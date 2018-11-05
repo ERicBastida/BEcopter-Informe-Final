@@ -1,0 +1,595 @@
+%---------------------------------------------------------------------
+%
+%                          Capítulo 3
+%
+%---------------------------------------------------------------------
+%
+% 03Edicion.tex
+% Copyright 2009 Marco Antonio Gomez-Martin, Pedro Pablo Gomez-Martin
+%
+% This file belongs to the TeXiS manual, a LaTeX template for writting
+% Thesis and other documents. The complete last TeXiS package can
+% be obtained from http://gaia.fdi.ucm.es/projects/texis/
+%
+% Although the TeXiS template itself is distributed under the 
+% conditions of the LaTeX Project Public License
+% (http://www.latex-project.org/lppl.txt), the manual content
+% uses the CC-BY-SA license that stays that you are free:
+%
+%    - to share & to copy, distribute and transmit the work
+%    - to remix and to adapt the work
+%
+% under the following conditions:
+%
+%    - Attribution: you must attribute the work in the manner
+%      specified by the author or licensor (but not in any way that
+%      suggests that they endorse you or your use of the work).
+%    - Share Alike: if you alter, transform, or build upon this
+%      work, you may distribute the resulting work only under the
+%      same, similar or a compatible license.
+%
+% The complete license is available in
+% http://creativecommons.org/licenses/by-sa/3.0/legalcode
+%
+%---------------------------------------------------------------------
+
+\chapter{Desarrollo de la plataforma}
+\label{cap3:desarrollo}
+
+\begin{FraseCelebre}
+\begin{Frase}
+Frase celebre
+\end{Frase}
+\begin{Fuente}
+Autor
+\end{Fuente}
+\end{FraseCelebre}
+
+\begin{resumen}
+	En este capitulo se describirá todo el proceso realizado de la fase denominada \textbf{Desarrollo de la plataforma}, que forma parte del presente proyecto . En esta fase se contempla las tareas del \textit{Diseño detallado de la plataforma} y \textit{Codificación} del mismo. En aspectos generales se define de manera un poco más especifica y en base al desarrollo global ya realizado en etapas anteriores, todo el comportamiento que incluirá la plataforma, como pueden ser, las funcionalidades de cada módulo, la interfaz gráfica de usuario o por sus siglas en inglés (GUI), la lógica interna correspondiente a cada uno y sus respectivas interacciones. 
+\end{resumen}
+
+%-------------------------------------------------------------------
+\section{Introducción}
+%-------------------------------------------------------------------
+\label{cap3:sec:Introduccion}
+
+	\par En el ámbito informático, como es sabido, la etapa de codificación del software generalmente es la que más tiempo abarca con respecto a la duración total del proyecto. Por esta razón, no es de sorprender que a medida que vayamos avanzando  objetivos, herramientas, planificación, diseño y lógica del software estén bajo un constante cambio ya que se van presentando obstáculos, alternativas e incompatiblididades que no han sido previstos en etapas iniciales. De esta manera, se irán ilustrando durante este capitulo capturas del estado del proyecto en distintas etapas del mismo, con el objetivo de poder ver el crecimiento y las técnicas utilizadas a medida que el proyecto va evolucionando y de esta manera poder aprender, para próximos proyectos, las estructuras que uno debe implementar en etapas iniciales con el fin de no cometer los mismos errores.
+
+\section{Diseño detallado de la plataforma}
+\label{cap3:sec:Disenio_detallado}
+
+\begin{center}
+	\begin{minipage}{0.9\linewidth}
+		\vspace{5pt}%margen superior de minipage
+		{\small
+			\textit{Un diseño de software es una descripción de la estructura del software que se va a implementar, los datos que son parte del sistema, las interfaces entre los componentes del sistema y, algunas veces, los algoritmos utilizados.}
+		}
+		\begin{flushleft}
+			(Ian Sommerville, 2005, p71)
+		\end{flushleft}
+		\vspace{5pt}%margen inferior de la minipage
+	\end{minipage}
+\end{center}
+
+
+Antes de iniciar directamente con la codificación, ya que por el mismo instinto de cumplir con las restricciones de tiempo, uno necesita finalizarlo lo antes posible; pero antes que nada es necesario, realizar un diseño de todo lo que queramos hacer, esto genera una linea de ejecución a seguir que ayuda al ejecutor del proyecto tener planificado las tareas generales que debe realizar en el transcurso del proyecto y no estar pendiente de como proseguir una vez finalizada cada tarea y re-planificar constantemente el hilo del proyecto. Es por tal motivo que el presente proyecto se ha dividido la fase de diseño en dos, la primera es un diseño global, meramente con la intensión de contar con un panorama general del comportamiento del software/hardware y además, poder mitigar la incertidumbre del ejecutor del proyecto, ya que se está iniciando en el desarrollo de proyectos de esta envergadura. En base a la documentación que se ha hecho en etapas anteriores podemos empezar a entablar de forma más precisa los procedimientos o tareas a realizar, lo que conlleva encarar la segunda parte del diseño.
+
+
+\par Según Pressman esta etapa produce los siguientes diseños:
+
+\begin{itemize}
+%	\item \textbf{Diseño de datos: } El diseño de datos esencialmente se encarga de transformar el modelo de dominio de la información creado durante el análisis \cite{pressman88is}. En el caso particular de este proyecto el diseño de datos no juega un papel determinante dado que la herramienta de software propuesta, de la manera en que sea físicamente desarrollada e implementada, no requiere momentáneamente estructuras de datos complejas, ni de un esquema de bases de datos como ejemplo.	
+%	\item \textbf{Diseño arquitectónico: } En el diseño arquitectónico se definen las relaciones entre los principales elementos estructurales del programa \cite{pressman88is}. Cuando se habla de elementos estructurales, se hace referencia entidades lógicas que componen la arquitectura de nuestro diseño, dentro del abanico de posibilidades de diseños, podemos seleccionar, diagramas de flujo de datos, modelos de entidad-relación, diagramas de clases, casos de usos entre otros esquemas gráficos. Viendo todas estas posibilidades, podemos encarar a diseñar nuestra estructura con el modelo que más se ajuste a nuestras necesidades y sea lo más útil posible para las etapas posteriores. Por tal razón, es necesario de un diseño que sea lo más representativo posible en el momento de codificación, que utilice un paradigma orientado a objetos , ya que queremos representar objetos como vehículos, posición geográfica, Joystick, etc; y que además tengan cada uno sus correspondientes atributos, es por eso que seleccionamos un diseño orientado a objetos, utilizando lo que anteriormente llamamos \textit{Diagramas de clases}. Estos diagramas son de suma utilidad ya que muestran de manera fácil como será la estructura de nuestro código y sus correspondientes relaciones entre cada uno, con el propósito de facilitar la tarea en las etapas posteriores al mismo.	
+%	\item \textbf{Diseño de interfaz: } El diseño de interfaz describe cómo se comunica el software consigo mismo, con los sistemas que operan con él, y con los operadores que lo emplean \cite{pressman88is}. Dentro del aspecto de comunicación de software consigo mismo y con otros sistemas es contemplado en el ítem anterior con el tipo de diseño elegido. Aquí lo que nos incumbe es la interacción con el operador del software. De esta manera, se selecciona una herramienta que nos permita realizar nuestra interfaz gráfica del usuario, como por ejemplo, botones, \textit{label}, gráficos, \textit{checkboxes}, etc. ayudando al usuario a realizar sus respectivas tareas sin entrar en tanto detalle en comandos específicos  que se debe memorizar con el fin de ser lo más amigable posible.
+%	\item \textbf{Diseño procedimental: } El diseño procedural transforma elementos estructurales de la arquitectura del programa en una descripción procedural de los componentes del software \cite{pressman88is}. Para no ser extensos en lo que es el desarrollo de este proyecto y teniendo en mente que el tamaño del mismo no corresponde a uno de grandes dimensiones y  considerando que únicamente  existe un único programador para la etapa de desarrollo, se descarta este tipo diseño.
+\item Item 
+\end{itemize}
+
+
+\par Dentro de lo que es el conjunto de diseños obtenidos en esta etapa es importante saber en que orden realizar cada una. Ya que cada diseño esta relacionado directamente con los demás, y el desarrollo de uno terminará condicionando el siguiente. Es por esto, que se analiza la opción de comenzar primero con el diseño de arquitectura. Suponiendo dicha elección se desarrolla el siguiente flujo:
+
+\par En el diseño orientado a objetos o más específicamente, en la confección del diagrama de clases se detallan los objetos mediante bloques gráficos denominados clases. Estas clases contienen todos los atributos correspondientes al objeto, como por ejemplo, la clase vehículo puede contener: cantidad de hélices, altura de vuelo, velocidad, posición, etc. Y además, según este diseño contiene todas las acciones que puede realizar a través de funciones; si continuamos con el ejemplo de vehículo aéreo pueden ser: volar, aterrizar, despegar, etc. Esto nos brinda como resultado final una estructura al momento de implementar el código, por lo que facilita la tarea del programador. Además, y un punto importante a tener en cuenta es que muestra como se comunicará cada clase con las demás, esta característica ayuda a descubrir que funciones extras son necesarias implementar para una correcta cooperación en conjunto. Sin embargo, existe una desventaja, dentro del punto de vista de la interacción del usuario, es que no toma en cuenta las funcionalidades que puede desear el usuario para que el uso del software sea más placentero (que es el objetivo de este diseño), sino que el resultado del diseño se centra en que cada clase pueda responder a las necesidades (mensajes) de las demás clases. 
+
+
+En cambio, si primero realizamos el diseño de la interfaz gráfica del usuario, nos determinará que es necesario entre otros aspectos que no han sido incluido en el diseño arquitectónico ya que no se ha tomado como parte importante en el desarrollo, la interacción del usuario. Como por ejemplo, funciones de validación de datos, ventanas de advertencias, gráficos, como es el HUD (figura \ref{fig:hud}).
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/hud}
+	\caption{Head Up Display}
+	\label{fig:hud}
+\end{figure}
+
+\par Como podemos ver y según las restricciones presentes, es conveniente realizar primero un diseño de interfaz, ya que el mismo nos proporcionará más detalles de implementación. Por tal motivo iniciamos primero con el diseño de interfaz.
+
+\subsection{Diseño de interfaz}
+
+En primera instancia se inicia con la interfaz gráfica del usuario o su equivalente en ingles \textit{\textbf{G}raphical \textbf{U}ser \textbf{I}nterface}; por definición es el proceso que define como será la interacción entre el software y el usuario final. Para esto, se utiliza la herramienta Qt Designer, que proporciona mediante un panel de \textbf{widgets} todos los elementos necesarios para el diseño del mismo. 
+
+\par Para iniciar este proceso, nos basamos en los \textit{mockups}  desarrollados  en la fase de diseño global de la plataforma, basándonos pantalla por pantalla en la confección de cada uno. Cabe mencionar que las pantallas presentes del diseño han sido obtenidas luego de un arduo proceso de modificaciones y actualizaciones debido a las necesidades e inconvenientes que se iban presentando en el transcurso de la fase de codificación. Las imágenes de la GUI se pueden ver en el anexo \ref{anexo:GUI}
+
+\subsubsection{Modificaciones generales}
+\begin{itemize}
+	
+	\item \textbf{Inserción del HUD en lugar de un mapa} Se ha considerado diseñar el HUD, en lugar de un mapa. Ya que el mismo no se considera de suma importancia para la navegación en un marco de referencia relativo. La implementación del mapa, se ha documentado como un requisito para las versiones futuras de la plataforma.
+	
+	\item \textbf{Reemplazo de ubicación de iconos de estados} Los iconos posicionados en la barra superior del software se han reubicados dentro de lo que es el HUD, ya que estos iconos sobrecargaban la aplicación con una constante actualización siendo que el HUD es el encargado de mostrar dicha información de manera actualizada.
+	
+	\item \textbf{Sustracción de pestaña \textit{Sensores}} Según el requisito \textbf{Implementación de calibración de sensores} no se considera para esta versión la posibilidad de calibrar los sensores del vehículo. Si, se incluyen los parámetros del vehículo y sus respectivos valores en la pestaña de configuración, con el fin de ser configurados.
+	
+\end{itemize}
+
+
+
+\subsection{Diseño arquitectónico}
+
+
+Luego de finalizar con el diseño de interfaz y en base al diagrama de clases realizado en etapas anteriores del proyecto, se inicia el modelado más detallado del diagrama de clases de nuestro proyecto. Para esto se utiliza de la herramienta ArgoUML, obteniendo el siguiente estructura. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth, height=0.93\textheight]{Imagenes/DC_BEcopter}
+	\caption{Diagrama de clases v2, perteneciente al proyecto BEcoper}
+	\label{fig:dcbecopter}
+\end{figure}
+
+Para el desarrollo del mismo se ha considerado el diseño de la interfaz gráfica y de manera complementaría ,la comunicación que tiene con las demás clases conectadas, esto nos facilita al momento de determinar que tipo de funciones necesita cada una y la forma en que se los debe enviar dicha información.  
+
+
+\newpage
+
+\section{Codificación y Testing}
+
+En esta etapa consiste en traducir el diseño en una forma legible por la máquina. Por tanto, iniciaremos esta tarea según los diseños de diagrama de clases generados y siempre teniendo en mente los requerimientos estipulados por los \textit{stakeholders}.
+
+\par Según,  la Figura \ref{fig:dcbecopter} tenemos varias clases que se encargarán de un grupo de funcionalidades en específico y a su vez cada una brinda funcionalidades a sus clases vecinas, para entender un poco el funcionamiento del software comenzaremos explicando cada una, exceptuando las clases que se han utilizado de las librerías pertinentes.
+
+%ANEXAR CODIGO?
+
+\subsection{Clase Vehículo}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth, height=0.2\textheight]{Imagenes/classVehiculo}
+	\caption{Clase Vehículo}
+	\label{fig:classvehiculo}
+\end{figure}
+
+La clase Vehículo es la responsable de representar en su mayor medida el objeto real, en nuestro caso es el cuadricóptero.  Para esto se ha decidido asignarle las siguientes funcionalidades 
+
+\begin{itemize}
+	
+	\item \textbf{Funciones de vuelo: } Según las restricciones establecidas en el ERS que se han estipulado en primera medida, ya sea por falta de conocimiento de librerías y/o complejidad de los mismos, únicamente las siguientes funcionalidades de vuelo \textbf{Ascenso, Descenso y Hovering}; en cambio, gracias a las librerias utilizadas se han codificado más funcionalidades correspondientes a las maniobras que puede realizar el vehículo. Dentro de este conjunto se desarrollaron las siguientes funciones (utilizando el protocolo MAVLink \textit{Micro Air Vehicle Link} y la librería Dronekit):
+	
+	
+	\par Cabe mencionar que estas funcionalidades han sido diseñadas con la posibilidad de realizar acciones de vuelo en un marco de referencia global, utilizando las coordenadas globales proporcionadas por el GPS en base a la latitud, longitud y altura (figura \ref{fig:latlong}). Además, es posible establecer sobre un marco de referencia relativo, es decir, este marco de referencia toma como origen el punto inicial de partida del vehículo, por lo que las coordenadas que ingresemos tendrán como referencia el punto de despegue. Es importante recordar que el marco de referencia global, conlleva la implementación de un mapa y según el requerimiento R025 este es opcional, e insistiendo con lo mencionado, esta funcionalidad se implementará en futuras versiones.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/latlong}
+		\caption{Marco de referencia global.}
+		\label{fig:latlong}
+	\end{figure}
+	
+	
+	
+	
+	\begin{enumerate}
+		\item \textbf{Despegar:  } Esta funcionalidad envía un comando al vehículo especificándole que debe propulsarse gracias a sus motores a una altura en particular.  
+		\item \textbf{Aterrizar: } Esta función ordena al vehículo que aterrice en un punto establecido, dependiendo del sistema de referencia, ya sea global o relativo.
+		\item \textbf{Suspenderse: } Según un punto en particular el vehículo estará inmóvil y suspendido en el aire por la cantidad de tiempo que se le asigne. Además, esta función entra en el requerimiento R017, donde se establece una función de salvataje encargada de ejecutarse en caso de algún inconveniente o percance con el vehículo y/o conexión. 
+		\item \textbf{Ir a un punto en especifico: } Como bien su nombre lo especifica, esta orden y según un sistema de referencia le indica al vehículo que debe desplazarse en un punto en particular. 
+		\item \textbf{Volver a inicio: } El vehículo almacena en primeras instancias su posición inicial, asignándola en una variable interna llamada \textit{home}, una vez que esta orden ha sido enviada, el vehículo tratará de dirigirse a su punto de partida.
+		\item \textbf{Moverse: } Según el requerimiento R024, que establece distintos tipos de vuelo se han codificado las funciones de \textit{velocidad} y \textit{yaw} que según las ordenes enviadas de un joystick el vehículo modificará su dirección en tiempo real,  ya que se han restringido estos comandos a que tengan una duración de ejecución mínima, dando así lugar a un nuevo comando y captar las nuevas indicaciones que han sido enviadas por el usuario.
+		
+	\end{enumerate}
+	\item \textbf{Modo de vuelo: }
+	Dentro del conjunto de las funcionalidades de vuelo se pueden observar que existen funciones con el prefijo "mis", estos a diferencia de los demás, son utilizados cuando el vehículo se encuentro en modo AUTO, es decir, estos comandos serán enviados al vehículo con el fin de que sean almacenados y ejecutados de manera secuencial misión por misión cuando se envié la orden \textit{ejecutar misiones}. Para cumplir de manera complementaría con el requisito R024, se han codificado funciones que gestionen las misiones pertinentes. 
+	
+	\item \textbf{Conexión: } En base a los requerimientos R015,R016 se han incluido en la clase vehículo las funciones de \textit{conectado, desconectar y el constructor de la clase} estas son encargadas de conectarse de manera inalámbrica a una red LAN, gracias a su módulo WiFi instalado en la placa Raspberry Pi o de manera ad-hoc mediante módulos de comunicación inalámbrica conectados en un puerto serial. 
+	
+\end{itemize}
+
+
+Por último una función que asigna \textit{Callbacks} a los atributos del vehículo, ya que estar consultando constantemente los cambios que se están produciendo dentro del vehículo conlleva un consumo extra de recursos,por lo que se decide implementar una función "setCallback2Param" que cada vez que el atributo correspondiente sufra algún tipo de cambio, este llame a otra función para informarle de dicha transición.
+
+
+\subsection{Clase Joystick}
+
+La clase Joystick, es la encargada de gestionar dentro del los comandos conectados en el equipo, sus respectivas acciones que han sido ejecutadas por el usuario. \par Con la ayuda de la librería Pygame podemos obtener información de los joystick conectados como nombre, cantidad de botones, número de ejes, si se ha presionado o saltado un botón, entre otras acciones, con el objetivo de poder interpretar, según un mapeo de funciones que se han pre-configurado las acciones que desee realizar el usuario en modo manual sobre el vehículo. Cabe mencionar que dicha clase se ha codificado satisfaciendo los requerimiento R012 y R022.
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth, height=0.15\textheight]{Imagenes/classJoystick}
+	\caption{Clase Joystick}
+	\label{fig:classjoystick}
+\end{figure}
+
+
+\newpage
+\subsection{Clase Gráfico Datos}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth, height=0.2\textheight]{Imagenes/classGraficoDatos}
+	\caption{Clase gráficos de datos o de atributos del vehículo.}
+	\label{fig:classgraficodatos}
+\end{figure}
+
+La clase Gráfico de Datos fue creada con el fin de cumplir con el requerimiento R002 que solicita una representación gráfica en tiempo real y evolutiva de la información capturada. Para realizar dicha tarea en primer momento se ha utilizado la librería Vispy como la definición del requerimiento lo especifica; pero a medida que se iba avanzando en el desarrollo y prueba del mismo se ha encontrado el inconveniente de que dicha librería no contiene la documentación actualizada, lo que genera contratiempos al momento de cumplir con el objetivo, por lo que se decide utilizar una librería con una comunidad más activa, como lo es PyQtGraph. Esta librería cuenta con una gran comunidad activa y una documentación detallada de cada funcionalidad disponible, esto facilita mucho al ejecutor del proyecto a dirigir la atención en otros aspectos del proyecto. Cabe destacar que esta librería, más allá de contener las funcionalidades necesarias para cumplir con el requerimiento estipulado.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth, height=0.4\textheight]{Imagenes/GD_prueba}
+	\caption{Prueba animada en la inserción de dato utilizando la Clase Gráfico Datos.}
+	\label{fig:gdprueba}
+\end{figure}
+Entre el conjunto de funcionalidades disponibles, se describen las más importantes:
+\begin{itemize}
+	\item \textbf{Cupo máximo de lineas: } Con fines estéticos se ha implementado la opción de disponer de un número máximo de gráficos en pantalla, ya que el acumulamiento de gráficos sobrecargará a la aplicación de recursos a consumir y además dejará de apreciarse cada gráfica en la ilustración por motivos de espacio. En caso de asignar una nueva linea al gráfico correspondiente, el mismo eliminará el primer gráfico ingresada, utilizando una metodología tipo FIFO.
+	\item \textbf{Identificación de lineas: } Para poder gestionar las lineas presentes en el gráfico es necesario asignarle a cada una un identificador, este identificador además servirá para las clases antecesoras para la inserción y eliminación de cada una.
+	\item \textbf{Pausado de animación: } Es de esperar que el gráfico no este disponible tiempo completo, por lo que se decide incorporar la opción de pausado de la animación con el propósito de optimizar el uso de recursos del equipo y que la aplicación BEcopter sea lo más liviana posible.
+	
+\end{itemize}
+
+
+
+
+\subsection{Clase HUD} %R003
+
+La clase HUD o por su respectiva traducción, \textit{visualización cabeza-arriba}, es la encargada de visualizar al piloto, en este caso el usuario, los datos más relevantes del estado del vehículo, con el objetivo de tener a simple vista el comportamiento del mismo en tiempo real. Por su parte, en el ámbito aeronáutico se utilizan ciertos instrumentos de navegación o símbolos que informan al piloto el estado de la aeronave, ya sea, velocidad, altitud, inclinación, etc; que para el desarrollo de esta clase es conveniente saber su significado. Por tal razón, explicaremos cada uno de estos instrumentos con su respectiva representación gráfica.
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\linewidth, height=0.5\textheight]{Imagenes/classHUD}
+	\caption{Clase Head Up Display}
+	\label{fig:classhud}
+\end{figure}
+
+\newpage
+
+\subsubsection{Instrumentos de navegación }
+Son los instrumentos esenciales para poder orientarse y seguir la ruta deseada por parte del piloto. \\
+
+
+
+\textbf{Horizonte artificial}
+
+\begin{wrapfigure}{l}{0.3\linewidth}
+	\centering
+	\includegraphics[width=0.8\linewidth]{Imagenes/horizonte_artificial}
+	\caption{Horizonte artificial indicando un giro a la derecha en descenso.}
+	\label{fig:horizonte_artificial}
+\end{wrapfigure}
+
+
+El horizonte artificial muestra la orientación longitudinal de la aeronave (la relación del eje longitudinal del avión con respecto al plano del suelo), es decir: si está girado, inclinado, con la frente del vehículo levantado, bajado o todo a la vez. Sirve de gran ayuda en condiciones en que la visibilidad es poca o nula. El horizonte artificial tiene dos partes: el horizonte propiamente dicho, y el indicador de rumbo. El primero está compuesto por una región azul que representa el cielo, otra normalmente marrón que representa la superficie terrestre, una mira que representa la dirección en que apunta la frente de la aeronave, y varias marcas a su alrededor. Las marcas horizontales a ambos lados representan las alas, el plano de la aeronave, y su ángulo con el límite entre las regiones de cielo y superficie (el horizonte artificial), el cual con dichos planos se produce el ángulo de alabeo. Dispuestas verticalmente a intervalos regulares, hay marcas horizontales más pequeñas que representan ángulos concretos en el plano vertical, a intervalos de 5º, 10º, etc. Muestran el ángulo actual del eje longitudinal con el plano del suelo. Su principio mecánico es basado sobre un giroscopio.
+
+
+\textbf{Indicador de rumbos }
+
+\par El indicador de rumbo, o giroscopio direccional, proporciona al piloto la dirección de la aeronave en grados magnéticos. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.2\linewidth, height=0.2\linewidth]{Imagenes/indicador_rumbo}
+	\caption{Indicador de rumbos}
+	\label{fig:indicadorrumbo}
+\end{figure}
+
+
+\textbf{Coordinador de Giro}
+
+\par En el coordinador de giro vemos en lugar del bastón una Figura de un avión que nos indica el grado de inclinación de las alas.
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/coord_de_giro}
+	\caption{Coordinador de giro.}
+	\label{fig:coord_de_giro}
+\end{figure}
+
+\par Una vez concientizado en los instrumentos de vuelo se procede a integrarlos de manera simulada en un \textit{widget}, con el fin de que cumpla las mismas funcionalidades. Para empezar necesitaremos de una librería gráfica en el cual nos proporcione de funcionalidades para poder graficar estos instrumentos, para eso se selecciona la conocida librería OpenGL. Dicha librería está equipada de funcionalidades para dibujar escenas tridimensionales complejas a partir de primitivas geométricas simples, tales como puntos, líneas y triángulos. Además nos dá a disposición la personalización de todos los paramentos que estén dentro de una escena como posición de la luz, cámara,  tipo de materiales y luces. Pero más allá de todo este conjunto de herramientas que nos deja a disposición OpenGL, la tarea del diseño del HUD es realizar en un dibujo en 2D,  el cual se mostraran un conjunto de datos y lineas básicas, por lo que se decide no utilizar directamente esta librería para el diseño de la escena, sino que se busca de una \textit{API} en que podamos graficar nuestros instrumentos de navegación de forma más sencilla, es por eso, que sea realiza una investigación antes de utilizar dicha librería y se encuentra que la librería PyQt, en sus conjuntos de clases contiene una de nombre QPainter, más allá que internamente usa OpenGL, esta librería facilita un conjunto de funciones tales como dibujar elipse, texto, imágenes, lineas, entre otras funcionalidades y de una manera más comprensible. De esta forma, abordamos la tarea de graficar  la escena de la siguiente manera: \newline
+
+\begin{enumerate}
+	
+	\item \textbf{Dibujo del Horizonte Artificial}
+	El horizonte artificial como se puede observar en la Figura \ref{fig:horizonte_artificial} está compuesto por dos rectángulos, uno representando el cielo y el segundo la tierra, de esta manera, con la funcionalidad de QPainter que nos proporciona dibujar un rectángulo proseguimos a dibujar dos rectángulos simulando el horizonte artificial; quedándonos como se puede ver en la Figura \ref{fig:hudv0}.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0}
+		\caption{HUD v0.1}
+		\label{fig:hudv0}
+	\end{figure}
+	
+	\par Hasta aquí, podemos observar que la Figura \ref{fig:hudv0} satisface las necesidades de representar el horizonte artificial según nuestras especificaciones, pero al momento de proyectar al uso del mismo podemos encontrar los siguientes problemas:
+	
+	\begin{enumerate}
+		
+		\item \textbf{Problema gráfico al momento del Roll: } Como se puede ver en la Figura \ref{fig:hudv0e1} , cuando la escena sufre una rotación sobre su eje perpendicular, es decir, simulando un giro sobre el Roll o alabeo del vehículo, la imagen muestra imperfecciones en las puntas del recuadro. 
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0_e1}
+			\caption{Error gráfico al momento de rotar}
+			\label{fig:hudv0e1}
+		\end{figure}
+		
+		\subitem Este problema fácilmente se puede solucionar ampliando los tamaños de los rectángulos en ambas direcciones, considerando siempre el tamaño más largo entre el alto y ancho de la pantalla, ya que si no tenemos en cuenta este aspecto cuando tengamos una imagen sumamente apaisada y de poca altura, obtendríamos el mismo problema. Por tal motivo, se debe elegir un tamaño adecuado para la imagen; ahora la pregunta es ¿Qué tamaño debo asignarle a la imagen para que no se presenten dichos defectos? 
+		
+		
+		\textbf{Obtención de la longitud requerida}
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.3\linewidth, width=0.3\linewidth]{Imagenes/problemaPuntas}
+			\caption{Problema gráfico en las esquinas}
+			\label{fig:problemapuntas}
+		\end{figure}
+		Como bien muestra la Figura \ref{fig:problemapuntas}, cuando la imagen de fondo sufre una rotación no llega a cubrir lo suficiente los limites de la pantalla, por tanto, se  produce dicho problema. De tal manera se debe buscar la longitud máxima que debe tener la imagen para que cubra dichos limites, en la Figura  \ref{fig:problemapuntas} se puede apreciar una linea roja que representa el largo necesario a calcular. Este deberá ser la mínima longitud que deben tener el alto y ancho de la imagen, es decir :
+		
+		\begin{center}
+			$L > Ancho_{Imagenes}  \land L > Alto_{Imagenes}   $ 
+		\end{center}
+		
+		Para calcular dicho valor, se propone implementar una circunferencia con centro en el origen de la pantalla y que tenga un radio por el cual cubra por completo los limites del mismo, como se puede observar en la Figura \ref{fig:problemapuntas2}, de esta manera se contemplan las posibilidades de que la imagen de fondo cubra por completo el dominio de la pantalla en cualquier angulo de rotación que sufra. 
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.3\linewidth, width=0.3\linewidth]{Imagenes/problemaPuntas2}
+			\caption{Circunferencia con radio que satisface la longitud requerida.}
+			\label{fig:problemapuntas2}
+		\end{figure}
+		
+		\par Por último, obtener esta longitud se traduce en un problema trigonométrico  donde se debe obtener la hipotenusa de un triangulo rectángulo con base $w/2$ y alto $h/2$. Utilizando el teorema de pitágoras obtenernos que
+		
+		
+		\begin{subequations}\label{eq:longRequerida}
+			\begin{align}
+			R &= \sqrt{(\frac{w}{2})^2 + (\frac{h}{2})^2}  \\
+			R &= \frac{1}{2} (w + h) \label{eq:longRequerida1}
+			\end{align}
+		\end{subequations}
+		
+		Como podemos apreciar, la longitud mínima requerida se obtiene de la ecuación \ref{eq:longRequerida1}. Pero como es de saber, este valor es la longitud total mínima que debe tener tanto el alto como el ancho de la imagen, por lo que se debe conocer cual es la diferencia al que debemos agregar al ancho, como también al alto de la imagen. Para esto, simplemente realizamos la diferencia para cada atributo y obtendremos el siguiente valor a agregar
+		
+		
+		\begin{subequations}
+			\begin{align}
+			Ancho_{aux} &= \frac{1}{2} (h+w) - \frac{w}{2} =  \frac{h}{2} \\
+			Alto_{aux} &=  \frac{1}{2} (h+w)  - \frac{h}{2} =  \frac{w}{2} 
+			\end{align}
+			
+		\end{subequations}
+		
+		\item \textbf{Problema al simular el Pitch: } Otro problema que surge, es al momento de simular el cabeceo o pitch, es que dentro de la escena cuando ocurre este comportamiento el script debe realizar un transformación de traslado, siendo proporcional a la inclinación ocurrida en el vehículo. Pero en cambio, el defecto que ocasiona es que únicamente se trasladarán los dos cuadrados ya dibujados, dejando al descubierto el \textit{background}, como se puede ver en la Figura \ref{fig:hudv0e2}. Además, hay que tener en cuenta que la escena debe permitir un pitch de 0 a 360 grados, por lo que se tendrá que expandir la escena con el fin de simular un entorno virtual 360 en 3D.
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0_e2}
+			\caption{Error al momento de simular el Pitch}
+			\label{fig:hudv0e2}
+		\end{figure}
+		
+		Para solucionar este inconveniente surgen las siguientes propuestas 
+		
+		\begin{enumerate}
+			\item \textbf{Mapear una textura al rededor de la cámara, mediante coordenadas esféricas: } En esta propuesta se debe generar una textura de ambiente exterior por el cual será mapeada de tal manera que simulará un ambiente 3D. La desventaja de esta propuesta es que la clase QPainter no proporciona funcionalidades para el desarrollo de dibujos en 3D, ni tampoco sus clases antecesoras para el mapeo de textura. Por lo cual, se debería codificar la textura manualmente y utilizando las funcionalidades primitivas de OpenGL.
+			
+			\item \textbf{Inserción de rectángulos dependientes del Pitch: } Aquí lo que se pretende es que a medida que el pitch aumente o disminuya, es decir, que el vehículo cabecee para arriba o abajo, el script interprete estos datos para dibujar un nuevo rectángulo contrario al que se ve en pantalla (cielo/tierra), simulando un entorno infinito, como se puede ver en la Figura \ref{fig:addrectangle}.
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/addRectangle}
+				\caption{Insertando un rectángulo perteneciente al piso. }
+				\label{fig:addrectangle}
+			\end{figure}
+			
+			Siendo parecer la propuesta más efectiva, al momento de realizar las pruebas con el vehículo se descubre que presenta inconsistencias, ya que el movimiento del pitch no es continuo, por tanto, no se puede ir llevando un seguimiento del cuadro que se esta viendo actualmente para la inserción del siguiente. Más allá de poder emparchar esta propuesta anexando al algoritmo estructuras extras para el seguimiento de los cuadros, el propósito del mismo no es acomplejar el problema presente, de esta manera, se recurre al desarrollo de la siguiente propuesta.
+			
+			\item \textbf{Mapeo del Pitch sobre una imagen: } Finalmente, para solucionar el presente problema, y siempre reduciendo la complejidad a una solución, se propone dibujar una imagen que contenga la escena del horizonte artificial en forma repetida, con el propósito de mapear el rango completo del pitch [0 - 360] dentro de una sola imagen, sin estar utilizando imágenes extras para cubran lo restante. 
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth, height=0.5\textheight]{Imagenes/mapeo}
+				\caption{Mapeo del horizonte artificial.}
+				\label{fig:mapeo}
+			\end{figure}
+			
+			\par Como se puede notar en la Figura \ref{fig:mapeo} el mapeo del pitch corresponderá unicamente al dominio de la pantalla marcada en color rojo. Con esto hacemos referencia, que el mapeo no será de forma lineal ya que la entrada del pitch corresponde dentro del dominio de [0 - 360], por lo que se procede a convertirlo en el dominio [-180 - 180] para que sea más representativo a la dirección que apunta el vehículo y luego mapearlo al dominio del tamaño de la imagen. La razón por la cual se ha tomado el dominio de pantalla especificado, es porque cuando el pitch supere el limite de los 180 (grados), inmediatamente el mapeador deberá llevar "la vista" al rango inferior, es decir, a los -180 (grados), esto dará al usuario una sensación continuidad de la imagen ya que al sobrepasar, ya sean los limites inferior o superior del dominio de la pantalla, las escenas serán prácticamente las mismas. 
+			
+			
+		\end{enumerate}
+		
+	\end{enumerate}% FIN de problemas al momento de dibujar el horizonte 
+	
+	\item \textbf{Dibujo del ángulo de banco}
+	El ángulo de banco representa directamente al instrumento de coordinador de giro. Este instrumento indica al usuario la inclinación en el eje x o Roll de la misma forma en que se detalló en su definición, con la diferencia que este muestra el rango de inclinación [-(-60), 60] y en caso de sobrepasar este limite se indica con una flecha en color rojo a modo de precaución. 
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.4\linewidth, height=0.1\textheight]{Imagenes/angulo}
+		\caption{Ángulo de banco.}
+		\label{fig:angulo}
+	\end{figure}
+	
+	
+	\item \textbf{Dibujo de lineas de referencia}
+	Estas lineas de referencia tienen el fin de mostrar al usuario en la pantalla el pitch que esta teniendo el vehículo en tiempo real, de la misma forma que el ángulo de banco, este muestra un rango limitado de [-40,40].
+	
+	\item \textbf{Dibujo de atributos del vehículo}
+	Por último, se ha tomado la decisión de ilustrar dentro del HUD ciertos atributos del vehículo y conexión, que se han considerado importante antes y durante del inicio del despegue. Dentro de estos atributos se han insertado los siguientes elementos como se puede ver en la imagen \ref{fig:hudbeta}
+	
+	\begin{itemize}
+		
+		\item \textbf{Indicador de rumbos}
+		\item \textbf{Icono de estado de GPS, Señal y batería}
+		\item \textbf{Un atributo a elección del usuario} En este caso se ha insertado por defecto el pitch del vehículo, pero este espacio puede ser ocupado por cualquier atributo del vehículo. 
+		
+	\end{itemize}  
+	
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.4\textheight]{Imagenes/HUD_beta}
+		\caption{HUD final con sus correspondientes atributos e  instrumentos de vuelo.}
+		\label{fig:hudbeta}
+	\end{figure}
+	
+	
+	
+	
+\end{enumerate}% FIN de como se dibujaron cada elemento
+
+\newpage
+
+
+\subsection{Clase Gestor Parámetro}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/classGestParametro}
+	\caption{}
+	\label{fig:classgestparametro}
+\end{figure}
+
+Dentro del vehículo además de encontrarse con sus atributos tales como: velocidad, posición, batería, etc. existen parámetros, como bien su nombre lo dice parametrizables, donde es posible establecer o informarse de todo tipo de configuración del vehículo. Existe una gran variedad de estos, ya que es importante poder configurar cada aspecto de los elementos del vehículo. Dentro de este conjunto de parámetros podemos clasificaros los siguientes grupos:
+
+\begin{itemize}
+	\item \textbf{Armado}
+	\item \textbf{Batería}
+	\item \textbf{Motores}
+	\item \textbf{Servo Output}
+	\item \textbf{Telemetría}
+	\item \textbf{IMU}
+	\item \textbf{Compas}
+	\item \textbf{Barometro}
+	\item \textbf{GPS}
+	\item \textbf{RC}
+	\item \textbf{WayPoint}
+	\item \textbf{Misiones}
+\end{itemize} %FIX explicar más o menos cada grupo
+
+%FIX - explicar como hice para obtener la información
+
+Donde en cada grupo se encuentran reunidos un conjunto de parámetros individuales que configuran cierto aspecto de cada grupo. Por tal razón se decide crear una clase Gestión de Parámetro, de tal manera que sea el encargado de agrupar estos parámetros. Para la carga de información de cada parámetros se ha utilizado una planilla de cálculo para almacenar la información, esto es posible gracias a la librería \textit{openpyxl} que nos permite ir guardando cada grupo de parámetros en una hoja independiente dentro del documento.
+\newpage
+
+
+\subsection{Clase Parámetro}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\linewidth, height=0.3\textheight]{Imagenes/classParametro}
+	\caption{Clase parámetro}
+	\label{fig:classparametro}
+\end{figure}
+
+Cada parámetro tiene la particularidad dentro del software un conjunto de propiedades que ayudan al usuario a entender su significado y poder modificarlos. Para la creación de dicha clase se han creado las siguientes propiedades:
+
+\begin{itemize}
+	\item \textbf{Permiso:     } Este propiedad determina si el parámetro es de solo lectura o es modificable por el usuario. 
+	\item \textbf{Código:      } Dentro del software se generan códigos a cada parámetro con el fin de poder enviarlos mediante comandos al vehículo.
+	\item \textbf{Nombre:      } Es una pequeña descripción del código, ya que los mismos están escritos de forma reducida.
+	\item \textbf{Descripción: } Describe de manera extendida el significado de cada parámetro y en determinados casos con ejemplos para ayudar al usuario a configurarlos.
+	\item \textbf{Rango:       } Los valores máximos y mínimos que puede tomar el parámetro.
+	\item \textbf{Incremento:  } Tiene como fin ser una propiedad para configurar un \textit{slider} dentro de cada parámetro en la GUI.
+	\item \textbf{Unidades:    } Unidades correspondiente al parámetro.
+\end{itemize}
+Como es de notar la clase parámetro no almacena su correspondiente valor, esto es debido a que los valores de cada parámetro son tomados del vehículo cuando se establece la primera conexión. Ya que estar manipulando valores cambiantes en dos lugares a la vez pueden producir accidentes al momento de sincronizarlos.
+
+\newpage
+\subsection{Clase GUI becopter}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.2\linewidth, height=0.15\textheight]{Imagenes/classGUI_becopter}
+	\caption{Clase Graphical User Interface de BEcopter}
+	\label{fig:classguibecopter}
+\end{figure}
+
+En lo que respecta al proyecto es la clase de mayor tamaño, ya que contiene absolutamente todos los elementos gráficos que se pueden ver en BEcopter. Estos están desarrollados en base a la creación de un widget padre, con su respectiva estética y comportamiento. Una vez definido este widget padre se procede a crear sus correspondientes hijos y una vez finalizados se los inserta en su antecesor. Estos widgets cuentan con una gran variedad de propiedades que puden ser modificadas, y los mismos pueden ser administrados mediante la herramienta Qt Designer (figura \ref{fig:qtdesigner}).
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/qtDesigner}
+	\caption{Aplicación QT designer}
+	\label{fig:qtdesigner}
+\end{figure}
+
+
+\par Como es de notar BEcopter comprende un gran número de widget, lo que causa que la programación de cada elemento se vuelva engorrosa y consuma tiempo, es por eso que el mismo programa brinda una herramienta que traduce los archivos .ui generados por la aplicacion a archivos .py, que es nuestro lenguaje seleccionado, con el fin de agregarlo directamente al proyecto. Cabe mencionar que dicha herramienta nos dá la facilidad de modificar los aspectos estéticos de los widget mediante CSS, por lo tanto se ha tenido que estudiar dicha sintaxis y utilizarla para el personalizado de los mismos.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/ejemploCCS}
+	\caption{Ejemplo del diseño de estilo con CSS.}
+	\label{fig:ejemploccs}
+\end{figure}
+
+
+
+
+
+
+\subsection{Clase BEcopter}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth, height=0.3\textheight]{Imagenes/classBEcopter}
+	\caption{Clase principal BEcopter}
+	\label{fig:classbecopter}
+\end{figure}
+
+Por último tenemos la clase principal BEcopter, esta es la encargada de gestionar las demás clases presentes en este proyecto. Como podemos observar en el diagrama de clases de la Figura \ref{fig:dcbecopter} la misma está relacionada con la gran mayoría por lo que conlleva varias tareas; si detallamos un poco su interacción, esta se encarga de:
+
+\begin{itemize}
+	
+	\item \textbf{Gestionar la interfaz gráfica: }  La interfaz proporcionada por la clase GUI\_becopter únicamente representa la GUI, por tanto, este no contiene ningún tipo de lógica ni tampoco aspectos dinámicos que son de suma importancia para este proyecto. Por lo que es tarea de la clase principal brindarle de dichos comportamientos para poder interactuar con las acciones del usuario; dentro de sus amplias tareas tales como inicialización de estilos, gestión de pestañas, validación de datos, etc.  Tenemos las más destacadas que son :
+	
+	\begin{enumerate}
+		
+		\item \textbf{Ocultamiento de de opciones: } A modo de seguridad se ha establecido por defecto que al iniciar la aplicación ciertas opciones estén deshabilitadas, como son las pestañas de (Inicio y Configuración) ya que estos dependen de que el vehículo este conectado y en caso contrario, si proporcionamos a que se puedan modificar misiones o parámetros del mismo pueden ocasionar errores.  
+		
+		
+		\item \textbf{Sincronización de datos: } Poder observar los atributos del vehículo en tiempo real es de suma importancia, por lo que se definen \textit{timer's} que sincronizan cada cierto periodo de tiempo los valores ubicados en la pestaña inicio que contiene un conjunto de botones que muestran datos sobre el vehículo y en la pestaña conexión que presenta información de su respectiva conexión y aspectos generales del vehículo.
+		
+	\end{enumerate}
+	
+	\item \textbf{Gestionar los Joysticks: } Como el fin de BEcopter es poder manejar un único vehículo, se ha restringido a la utilización de un solo Joystick, pero es importante tener en cuenta que pueden haber más de un dispositivo tipo comando conectado al equipo, por lo que se provee de opciones de selección de comandos para contemplar ese aspecto. 
+	Además de gestionar la selección del comando a utilizar y realizar el correspondiente mapeo en relación de acción-botón que ha seleccionado el usuario, este es encargado de captar todos los eventos que se están siendo generados en el joystick, con el propósito de enviarlos al vehículo para su posterior interpretación. Esta función es la responsable de realizar el modo manual en caso de ser solicitado.
+	
+	
+	\item \textbf{Gestionar los gráficos: }  Dentro de lo que es el proyecto BEcopter están incluido un par de gráficos que ayudan al usuario a tener presente información útil del vehículo y sus sensores. Estos gráficos son :
+	
+	\subitem \textbf{Gráfico \textit{Head UP Display}}: Más allá de su propio funcionamiento interno de la clase HUD, la clase BEcopter es la responsable de poder inicializar la conexión entre el vehículo y dicha clase. Por eso es importante que este proporcione los datos necesarios a mostrar cada vez que el atributo sufra un cambio, por tal motivo, es que se generan \textit{callback's} que administran dichos eventos.
+	
+	\subitem \textbf{Gráfico de atributos: } La clase vehículo nos brinda un gran conjunto de atributos que informan sobre el estado del vehículo, conexión, como también provenientes de los sensores, de tal manera que la clase BEcopter se debe encargar de mostrar dichos atributos en una lista con la opción poder agregarlos a la clase gráfico de datos para su procedente graficación. Además, BEcopter debe proporcionar en dicha lista la opción agregar/eliminar atributos tanto en el gráfico de datos como también en la botonera.
+	
+	
+	\item \textbf{Gestionar el vehículo: } La clase vehículo corresponde al corazón del proyecto, ya que este representa de manera directa el UAVs que estamos por manipular, por tal razón es importante tener actualizado todos los valores que proporciona la clase vehículo hacia el usuario; además hay que tener en cuenta que el usuario deseará enviarle comandos al mismo como, despegar, moverse, aterrizar, desplazarse, etc. Ya sea en modo manual mediante el joystick ya selecionado o en forma de misiones, es decir, en modo automático. De esta manera la clase BEcopter para contemplar estos aspectos tendrá que realizar las siguientes tareas:
+	
+	\subitem \textbf{Sincronización: } La clase BEcopter tiene la responsabilidad informarle a las clases restantes cuando los atributos que están siendo utilizado sufren algún tipo de cambio, de esta manera, se han creado un conjunto de conexiones mediante \textit{callbacks} y \textit{timer's} que envían de manera sincrona y asincrona la información requerido a cada entidad.
+	
+	\subitem \textbf{Misiones: } Las misiones son un aspecto importante en BEcopter, ya que proporcionan al usuario la posibilidad de crear un conjunto de comandos parametrizables y que pueden ser enviados al vehículo para que sean ejecutadas. En lo que concierne a estas opciones tenemos las siguientes utilidades:
+	
+	\subsubitem \underline{Descargar misiones: } Esta opción permite descargar y mostrar en pantalla las misiones que ya tiene almacenado el vehículo. De manera complementaría, es una herramienta útil para comprobar que las misiones que han sido enviadas de manera correcta.
+	
+	\subsubitem \underline{Agregar misión: } Agrega una nueva linea en blanco para el ingreso de siguiente misión.
+	
+	\subsubitem \underline{Enviar misión: } Esta opción tiene la particularidad de únicamente cargar las misiones en el vehículo sin la intensión de ejecutarlas, ya que puede suceder de enviar misiones incorrectas, por tal motivo BEcopter se encarga de validar dichas misiones y en caso de encontrar un error se le informará al usuario.
+	
+	\subsubitem \underline{Iniciar: } Por último y una vez validada las misiones, BEcopter le envía la confirmación al vehículo para que inicie las misiones enviadas.
+	
+	\subitem \textbf{Estado de conexión: } Cumpliendo con el requerimiento R016, que establece la codificación de un script de control del estado de conexión, la clase BEcopter se encarga de este aspecto, consultando periódicamente dicho estado y en caso de perder la conexión (siempre y cuando no se encuentre en vuelo) se bloquearán las opciones pertinentes al vehículo, como si estuviera iniciando la aplicación de nuevo. En caso de existir una perturbación en las variables tales como conexión, GPS y batería, el sistema informará dicho suceso al usuario para que realice las acciones pertinentes.
+	
+	\item \textbf{Logging: } Para satisfacer los requerimientos R010 y R011 del documento de especificación de requerimientos la clase BEcopter como también la clase vehículo utilizan la librería \textbf{logging} de Python para la generación de un logging ya sea de la plataforma o del vehículo, que se van mostrando en la pestaña de conexión de BEcopter. 
+	
+\end{itemize}
+\newpage
+
+
