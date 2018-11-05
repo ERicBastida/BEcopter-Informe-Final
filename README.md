@@ -1,2 +1,2 @@
 # BEcopter-Informe-Final
-Informe del Proyecto Final para obtener el título como Ingeniero en Informática
+Informe de Proyecto Final de Carrera - Ingeniería en Informática.
