@@ -32,30 +32,30 @@
 %---------------------------------------------------------------------
 
 %%%
-% Gestión de la configuración
+% Gestiï¿½n de la configuraciï¿½n
 %%%
 
-% Título de la parte
+% Tï¿½tulo de la parte
 \def\partTitleVal{}
 \newcommand{\partTitle}[1]{
 \def\partTitleVal{#1}
 }
 
-% Descripción de la parte
+% Descripciï¿½n de la parte
 \def\partDescVal{}
 \newcommand{\partDesc}[1]{
 \def\partDescVal{#1}
 }
 
-% Descripción en la parte trasera de la hoja
-% (solamente se utilizará en twoside)
+% Descripciï¿½n en la parte trasera de la hoja
+% (solamente se utilizarï¿½ en twoside)
 \def\partBackTextVal{}
 \newcommand{\partBackText}[1]{
 \def\partBackTextVal{#1}
 }
 
 %%%
-% Configuración terminada
+% Configuraciï¿½n terminada
 %%%
 
 
@@ -66,10 +66,10 @@
 \newcommand{\makespart}{\part*{\partTitleVal}\partDesc{}\partBackText{}\def\tienePartesTeXiS{}}
 
 % El \makepart se basa en  el comando LaTeX \part{...} que redefinimos
-% aquí (cambiando la  definición de book) para permitir  el uso de los
-% comandos anteriores.  En realidad el usuario  podría seguir haciendo
-% uso del comando de LaTeX \part, pero podría añadir las descripciones
-% en la propia página, ni en la página trasera.
+% aquï¿½ (cambiando la  definiciï¿½n de book) para permitir  el uso de los
+% comandos anteriores.  En realidad el usuario  podrï¿½a seguir haciendo
+% uso del comando de LaTeX \part, pero podrï¿½a aï¿½adir las descripciones
+% en la propia pï¿½gina, ni en la pï¿½gina trasera.
 
 \makeatletter
 \renewcommand\part{%
@@ -79,7 +79,7 @@
     \clearpage
   \fi
   \thispagestyle{empty}% Cambiado; antes era plain pero
-% no queremos número de página...
+% no queremos nï¿½mero de pï¿½gina...
   \if@twocolumn
     \onecolumn
     \@tempswatrue
@@ -87,12 +87,12 @@
     \@tempswafalse
   \fi
   \null\vspace*{2cm}% Cambiado; en vez de \vfil, un espacio fijo de
-                    % dos centímetros, para que el título no cambie de
-                    % posición dependiendo de la longitud de la descripción.
+                    % dos centï¿½metros, para que el tï¿½tulo no cambie de
+                    % posiciï¿½n dependiendo de la longitud de la descripciï¿½n.
   \secdef\@part\@spart}
 
-% Versión "sin estrella" del comando part. Se mete en el toc y se pone
-% "Parte I"; después viene el título y descripción.
+% Versiï¿½n "sin estrella" del comando part. Se mete en el toc y se pone
+% "Parte I"; despuï¿½s viene el tï¿½tulo y descripciï¿½n.
 \def\@part[#1]#2{%
     \ifnum \c@secnumdepth >-2\relax
       \refstepcounter{part}%
@@ -110,24 +110,24 @@
        \vskip 20\p@
      \fi
      \Huge \bfseries #2\par}
-    % Si hay descripción de la parte, la ponemos después de 2 centímetros
+    % Si hay descripciï¿½n de la parte, la ponemos despuï¿½s de 2 centï¿½metros
     {\vspace*{2cm}\noindent\partDescVal}%
     \@endpart}
 
-% Versión "con estrella" del comando part. Se pone el título y la
-% descripción.
+% Versiï¿½n "con estrella" del comando part. Se pone el tï¿½tulo y la
+% descripciï¿½n.
 \def\@spart#1{%
     {\centering
      \interlinepenalty \@M
      \normalfont
      \Huge \bfseries #1\par%
-    % Si hay descripción de la parte, la ponemos después de 2 centímetros
+    % Si hay descripciï¿½n de la parte, la ponemos despuï¿½s de 2 centï¿½metros
     {\vspace*{2cm}\noindent\partDescVal}%
 }%
     \@endpart}
 
-% Final del comando part; salta de página y si se está en twoside
-% deja la página de atrás en blanco, añadiendo la descripción
+% Final del comando part; salta de pï¿½gina y si se estï¿½ en twoside
+% deja la pï¿½gina de atrï¿½s en blanco, aï¿½adiendo la descripciï¿½n
 % trasera si existe.
 \def\@endpart{\vfil\newpage
               \if@twoside
@@ -146,7 +146,7 @@
 
 
 % Variable local para emacs, para que encuentre el fichero
-% maestro de compilación
+% maestro de compilaciï¿½n
 %%%
 %%% Local Variables:
 %%% mode: latex

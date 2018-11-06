@@ -1,20 +1,23 @@
-Quien se atreve a invertir en su propia educación, se arriesga a ser exitoso.
+Quien se atreve a invertir en su propia educaciï¿½n, se arriesga a ser exitoso.
 
 Everybody in this country should lear how to pragram a computer, because it teach you how to think. -Steve Jobs
 
-No ilumino a aquellos que no están deseosos de aprender, tampoco despierto a
-quienes no están ansiosos de darse una explicación a sí mismos. Si les he presentado
-una esquina del cuadro y ellos no vienen con las otras tres, no debería recorrer otra
-vez los puntos." Confucio
+No ilumino a aquellos que no estï¿½n deseosos de aprender, tampoco despierto a
+quienes no estï¿½n ansiosos de darse una explicaciï¿½n a sï¿½ mismos. Si les he presentado
+una esquina del cuadro y ellos no vienen con las otras tres, no deberï¿½a recorrer otra
+vez los puntos." Confucio
 
-El programador de computadoras es el creador de universos de los cuales él sólo es
+
+El programador de computadoras es el creador de universos de los cuales ï¿½l sï¿½lo es
 responsable. Universos de complejidad virtualmente ilimitada pueden ser creados en la
 forma de programas de computadora."
-Joseph Weizenbaum, Computer Power and Human Reason
+Joseph Weizenbaum, Computer Power and Human Reason
 
-Debajo de la superficie de la máquina, el programa se mueve. Sin esfuerzo, se
-expande y contrae. En gran armonía, los electrones se separan y reagrupan. Las
-formas en el monitor no son más que ondas en el agua. La escencia permanece
-invisible debajo. Master Yuan-Ma, The Book of Programming
+
+Debajo de la superficie de la mï¿½quina, el programa se mueve. Sin esfuerzo, se
+expande y contrae. En gran armonï¿½a, los electrones se separan y reagrupan. Las
+formas en el monitor no son mï¿½s que ondas en el agua. La escencia permanece
+invisible debajo. Master Yuan-Ma, The Book of Programming
+
 
 divide et empire

@@ -210,8 +210,8 @@ FUNCTION {bib.fname.font}
 FUNCTION {tie.or.space.prefix}
 { duplicate$ text.length$ #3 <
     { "\ " } % Cambiado. Inicialmente estaba como "~",
-			 % pero puede dar problemas con babel, si después
-			 % va una 'n', porque lo convierte a ñ, y quita el espacio.
+			 % pero puede dar problemas con babel, si despuï¿½s
+			 % va una 'n', porque lo convierte a ï¿½, y quita el espacio.
     { " " }
   if$
   swap$
@@ -286,7 +286,7 @@ FUNCTION {bbl.availableat}
 { "Disponible en" }
 
 FUNCTION {bbl.lastaccess}
-{ "último acceso, "}
+{ "ï¿½ltimo acceso, "}
 
 FUNCTION {bbl.wpentry}
 { "Entrada"}
@@ -606,7 +606,7 @@ MACRO {toplas} {"ACM Transactions on Programming Languages and Systems"}
 
 MACRO {tcs} {"Theoretical Computer Science"}
 
-% Otros añadidos por Marco
+% Otros aï¿½adidos por Marco
 
 MACRO {LNCS} {"Lecture Notes in Computer Science"}
 
@@ -877,7 +877,7 @@ FUNCTION {format.full.names}
   while$
 }
 
-% Dos alternativas de "año": el nombre de la entrada,
+% Dos alternativas de "aï¿½o": el nombre de la entrada,
 % o el nombre de la entrada seguido de un '-' y el
 % idioma. Dependiendo de la que se quiera, utilizar
 % 'pop$ o {"-" swapt$ * *} respectivamente.
@@ -1654,7 +1654,7 @@ FUNCTION {calc.label}
   short.list
   "("
   *
-% Añadido Marco: el año en las entradas de la Wikipedia
+% Aï¿½adido Marco: el aï¿½o en las entradas de la Wikipedia
 % NO se corresponde con la entrada year
   type$ "wikipedia" = not
   	{ year duplicate$ empty$ }
