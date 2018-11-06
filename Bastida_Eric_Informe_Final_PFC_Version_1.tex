@@ -146,23 +146,23 @@ constantes,guionado,Cascaras/bibliografia,config%
 % p?ginas) y ponemos la cabecera normal
 \mainmatter
 \restauraCabecera
-|
+
 % Capitulos
 \include{Capitulos/00Capitulo}    % JOA
 \include{Capitulos/01Capitulo}    % Obtencion de los requerimientos
 \include{Capitulos/02Capitulo}    % Gestión del hardware y armado 
 \include{Capitulos/03Capitulo}    % Desarrollo de la plataforma
-%\include{Capitulos/04Capitulo}   % Pruebas
+\include{Capitulos/04Capitulo}    % Pruebas
 %\include{Capitulos/05Conclusion} % Conclusión
 
 
 % Apendices
 \appendix
-\include{Apendices/ParteApendices}
+%\include{Apendices/ParteApendices}
 \include{Apendices/01ApendiceA}     %Documentacion - ERS - GUI - Diagrama de clases
 %\include{Apendices/01ApendiceB}    %Deberia estar el código (consultar antes a la cátedra)
 %\include{Apendices/01ApendiceC}
-\backmatter
+%\backmatter
 
 %
 % Bibliograf?a
@@ -182,10 +182,10 @@ constantes,guionado,Cascaras/bibliografia,config%
 % "en producci?n". Por tanto, el fichero que genera el ?ndice
 % *no* se incluye aqu? (est? comentado). Consulta la documentaci?n
 % en TeXiS_pream.tex para m?s informaci?n.
-\ifx\generaindice\undefined
-\else
-	\include{TeXiS/TeXiS_indice}
-\fi
+%\ifx\generaindice\undefined
+%\else
+%	\include{TeXiS/TeXiS_indice}
+%\fi
 
 %
 % Lista de acr?nimos
@@ -200,7 +200,7 @@ constantes,guionado,Cascaras/bibliografia,config%
 \include{TeXiS/TeXiS_acron}
 \fi
 
-\include{Apendices/ParteAnexos}
+%\include{Apendices/ParteAnexos}
 
 %
 % Final
