@@ -1,11 +1,11 @@
 % -*-coding: iso-latin-1  -*-
 %---------------------------------------------------------------------
 %
-%                          Capítulo 4
+%                          Capítulo 3
 %
 %---------------------------------------------------------------------
 %
-% 
+% 03Edicion.tex
 % Copyright 2009 Marco Antonio Gomez-Martin, Pedro Pablo Gomez-Martin
 %
 % This file belongs to the TeXiS manual, a LaTeX template for writting
@@ -34,598 +34,563 @@
 %
 %---------------------------------------------------------------------
 
-\chapter{Prueba integral de la plataforma y del cuadricóptero}
-
-\label{cap4:pruebas}
+\chapter{Desarrollo de la plataforma}
+\label{cap3:desarrollo}
 
 \begin{FraseCelebre}
 \begin{Frase}
-Divide et Impera
+Frase celebre
 \end{Frase}
 \begin{Fuente}
-Julio Cesar
+Autor
 \end{Fuente}
 \end{FraseCelebre}
 
 \begin{resumen}
-	En el presente capítulo se describirá todo el proceso realizado de la fase denominada \textbf{ Prueba integral de la plataforma y del cuadricóptero} que forma parte del actual proyecto. En esta fase se contempla la tarea de \textit{Evaluar el funcionamiento del cuadricóptero y de la plataforma} con el fin de satisfacer los requerimientos estipulados y de manera complementaria que el sistema se comporte de forma estable. 
-
-
-
+	En este capitulo se describirá todo el proceso realizado de la fase denominada \textbf{Desarrollo de la plataforma}, que forma parte del presente proyecto . En esta fase se contempla las tareas del \textit{Diseño detallado de la plataforma} y \textit{Codificación} del mismo. En aspectos generales se define de manera un poco más especifica y en base al desarrollo global ya realizado en etapas anteriores, todo el comportamiento que incluirá la plataforma, como pueden ser, las funcionalidades de cada módulo, la interfaz gráfica de usuario o por sus siglas en inglés (GUI), la lógica interna correspondiente a cada uno y sus respectivas interacciones. 
 \end{resumen}
 
+%-------------------------------------------------------------------
 \section{Introducción}
-	\par Al momento de encargar el desarrollo de cualquier tipo de proyecto y estemos avanzando en sus respectivas fases es necesario comprobar que el funcionamiento de lo que se va desarrollando esté cumpliendo con los resultados esperados, ya que de no ser así, la continuidad del mismo se verá afectada. Por tal motivo, en las siguientes secciones se detallarán los distintos tipos de pruebas que han sido ejecutadas luego de codificar alguna funcionalidad del mismo. Cabe mencionar que por la naturaleza del proyecto que estamos desarrollando es importante que el mismo se comporte exactamente a los requerimientos estipulados y que además, el software proporcione mecanismos de seguridad en caso de que ocurriese alguna inconsistencia, ya que podría provocar accidentes que dañen el equipo como también a las personas que se encuentren en la intersección de su trayectoria. Dicho esto, introduciremos el concepto de  \textbf{Aseguramiento de la calidad} en las próximas secciones. 
+%-------------------------------------------------------------------
+\label{cap3:sec:Introduccion}
 
-\section{Conceptos preliminares}
+	\par En el ámbito informático, como es sabido, la etapa de codificación del software generalmente es la que más tiempo abarca con respecto a la duración total del proyecto. Por esta razón, no es de sorprender que a medida que vayamos avanzando  objetivos, herramientas, planificación, diseño y lógica del software estén bajo un constante cambio ya que se van presentando obstáculos, alternativas e incompatiblididades que no han sido previstos en etapas iniciales. De esta manera, se irán ilustrando durante este capitulo capturas del estado del proyecto en distintas etapas del mismo, con el objetivo de poder ver el crecimiento y las técnicas utilizadas a medida que el proyecto va evolucionando y de esta manera poder aprender, para próximos proyectos, las estructuras que uno debe implementar en etapas iniciales con el fin de no cometer los mismos errores.
 
-	El\textbf{ plan de QA} atraviesa el proceso de desarrollo desde el nacimiento de la idea hasta la implementación del software.  En las primeras etapas, verifica que los objetivos estén bien planteados y los requerimientos sean precisos. En las fases de diseño y codificación, vigila el cumplimiento de los estándares fijados. Finalmente, revisa que el software en funcionamiento respete los requerimientos pedidos y que la entrega al cliente se haga en las condiciones adecuadas.
+\section{Diseño detallado de la plataforma}
+\label{cap3:sec:Disenio_detallado}
+
+\begin{center}
+	\begin{minipage}{0.9\linewidth}
+		\vspace{5pt}%margen superior de minipage
+		{\small
+			\textit{Un diseño de software es una descripción de la estructura del software que se va a implementar, los datos que son parte del sistema, las interfaces entre los componentes del sistema y, algunas veces, los algoritmos utilizados.}
+		}
+		\begin{flushleft}
+			(Ian Sommerville, 2005, p71)
+		\end{flushleft}
+		\vspace{5pt}%margen inferior de la minipage
+	\end{minipage}
+\end{center}
+
+
+Antes de iniciar directamente con la codificación, ya que por el mismo instinto de cumplir con las restricciones de tiempo, uno necesita finalizarlo lo antes posible; pero antes que nada es necesario, realizar un diseño de todo lo que queramos hacer, esto genera una linea de ejecución a seguir que ayuda al ejecutor del proyecto tener planificado las tareas generales que debe realizar en el transcurso del proyecto y no estar pendiente de como proseguir una vez finalizada cada tarea y re-planificar constantemente el hilo del proyecto. Es por tal motivo que el presente proyecto se ha dividido la fase de diseño en dos, la primera es un diseño global, meramente con la intensión de contar con un panorama general del comportamiento del software/hardware y además, poder mitigar la incertidumbre del ejecutor del proyecto, ya que se está iniciando en el desarrollo de proyectos de esta envergadura. En base a la documentación que se ha hecho en etapas anteriores podemos empezar a entablar de forma más precisa los procedimientos o tareas a realizar, lo que conlleva encarar la segunda parte del diseño.
+
+
+\par Según Pressman esta etapa produce los siguientes diseños:
+
+\begin{itemize}
+	\item \textbf{Diseño de datos: } El diseño de datos esencialmente se encarga de transformar el modelo de dominio de la información creado durante el análisis \cite{pressman88is}. 
+	En el caso particular de este proyecto el diseño de datos no juega un papel determinante dado que la herramienta de software propuesta, de la manera en que sea físicamente desarrollada e implementada, no requiere momentáneamente estructuras de datos complejas, ni de un esquema de bases de datos como ejemplo.	
+	\item \textbf{Diseño arquitectónico: } En el diseño arquitectónico se definen las relaciones entre los principales elementos estructurales del programa \cite{pressman88is}. 
+	Cuando se habla de elementos estructurales, se hace referencia entidades lógicas que componen la arquitectura de nuestro diseño, dentro del abanico de posibilidades de diseños, podemos seleccionar, diagramas de flujo de datos, modelos de entidad-relación, diagramas de clases, casos de usos entre otros esquemas gráficos. Viendo todas estas posibilidades, podemos encarar a diseñar nuestra estructura con el modelo que más se ajuste a nuestras necesidades y sea lo más útil posible para las etapas posteriores. Por tal razón, es necesario de un diseño que sea lo más representativo posible en el momento de codificación, que utilice un paradigma orientado a objetos , ya que queremos representar objetos como vehículos, posición geográfica, Joystick, etc; y que además tengan cada uno sus correspondientes atributos, es por eso que seleccionamos un diseño orientado a objetos, utilizando lo que anteriormente llamamos \textit{Diagramas de clases}. Estos diagramas son de suma utilidad ya que muestran de manera fácil como será la estructura de nuestro código y sus correspondientes relaciones entre cada uno, con el propósito de facilitar la tarea en las etapas posteriores al mismo.	
+	\item \textbf{Diseño de interfaz: } El diseño de interfaz describe cómo se comunica el software consigo mismo, con los sistemas que operan con él, y con los operadores que lo emplean\cite{pressman88is}. 
+	Dentro del aspecto de comunicación de software consigo mismo y con otros sistemas es contemplado en el ítem anterior con el tipo de diseño elegido. Aquí lo que nos incumbe es la interacción con el operador del software. De esta manera, se selecciona una herramienta que nos permita realizar nuestra interfaz gráfica del usuario, como por ejemplo, botones, \textit{label}, gráficos, \textit{checkboxes}, etc. ayudando al usuario a realizar sus respectivas tareas sin entrar en tanto detalle en comandos específicos  que se debe memorizar con el fin de ser lo más amigable posible.
+	\item \textbf{Diseño procedimental: } El diseño procedural transforma elementos estructurales de la arquitectura del programa en una descripción procedural de los componentes del software \cite{pressman88is}. 
+	Para no ser extensos en lo que es el desarrollo de este proyecto y teniendo en mente que el tamaño del mismo no corresponde a uno de grandes dimensiones y  considerando que únicamente  existe un único programador para la etapa de desarrollo, se descarta este tipo diseño.
+
+\end{itemize}
+
+
+\par Dentro de lo que es el conjunto de diseños obtenidos en esta etapa es importante saber en que orden realizar cada una. Ya que cada diseño esta relacionado directamente con los demás, y el desarrollo de uno terminará condicionando el siguiente. Es por esto, que se analiza la opción de comenzar primero con el diseño de arquitectura. Suponiendo dicha elección se desarrolla el siguiente flujo:
+
+\par En el diseño orientado a objetos o más específicamente, en la confección del diagrama de clases se detallan los objetos mediante bloques gráficos denominados clases. Estas clases contienen todos los atributos correspondientes al objeto, como por ejemplo, la clase vehículo puede contener: cantidad de hélices, altura de vuelo, velocidad, posición, etc. Y además, según este diseño contiene todas las acciones que puede realizar a través de funciones; si continuamos con el ejemplo de vehículo aéreo pueden ser: volar, aterrizar, despegar, etc. Esto nos brinda como resultado final una estructura al momento de implementar el código, por lo que facilita la tarea del programador. Además, y un punto importante a tener en cuenta es que muestra como se comunicará cada clase con las demás, esta característica ayuda a descubrir que funciones extras son necesarias implementar para una correcta cooperación en conjunto. Sin embargo, existe una desventaja, dentro del punto de vista de la interacción del usuario, es que no toma en cuenta las funcionalidades que puede desear el usuario para que el uso del software sea más placentero (que es el objetivo de este diseño), sino que el resultado del diseño se centra en que cada clase pueda responder a las necesidades (mensajes) de las demás clases. 
+
+
+En cambio, si primero realizamos el diseño de la interfaz gráfica del usuario, nos determinará que es necesario entre otros aspectos que no han sido incluido en el diseño arquitectónico ya que no se ha tomado como parte importante en el desarrollo, la interacción del usuario. Como por ejemplo, funciones de validación de datos, ventanas de advertencias, gráficos, como es el HUD (figura \ref{fig:hud}).
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/hud}
+	\caption{Head Up Display}
+	\label{fig:hud}
+\end{figure}
+
+\par Como podemos ver y según las restricciones presentes, es conveniente realizar primero un diseño de interfaz, ya que el mismo nos proporcionará más detalles de implementación. Por tal motivo iniciamos primero con el diseño de interfaz.
+
+\subsection{Diseño de interfaz}
+
+En primera instancia se inicia con la interfaz gráfica del usuario o su equivalente en ingles \textit{\textbf{G}raphical \textbf{U}ser \textbf{I}nterface}; por definición es el proceso que define como será la interacción entre el software y el usuario final. Para esto, se utiliza la herramienta Qt Designer, que proporciona mediante un panel de \textbf{widgets} todos los elementos necesarios para el diseño del mismo. 
+
+\par Para iniciar este proceso, nos basamos en los \textit{mockups}  desarrollados  en la fase de diseño global de la plataforma, basándonos pantalla por pantalla en la confección de cada uno. Cabe mencionar que las pantallas presentes del diseño han sido obtenidas luego de un arduo proceso de modificaciones y actualizaciones debido a las necesidades e inconvenientes que se iban presentando en el transcurso de la fase de codificación. Las imágenes de la GUI se pueden ver en el anexo \ref{ap1:GUI}
+
+\subsubsection{Modificaciones generales}
+\begin{itemize}
 	
-	El responsable del QA se tendrá que basar en conjunto de pruebas de calidad, entre las que se incluyen:
+	\item \textbf{Inserción del HUD en lugar de un mapa} Se ha considerado diseñar el HUD, en lugar de un mapa. Ya que el mismo no se considera de suma importancia para la navegación en un marco de referencia relativo. La implementación del mapa, se ha documentado como un requisito para las versiones futuras de la plataforma.
 	
-	\begin{itemize}
+	\item \textbf{Reemplazo de ubicación de iconos de estados} Los iconos posicionados en la barra superior del software se han reubicados dentro de lo que es el HUD, ya que estos iconos sobrecargaban la aplicación con una constante actualización siendo que el HUD es el encargado de mostrar dicha información de manera actualizada.
+	
+	\item \textbf{Sustracción de pestaña \textit{Sensores}} Según el requisito \textbf{Implementación de calibración de sensores} no se considera para esta versión la posibilidad de calibrar los sensores del vehículo. Si, se incluyen los parámetros del vehículo y sus respectivos valores en la pestaña de configuración, con el fin de ser configurados.
+	
+\end{itemize}
+
+
+
+\subsection{Diseño arquitectónico}
+
+
+Luego de finalizar con el diseño de interfaz y en base al diagrama de clases realizado en etapas anteriores del proyecto, se inicia el modelado más detallado del diagrama de clases de nuestro proyecto. Para esto se utiliza de la herramienta ArgoUML \footnote{Página web de ArgoUML  http://argouml.tigris.org/ }, obteniendo como resultado el diagrama de clases adjuntado en el apéndice \ref{ap1:classDiagra_vFinal}
+
+Para el desarrollo del mismo se ha considerado el diseño de la interfaz gráfica y de manera complementaría ,la comunicación que tiene con las demás clases conectadas, esto nos facilita al momento de determinar que tipo de funciones necesita cada una y la forma en que se los debe enviar dicha información.  
+
+
+
+\section{Codificación y Testing}
+
+	En esta etapa consiste en traducir el diseño en una forma legible por la máquina. Por tanto, iniciaremos esta tarea según los diseños de diagrama de clases generados y siempre teniendo en mente los requerimientos estipulados por los \textit{stakeholders}.
+	
+	\par Según, el diagrama de clases adjuntado en el apéndice \ref{ap1:classDiagra_vFinal} tenemos varias clases que se encargarán de un grupo de funcionalidades en específico y a su vez cada una brinda funcionalidades a sus clases vecinas, para entender un poco el funcionamiento del software comenzaremos explicando cada una, exceptuando las clases que se han utilizado de las librerías pertinentes.
+	
+	%ANEXAR CODIGO?
+
+		\subsection{Clase Vehículo}
+
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.4\linewidth, height=0.35\textheight]{Imagenes/classVehiculo}
+				\caption{Clase Vehículo}
+				\label{fig:classvehiculo}
+			\end{figure}
 		
-		\item \textbf{Testeo unitario:} se prueba que cada módulo funcione bien por separado.
-		\item \textbf{Prueba de estrés :} se prueba la resistencia de la aplicación enviándole una cantidad de peticiones excesiva, buscando que colapse.
-		\item \textbf{Test de integración:} los módulos probados independientemente durante el testeo unitario se acoplan y se prueban en conjunto.
-		\item \textbf{Test funcional:} se prueba que el software ofrezca las funciones solicitadas.
-		\item \textbf{Test de aceptación:} el usuario verifica que el producto satisfaga sus expectativas. En este caso, como se trata de una necesidad que inicialmente ha surgido de integrantes del \textit{sinc(i)} el software será validado por dichos responsables y una vez que el producto esté finalizado, y con el objetivo de que éste cumpla de manera eficaz con todas sus funcionalidades, el mismo será publicado en una plataforma de desarrollo colaborativo con el fin de que éste realice un \textit{feedback} de las inconsistencias y/o errores del mismo. 
-		
-	\end{itemize}
-	
-	
-	Las pruebas de QA no sólo son beneficiosas para el usuario final que recibirá un producto de calidad, sino también para el ejecutor del proyecto, ya que al establecer un control permanente sobre el proceso evitará en buena medida los costos de tener que corregir errores en etapas avanzadas del proyecto.
-	
-	\newpage
-
-\section{Evaluación funcional del Cuadricóptero y la Plataforma}
-
-	\subsection{Verificación y validación de la plataforma}
-	
-		Para el desarrollo del proyecto, se ha utilizado un paradigma de programación \textit{orientado a objetos}. Este paradigma nos ha facilitado la división lógica de las funcionalidades y por lo tanto, nos ha sido de gran facilidad probar cada componente lógico una vez codificado. Para validar y verificar que las funcionalidades cumplan con las especificaciones del cliente; se realiza el siguiente \textbf{plan de QA}.
-		
-		En primera instancia se valida con el documento de requerimientos y con el diagrama de clases generado en etapas anteriores. Se examina de manera general que cumpla con las necesidades de los usuarios y, en caso de encontrar inconsistencias que no cumplen completamente dicha necesidad se procede a modificar el diagrama de clases. Una vez codificadas, se procede a realizar los siguientes niveles de prueba:\newline
-		
-	
-
+			La clase Vehículo es la responsable de representar en su mayor medida el objeto real, en nuestro caso es el cuadricóptero.  Para esto se ha decidido asignarle las siguientes funcionalidades 
+			
 		\begin{itemize}
-			\item \textbf{ [Descripción] Nivel 0 } Por funcionalidad se implementan las pruebas unitarias, realizando el siguiente procedimiento: 
 			
-				\par Se ingresan datos reales o verdaderos en las entradas de las funciones, y luego de ejecutarla, observamos si obtuvimos los resultados deseados. A partir de aquí podemos obtener 2 casos, que la función se comporte según lo esperado o que la misma contenga errores. En caso de contenerlos se procede a solucionarlo siempre y cuando  al momento de obtener dicha solución la misma no conlleve demasiado tiempo y no sea dependiente de otras tareas; se registra dicho inconveniente con su respectiva fecha de incidencia y sus posibles riesgos para ser resuelta en etapas posteriores.
-				Por otro lado y una vez obtenido los resultados con los datos verdaderos, se procede a cambiar el tipo de entrada por datos erróneos o posibles alternativas, como por ejemplo , datos numéricos en vez de texto, caracteres especiales, datos fuera de rango, etc. con el fin de ``proporcionar robustez a nuestro código'' (prueba de estrés) y adaptar el código para  mantener el control en caso de ocurrir algún tipo de inconsistencia. Cabe mencionar, que sólo se suspenden temporalmente funcionalidades, si se consideran de tipo \textit{no funcionales} o no resuelve completamente un requerimiento del usuario. En la Figura \ref{fig:nivel-0} se esquematiza con un diagrama de flujo este procedimiento. 
-				
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.7\linewidth, height=0.4\textheight]{Imagenes/Nivel0}
-					\caption{Plan de QA - Nivel 0}
-					\label{fig:nivel-0}
-				\end{figure}
-				
-				\newpage
+			\item \textbf{Funciones de vuelo: } Según las restricciones establecidas en el ERS que se han estipulado en primera medida, ya sea por falta de conocimiento de librerías y/o complejidad de los mismos, únicamente las siguientes funcionalidades de vuelo \textbf{Ascenso, Descenso y Hovering}; en cambio, gracias a las librerías utilizadas se han codificado más funcionalidades correspondientes a las maniobras que puede realizar el vehículo. Dentro de este conjunto se desarrollaron las siguientes funciones (utilizando el protocolo MAVLink \textit{Micro Air Vehicle Link} y la librería Dronekit):
 			
-			\item \textbf{[Descripción] Nivel 1 } En este nivel lo que se busca es realizar los test de integración y funcionales (una vez ya finalizados los test del nivel 0), para esto se procede de la siguiente manera:
 			
-				
-				En el mismo módulo, se instancia cada clase perteneciente al mismo y se prueban las funcionalidades que dependen de otras clases (ya que las funcionalidades que no dependen de otras ya han sido probadas) y se toma el mismo procedimiento por funcionalidad que en el Nivel 0. 
-				
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Nivel1}
-					\caption{Plan de QA - Nivel 1}
-					\label{fig:nivel1}
-				\end{figure}
-	
-	\item \textbf{[Descripción] Nivel 2 } 	Este nivel es el último que se realiza, tiene como principal objetivo cumplir con los test de aceptación (considerando temporalmente que el programador es el usuario final):
-	
-		 \par para realizar esto se tiene como prioridad que la interacción entre el vehículo y el software se comporte correctamente, con esto hacemos referencia a que se muestren los resultados correspondientes, como señal de GPS, batería desenchufada, vehículo desconectado de la red, que el recibimiento de los comandos se puedan comprobar con las revoluciones de los motores, etc. En caso de encontrar algún tipo de falla o desperfecto, nos dirigimos directamente hasta el nivel 0 y desde ahí se procede a repetir el procedimiento. 
+			\par Cabe mencionar que estas funcionalidades han sido diseñadas con la posibilidad de realizar acciones de vuelo en un marco de referencia global, utilizando las coordenadas globales proporcionadas por el GPS en base a la latitud, longitud y altura (figura \ref{fig:latlong}). Además, es posible establecer sobre un marco de referencia relativo, es decir, este marco de referencia toma como origen el punto inicial de partida del vehículo, por lo que las coordenadas que ingresemos tendrán como referencia el punto de despegue. Es importante recordar que el marco de referencia global, conlleva la implementación de un mapa y según el requerimiento R025 este es opcional, e insistiendo con lo mencionado, esta funcionalidad se implementará en futuras versiones.
 			
-		% TODO: Falta modificar el diagrama a que luego se lleva a cabo la solucion de los problemas pendientes
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/latlong}
+				\caption{Marco de referencia global.}
+				\label{fig:latlong}
+			\end{figure}
+		
+		
+		
+		
+		\begin{enumerate}
+			\item \textbf{Despegar:  } Esta funcionalidad envía un comando al vehículo especificándole que debe propulsarse gracias a sus motores a una altura en particular.  
+			\item \textbf{Aterrizar: } Esta función ordena al vehículo que aterrice en un punto establecido, dependiendo del sistema de referencia, ya sea global o relativo.
+			\item \textbf{Suspenderse: } Según un punto en particular el vehículo estará inmóvil y suspendido en el aire por la cantidad de tiempo que se le asigne. Además, esta función entra en el requerimiento R017, donde se establece una función de salvataje encargada de ejecutarse en caso de algún inconveniente o percance con el vehículo y/o conexión. 
+			\item \textbf{Ir a un punto en especifico: } Como bien su nombre lo especifica, esta orden y según un sistema de referencia le indica al vehículo que debe desplazarse en un punto en particular. 
+			\item \textbf{Volver a inicio: } El vehículo almacena en primeras instancias su posición inicial, asignándola en una variable interna llamada \textit{home}, una vez que esta orden ha sido enviada, el vehículo tratará de dirigirse a su punto de partida.
+			\item \textbf{Moverse: } Según el requerimiento R024, que establece distintos tipos de vuelo se han codificado las funciones de \textit{velocidad} y \textit{yaw} que según las ordenes enviadas de un Joystick el vehículo modificará su dirección en tiempo real,  ya que se han restringido estos comandos a que tengan una duración de ejecución mínima, dando así lugar a un nuevo comando y captar las nuevas indicaciones que han sido enviadas por el usuario.
 			
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Nivel2}
-			\caption{Plan de QA - Nivel 2}
-			\label{fig:nivel2}
-		\end{figure}
-	
-	
-	
+		\end{enumerate}
+		
+		\item \textbf{Modo de vuelo: }
+		Dentro del conjunto de las funcionalidades de vuelo se pueden observar que existen funciones con el prefijo "mis", estos a diferencia de los demás, son utilizados cuando el vehículo se encuentro en modo AUTO, es decir, estos comandos serán enviados al vehículo con el fin de que sean almacenados y ejecutados de manera secuencial misión por misión cuando se envié la orden \textit{ejecutar misiones}. Para cumplir de manera complementaría con el requisito R024, se han codificado funciones que gestionen las misiones pertinentes. 
+		
+		\item \textbf{Conexión: } En base a los requerimientos R015,R016 se han incluido en la clase vehículo las funciones de \textit{conectado, desconectar y el constructor de la clase} estas son encargadas de conectarse de manera inalámbrica a una red LAN, gracias a su módulo WiFi instalado en la placa Raspberry Pi o de manera ad-hoc mediante módulos de comunicación inalámbrica conectados en un puerto serial. 
+		
 	\end{itemize}
-
-
-
-	\subsection{Verificación y validación del cuadricóptero}
 	
-		Más allá que el concepto del plan de QA se aplique comúnmente en el desarrollo de software, es posible crear un punto de intersección y adoptar la misma estructura lógica en donde se realizan los distintos tipos de pruebas que en el plan creado; pero en este caso sobre elementos electrónicos. Con esto hacemos referencia, que podemos ver a cada componente electrónico como un módulo, por el cual nosotros como QA lo conceptualizamos como una \textbf{caja negra}, en donde ingresan  datos de entrada y deberíamos obtener determinados datos de salida. Estos datos  pueden ser obtenidos por sus correspondientes fabricantes que proporcionan en su gran mayoría el \textit{data-sheet} de cada componente. 
-		Por lo tanto en lo que concierne a esta sección se explicará el procedimiento utilizado para probar el correcto funcionamientos de cada componente antes de ponerlos en marcha de manera conjunta. 
-		
+	
+	Por último una función que asigna \textit{Callbacks} a los atributos del vehículo, ya que estar consultando constantemente los cambios que se están produciendo dentro del vehículo conlleva un consumo extra de recursos,por lo que se decide implementar una función "setCallback2Param" que cada vez que el atributo correspondiente sufra algún tipo de cambio, este llame a otra función para informarle de dicha transición.
+	\newpage
+	
+	\subsection{Clase Joystick}
+
+	
+		La clase Joystick, es la encargada de gestionar dentro del los comandos conectados en el equipo, sus respectivas acciones que han sido ejecutadas por el usuario. 
 		
 		\begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.9\linewidth, height=0.6\textheight]{Imagenes/esquema-hardware}
-			\caption{Esquema de conexiones eléctricas del cuadricóptero}
-			\label{fig:esquema-hardware}
+			\includegraphics[width=0.4\linewidth, height=0.3\textheight]{Imagenes/classJoystick}
+			\caption{Clase Joystick}
+			\label{fig:classjoystick}
+		\end{figure}
+	
+		\par Con la ayuda de la librería Pygame podemos obtener información de los joystick conectados como nombre, cantidad de botones, número de ejes, si se ha presionado o saltado un botón, entre otras acciones, con el objetivo de poder interpretar, según un mapeo de funciones que se han pre-configurado las acciones que desee realizar el usuario en modo manual sobre el vehículo. Cabe mencionar que dicha clase se ha codificado satisfaciendo los requerimiento R012 y R022.
+		
+		
+
+
+
+	\subsection{Clase Gráfico Datos}
+	
+	
+			
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.3\textheight]{Imagenes/classGraficoDatos}
+			\caption{Clase gráficos de datos o de atributos del vehículo.}
+			\label{fig:classgraficodatos}
 		\end{figure}
 
-		\subsubsection{Conectores}
-		
-			Los conectores o cables, son los encargados de comunicar o transportar las señales a cada entrada/salida entre componentes electrónicos, por tal razón es de suma importancia evaluar su estado, ya que cumplen un rol importante al transportar la información. Para determinar el estado de cada conector se utilizó el tester en modo ``comprobación de continuidad'', como se puede ver en la Figura \ref{fig:testermodocont},  el cual conectando las puntas del cable con las puntas del tester, nos indicará con un sonido cuando el cable se encuentre en buenas condiciones, en caso contrario se intenta repararlo o desecharlo en el peor de los casos.
-
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.6\linewidth, height=0.3\textheight]{Imagenes/testerModoCont}
-				\caption{Multímetro digital}
-				\label{fig:testermodocont}
-			\end{figure}
-
-
-
-		\subsubsection{Fuentes de alimentación}
-		
-			En lo que respecta a las pruebas, hay que hacer foco en que es necesario disponer de un uso considerable de los componentes, ya que probar cada funcionalidad conlleva realizar pruebas continuas y por lo tanto al ser componentes electrónicos el suministro de energía en esta etapa deben ser , ``ilimitado''. Es por tal razón que la portabilidad que disponemos al tener baterías es innecesaria (más allá que serán útiles al momento de realizar vuelos a distancia),  por lo tanto estas baterías son reemplazadas por fuentes transformadoras de energía, las cuales dependen del suministro de energía de tipo alterna proveniente de las instalaciones del domicilio del ejecutante, y de esta manera obtendremos independencia en en tiempo de uso. En la Figura \ref{fig:esquema-hardware} los componentes etiquetadas con los números 1 y 4 corresponden a las baterías que deben tener las siguientes especificaciones según los dispositivos electrónicos que alimentan:
-			%TODO: el diagrama fue reeemplazado sin querer por el diagrama viejo, donde esta mal el cableado
-			
-			\begin{itemize}
-				\item \textbf{Batería 1: } La misma provee de energía a la placa Arduino UNO. Por lo tanto, según las especificaciones de Arduino
-				debe recibir los siguientes suministros \footnote{Especificaciones de Arduino UNO  https://store.arduino.cc/usa/arduino-uno-rev3} :
-				\begin{table}[ht]
-					\begin{center}
-						\begin{tabular}{|c|c|}
-							\hline 
-							\multicolumn{2}{|c|}{\textbf{Especificaciones Arduino UNO}} \\ 
-							\hline 
-							Voltaje operativo & 5 [Volts] \\ 
-							\hline 
-							Entrada de voltaje (recomendado)  & 7 - 12  [Volts] \\ 
-							\hline 
-							Entrada de voltaje (limites) & 6 - 20 [Volts] \\ 
-							\hline 
-						\end{tabular} 
-					\end{center}
-					\caption{Suministro energía Arduino UNO}
-					\label{Tab:energia_ArduinoUNO}
-				\end{table}
-				
-			
-				Para reemplazar esta batería se ha utilizado una fuente transformador de 7 Volts y 800mA, como se puede observar en la Figura \ref{fig:fuentearduino}
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/fuenteArduinoo}
-					\caption{Fuente de alimentación para Arduino UNO 7 [Volts] - 800[mA]}
-					\label{fig:fuentearduino}
-				\end{figure}
+		La clase Gráfico de Datos fue creada con el fin de cumplir con el requerimiento R002 que solicita una representación gráfica en tiempo real y evolutiva de la información capturada. Para realizar dicha tarea en primer momento se ha utilizado la librería Vispy como la definición del requerimiento lo especifica; pero a medida que se iba avanzando en el desarrollo y prueba del mismo se ha encontrado el inconveniente de que dicha librería no contiene la documentación actualizada, lo que genera contratiempos al momento de cumplir con el objetivo, por lo que se decide utilizar una librería con una comunidad más activa, como lo es PyQtGraph. Esta librería cuenta con una gran comunidad activa y una documentación detallada de cada funcionalidad disponible, esto facilita mucho al ejecutor del proyecto a dirigir la atención en otros aspectos del proyecto. Cabe destacar que esta librería, más allá de contener las funcionalidades necesarias para cumplir con el requerimiento estipulado.
 	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/GD_prueba}
+			\caption{Prueba animada en la inserción de dato utilizando la Clase Gráfico Datos.}
+			\label{fig:gdprueba}
+		\end{figure}
 	
+		Entre el conjunto de funcionalidades disponibles, se describen las más importantes:
 	
-	
-			\item \textbf{Batería 4: } La segunda batería como se puede ver en la Figura \ref{fig:esquema-hardware} provee de energía a los 4 motores  y además alimenta de manera paralela a la placa Navio2/Raspberry Pi. Y por el otro lado tenemos los motores HobbyKing \footnote{ Página web del fabricante   hobbyking.com/es\_es/hobbyking-30a-blueseries-brushless-speed-controller.html} que reciben los suministros mostrados en la Tabla \ref{Tab:energia_motores}
-			
-					\begin{table}[ht]
-						\begin{center}
-							\begin{tabular}{|c|c|}
-								\hline 
-								\multicolumn{2}{|c|}{Especificaciones motor} \\ 
-								\hline 
-								Voltaje de entrada & 7.4 - 14.8 [Volts] \\ 
-								\hline 
-								Baterías & 2-4 célula Lipo / 5-12 de la célula de Ni-XX \\ 
-								\hline 
-							\end{tabular} 
-						\end{center}
-						\caption{Suministro energía de motores}
-						\label{Tab:energia_motores}
-					\end{table}
-
-	
-	%
-	
-			\begin{figure}[h!]
-				\centering
-				\includegraphics[width=0.6\linewidth, height=0.25\textheight]{Imagenes/fuente12A}
-				\caption{Fuente de alimentacion Nitto de 12v - 5A}
-				\label{fig:fuente12a}
-			\end{figure}
-			
-			Para reemplazar la alimentación proveniente de dicha batería se ha adquirido una fuente de alimentación como se puede observar en la Figura \ref{fig:fuente12a}, la cual será responsable de alimentar a los 4 motores y como se explicará más adelante al Radio Control.
-			
-			Por último debemos alimentar a nuestra Raspberry Pi / Navio2 \footnote{https://emlid.com/navio/} que recibe los valores mostrados en la Tabla \ref{Tab:energia_navio2}
-			\begin{table}
-				\begin{center}
-					\begin{tabular}{|c|c|}
-						\hline 
-						\multicolumn{2}{|c|}{\textbf{Especificaciones Navio2}} \\ 
-						\hline 
-						Entrada de voltaje   & 4.75 - 5.25  [Volts] \\ 
-						\hline 
-						Consumo promedio & \< 150 [miliAmperes] \\ 
-						\hline 
-					\end{tabular} 
-				\end{center}
-					\caption{Suministro energía de Navio2}
-					\label{Tab:energia_navio2}
-			\end{table}
-
-			
-			En este caso para alimentar a las placas se nos ha suministrado un transformador incluido en la compra de nuestra Raspberry Pi 3 con las siguientes especificaciones:
-			5V y 2500mA, como se puede observar en la Figura \ref{fig:fuentenavio2}.
-			
-			\begin{figure}[h!]
-				\centering
-				\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/fuenteNavio2}
-				\caption{Fuente de alimentación para la Navio2 con 5V y 2500mA}
-				\label{fig:fuentenavio2}
-			\end{figure}
+		\begin{itemize}
+			\item \textbf{Cupo máximo de lineas: } Con fines estéticos se ha implementado la opción de disponer de un número máximo de gráficos en pantalla, ya que el acumulamiento de gráficos sobrecargará a la aplicación de recursos a consumir y además dejará de apreciarse cada gráfica en la ilustración por motivos de espacio. En caso de asignar una nueva linea al gráfico correspondiente, el mismo eliminará el primer gráfico ingresada, utilizando una metodología tipo FIFO.
+			\item \textbf{Identificación de lineas: } Para poder gestionar las lineas presentes en el gráfico es necesario asignarle a cada una un identificador, este identificador además servirá para las clases antecesoras para la inserción y eliminación de cada una.
+			\item \textbf{Pausado de animación: } Es de esperar que el gráfico no este disponible tiempo completo, por lo que se decide incorporar la opción de pausado de la animación con el propósito de optimizar el uso de recursos del equipo y que la aplicación BEcopter sea lo más liviana posible.
 			
 		\end{itemize}
 
-		Para comprobar que los respectivos valores de salida de cada fuente sean correctos y no provengan con algún tipo de falla técnica, se procede a medir los voltajes correspondientes con un tester, dándonos como resultado valores dentro del rango de especificaciones de fábrica.
-		
-		
-		
-		\newpage
 
-		\subsubsection{Radio Control}
+	\subsection{Clase HUD} %R003
+	
+		La clase HUD o por su respectiva traducción, \textit{visualización cabeza-arriba}, es la encargada de visualizar al piloto, en este caso el usuario, los datos más relevantes del estado del vehículo, con el objetivo de tener a simple vista el comportamiento del mismo en tiempo real. Por su parte, en el ámbito aeronáutico se utilizan ciertos instrumentos de navegación o símbolos que informan al piloto el estado de la aeronave, ya sea, velocidad, altitud, inclinación, etc; que para el desarrollo de esta clase es conveniente saber su significado. Por tal razón, explicaremos cada uno de estos instrumentos con su respectiva representación gráfica.
+		
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.5\textheight]{Imagenes/classHUD}
+			\caption{Clase Head Up Display}
+			\label{fig:classhud}
+		\end{figure}
 
-			La comprobación del radio control en primera instancia se reemplazan las 8 baterías de 1.5v, con lo cual  tenemos una cantidad suministrada de 12V necesarios para alimentarlo, siendo justamente la misma cantidad de Voltaje proveniente de nuestra fuente de alimentación de la Figura \ref{fig:fuente12a}. Luego de conectar la fuente se procede a controlar que las señales enviadas por lo movimientos del Joystick de control lleguen de manera correcta al receptor de señal. Para realizar dicho procedimiento se debería medirlo mediante un osciloscopio y ver de manera precisa la forma de la señal. Pero al no contar con dicho instrumento se analizan los pines con el tester midiendo el voltaje de la corriente continua, y se observa que al producir movimientos en los joystick cada pin en promedio muestra un voltaje cercano a los 5 Volts. Exceptuando el primer pin (el que corresponde al Eje x del primer joystick) donde no se observan valor de voltaje significativos. De esta manera, se tendrá en cuenta dicha falencia para las próximas pruebas.  
+\newpage
+
+		\subsubsection{Instrumentos de navegación }
+			Son los instrumentos esenciales para poder orientarse y seguir la ruta deseada por parte del piloto. \\	
 			
+			\textbf{Horizonte artificial}
+			
+				\begin{wrapfigure}{l}{0.3\linewidth}
+					\centering
+					\includegraphics[width=0.8\linewidth]{Imagenes/horizonte_artificial}
+					\caption{Horizonte artificial indicando un giro a la derecha en descenso.}
+					\label{fig:horizonte_artificial}
+				\end{wrapfigure}
+	
+				
+				El horizonte artificial muestra la orientación longitudinal de la aeronave (la relación del eje longitudinal del avión con respecto al plano del suelo), es decir: si está girado, inclinado, con la frente del vehículo levantado, bajado o todo a la vez. Sirve de gran ayuda en condiciones en que la visibilidad es poca o nula. El horizonte artificial tiene dos partes: el horizonte propiamente dicho, y el indicador de rumbo. El primero está compuesto por una región azul que representa el cielo, otra normalmente marrón que representa la superficie terrestre, una mira que representa la dirección en que apunta la frente de la aeronave, y varias marcas a su alrededor. Las marcas horizontales a ambos lados representan las alas, el plano de la aeronave, y su ángulo con el límite entre las regiones de cielo y superficie (el horizonte artificial), el cual con dichos planos se produce el ángulo de alabeo. Dispuestas verticalmente a intervalos regulares, hay marcas horizontales más pequeñas que representan ángulos concretos en el plano vertical, a intervalos de 5º, 10º, etc. Muestran el ángulo actual del eje longitudinal con el plano del suelo. Su principio mecánico es basado sobre un giroscopio.
 
-		\subsubsection{Motores}
-			En la prueba de motores se tuvo que codificar un script  \ref{script:motor}para que sea ejecutado sobre la placa Arduino. Una vez codificado dicho script se procedió a realizar sus respectivas conexiones como se puede observar en la Figura \ref{fig:testmotor}.
+%
+			\textbf{Indicador de rumbos }
+			
+				\par El indicador de rumbo, o giroscopio direccional, proporciona al piloto la dirección de la aeronave en grados magnéticos. 
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.2\linewidth, height=0.2\linewidth]{Imagenes/indicador_rumbo}
+					\caption{Indicador de rumbos}
+					\label{fig:indicadorrumbo}
+				\end{figure}
+	%
+			
+			\textbf{Coordinador de Giro}
+			
+				\par En el coordinador de giro vemos en lugar del bastón una Figura de un avión que nos indica el grado de inclinación de las alas.
+				
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/coord_de_giro}
+					\caption{Coordinador de giro.}
+					\label{fig:coord_de_giro}
+				\end{figure}
+
+				\par Una vez concientizado en los instrumentos de vuelo se procede a integrarlos de manera simulada en un \textit{widget}, con el fin de que cumpla las mismas funcionalidades. Para empezar necesitaremos de una librería gráfica en el cual nos proporcione de funcionalidades para poder graficar estos instrumentos, para eso se selecciona la conocida librería OpenGL. Dicha librería está equipada de funcionalidades para dibujar escenas tridimensionales complejas a partir de primitivas geométricas simples, tales como puntos, líneas y triángulos. Además nos dá a disposición la personalización de todos los paramentos que estén dentro de una escena como posición de la luz, cámara,  tipo de materiales y luces. Pero más allá de todo este conjunto de herramientas que nos deja a disposición OpenGL, la tarea del diseño del HUD es realizar en un dibujo en 2D,  el cual se mostraran un conjunto de datos y lineas básicas, por lo que se decide no utilizar directamente esta librería para el diseño de la escena, sino que se busca de una \textit{API} en que podamos graficar nuestros instrumentos de navegación de forma más sencilla, es por eso, que sea realiza una investigación antes de utilizar dicha librería y se encuentra que la librería PyQt, en sus conjuntos de clases contiene una de nombre QPainter, más allá que internamente usa OpenGL, esta librería facilita un conjunto de funciones tales como dibujar elipse, texto, imágenes, lineas, entre otras funcionalidades y de una manera más comprensible. De esta forma, abordamos la tarea de graficar  la escena de la siguiente manera: \newline
+
+				\begin{enumerate}
+					
+					\item \textbf{Dibujo del Horizonte Artificial}
+						El horizonte artificial como se puede observar en la Figura \ref{fig:horizonte_artificial} está compuesto por dos rectángulos, uno representando el cielo y el segundo la tierra, de esta manera, con la funcionalidad de QPainter que nos proporciona dibujar un rectángulo proseguimos a dibujar dos rectángulos simulando el horizonte artificial; quedándonos como se puede ver en la Figura \ref{fig:hudv0}.
+						\begin{figure}[h!]
+							\centering
+							\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0}
+							\caption{HUD v0.1}
+							\label{fig:hudv0}
+						\end{figure}
+						
+						\par Hasta aquí, podemos observar que la Figura \ref{fig:hudv0} satisface las necesidades de representar el horizonte artificial según nuestras especificaciones, pero al momento de proyectar al uso del mismo podemos encontrar los siguientes problemas:
+						
+						\begin{enumerate}
+						
+					\item \textbf{Problema gráfico al momento del Roll: } Como se puede ver en la Figura \ref{fig:hudv0e1} , cuando la escena sufre una rotación sobre su eje perpendicular, es decir, simulando un giro sobre el Roll o alabeo del vehículo, la imagen muestra imperfecciones en las puntas del recuadro. 
+						
+						\begin{figure}[h]
+							\centering
+							\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0_e1}
+							\caption{Error gráfico al momento de rotar}
+							\label{fig:hudv0e1}
+						\end{figure}
+						
+						\subitem Este problema fácilmente se puede solucionar ampliando los tamaños de los rectángulos en ambas direcciones, considerando siempre el tamaño más largo entre el alto y ancho de la pantalla, ya que si no tenemos en cuenta este aspecto cuando tengamos una imagen sumamente apaisada y de poca altura, obtendríamos el mismo problema. Por tal motivo, se debe elegir un tamaño adecuado para la imagen; ahora la pregunta es ¿Qué tamaño debo asignarle a la imagen para que no se presenten dichos defectos? 
+			
+		
+							\textbf{Obtención de la longitud requerida}
+		
+							\begin{figure}[h]
+								\centering
+								\includegraphics[width=0.3\linewidth, width=0.3\linewidth]{Imagenes/problemaPuntas}
+								\caption{Problema gráfico en las esquinas}
+								\label{fig:problemapuntas}
+							\end{figure}
+							Como bien muestra la Figura \ref{fig:problemapuntas}, cuando la imagen de fondo sufre una rotación no llega a cubrir lo suficiente los limites de la pantalla, por tanto, se  produce dicho problema. De tal manera se debe buscar la longitud máxima que debe tener la imagen para que cubra dichos limites, en la Figura  \ref{fig:problemapuntas} se puede apreciar una linea roja que representa el largo necesario a calcular. Este deberá ser la mínima longitud que deben tener el alto y ancho de la imagen, es decir :
+							
+							\begin{center}
+								$L > Ancho_{Imagen}  \land L > Alto_{Imagen}   $ 
+							\end{center}
+						
+							Para calcular dicho valor, se propone implementar una circunferencia con centro en el origen de la pantalla y que tenga un radio por el cual cubra por completo los limites del mismo, como se puede observar en la Figura \ref{fig:problemapuntas2}, de esta manera se contemplan las posibilidades de que la imagen de fondo cubra por completo el dominio de la pantalla en cualquier angulo de rotación que sufra. 
+							\begin{figure}[h]
+								\centering
+								\includegraphics[width=0.3\linewidth, width=0.3\linewidth]{Imagenes/problemaPuntas2}
+								\caption{Circunferencia con radio que satisface la longitud requerida.}
+								\label{fig:problemapuntas2}
+							\end{figure}
+							
+							\par Por último, obtener esta longitud se traduce en un problema trigonométrico  donde se debe obtener la hipotenusa de un triangulo rectángulo con base $w/2$ y alto $h/2$. Utilizando el teorema de pitágoras obtenernos que
+							
+							
+							\begin{subequations}\label{eq:longRequerida}
+								\begin{align}
+								R &= \sqrt{(\frac{w}{2})^2 + (\frac{h}{2})^2}  \\
+								R &= \frac{1}{2} (w + h) \label{eq:longRequerida1}
+								\end{align}
+							\end{subequations}
+							
+							Como podemos apreciar, la longitud mínima requerida se obtiene de la ecuación \ref{eq:longRequerida1}. Pero como es de saber, este valor es la longitud total mínima que debe tener tanto el alto como el ancho de la imagen, por lo que se debe conocer cual es la diferencia al que debemos agregar al ancho, como también al alto de la imagen. Para esto, simplemente realizamos la diferencia para cada atributo y obtendremos el siguiente valor a agregar
+							
+							
+							\begin{subequations}
+								\begin{align}
+								Ancho_{aux} &= \frac{1}{2} (h+w) - \frac{w}{2} =  \frac{h}{2} \\
+								Alto_{aux} &=  \frac{1}{2} (h+w)  - \frac{h}{2} =  \frac{w}{2} 
+								\end{align}
+								
+							\end{subequations}
+					
+					\item \textbf{Problema al simular el Pitch: } Otro problema que surge, es al momento de simular el cabeceo o pitch, es que dentro de la escena cuando ocurre este comportamiento el script debe realizar un transformación de traslado, siendo proporcional a la inclinación ocurrida en el vehículo. Pero en cambio, el defecto que ocasiona es que únicamente se trasladarán los dos cuadrados ya dibujados, dejando al descubierto el \textit{background}, como se puede ver en la Figura \ref{fig:hudv0e2}. Además, hay que tener en cuenta que la escena debe permitir un pitch de 0 a 360 grados, por lo que se tendrá que expandir la escena con el fin de simular un entorno virtual 360 en 3D.
+								
+						\begin{figure}[h!]
+							\centering
+							\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0_e2}
+							\caption{Error al momento de simular el Pitch}
+							\label{fig:hudv0e2}
+						\end{figure}
+			
+		Para solucionar este inconveniente surgen las siguientes propuestas 
+		
+		\begin{enumerate}
+			\item \textbf{Mapear una textura al rededor de la cámara, mediante coordenadas esféricas: } En esta propuesta se debe generar una textura de ambiente exterior por el cual será mapeada de tal manera que simulará un ambiente 3D. La desventaja de esta propuesta es que la clase QPainter no proporciona funcionalidades para el desarrollo de dibujos en 3D, ni tampoco sus clases antecesoras para el mapeo de textura. Por lo cual, se debería codificar la textura manualmente y utilizando las funcionalidades primitivas de OpenGL.
+			
+			\item \textbf{Inserción de rectángulos dependientes del Pitch: } Aquí lo que se pretende es que a medida que el pitch aumente o disminuya, es decir, que el vehículo cabecee para arriba o abajo, el script interprete estos datos para dibujar un nuevo rectángulo contrario al que se ve en pantalla (cielo/tierra), simulando un entorno infinito, como se puede ver en la Figura \ref{fig:addrectangle}.
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/addRectangle}
+				\caption{Insertando un rectángulo perteneciente al piso. }
+				\label{fig:addrectangle}
+			\end{figure}
+			
+			Siendo parecer la propuesta más efectiva, al momento de realizar las pruebas con el vehículo se descubre que presenta inconsistencias, ya que el movimiento del pitch no es continuo, por tanto, no se puede ir llevando un seguimiento del cuadro que se esta viendo actualmente para la inserción del siguiente. Más allá de poder emparchar esta propuesta anexando al algoritmo estructuras extras para el seguimiento de los cuadros, el propósito del mismo no es acomplejar el problema presente, de esta manera, se recurre al desarrollo de la siguiente propuesta.
+			
+			\item \textbf{Mapeo del Pitch sobre una imagen: } Finalmente, para solucionar el presente problema, y siempre reduciendo la complejidad a una solución, se propone dibujar una imagen que contenga la escena del horizonte artificial en forma repetida, con el propósito de mapear el rango completo del pitch [0 - 360] dentro de una sola imagen, sin estar utilizando imágenes extras para cubran lo restante. 
 			
 			\begin{figure}[h!]
 				\centering
-				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/testMotor}
-				\caption{Esquema de conexiones para realizar prueba del motor}
-				\label{fig:testmotor}
+				\includegraphics[width=0.7\linewidth, height=0.5\textheight]{Imagenes/mapeo}
+				\caption{Mapeo del horizonte artificial.}
+				\label{fig:mapeo}
 			\end{figure}
 			
+			\par Como se puede notar en la Figura \ref{fig:mapeo} el mapeo del pitch corresponderá unicamente al dominio de la pantalla marcada en color rojo. Con esto hacemos referencia, que el mapeo no será de forma lineal ya que la entrada del pitch corresponde dentro del dominio de [0 - 360], por lo que se procede a convertirlo en el dominio [-180 - 180] para que sea más representativo a la dirección que apunta el vehículo y luego mapearlo al dominio del tamaño de la imagen. La razón por la cual se ha tomado el dominio de pantalla especificado, es porque cuando el pitch supere el limite de los 180 (grados), inmediatamente el mapeador deberá llevar "la vista" al rango inferior, es decir, a los -180 (grados), esto dará al usuario una sensación continuidad de la imagen ya que al sobrepasar, ya sean los limites inferior o superior del dominio de la pantalla, las escenas serán prácticamente las mismas. 
 			
 			
-			\newpage
-
-\begin{lstlisting}[language=C++]{Name=test2}\label{script:motor}
-/* Programacion de un ESC con Arduino
-*
-* La velocidad del motor puede cambiarse enviando
-* un entero entre 1000 (vel. minima) y 2000 (vel. max.)
-* por Serial.
-*
-*/
-#include<Servo.h>
-
-//Crear un objeto de clase servo
-Servo ESC; 
-
-//Amplitud del pulso
-int vel = 2000; 
-
-
-void setup()
-{
-	//Asignar un pin al ESC
-	ESC.attach(9);
+		\end{enumerate}
+		
+	\end{enumerate}% FIN de problemas al momento de dibujar el horizonte 
 	
-	//Activar el ESC -> 1000 = 1ms
-	ESC.writeMicroseconds(1000); 
-	
-	//Esperar 5 segundos para hacer la activacion
-	delay(5000); 
-	
-	//Iniciar puerto serial
-	Serial.begin(9600);
-	Serial.setTimeout(10);
-}
-
-
-void loop()
-{
-	if(Serial.available() >= 1)
-	{
-		vel = Serial.parseInt(); //Leer un entero por serial
-		if(vel != 0)
-		{
-		//Generar un pulso con el numero recibido
-		ESC.writeMicroseconds(vel); 
-		}
-	}
-}
-\end{lstlisting}
-
-			En la Figura \ref{fig:motortest} (que fue obtenida mediante el módulo de representación de datos en etapas posteriores) se puede observar una gráfica de tiempo vs rpm
-			
-			\begin{figure}[h!]
-				\centering
-				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/motor_test}
-				\caption{Gráfico tiempo-RPM de los motores probados con el script}
-				\label{fig:motortest}
-			\end{figure}
-			
-			
-			
-
-		\subsubsection{Raspberry Pi - Navio2}
-
-			La prueba de funcionamiento de dichas placas se comprueba con la interacción con el software desarrollado. 
-			
-			\subsubsection{Arduino}
-			En lo que compete a la placa Arduino, en el esquema presentado en la Figura \ref{fig:esquema-hardware} la misma cumple la función de un conversor PWM a PPM, el cual es el formato de señal necesario para que la placa Navio2 interprete las señales enviadas por el radio-control.  En nuestro caso, ya se han probado los dispositivos conectados al mismo, por lo tanto sólo nos queda corroborar que el tipo de señal enviada sea el correcto. Para realizar esta prueba es necesario contar con un osciloscopio, que muestre el tipo de señal enviada por el pin configurado en la placa Arduino. Como no disponemos momentáneamente de un osciloscopio, se recurre a la simulación; de manera que se utiliza el software de la siguiente página web  \url{www.library.io}, el cual proporciona un simulador de código y además nos da la posibilidad de mostrar la señal generada por un osciloscopio digital.   	
-			Luego de corroborar que la señal es correcta mediante el programa de simulación, se mide mediante un tester que la corriente promedio de salida se mantenga en un valor aceptable de voltaje para comprobar que la placa este funcionando correctamente.
-			Por último, en la Figura \ref{fig:todoconectado} se puede apreciar todo el sistema conectado según el diagrama de la Figura \ref{fig:esquema-hardware}. Exceptuando los motores, que han sido debidamente desconectados al momento de realizar las pruebas; y únicamente se ha conectado un motor sobre una base de madera, con el fin de mantener el mismo inmóvil al momento de enviar las órdenes de arrancar. 
-			
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.8\linewidth, height=0.2\textheight]{Imagenes/todoConectado}
-				\caption{Conexiones terminadas}
-				\label{fig:todoconectado}
-			\end{figure}
-			
-			\newpage
-
-	\subsection{Prueba integral}
-	
-		Por último y ya probado que tanto la plataforma como el vehículo estén en condiciones, se procede a realizar las pruebas integrales entre ambas partes (Proyecto-Vehículo). Para esto se descomponen dichas pruebas en categorías o "módulos" que se han definido en el comienzo del proyecto por los \textit{stakeholders}.
-
-
-		\subsubsection{Conexión }
-			\begin{figure}[h!]
-				\centering
-				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/pConexion}
-				\caption{Módulo de conexión del proyecto}
-				\label{fig:pconexion}
-			\end{figure}
-
-		El módulo de conexión es el encargado de habilitar y mantener toda la comunicación entre el vehículo y nuestro software, por tanto éste debe ser lo bastante robusto para interpretar los principales errores producidos por la red de comunicación elegida. El siguiente código muestra la funcionalidad principal que se encarga de conectarse con nuestro vehículo y mediante los try-except gestiona el control de errores proporcionando al usuario (en caso de generarse alguno) su respectivo mensaje informativo.
-
-\begin{lstlisting}[language=python]
-try:
-if port_host != None:
-# Concatenamos la direccion IP con el puerto
-source = ip_host + ":" + port_host
-else: 
-# En caso de entrar aqui es porque se ha ingresado un puerto serial
-source = ip_host
-# Utilizamos la funcion connect de DroneKit
-self.v = connect(source, 
-wait_ready=True, 
-heartbeat_timeout=10,
-status_printer=logging.info)  		
-# El parametro wait_ready = True garantiza que connect () no volvera 
-# hasta que Vehicle.parameters y la mayoria de los otros atributos
-# predeterminados se hayan rellenado con valores del vehiculo.
-
-logging.info("Se ha conectado con la direccion {} de manera exitosa".format(source))
-
-self.__on = True
-self.descargarMisiones(False)
-
-# Error TCP connection
-except socket.error:
-logging.info('No se ha encontrado el vehiculo, por favor compruebe la conexion')
-raise WindowsError('No se ha encontrado el vehiculo, por favor compruebe la conexion')
-
-# Error TTY connection
-except exceptions.OSError as e:
-logging.info('No se pudo establecer conexion con el puerto serial')
-raise WindowsError('No se pudo establecer conexion con el puerto serial')
-return
-except APIException:
-logging.info('Se ha excedido el tiempo de espera para establecer la conexion!')
-raise WindowsError('Se ha excedido el tiempo de espera para establecer la conexion!')
-
-except :
-logging.info('Ha ocurrido un error inesperado. ')
-raise WindowsError('Ha ocurrido un error inesperado. ') 
-
-\end{lstlisting}
-
-Según el código mostrado, podemos realizar una conexión con nuestro vehículo mediante un dispositivo que se conecte por puerto serial o a través de la red, ya sea mediante Ethernet o Wireless (utilizando UDP). 
-
-\begin{itemize}
-	
-	\item \textbf{Conexión mediante el puerto serial: } Para comprobar el funcionamiento, se han realizado anteriormente pruebas de conexión utilizando el protocolo SSH, el cual nos permite interactuar mediante una consola de comandos con nuestro vehículo, dándonos los datos solicitados sin ningún tipo de problema. Cabe mencionar que el objetivo de este tipo de conexión es utilizar los módulos inalámbricos XBee/LoRa. 
-	
-	\item \textbf{Conexión mediante la red local: } Por comodidad al momento de transportar el vehículo en los lugares en que la fuente de alimentación necesitaba conectarse, este tipo de conexión nos ha resultado la más beneficiosa. El mismo utiliza un Router TP LINK TL-WR841N con una cantidad de 10 clientes conectados de manera inalámbrica en el domincilio utilizado. Además, se han realizado las mismas pruebas pero dentro de las instalaciones del \textit{sinc(i)} con una cantidad de 50 clientes  conectados aproximadamente al mismo router de pruebas. Y para este caso, la conexión sufría de varias interrupciones continuas.  Por lo que obtenemos como conclusión para estos casos que el router utilizado para el envio de comandos no debe ser utilizados por muchos usuarios, que de ser así la conexión no será la optima.
-	%TODO consultar que cantidad de clientes tiene la red aproximadamente
-\end{itemize}
-
-\textbf{Pruebas de interrupción de conexión}
-
-Un aspecto importante a tener en cuenta, es el momento en que la conexión se corta. Por tal inconsistencia que puede ocurrir fácilmente  se han realizado pruebas simulando dicho fenómeno y comprobando cómo se comporta el software y el vehículo al ocurrir este hecho. 
-Cuando este inconveniente se presente, tanto el vehículo como el software comparten una variable en común llamada \textit{last heartbeat}, la cual contiene información sobre el tiempo (en segundos) en que ha recibido su último mensaje proveniente del vehículo.
-
-\begin{lstlisting}[language=python]
-
-# Testing on SITL indicates that last_heartbeat averages about .5 seconds,
-# but will rarely exceed 1.5 seconds when connected. 
-# Whether heartbeat monitoring can be useful will very much depend on the application.
-
-if self.v.last_heartbeat > 1 and self.v.last_heartbeat <= 1.5 :
-estados['signal'] = None
-elif self.v.last_heartbeat <= 1 and self.v.last_heartbeat :
-estados['signal'] = True
-else:
-estados['signal'] = False	
-\end{lstlisting}
-
-
-En el código anterior se puede observar que existe una variable correspondiente al estado de la señal, el mismo puede contener 3 valores: [False, None, True]. En caso de tener el valor de False, esto quiere decir que la conexión se ha perdido, ya que se ha superado el rango establecido; cuando el valor de \textit{last heartbeat} está comprendido entre 1 y 1.5 segundos, tendrá un estado None, el mismo significa que está dentro de valores de precaución ya que está recibiendo mensajes con un poco de demora. Y por último en caso de estar en valores normales de tiempo tendrá un valor de True, indicando que estamos recibiendo información a tiempo del vehículo, esta estructura simula el comportamiento de un semáforo. 
-
-
-\begin{itemize}
-	\item \textbf{Comportamiento del vehículo: } Como mencionamos, la variable \textit{last hearbeat} es compartida entre el software y el vehículo. Por lo tanto cuando el vehículo detecte que se ha perdido la conexión tenemos 3 posibilidades:
-	\begin{enumerate}
-		\item \textbf{Aterrizar}						
-		\item \textbf{Volver al inicio}
-		\item \textbf{Quedarse suspendido en el aire}
-	\end{enumerate}
-	
-	Por defecto el vehículo estará en suspensión en el aire (siempre y cuando el nivel de batería lo permita) y en caso de agotar la batería, se procederá a aterrizar el vehículo. Se procede de esta forma ya que se considera que el vehículo puede encontrarse en una zona no apta para aterrizar, como por ejemplo sobre una edificación, un río, árbol, etc. El mismo puede llegar a estropearse, por lo tanto seguirá pendiente hasta que la conexión se restablezca y en el último de los casos se procede a aterrizar (ya que se supone el problema de que el equipo de comunicación se estropee o el mismo software cierre inesperadamente su ejecución por algún motivo). Es importante a tener en cuenta que estas acciones pueden ser cambiadas en la respectiva configuración de la aplicación. 
-	
-	\item \textbf{Comportamiento del software: } Cuando este inconveniente se presente, el software, en primera instancia, tratará de reconectarse por un tiempo estipulado (5 segundos)  y en caso de no poder restablecerá el estado del programa al mismo que cuando se inicia la aplicación en primera instancia, con el objetivo de deshabilitar las funciones dependientes del vehículo y dejar a disposición del usuario volver a conectarse en caso de ser necesario. 
-\end{itemize}  
-
-
-\subsubsection{Representación de datos} 
-
-La visualización de los datos es un aspecto importante cuando estamos controlando algún objeto a distancia, ya que es necesario conocer el estado del mismo, y con mayor importancia cuando el objeto no está en nuestro campo visible. Por tal motivo se han realizado varias pruebas sobre los módulos de representación de datos, con el propósito de que éstos muestren fielmente los datos capturados por el vehículo en tiempo real.
-\begin{itemize}
-	\item \textbf{Gráfico temporal de datos: }	El objetivo de este módulo de software en nuestro proyecto, como su nombre lo dice, es poder representar la evolución temporal de los datos provenientes de algún sensor o estado del vehículo mediante una gráfica. 
-	\par Según lo especificado en el ERS, se ha propuesto utilizar la librería Vispy\footnote{Sitio web de Vispy http://vispy.org/}, esta librería escrita en Python  está diseñada específicamente para la visualización interactiva de gran cantidad de datos de forma rápida, escalable y fácil.  Pero más allá de sus prestaciones, al momento de realizar las \textbf{pruebas de integración} se ha observado que el rendimiento de nuestro software se ha reducido considerablemente; esto es debido a que Vispy utiliza distintas tecnologías al renderizar las figuras, por lo que se debió incrustar dicho gráfico de manera brusca para poder ver su funcionamiento. Al momento de querer optimizar dicho rendimiento, al ser Vispy una librería nueva,  su documentación y por lo tanto su comunidad era escasa, y como es de esperar no se encontraba la ayuda necesaria para poder solventar los problemas presentes. Por tales motivos se recurre a la búsqueda de alguna alternativa que se adapte a nuestras necesidades; luego de encontrar y analizar las librerías disponibles se llega a la decisión de utilizar PyQtGraph\footnote{Sitio web de PyQtGraph http://pyqtgraph.org/}. Esta librería además de todas su prestaciones en el ámbito científico / matemático / aplicaciones ingenieriles, está construida con las mismas librerías que utilizamos en nuestro proyecto, que es PyQt\footnote{Sitio Web de PyQt https://riverbankcomputing.com/software/pyqt/intro}. Por lo tanto, esto generó una excelente adaptabilidad y rendimiento al momento de realizar las pruebas de integración.  
-	Para las \textbf{pruebas unitarias/estrés/funcionales} se ha creado el módulo \textit{GraphDatav2}, el cual ha sido puesto en prueba hasta su máximo potencial. Utilizando una señal de tipo aleatoria como datos de prueba (ya que el mismo contiene una gran cantidad de componentes frecuenciales en su dominio) y se ha generado su respectiva transformada de Fourier (utilizando la Transformada Rápida de Fourier), con el fin de corroborar que los cálculos de los mismo no ralenticen el funcionamiento del mismo, y luego de realizar las pruebas nos suministró  resultados  dentro de las expectativa de rendimiento. Siendo estas espectativas:
-	\begin{itemize}
-		\item Fluidez en la animación de la figuras.
-		\item Que no interrumpa el flujo de trabajo de la aplicación en general.
-		\item La interfaz ofrece de herramientas como zoom y paneo, por lo tanto al momento que el usuario las utilice es deseable que el mismo no retarde el renderizado.
-		\item Fluidez al momento de graficar el limite de figuras permitidas (5 - 10).
-	\end{itemize} 
-	
-	\begin{figure}[h!]
+	\item \textbf{Dibujo del ángulo de banco}
+	El ángulo de banco representa directamente al instrumento de coordinador de giro. Este instrumento indica al usuario la inclinación en el eje x o Roll de la misma forma en que se detalló en su definición, con la diferencia que este muestra el rango de inclinación [-(-60), 60] y en caso de sobrepasar este limite se indica con una flecha en color rojo a modo de precaución. 
+	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/pINICIO_b}
-		\caption{Módulo de representación de datos}
-		\label{fig:piniciob}
+		\includegraphics[width=0.4\linewidth, height=0.1\textheight]{Imagenes/angulo}
+		\caption{Ángulo de banco.}
+		\label{fig:angulo}
 	\end{figure}
 	
 	
-	\item \textbf{HUD: } A diferencia del módulo anterior, su responsabilidad es mostrar al usuario de manera instantánea los estados sobre los componentes integrados al vehículo, como también algunos de sus respectivos valores. Por lo tanto, más allá de sus pruebas unitarias/funcionales/estrés/integración aquí entra en juego las pruebas de aceptación proporcionadas por ``los pilotos de los vehículos'', ya que el mismo debe ser indispensable al momento de mostrar los valores que ayuden al piloto del vehículo en tener un conocimiento general del mismo en plena ejecución. Así que de manera preventiva se ha desarrollado el mismo imitando en lo mejor posible a los HUD's reales, con el fin de tener una base de diseño que sea válida en la vida real. 
-	Con respecto a las pruebas de integración hemos detectado que no cumple con nuestras necesidades de rendimiento, esto causa que el software se ralentice y no pueda interpretar ``en tiempo real'' la información recibida del vehículo como también los comandos enviados. Por lo que se decidió temporalmente deshabilitar algunas características del HUD hasta que se encuentre su respectiva solución. 
+	\item \textbf{Dibujo de lineas de referencia}
+	Estas lineas de referencia tienen el fin de mostrar al usuario en la pantalla el pitch que esta teniendo el vehículo en tiempo real, de la misma forma que el ángulo de banco, este muestra un rango limitado de [-40,40].
 	
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/HUD}
-		\caption{Head Up Display}
-		\label{fig:hud}
-	\end{figure}
-	
-	
-\end{itemize}
-
-\subsubsection{Control del vehículo}
-
-El control del vehículo, ya sea de forma manual o automática, es una de las funcionalidades principales de este software. En lo que es el control manual, consiste en estar consultando constantemente los eventos producidos por un Joystick y según una respectiva pre-asignación se ejecuta un comando sobre el vehículo. Y en el caso del control automático, se requiere que se envíen un conjunto de misiones pre-configuradas y al ser recibidas por el vehículo, que el mismo las ejecute.
-
-\begin{itemize}
-	
-	\item \textbf{Control Manual:} Para poder ejecutar las pruebas del funcionamiento del control manual, es indispensable que el módulo de comunicación funcione correctamente, ya que el control manual depende del mismo. Al momento de ejecutar las pruebas unitarias, entran en juego varias clases, como lo son la clase Vehículo y Joystick. Por lo tanto se ha realizado en primera instancia el control manual con envío de acciones con una duración definida de tiempo, simulando la interacción con el joystick, y para determinar si los comandos han sido interpretados por el vehículo se ha analizado la evolución temporal del giro de los motores (utilizando el módulo de representación de datos) medido en [rpm], y mostrándonos resultados aceptables y razonables como se puede ver en la Figura \ref{fig:testmotor}
-	
-	
-	Luego de comprobar el correcto funcionamiento de los motores según comandos limitados en tiempo, se inicia el proceso de pruebas con el joystick. En este caso se utiliza una clase auxiliar \textit{Capturador} que ha sido creada con el fin de ejecutarse en un hilo de ejecución independiente para no congestionar el procesamiento de manera secuencial o interrumpir el hilo de ejecución padre . En el siguiente código podemos apreciar su funcionamiento:
-	
-	
-	\begin{lstlisting}[language=python]
-	class Capturador(QThread):
-	"Clase encargada de capturar en background los comandos que se envian del Joystick "
-	condicion_para_capturar = False		
-	def __init__(self,parent):
-	super(Capturadorr, self).__init__(parent)
-	# QThread.__init__(parent)
-	
-	def capturing(self,run):
-	self.condicion_para_capturar = run
-	
-	def __del__(self):
-	
-	self.exit(0)
-	
-	def capturarComandos(self):
-	try:	
-	while  True :
-	
-	if self.condicion_para_capturar:
-	eventos = pygame.event.get()	
-	for e in eventos:
-	# e.type == 7, es un codigo de tipo joymotion
-	if e.type == 7: 
-	self.emit(SIGNAL('mostrarEje(int,float)'), e.axis, e.value)
-	self.emit(SIGNAL('sendManualCmd(int,float,bool)'),\
-	e.axis+12, e.value, True)
-	if e.type == 10: #Es de tipo JoyButtonDown
-	self.emit(SIGNAL('sendManualCmd(int,float,bool)'), e.button, 1.0, False)
-	except:
-	WindowsError("Error de comando", "Ah ocurrido un error al enviar los comandos" )
-	\end{lstlisting}
-	
-	
-	La función \textit{sendManualCmd} posee comandos preestablecidos por el usuario, por lo tanto, cuando se presione algún botón o se mueva algún joystick (palancas) identificado con un id (primer parámetro entero) y su respectivo valor, la clase \textit{Capturador} emitirá una señal a su respectivo objeto instanciador y procederá a enviar los comandos pertinentes al vehículo. Para comprobar dichas funcionalidades únicamente se ha observado el comportamiento de los motores al girar, ya que al enviar un comando de detención, los mismos respondían correctamente a dicha acción. 
-	
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/pComando}
-		\caption{Configuración del módulo de control manual}
-		\label{fig:pcomando}
-	\end{figure}
-	
-	
-	
-	
-	\item \textbf{Control automático: } En este apartado se comprueba el gestionamiento de las misiones, como por ejemplo:  que las mismas puedan ser enviadas y recibidas correctamente por el vehículo, y que sean debidamente validadas mediante la interfaz gráfica. Por otro lado, tenemos que verificar que dichas misiones sean ejecutadas por el vehículo. Para comprobar dicha funcionalidad se han cargado y enviado, mediante la aplicación, misiones unitarias con el fin de corroborar el comportamiento del vehículo según la misión asignada. Pero antes de enviar cualquier tipo de misión, se tuvo que atar al vehículo a una base fija con el fin de que al momento de realizar algún tipo de movimiento inadecuado, el mismo no pierda el control y se estrelle con algún objeto. 
-	Las pruebas por cada misión llevaron el siguiente procedimiento:
+	\item \textbf{Dibujo de atributos del vehículo}
+	Por último, se ha tomado la decisión de ilustrar dentro del HUD ciertos atributos del vehículo y conexión, que se han considerado importante antes y durante del inicio del despegue. Dentro de estos atributos se han insertado los siguientes elementos como se puede ver en la imagen \ref{fig:hudbeta}
 	
 	\begin{itemize}
 		
-		\item \textbf{Despegar: } En este tipo de misión  el vehículo procede a elevarse, de esta manera, los motores generaron la suficiente propulsión para elevar la estructura del vehículo. 
+		\item \textbf{Indicador de rumbos}
+		\item \textbf{Icono de estado de GPS, Señal y batería}
+		\item \textbf{Un atributo a elección del usuario} En este caso se ha insertado por defecto el pitch del vehículo, pero este espacio puede ser ocupado por cualquier atributo del vehículo. 
 		
-		\item \textbf{Aterrizar: } Posicionando el vehículo a una altura no mayor a 30cm, dejamos que descienda el mismo suavemente, procurando que no se desestabilice y se apoye suavemente sobre la base a la cual está atada.
-		
-		\item \textbf{Suspenderse en el aire: } Al momento de ejecutar dicha misión, se ha suspendido con una cuerda al vehículo con el fin de observar que el mismo pueda mantenerse en el aire el tiempo indicado en la misión (3 segundos) de manera estable. 
-		
-		\item \textbf{Punto Objetivo: } En este caso, se ha ordenado al vehículo simplemente moverse hacia la izquierda. Por lo tanto el mismo realizó un pequeño giro sobre su eje \textit{Roll}, propulsándose lentamente hacia a su izquierda, como se le ordenó.
-		%\item \textbf{Volver al inicio: } Esta prueba la debo hacer con el vehículo ya armado en su respectiva estructura.
-		
-	\end{itemize}
-
+	\end{itemize}  
 	
-	\begin{figure}[h!]
+	
+	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.7\linewidth, height=0.17\textheight]{Imagenes/pINICIO_a}
-		\caption{Módulo de control automático del vehículo}
-		\label{fig:pinicioa}
+		\includegraphics[width=0.7\linewidth, height=0.4\textheight]{Imagenes/HUD_beta}
+		\caption{HUD final con sus correspondientes atributos e  instrumentos de vuelo.}
+		\label{fig:hudbeta}
 	\end{figure}
 	
 	
 	
-	\end{itemize}
-
-		\subsubsection{Parametrización}
-
-			\begin{figure}[h!]
-				\centering
-				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/pestConfig}
-				\caption{Pestaña de parametrización del Autopiloto}
-				\label{fig:pestconfig}
-			\end{figure}
-			
-			
-			El módulo encargado de la parametrización, es simplemente una interfaz gráfica que muestra las opciones disponibles y configurables del firmware del autopiloto, como se puede ver en la Figura \ref{fig:pestconfig}. Por lo tanto, se valida que esta información sea mostrada de manera correcta. Además, esta pestaña permite modificar los valores de cada parámetro, por lo que es necesario validar esta modificación y que sea guardada de forma correcta. Por último probando que el vehículo con sus respectivas parámetros modificados se comporte según lo configurado.
-			
-			
-
-	\section{Resultados}
 	
-		Como se pudo ver en las secciones anteriores las pruebas realizadas hasta el momento de los módulos pertinentes se han realizado de manera satisfactoria. Como paso final, se realizará una prueba funcional del proyecto ejecutando un conjunto de pruebas de vuelo que involucren la mayor cantidad de funcionalidades integradas en el software. Por tal razón y a modo de evitar roturas en la estructura del vehículo, se ha optado por enviar a imprimir un modelo 3D de la estructura del vehículo, con el fin de ganar autonomía en la reposición de partes y facilitar a que el proyecto sea de fácil implementación gracias a esta tecnología. Por lo tanto se adjuntará un video de las pruebas realizadas una vez obtenido dicho modelo.
+	\end{enumerate}% FIN de como se dibujaron cada elemento
+	
+	\newpage
+	
+	
+	\subsection{Clase Gestor Parámetro}
+	
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/classGestParametro}
+			\caption{}
+			\label{fig:classgestparametro}
+		\end{figure}
 		
+		Dentro del vehículo además de encontrarse con sus atributos tales como: velocidad, posición, batería, etc. existen parámetros, como bien su nombre lo dice parametrizables, donde es posible establecer o informarse de todo tipo de configuración del vehículo. Existe una gran variedad de estos, ya que es importante poder configurar cada aspecto de los elementos del vehículo. Dentro de este conjunto de parámetros podemos clasificaros los siguientes grupos:
+		
+		\begin{itemize}
+			\item \textbf{Armado}
+			\item \textbf{Batería}
+			\item \textbf{Motores}
+			\item \textbf{Servo Output}
+			\item \textbf{Telemetría}
+			\item \textbf{IMU}
+			\item \textbf{Compas}
+			\item \textbf{Barometro}
+			\item \textbf{GPS}
+			\item \textbf{RC}
+			\item \textbf{WayPoint}
+			\item \textbf{Misiones}
+		\end{itemize} %FIX explicar más o menos cada grupo
+		
+		%FIX - explicar como hice para obtener la información
+		
+		Donde en cada grupo se encuentran reunidos un conjunto de parámetros individuales que configuran cierto aspecto de cada grupo. Por tal razón se decide crear una clase Gestión de Parámetro, de tal manera que sea el encargado de agrupar estos parámetros. Para la carga de información de cada parámetros se ha utilizado una planilla de cálculo para almacenar la información, esto es posible gracias a la librería \textit{openpyxl} que nos permite ir guardando cada 	grupo de parámetros en una hoja independiente dentro del documento.
 		\newpage
 		
-	\section{Conclusión}
 	
-		Finalmente, luego de haber terminado con la realización de los distintos tipos de pruebas y comprobar que cada funcionalidad de nuestra aplicación, como también de nuestro vehículo estén funcionando correctamente, llegamos a la conclusión de que el \textit{Aseguramiento de la calidad} es un aspecto muy importante en el desarrollo de cualquier tipo de proyecto. 
+	\subsection{Clase Parámetro}
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.3\linewidth, height=0.3\textheight]{Imagenes/classParametro}
+			\caption{Clase parámetro}
+			\label{fig:classparametro}
+		\end{figure}
 		
-		\par De tal manera, como mencionamos en la introducción de este informe,  este proceso se aplica de manera integral desde los inicios del proyecto hasta en las últimas etapas; pero cabe destacar que este proceso del \textit{Aseguramiento de la calidad} no ha sido aplicado correctamente 
-		en las etapas iniciales al proyecto ya que se consideraba como una tarea irrelevante, por lo cual , y como es de esperarse en etapas posteriores nos encontrábamos que muchos errores y con la consecuencia de tener módulos deficientes e inseguros. Lo que impedía proseguir con el proyecto ya que se dificultaba la tarea del desarrollo debido a código no robusto y metodologías poco probadas. Así que nos vimos obligados de reformular la estrategia de las etapas siguientes con respecto a las pruebas y además, aplicar dicha técnica por primera vez a las etapas iniciales para asegurar que en un futuro la aparición de los errores disminuya. De esta manera se ha aprendido, y por lo tanto, se incorporará como ``buenas prácticas'', integrar el proceso de QA en proyectos futuros para el cual participe el alumno. 
+		Cada parámetro tiene la particularidad dentro del software un conjunto de propiedades que ayudan al usuario a entender su significado y poder 	modificarlos. Para la creación de dicha clase se han creado las siguientes propiedades:
+		
+		\begin{itemize}
+			\item \textbf{Permiso:     } Este propiedad determina si el parámetro es de solo lectura o es modificable por el usuario. 
+			\item \textbf{Código:      } Dentro del software se generan códigos a cada parámetro con el fin de poder enviarlos mediante comandos al vehículo.
+			\item \textbf{Nombre:      } Es una pequeña descripción del código, ya que los mismos están escritos de forma reducida.
+			\item \textbf{Descripción: } Describe de manera extendida el significado de cada parámetro y en determinados casos con ejemplos para ayudar al 	usuario a configurarlos.
+			\item \textbf{Rango:       } Los valores máximos y mínimos que puede tomar el parámetro.
+			\item \textbf{Incremento:  } Tiene como fin ser una propiedad para configurar un \textit{slider} dentro de cada parámetro en la GUI.
+			\item \textbf{Unidades:    } Unidades correspondiente al parámetro.
+		\end{itemize}
+		Como es de notar la clase parámetro no almacena su correspondiente valor, esto es debido a que los valores de cada parámetro son tomados del vehículo 	cuando se establece la primera conexión. Ya que estar manipulando valores cambiantes en dos lugares a la vez pueden producir accidentes al momento de sincronizarlos.
+		
+	\newpage
+	\subsection{Clase GUI becopter}
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.2\linewidth, height=0.15\textheight]{Imagenes/classGUI_becopter}
+			\caption{Clase Graphical User Interface de BEcopter}
+			\label{fig:classguibecopter}
+		\end{figure}
+		
+		En lo que respecta al proyecto es la clase de mayor tamaño, ya que contiene absolutamente todos los elementos gráficos que se pueden ver en BEcopter. Estos están desarrollados en base a la creación de un widget padre, con su respectiva estética y comportamiento. Una vez definido este widget padre se procede a crear sus correspondientes hijos y una vez finalizados se los inserta en su antecesor. Estos widgets cuentan con una gran variedad de propiedades que puden ser modificadas, y los mismos pueden ser administrados mediante la herramienta Qt Designer (figura \ref{fig:qtdesigner}).
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/qtDesigner}
+			\caption{Aplicación QT designer}
+			\label{fig:qtdesigner}
+		\end{figure}
 		
 		
+		\par Como es de notar BEcopter comprende un gran número de widget, lo que causa que la programación de cada elemento se vuelva engorrosa y consuma tiempo, es por eso que el mismo programa brinda una herramienta que traduce los archivos .ui generados por la aplicacion a archivos .py, que es nuestro lenguaje seleccionado, con el fin de agregarlo directamente al proyecto. Cabe mencionar que dicha herramienta nos dá la facilidad de modificar los aspectos estéticos de los widget mediante CSS, por lo tanto se ha tenido que estudiar dicha sintaxis y utilizarla para el personalizado de los mismos.
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/ejemploCCS}
+			\caption{Ejemplo del diseño de estilo con CSS.}
+			\label{fig:ejemploccs}
+		\end{figure}
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
+	
+	\subsection{Clase BEcopter}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth, height=0.3\textheight]{Imagenes/classBEcopter}
+		\caption{Clase principal BEcopter}
+		\label{fig:classbecopter}
+	\end{figure}
+	
+	Por último tenemos la clase principal BEcopter, esta es la encargada de gestionar las demás clases presentes en este proyecto. Como podemos observar en el diagrama de clases de la Figura \ref{fig:classbecopter} la misma está relacionada con la gran mayoría por lo que conlleva varias tareas; si detallamos un poco su interacción, esta se encarga de:
+	
+	\begin{itemize}
+		
+		\item \textbf{Gestionar la interfaz gráfica: }  La interfaz proporcionada por la clase GUI\_becopter únicamente representa la GUI, por tanto, este no contiene ningún tipo de lógica ni tampoco aspectos dinámicos que son de suma importancia para este proyecto. Por lo que es tarea de la clase principal brindarle de dichos comportamientos para poder interactuar con las acciones del usuario; dentro de sus amplias tareas tales como inicialización de estilos, gestión de pestañas, validación de datos, etc.  Tenemos las más destacadas que son :
+		
+		\begin{enumerate}
+			
+			\item \textbf{Ocultamiento de de opciones: } A modo de seguridad se ha establecido por defecto que al iniciar la aplicación ciertas opciones estén deshabilitadas, como son las pestañas de (Inicio y Configuración) ya que estos dependen de que el vehículo este conectado y en caso contrario, si proporcionamos a que se puedan modificar misiones o parámetros del mismo pueden ocasionar errores.  
+			
+			
+			\item \textbf{Sincronización de datos: } Poder observar los atributos del vehículo en tiempo real es de suma importancia, por lo que se definen \textit{timer's} que sincronizan cada cierto periodo de tiempo los valores ubicados en la pestaña inicio que contiene un conjunto de botones que muestran datos sobre el vehículo y en la pestaña conexión que presenta información de su respectiva conexión y aspectos generales del vehículo.
+			
+		\end{enumerate}
+		
+		\item \textbf{Gestionar los Joysticks: } Como el fin de BEcopter es poder manejar un único vehículo, se ha restringido a la utilización de un solo Joystick, pero es importante tener en cuenta que pueden haber más de un dispositivo tipo comando conectado al equipo, por lo que se provee de opciones de selección de comandos para contemplar ese aspecto. 
+		Además de gestionar la selección del comando a utilizar y realizar el correspondiente mapeo en relación de acción-botón que ha seleccionado el usuario, este es encargado de captar todos los eventos que se están siendo generados en el joystick, con el propósito de enviarlos al vehículo para su posterior interpretación. Esta función es la responsable de realizar el modo manual en caso de ser solicitado.
+		
+		
+		\item \textbf{Gestionar los gráficos: }  Dentro de lo que es el proyecto BEcopter están incluido un par de gráficos que ayudan al usuario a tener presente información útil del vehículo y sus sensores. Estos gráficos son :
+		
+		\subitem \textbf{Gráfico \textit{Head UP Display}}: Más allá de su propio funcionamiento interno de la clase HUD, la clase BEcopter es la responsable de poder inicializar la conexión entre el vehículo y dicha clase. Por eso es importante que este proporcione los datos necesarios a mostrar cada vez que el atributo sufra un cambio, por tal motivo, es que se generan \textit{callback's} que administran dichos eventos.
+		
+		\subitem \textbf{Gráfico de atributos: } La clase vehículo nos brinda un gran conjunto de atributos que informan sobre el estado del vehículo, conexión, como también provenientes de los sensores, de tal manera que la clase BEcopter se debe encargar de mostrar dichos atributos en una lista con la opción poder agregarlos a la clase gráfico de datos para su procedente graficación. Además, BEcopter debe proporcionar en dicha lista la opción agregar/eliminar atributos tanto en el gráfico de datos como también en la botonera.
+		
+		
+		\item \textbf{Gestionar el vehículo: } La clase vehículo corresponde al corazón del proyecto, ya que este representa de manera directa el UAVs que estamos por manipular, por tal razón es importante tener actualizado todos los valores que proporciona la clase vehículo hacia el usuario; además hay que tener en cuenta que el usuario deseará enviarle comandos al mismo como, despegar, moverse, aterrizar, desplazarse, etc. Ya sea en modo manual mediante el joystick ya selecionado o en forma de misiones, es decir, en modo automático. De esta manera la clase BEcopter para contemplar estos aspectos tendrá que realizar las siguientes tareas:
+		
+		\subitem \textbf{Sincronización: } La clase BEcopter tiene la responsabilidad informarle a las clases restantes cuando los atributos que están siendo utilizado sufren algún tipo de cambio, de esta manera, se han creado un conjunto de conexiones mediante \textit{callbacks} y \textit{timer's} que envían de manera sincrona y asincrona la información requerido a cada entidad.
+		
+		\subitem \textbf{Misiones: } Las misiones son un aspecto importante en BEcopter, ya que proporcionan al usuario la posibilidad de crear un conjunto de comandos parametrizables y que pueden ser enviados al vehículo para que sean ejecutadas. En lo que concierne a estas opciones tenemos las siguientes utilidades:
+		
+		\subsubitem \underline{Descargar misiones: } Esta opción permite descargar y mostrar en pantalla las misiones que ya tiene almacenado el vehículo. De manera complementaría, es una herramienta útil para comprobar que las misiones que han sido enviadas de manera correcta.
+		
+		\subsubitem \underline{Agregar misión: } Agrega una nueva linea en blanco para el ingreso de siguiente misión.
+		
+		\subsubitem \underline{Enviar misión: } Esta opción tiene la particularidad de únicamente cargar las misiones en el vehículo sin la intensión de ejecutarlas, ya que puede suceder de enviar misiones incorrectas, por tal motivo BEcopter se encarga de validar dichas misiones y en caso de encontrar un error se le informará al usuario.
+		
+		\subsubitem \underline{Iniciar: } Por último y una vez validada las misiones, BEcopter le envía la confirmación al vehículo para que inicie las misiones enviadas.
+		
+		\subitem \textbf{Estado de conexión: } Cumpliendo con el requerimiento R016, que establece la codificación de un script de control del estado de conexión, la clase BEcopter se encarga de este aspecto, consultando periódicamente dicho estado y en caso de perder la conexión (siempre y cuando no se encuentre en vuelo) se bloquearán las opciones pertinentes al vehículo, como si estuviera iniciando la aplicación de nuevo. En caso de existir una perturbación en las variables tales como conexión, GPS y batería, el sistema informará dicho suceso al usuario para que realice las acciones pertinentes.
+		
+		\item \textbf{Logging: } Para satisfacer los requerimientos R010 y R011 del documento de especificación de requerimientos la clase BEcopter como también la clase vehículo utilizan la librería \textbf{logging} de Python para la generación de un logging ya sea de la plataforma o del vehículo, que se van mostrando en la pestaña de conexión de BEcopter. 
+		
+	\end{itemize}
+%\newpage
+%
+%

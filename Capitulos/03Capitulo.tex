@@ -1,11 +1,11 @@
 % -*-coding: iso-latin-1  -*-
 %---------------------------------------------------------------------
 %
-%                          Capítulo 3
+%                          Capítulo 2
 %
 %---------------------------------------------------------------------
 %
-% 03Edicion.tex
+% 02EstructuraYGeneracion.tex
 % Copyright 2009 Marco Antonio Gomez-Martin, Pedro Pablo Gomez-Martin
 %
 % This file belongs to the TeXiS manual, a LaTeX template for writting
@@ -34,563 +34,562 @@
 %
 %---------------------------------------------------------------------
 
-\chapter{Desarrollo de la plataforma}
-\label{cap3:desarrollo}
+% -------------------------------------------------------------------------------
+%      Estilos para los segmentos de códigos/comandos para aparentar una consola
+% -------------------------------------------------------------------------------
+
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+\definecolor{mygray}{rgb}{0.4,0.4,0.4}
+\definecolor{mygreen}{rgb}{0,0.8,0.6}
+\definecolor{myorange}{rgb}{1.0,0.4,0}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+\lstset{ 
+	basicstyle=\footnotesize\sffamily\color{black},
+	commentstyle=\color{mygray},
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray},
+	keywordstyle=\color{mygreen},
+	showspaces=false,
+	showstringspaces=false,
+	stringstyle=\color{myorange},
+	tabsize=2
+}
+
+% minimizar fragmentado de listados
+\lstnewenvironment{listing}[1][]
+{\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+
+\lstdefinestyle{consola}
+{basicstyle=\scriptsize\bf\ttfamily,
+	backgroundcolor=\color{gray75},
+}
+
+\lstdefinestyle{Python}
+{language=Python,
+}
+
+
+\lstset{ frame=Ltb,
+	framerule=0pt,
+	aboveskip=0.5cm,
+	framextopmargin=3pt,
+	framexbottommargin=4pt,
+	framexleftmargin=0.4cm,
+	framesep=0pt,
+	rulesep=.4pt,
+	backgroundcolor=\color{gray97},
+	rulesepcolor=\color{black},
+	%
+	stringstyle=\ttfamily,
+	showstringspaces = false,
+	basicstyle=\small\ttfamily,
+	commentstyle=\color{gray45},
+	keywordstyle=\bfseries,
+	%
+	numbers=left,
+	numbersep=15pt,
+	numberstyle=\tiny,
+	numberfirstline = false,
+	breaklines=true,
+}
+
+\lstdefinestyle{consola}
+{basicstyle=\scriptsize\bf\ttfamily,
+	backgroundcolor=\color{gray75},
+}
+
+
+
+
+\chapter{Gestión de componentes y armado del cuadricóptero}
+\label{cap2:gest_y_arm}
 
 \begin{FraseCelebre}
-\begin{Frase}
-Frase celebre
-\end{Frase}
-\begin{Fuente}
-Autor
-\end{Fuente}
+	
+	\begin{Frase}
+	 La mejor estructura no garantizará los resultados ni el rendimiento.
+	 Pero la estructura equivocada es una garantía de fracaso.
+	\end{Frase}
+
+	\begin{Fuente}
+		Peter Drucker
+	\end{Fuente}
+
 \end{FraseCelebre}
 
 \begin{resumen}
-	En este capitulo se describirá todo el proceso realizado de la fase denominada \textbf{Desarrollo de la plataforma}, que forma parte del presente proyecto . En esta fase se contempla las tareas del \textit{Diseño detallado de la plataforma} y \textit{Codificación} del mismo. En aspectos generales se define de manera un poco más especifica y en base al desarrollo global ya realizado en etapas anteriores, todo el comportamiento que incluirá la plataforma, como pueden ser, las funcionalidades de cada módulo, la interfaz gráfica de usuario o por sus siglas en inglés (GUI), la lógica interna correspondiente a cada uno y sus respectivas interacciones. 
+Este capítulo contiene información sobre el procedimiento que se ha llevado a cabo en el desarrollo de la tercera etapa del proyecto. Esta etapa consiste principalmente en describir los pasos realizados para el armado del vehículo aéreo no tripulado (VANT) de tipo cuadricóptero. Además, se incluirán los inconvenientes que se han presentado en el transcurso del desarrollo del mismo con sus respectivas alternativas y/o soluciones. 
+
+% TODO: Consultar si dejar esta parte   
+\par Cabe mencionar que el hardware aquí descripto como también las herramientas utilizadas han sido proporcionadas por el\textit{ Centro de Investigación en Señales, Sistemas e Inteligencia sinc(i)} con sede en la Facultad de Ingeniería y Ciencias Hídricas de la Universidad Nacional del Litoral y todo procedimiento riesgoso para el alumno ha sido siempre supervisado bajo personal idóneo en el tema.
+
 \end{resumen}
 
 %-------------------------------------------------------------------
-\section{Introducción}
+\section{Hardware}
 %-------------------------------------------------------------------
-\label{cap3:sec:Introduccion}
+\label{cap2:sec:hardware}
 
-	\par En el ámbito informático, como es sabido, la etapa de codificación del software generalmente es la que más tiempo abarca con respecto a la duración total del proyecto. Por esta razón, no es de sorprender que a medida que vayamos avanzando  objetivos, herramientas, planificación, diseño y lógica del software estén bajo un constante cambio ya que se van presentando obstáculos, alternativas e incompatiblididades que no han sido previstos en etapas iniciales. De esta manera, se irán ilustrando durante este capitulo capturas del estado del proyecto en distintas etapas del mismo, con el objetivo de poder ver el crecimiento y las técnicas utilizadas a medida que el proyecto va evolucionando y de esta manera poder aprender, para próximos proyectos, las estructuras que uno debe implementar en etapas iniciales con el fin de no cometer los mismos errores.
-
-\section{Diseño detallado de la plataforma}
-\label{cap3:sec:Disenio_detallado}
-
-\begin{center}
-	\begin{minipage}{0.9\linewidth}
-		\vspace{5pt}%margen superior de minipage
-		{\small
-			\textit{Un diseño de software es una descripción de la estructura del software que se va a implementar, los datos que son parte del sistema, las interfaces entre los componentes del sistema y, algunas veces, los algoritmos utilizados.}
-		}
-		\begin{flushleft}
-			(Ian Sommerville, 2005, p71)
-		\end{flushleft}
-		\vspace{5pt}%margen inferior de la minipage
-	\end{minipage}
-\end{center}
+Antes de empezar con la descripción del armado de un VANT, es necesario tener en conocimiento el hardware que está involucrado en el vehículo y en consecuencia su funcionamiento, como por ejemplo, los sensores que forman parte del mismo y hacen que el cuadricóptero pueda realizar un vuelo de manera segura y controlada, el tipo de estructura usado para soportar los motores, la tecnología responsable de la comunicación y el ordenador que procesará toda esa información. Es por eso que iniciamos esta sección con una lista del hardware utilizado y su respectiva descripción:
 
 
-Antes de iniciar directamente con la codificación, ya que por el mismo instinto de cumplir con las restricciones de tiempo, uno necesita finalizarlo lo antes posible; pero antes que nada es necesario, realizar un diseño de todo lo que queramos hacer, esto genera una linea de ejecución a seguir que ayuda al ejecutor del proyecto tener planificado las tareas generales que debe realizar en el transcurso del proyecto y no estar pendiente de como proseguir una vez finalizada cada tarea y re-planificar constantemente el hilo del proyecto. Es por tal motivo que el presente proyecto se ha dividido la fase de diseño en dos, la primera es un diseño global, meramente con la intensión de contar con un panorama general del comportamiento del software/hardware y además, poder mitigar la incertidumbre del ejecutor del proyecto, ya que se está iniciando en el desarrollo de proyectos de esta envergadura. En base a la documentación que se ha hecho en etapas anteriores podemos empezar a entablar de forma más precisa los procedimientos o tareas a realizar, lo que conlleva encarar la segunda parte del diseño.
-
-
-\par Según Pressman esta etapa produce los siguientes diseños:
-
-\begin{itemize}
-	\item \textbf{Diseño de datos: } El diseño de datos esencialmente se encarga de transformar el modelo de dominio de la información creado durante el análisis %TODO: Arreglar \cite{pressman88is}. 
-	En el caso particular de este proyecto el diseño de datos no juega un papel determinante dado que la herramienta de software propuesta, de la manera en que sea físicamente desarrollada e implementada, no requiere momentáneamente estructuras de datos complejas, ni de un esquema de bases de datos como ejemplo.	
-	\item \textbf{Diseño arquitectónico: } En el diseño arquitectónico se definen las relaciones entre los principales elementos estructurales del programa %\cite{pressman88is}. 
-	Cuando se habla de elementos estructurales, se hace referencia entidades lógicas que componen la arquitectura de nuestro diseño, dentro del abanico de posibilidades de diseños, podemos seleccionar, diagramas de flujo de datos, modelos de entidad-relación, diagramas de clases, casos de usos entre otros esquemas gráficos. Viendo todas estas posibilidades, podemos encarar a diseñar nuestra estructura con el modelo que más se ajuste a nuestras necesidades y sea lo más útil posible para las etapas posteriores. Por tal razón, es necesario de un diseño que sea lo más representativo posible en el momento de codificación, que utilice un paradigma orientado a objetos , ya que queremos representar objetos como vehículos, posición geográfica, Joystick, etc; y que además tengan cada uno sus correspondientes atributos, es por eso que seleccionamos un diseño orientado a objetos, utilizando lo que anteriormente llamamos \textit{Diagramas de clases}. Estos diagramas son de suma utilidad ya que muestran de manera fácil como será la estructura de nuestro código y sus correspondientes relaciones entre cada uno, con el propósito de facilitar la tarea en las etapas posteriores al mismo.	
-	\item \textbf{Diseño de interfaz: } El diseño de interfaz describe cómo se comunica el software consigo mismo, con los sistemas que operan con él, y con los operadores que lo emplean% \cite{pressman88is}. 
-	Dentro del aspecto de comunicación de software consigo mismo y con otros sistemas es contemplado en el ítem anterior con el tipo de diseño elegido. Aquí lo que nos incumbe es la interacción con el operador del software. De esta manera, se selecciona una herramienta que nos permita realizar nuestra interfaz gráfica del usuario, como por ejemplo, botones, \textit{label}, gráficos, \textit{checkboxes}, etc. ayudando al usuario a realizar sus respectivas tareas sin entrar en tanto detalle en comandos específicos  que se debe memorizar con el fin de ser lo más amigable posible.
-	\item \textbf{Diseño procedimental: } El diseño procedural transforma elementos estructurales de la arquitectura del programa en una descripción procedural de los componentes del software %\cite{pressman88is}. 
-	Para no ser extensos en lo que es el desarrollo de este proyecto y teniendo en mente que el tamaño del mismo no corresponde a uno de grandes dimensiones y  considerando que únicamente  existe un único programador para la etapa de desarrollo, se descarta este tipo diseño.
-
-\end{itemize}
-
-
-\par Dentro de lo que es el conjunto de diseños obtenidos en esta etapa es importante saber en que orden realizar cada una. Ya que cada diseño esta relacionado directamente con los demás, y el desarrollo de uno terminará condicionando el siguiente. Es por esto, que se analiza la opción de comenzar primero con el diseño de arquitectura. Suponiendo dicha elección se desarrolla el siguiente flujo:
-
-\par En el diseño orientado a objetos o más específicamente, en la confección del diagrama de clases se detallan los objetos mediante bloques gráficos denominados clases. Estas clases contienen todos los atributos correspondientes al objeto, como por ejemplo, la clase vehículo puede contener: cantidad de hélices, altura de vuelo, velocidad, posición, etc. Y además, según este diseño contiene todas las acciones que puede realizar a través de funciones; si continuamos con el ejemplo de vehículo aéreo pueden ser: volar, aterrizar, despegar, etc. Esto nos brinda como resultado final una estructura al momento de implementar el código, por lo que facilita la tarea del programador. Además, y un punto importante a tener en cuenta es que muestra como se comunicará cada clase con las demás, esta característica ayuda a descubrir que funciones extras son necesarias implementar para una correcta cooperación en conjunto. Sin embargo, existe una desventaja, dentro del punto de vista de la interacción del usuario, es que no toma en cuenta las funcionalidades que puede desear el usuario para que el uso del software sea más placentero (que es el objetivo de este diseño), sino que el resultado del diseño se centra en que cada clase pueda responder a las necesidades (mensajes) de las demás clases. 
-
-
-En cambio, si primero realizamos el diseño de la interfaz gráfica del usuario, nos determinará que es necesario entre otros aspectos que no han sido incluido en el diseño arquitectónico ya que no se ha tomado como parte importante en el desarrollo, la interacción del usuario. Como por ejemplo, funciones de validación de datos, ventanas de advertencias, gráficos, como es el HUD (figura \ref{fig:hud}).
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/hud}
-	\caption{Head Up Display}
-	\label{fig:hud}
-\end{figure}
-
-\par Como podemos ver y según las restricciones presentes, es conveniente realizar primero un diseño de interfaz, ya que el mismo nos proporcionará más detalles de implementación. Por tal motivo iniciamos primero con el diseño de interfaz.
-
-\subsection{Diseño de interfaz}
-
-En primera instancia se inicia con la interfaz gráfica del usuario o su equivalente en ingles \textit{\textbf{G}raphical \textbf{U}ser \textbf{I}nterface}; por definición es el proceso que define como será la interacción entre el software y el usuario final. Para esto, se utiliza la herramienta Qt Designer, que proporciona mediante un panel de \textbf{widgets} todos los elementos necesarios para el diseño del mismo. 
-
-\par Para iniciar este proceso, nos basamos en los \textit{mockups}  desarrollados  en la fase de diseño global de la plataforma, basándonos pantalla por pantalla en la confección de cada uno. Cabe mencionar que las pantallas presentes del diseño han sido obtenidas luego de un arduo proceso de modificaciones y actualizaciones debido a las necesidades e inconvenientes que se iban presentando en el transcurso de la fase de codificación. Las imágenes de la GUI se pueden ver en el anexo \ref{ap1:GUI}
-
-\subsubsection{Modificaciones generales}
-\begin{itemize}
-	
-	\item \textbf{Inserción del HUD en lugar de un mapa} Se ha considerado diseñar el HUD, en lugar de un mapa. Ya que el mismo no se considera de suma importancia para la navegación en un marco de referencia relativo. La implementación del mapa, se ha documentado como un requisito para las versiones futuras de la plataforma.
-	
-	\item \textbf{Reemplazo de ubicación de iconos de estados} Los iconos posicionados en la barra superior del software se han reubicados dentro de lo que es el HUD, ya que estos iconos sobrecargaban la aplicación con una constante actualización siendo que el HUD es el encargado de mostrar dicha información de manera actualizada.
-	
-	\item \textbf{Sustracción de pestaña \textit{Sensores}} Según el requisito \textbf{Implementación de calibración de sensores} no se considera para esta versión la posibilidad de calibrar los sensores del vehículo. Si, se incluyen los parámetros del vehículo y sus respectivos valores en la pestaña de configuración, con el fin de ser configurados.
-	
-\end{itemize}
+\begin{enumerate}
+	\item Estructura de vehículo.
+	\item Controlador Electrónico de Velocidad.
+	\item Motor sin escobillas.
+	\item Raspberry Pi 3.
+	\item Navio2.
+	\item Arduino UNO \footnote{Estos dispositivos no han sido previstos y tampoco forman parte definitiva del proyecto, ya que han surgido para solventar problemas que surgieron en el transcurso de esta etapa. \label{footnote_hardware} }.
+	\item Radio Control \footref{footnote_hardware}.
+	\item Joystick.
+	\item Router \footref{footnote_hardware}.
+	\item Módulos XBee
+	\item Bateria LiPo.
+\end{enumerate}
 
 
 
-\subsection{Diseño arquitectónico}
+
+	\subsection{Estructura de vehículo}
+
+		La estructura del cuadricóptero como se puede ver en la Figura \ref{fig:estrucuadricoptero} consta en su parte inferior de un patín de aterrizaje que cumplen la función (como en los helicópteros) de soportar el vehículo cuando se apoye sobre tierra y mantener las hélices lo más alejado posible de piso cuando se encuentra en reposo. En su parte superior proporciona una base donde es posible instalar los dispositivos electrónicos que controlan al vehículo. Por último, desde la base se extienden 4 brazos con la función de ser soporte a los motores con sus respectivas hélices y además, en cada motor se le incluye su controlador electrónico de velocidad o ESC (\textit{Electronic Speed Controller}). 
 
 
-Luego de finalizar con el diseño de interfaz y en base al diagrama de clases realizado en etapas anteriores del proyecto, se inicia el modelado más detallado del diagrama de clases de nuestro proyecto. Para esto se utiliza de la herramienta ArgoUML \footnote{Página web de ArgoUML  http://argouml.tigris.org/ }, obteniendo como resultado el diagrama de clases adjuntado en el apéndice \ref{ap1:classDiagra_vFinal}
-
-Para el desarrollo del mismo se ha considerado el diseño de la interfaz gráfica y de manera complementaría ,la comunicación que tiene con las demás clases conectadas, esto nos facilita al momento de determinar que tipo de funciones necesita cada una y la forma en que se los debe enviar dicha información.  
 
 
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.25\textheight]{Imagenes/estrucuadricoptero}
+			\caption{Estructura cuadricóptero de fibra de carbono}
+			\label{fig:estrucuadricoptero}
+		\end{figure}
 
-\section{Codificación y Testing}
-
-	En esta etapa consiste en traducir el diseño en una forma legible por la máquina. Por tanto, iniciaremos esta tarea según los diseños de diagrama de clases generados y siempre teniendo en mente los requerimientos estipulados por los \textit{stakeholders}.
-	
-	\par Según, el diagrama de clases adjuntado en el apéndice \ref{ap1:classDiagra_vFinal} tenemos varias clases que se encargarán de un grupo de funcionalidades en específico y a su vez cada una brinda funcionalidades a sus clases vecinas, para entender un poco el funcionamiento del software comenzaremos explicando cada una, exceptuando las clases que se han utilizado de las librerías pertinentes.
-	
-	%ANEXAR CODIGO?
-
-		\subsection{Clase Vehículo}
-
-			\begin{figure}[h!]
-				\centering
-				\includegraphics[width=0.4\linewidth, height=0.35\textheight]{Imagenes/classVehiculo}
-				\caption{Clase Vehículo}
-				\label{fig:classvehiculo}
-			\end{figure}
+		El material del cuerpo de vehículo esta hecho con fibra de carbono \footnote{Aunque el mismo puede ser reemplazado por otro tipo de estructura, por ejemplo, un modelo impreso por una impresora 3D}, este consta con la propiedad de tener una elevada resistencia mecánica que será de suma importancia ya que el vehículo presenta altas probabilidades de sufrir algún choque o aterrizaje forzoso, además de ser un material sumamente liviano por lo que disminuirá la fuerza de los motores para mantener un vuelo y por tanto, menos consumo de batería.
 		
-			La clase Vehículo es la responsable de representar en su mayor medida el objeto real, en nuestro caso es el cuadricóptero.  Para esto se ha decidido asignarle las siguientes funcionalidades 
-			
+
+	\subsection{Controlador Electrónico de Velocidad}
+		Un controlador electrónico de velocidad o por sus siglas en inglés \textit{Electronic Speed Control} como su nombre lo dice, es un circuito electrónico con el propósito de variar la velocidad de un motor eléctrico. Además, por sus características puede funcionar como un freno dinámico.
+
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.1\textheight]{Imagenes/esc}
+			\caption{Controlador Electrónico de Velocidad}
+			\label{fig:esc}
+		\end{figure}
+
+	\subsection{Motores sin escobillas}
+		Son los encargados de transformar la energía eléctrica en mecánica generando movimiento en las hélices, y de esta manera dando propulsión al vehículo para poder volar.
+
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.15\textheight]{Imagenes/motor}
+			\caption{Motor sin escobillas}
+			\label{fig:motor}
+		\end{figure}
+
+	\subsection{Raspberry Pi 3}
+		Es un ordenador de tamaño reducido que trata de ofrecer las mismas funcionalidades y componentes que el de un ordenador común pero con un rendimiento menor, entre sus componentes, esta placa reducida tiene memoria RAM, GPU, puertos USB, HDMI, ranura para tarjeta SD, conector para una cámara, conectividad WiFi, Ethernet, Bluetooth y 40 pines GPIO(\textit{General Purpose Input/Output}) donde es posible extender sus características instalando hardware extra como sensores, led, motores, interfaces, etc.\par \textbf{Especificaciones:}
 		\begin{itemize}
 			
-			\item \textbf{Funciones de vuelo: } Según las restricciones establecidas en el ERS que se han estipulado en primera medida, ya sea por falta de conocimiento de librerías y/o complejidad de los mismos, únicamente las siguientes funcionalidades de vuelo \textbf{Ascenso, Descenso y Hovering}; en cambio, gracias a las librerías utilizadas se han codificado más funcionalidades correspondientes a las maniobras que puede realizar el vehículo. Dentro de este conjunto se desarrollaron las siguientes funciones (utilizando el protocolo MAVLink \textit{Micro Air Vehicle Link} y la librería Dronekit):
-			
-			
-			\par Cabe mencionar que estas funcionalidades han sido diseñadas con la posibilidad de realizar acciones de vuelo en un marco de referencia global, utilizando las coordenadas globales proporcionadas por el GPS en base a la latitud, longitud y altura (figura \ref{fig:latlong}). Además, es posible establecer sobre un marco de referencia relativo, es decir, este marco de referencia toma como origen el punto inicial de partida del vehículo, por lo que las coordenadas que ingresemos tendrán como referencia el punto de despegue. Es importante recordar que el marco de referencia global, conlleva la implementación de un mapa y según el requerimiento R025 este es opcional, e insistiendo con lo mencionado, esta funcionalidad se implementará en futuras versiones.
-			
-			\begin{figure}[h!]
-				\centering
-				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/latlong}
-				\caption{Marco de referencia global.}
-				\label{fig:latlong}
-			\end{figure}
+			\item 1.2GHz 64-bit quad-core ARMv8 CPU
+			\item 1GB RAM (Compartido con la GPU)
+			\item GPU Broadcom VideoCore IV	\newline
+		\end{itemize}
 		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.6\linewidth]{Imagenes/raspberry3}
+			\caption{Raspberry Pi 3}
+			\label{fig:raspberry3}
+		\end{figure}
+
+
+	\subsection{Navio2}
+		La placa Navio2 es un conjunto de sensores que se conectan sobre pines GPIO de una Raspberry Pi, transformándolo en un completo controlador de drones. Esta placa controladora suministra a la Raspberry Pi de sensores y entradas que son de suma importancia para cualquier tipo de vehículo, con el objetivo de monitorear y obtener información para algún tipo de maniobra aérea, como también terrestre.
 		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.25\textheight]{Imagenes/navio22}
+			\caption{Navio2}
+			\label{fig:navio2}
+		\end{figure}
 		
+		Dentro del conjunto de sensores que contiene esta placa tenemos:
+		
+	\subsubsection{IMU}
+		Unidad de Medición Inercial (o por sus siglas en inglés \textit{Inertial Measurement Unit}) es el componente principal de los sistemas de navegación. Son un conjunto de dispositivos electrónicos, generalmente, una combinación de acelerómetros, magnetómetros y giroscopios que miden e informan características del movimiento del vehículo como pueden ser velocidad, fuerzas magnéticas y orientación. Como es un aspecto importante en este tipo de sistemas la precisión, la placa controladora Navio2 contiene dos de estas unidades con el fin de proporcionar y corroborar su información mediante dos fuentes de referencia distintas. Estas dos unidades son:
 		
 		\begin{enumerate}
-			\item \textbf{Despegar:  } Esta funcionalidad envía un comando al vehículo especificándole que debe propulsarse gracias a sus motores a una altura en particular.  
-			\item \textbf{Aterrizar: } Esta función ordena al vehículo que aterrice en un punto establecido, dependiendo del sistema de referencia, ya sea global o relativo.
-			\item \textbf{Suspenderse: } Según un punto en particular el vehículo estará inmóvil y suspendido en el aire por la cantidad de tiempo que se le asigne. Además, esta función entra en el requerimiento R017, donde se establece una función de salvataje encargada de ejecutarse en caso de algún inconveniente o percance con el vehículo y/o conexión. 
-			\item \textbf{Ir a un punto en especifico: } Como bien su nombre lo especifica, esta orden y según un sistema de referencia le indica al vehículo que debe desplazarse en un punto en particular. 
-			\item \textbf{Volver a inicio: } El vehículo almacena en primeras instancias su posición inicial, asignándola en una variable interna llamada \textit{home}, una vez que esta orden ha sido enviada, el vehículo tratará de dirigirse a su punto de partida.
-			\item \textbf{Moverse: } Según el requerimiento R024, que establece distintos tipos de vuelo se han codificado las funciones de \textit{velocidad} y \textit{yaw} que según las ordenes enviadas de un Joystick el vehículo modificará su dirección en tiempo real,  ya que se han restringido estos comandos a que tengan una duración de ejecución mínima, dando así lugar a un nuevo comando y captar las nuevas indicaciones que han sido enviadas por el usuario.
+			\item MPU9250 9DOF.
+			\item LSM9DS1 9DOF.
 			
 		\end{enumerate}
-		
-		\item \textbf{Modo de vuelo: }
-		Dentro del conjunto de las funcionalidades de vuelo se pueden observar que existen funciones con el prefijo "mis", estos a diferencia de los demás, son utilizados cuando el vehículo se encuentro en modo AUTO, es decir, estos comandos serán enviados al vehículo con el fin de que sean almacenados y ejecutados de manera secuencial misión por misión cuando se envié la orden \textit{ejecutar misiones}. Para cumplir de manera complementaría con el requisito R024, se han codificado funciones que gestionen las misiones pertinentes. 
-		
-		\item \textbf{Conexión: } En base a los requerimientos R015,R016 se han incluido en la clase vehículo las funciones de \textit{conectado, desconectar y el constructor de la clase} estas son encargadas de conectarse de manera inalámbrica a una red LAN, gracias a su módulo WiFi instalado en la placa Raspberry Pi o de manera ad-hoc mediante módulos de comunicación inalámbrica conectados en un puerto serial. 
-		
-	\end{itemize}
-	
-	
-	Por último una función que asigna \textit{Callbacks} a los atributos del vehículo, ya que estar consultando constantemente los cambios que se están produciendo dentro del vehículo conlleva un consumo extra de recursos,por lo que se decide implementar una función "setCallback2Param" que cada vez que el atributo correspondiente sufra algún tipo de cambio, este llame a otra función para informarle de dicha transición.
-	\newpage
-	
-	\subsection{Clase Joystick}
 
-	
-		La clase Joystick, es la encargada de gestionar dentro del los comandos conectados en el equipo, sus respectivas acciones que han sido ejecutadas por el usuario. 
+	\subsubsection{GNSS}
+		Obtener la posición del vehículo mientras este se encuentra en movimiento es un aspecto sumamente necesario, más cuando la visibilidad del ambiente dificulta hacerlo, es por eso que el GNSS (\textit{Global Navigation Satellite System}) proporciona un posicionamiento geoespacial con cobertura global mediante un conjunto de tecnologías de sistemas de navegación por satélite. Las tecnologías utilizadas en el módulo U-blox M8N de esta placa son:
 		
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.4\linewidth, height=0.3\textheight]{Imagenes/classJoystick}
-			\caption{Clase Joystick}
-			\label{fig:classjoystick}
-		\end{figure}
-	
-		\par Con la ayuda de la librería Pygame podemos obtener información de los joystick conectados como nombre, cantidad de botones, número de ejes, si se ha presionado o saltado un botón, entre otras acciones, con el objetivo de poder interpretar, según un mapeo de funciones que se han pre-configurado las acciones que desee realizar el usuario en modo manual sobre el vehículo. Cabe mencionar que dicha clase se ha codificado satisfaciendo los requerimiento R012 y R022.
-		
-		
+		\begin{enumerate}
+			\item Glonass.
+			\item GPS.
+			\item Beidou.
+		\end{enumerate}
 
 
+	\subsubsection{Entrada/Salida RC (Radio Control)} \label{sec:ioRC}
+		La placa Navio2 tiene una entrada habilitada para recibir información proveniente del emisor mediante un radio control, aceptando señales por los protocolos de comunicación PPM (Modulación por Posición de Pulso) y SBUS únicamente.
+		
 
-	\subsection{Clase Gráfico Datos}
-	
-	
-			
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.4\linewidth, height=0.3\textheight]{Imagenes/classGraficoDatos}
-			\caption{Clase gráficos de datos o de atributos del vehículo.}
-			\label{fig:classgraficodatos}
-		\end{figure}
+	\subsubsection{Barómetro}
+		El barómetro tiene sus usos provenientes de la meteorología para poder predecir el tiempo entre otras cosas, pero en este caso la placa controladora utiliza un barómetro MS5611 de alta precisión (con 10cm de resolución ) para poder estimar la altura en el cual se encuentra el dispositivo. 
 
-		La clase Gráfico de Datos fue creada con el fin de cumplir con el requerimiento R002 que solicita una representación gráfica en tiempo real y evolutiva de la información capturada. Para realizar dicha tarea en primer momento se ha utilizado la librería Vispy como la definición del requerimiento lo especifica; pero a medida que se iba avanzando en el desarrollo y prueba del mismo se ha encontrado el inconveniente de que dicha librería no contiene la documentación actualizada, lo que genera contratiempos al momento de cumplir con el objetivo, por lo que se decide utilizar una librería con una comunidad más activa, como lo es PyQtGraph. Esta librería cuenta con una gran comunidad activa y una documentación detallada de cada funcionalidad disponible, esto facilita mucho al ejecutor del proyecto a dirigir la atención en otros aspectos del proyecto. Cabe destacar que esta librería, más allá de contener las funcionalidades necesarias para cumplir con el requerimiento estipulado.
-	
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/GD_prueba}
-			\caption{Prueba animada en la inserción de dato utilizando la Clase Gráfico Datos.}
-			\label{fig:gdprueba}
-		\end{figure}
-	
-		Entre el conjunto de funcionalidades disponibles, se describen las más importantes:
-	
+	\subsubsection{Interfaces}
 		\begin{itemize}
-			\item \textbf{Cupo máximo de lineas: } Con fines estéticos se ha implementado la opción de disponer de un número máximo de gráficos en pantalla, ya que el acumulamiento de gráficos sobrecargará a la aplicación de recursos a consumir y además dejará de apreciarse cada gráfica en la ilustración por motivos de espacio. En caso de asignar una nueva linea al gráfico correspondiente, el mismo eliminará el primer gráfico ingresada, utilizando una metodología tipo FIFO.
-			\item \textbf{Identificación de lineas: } Para poder gestionar las lineas presentes en el gráfico es necesario asignarle a cada una un identificador, este identificador además servirá para las clases antecesoras para la inserción y eliminación de cada una.
-			\item \textbf{Pausado de animación: } Es de esperar que el gráfico no este disponible tiempo completo, por lo que se decide incorporar la opción de pausado de la animación con el propósito de optimizar el uso de recursos del equipo y que la aplicación BEcopter sea lo más liviana posible.
-			
+			\item Entrada UART (\textit{Universal Asynchronous Receiver-Transmitter})
+			\item Bus de serie de datos $I^{2}C$ de sus siglas en inglés (Inter-Integrated Circuit)
+			\item Conversor Analógico/Digital ADC
+			\item Y por último. 14 salidas para servomotores mediante el protocolo PWM (Modulación por Ancho de Pulso)
 		\end{itemize}
 
 
-	\subsection{Clase HUD} %R003
-	
-		La clase HUD o por su respectiva traducción, \textit{visualización cabeza-arriba}, es la encargada de visualizar al piloto, en este caso el usuario, los datos más relevantes del estado del vehículo, con el objetivo de tener a simple vista el comportamiento del mismo en tiempo real. Por su parte, en el ámbito aeronáutico se utilizan ciertos instrumentos de navegación o símbolos que informan al piloto el estado de la aeronave, ya sea, velocidad, altitud, inclinación, etc; que para el desarrollo de esta clase es conveniente saber su significado. Por tal razón, explicaremos cada uno de estos instrumentos con su respectiva representación gráfica.
-		
-		
+	\subsection{Arduino UNO}
+		El Arduino UNO es una plataforma computacional física open-source basada en una simple tarjeta de I/O y un entorno de desarrollo que implementa el lenguaje Processing/Wiring. A diferencia de la Raspberry Pi 3, este está fabricado para realizar tareas más sencillas, ya que su poder de procesamiento y memoria son limitados.
+		\begin{itemize}
+			\item Microcontrolador ATmega328.
+			\item 14 pines digitales de I/O (6 salidas PWM).
+			\item 6 entradas análogas.
+			\item 32KB de memoria Flash.
+			\item Reloj de 16MHz de velocidad.	
+		\end{itemize}
 		\begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.4\linewidth, height=0.5\textheight]{Imagenes/classHUD}
-			\caption{Clase Head Up Display}
-			\label{fig:classhud}
+			\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/arduinouno}
+			\caption{Placa Arduino UNO}
+			\label{fig:arduinouno}
 		\end{figure}
+		
 
-\newpage
-
-		\subsubsection{Instrumentos de navegación }
-			Son los instrumentos esenciales para poder orientarse y seguir la ruta deseada por parte del piloto. \\	
-			
-			\textbf{Horizonte artificial}
-			
-				\begin{wrapfigure}{l}{0.3\linewidth}
-					\centering
-					\includegraphics[width=0.8\linewidth]{Imagenes/horizonte_artificial}
-					\caption{Horizonte artificial indicando un giro a la derecha en descenso.}
-					\label{fig:horizonte_artificial}
-				\end{wrapfigure}
-	
-				
-				El horizonte artificial muestra la orientación longitudinal de la aeronave (la relación del eje longitudinal del avión con respecto al plano del suelo), es decir: si está girado, inclinado, con la frente del vehículo levantado, bajado o todo a la vez. Sirve de gran ayuda en condiciones en que la visibilidad es poca o nula. El horizonte artificial tiene dos partes: el horizonte propiamente dicho, y el indicador de rumbo. El primero está compuesto por una región azul que representa el cielo, otra normalmente marrón que representa la superficie terrestre, una mira que representa la dirección en que apunta la frente de la aeronave, y varias marcas a su alrededor. Las marcas horizontales a ambos lados representan las alas, el plano de la aeronave, y su ángulo con el límite entre las regiones de cielo y superficie (el horizonte artificial), el cual con dichos planos se produce el ángulo de alabeo. Dispuestas verticalmente a intervalos regulares, hay marcas horizontales más pequeñas que representan ángulos concretos en el plano vertical, a intervalos de 5º, 10º, etc. Muestran el ángulo actual del eje longitudinal con el plano del suelo. Su principio mecánico es basado sobre un giroscopio.
-
-%
-			\textbf{Indicador de rumbos }
-			
-				\par El indicador de rumbo, o giroscopio direccional, proporciona al piloto la dirección de la aeronave en grados magnéticos. 
-				
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.2\linewidth, height=0.2\linewidth]{Imagenes/indicador_rumbo}
-					\caption{Indicador de rumbos}
-					\label{fig:indicadorrumbo}
-				\end{figure}
-	%
-			
-			\textbf{Coordinador de Giro}
-			
-				\par En el coordinador de giro vemos en lugar del bastón una Figura de un avión que nos indica el grado de inclinación de las alas.
-				
-				
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/coord_de_giro}
-					\caption{Coordinador de giro.}
-					\label{fig:coord_de_giro}
-				\end{figure}
-
-				\par Una vez concientizado en los instrumentos de vuelo se procede a integrarlos de manera simulada en un \textit{widget}, con el fin de que cumpla las mismas funcionalidades. Para empezar necesitaremos de una librería gráfica en el cual nos proporcione de funcionalidades para poder graficar estos instrumentos, para eso se selecciona la conocida librería OpenGL. Dicha librería está equipada de funcionalidades para dibujar escenas tridimensionales complejas a partir de primitivas geométricas simples, tales como puntos, líneas y triángulos. Además nos dá a disposición la personalización de todos los paramentos que estén dentro de una escena como posición de la luz, cámara,  tipo de materiales y luces. Pero más allá de todo este conjunto de herramientas que nos deja a disposición OpenGL, la tarea del diseño del HUD es realizar en un dibujo en 2D,  el cual se mostraran un conjunto de datos y lineas básicas, por lo que se decide no utilizar directamente esta librería para el diseño de la escena, sino que se busca de una \textit{API} en que podamos graficar nuestros instrumentos de navegación de forma más sencilla, es por eso, que sea realiza una investigación antes de utilizar dicha librería y se encuentra que la librería PyQt, en sus conjuntos de clases contiene una de nombre QPainter, más allá que internamente usa OpenGL, esta librería facilita un conjunto de funciones tales como dibujar elipse, texto, imágenes, lineas, entre otras funcionalidades y de una manera más comprensible. De esta forma, abordamos la tarea de graficar  la escena de la siguiente manera: \newline
-
-				\begin{enumerate}
-					
-					\item \textbf{Dibujo del Horizonte Artificial}
-						El horizonte artificial como se puede observar en la Figura \ref{fig:horizonte_artificial} está compuesto por dos rectángulos, uno representando el cielo y el segundo la tierra, de esta manera, con la funcionalidad de QPainter que nos proporciona dibujar un rectángulo proseguimos a dibujar dos rectángulos simulando el horizonte artificial; quedándonos como se puede ver en la Figura \ref{fig:hudv0}.
-						\begin{figure}[h!]
-							\centering
-							\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0}
-							\caption{HUD v0.1}
-							\label{fig:hudv0}
-						\end{figure}
-						
-						\par Hasta aquí, podemos observar que la Figura \ref{fig:hudv0} satisface las necesidades de representar el horizonte artificial según nuestras especificaciones, pero al momento de proyectar al uso del mismo podemos encontrar los siguientes problemas:
-						
-						\begin{enumerate}
-						
-					\item \textbf{Problema gráfico al momento del Roll: } Como se puede ver en la Figura \ref{fig:hudv0e1} , cuando la escena sufre una rotación sobre su eje perpendicular, es decir, simulando un giro sobre el Roll o alabeo del vehículo, la imagen muestra imperfecciones en las puntas del recuadro. 
-						
-						\begin{figure}[h]
-							\centering
-							\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0_e1}
-							\caption{Error gráfico al momento de rotar}
-							\label{fig:hudv0e1}
-						\end{figure}
-						
-						\subitem Este problema fácilmente se puede solucionar ampliando los tamaños de los rectángulos en ambas direcciones, considerando siempre el tamaño más largo entre el alto y ancho de la pantalla, ya que si no tenemos en cuenta este aspecto cuando tengamos una imagen sumamente apaisada y de poca altura, obtendríamos el mismo problema. Por tal motivo, se debe elegir un tamaño adecuado para la imagen; ahora la pregunta es ¿Qué tamaño debo asignarle a la imagen para que no se presenten dichos defectos? 
-			
-		
-							\textbf{Obtención de la longitud requerida}
-		
-							\begin{figure}[h]
-								\centering
-								\includegraphics[width=0.3\linewidth, width=0.3\linewidth]{Imagenes/problemaPuntas}
-								\caption{Problema gráfico en las esquinas}
-								\label{fig:problemapuntas}
-							\end{figure}
-							Como bien muestra la Figura \ref{fig:problemapuntas}, cuando la imagen de fondo sufre una rotación no llega a cubrir lo suficiente los limites de la pantalla, por tanto, se  produce dicho problema. De tal manera se debe buscar la longitud máxima que debe tener la imagen para que cubra dichos limites, en la Figura  \ref{fig:problemapuntas} se puede apreciar una linea roja que representa el largo necesario a calcular. Este deberá ser la mínima longitud que deben tener el alto y ancho de la imagen, es decir :
-							
-							\begin{center}
-								$L > Ancho_{Imagen}  \land L > Alto_{Imagen}   $ 
-							\end{center}
-						
-							Para calcular dicho valor, se propone implementar una circunferencia con centro en el origen de la pantalla y que tenga un radio por el cual cubra por completo los limites del mismo, como se puede observar en la Figura \ref{fig:problemapuntas2}, de esta manera se contemplan las posibilidades de que la imagen de fondo cubra por completo el dominio de la pantalla en cualquier angulo de rotación que sufra. 
-							\begin{figure}[h]
-								\centering
-								\includegraphics[width=0.3\linewidth, width=0.3\linewidth]{Imagenes/problemaPuntas2}
-								\caption{Circunferencia con radio que satisface la longitud requerida.}
-								\label{fig:problemapuntas2}
-							\end{figure}
-							
-							\par Por último, obtener esta longitud se traduce en un problema trigonométrico  donde se debe obtener la hipotenusa de un triangulo rectángulo con base $w/2$ y alto $h/2$. Utilizando el teorema de pitágoras obtenernos que
-							
-							
-							\begin{subequations}\label{eq:longRequerida}
-								\begin{align}
-								R &= \sqrt{(\frac{w}{2})^2 + (\frac{h}{2})^2}  \\
-								R &= \frac{1}{2} (w + h) \label{eq:longRequerida1}
-								\end{align}
-							\end{subequations}
-							
-							Como podemos apreciar, la longitud mínima requerida se obtiene de la ecuación \ref{eq:longRequerida1}. Pero como es de saber, este valor es la longitud total mínima que debe tener tanto el alto como el ancho de la imagen, por lo que se debe conocer cual es la diferencia al que debemos agregar al ancho, como también al alto de la imagen. Para esto, simplemente realizamos la diferencia para cada atributo y obtendremos el siguiente valor a agregar
-							
-							
-							\begin{subequations}
-								\begin{align}
-								Ancho_{aux} &= \frac{1}{2} (h+w) - \frac{w}{2} =  \frac{h}{2} \\
-								Alto_{aux} &=  \frac{1}{2} (h+w)  - \frac{h}{2} =  \frac{w}{2} 
-								\end{align}
-								
-							\end{subequations}
-					
-					\item \textbf{Problema al simular el Pitch: } Otro problema que surge, es al momento de simular el cabeceo o pitch, es que dentro de la escena cuando ocurre este comportamiento el script debe realizar un transformación de traslado, siendo proporcional a la inclinación ocurrida en el vehículo. Pero en cambio, el defecto que ocasiona es que únicamente se trasladarán los dos cuadrados ya dibujados, dejando al descubierto el \textit{background}, como se puede ver en la Figura \ref{fig:hudv0e2}. Además, hay que tener en cuenta que la escena debe permitir un pitch de 0 a 360 grados, por lo que se tendrá que expandir la escena con el fin de simular un entorno virtual 360 en 3D.
-								
-						\begin{figure}[h!]
-							\centering
-							\includegraphics[width=0.3\linewidth, height=0.3\linewidth]{Imagenes/HUD_v0_e2}
-							\caption{Error al momento de simular el Pitch}
-							\label{fig:hudv0e2}
-						\end{figure}
-			
-		Para solucionar este inconveniente surgen las siguientes propuestas 
-		
-		\begin{enumerate}
-			\item \textbf{Mapear una textura al rededor de la cámara, mediante coordenadas esféricas: } En esta propuesta se debe generar una textura de ambiente exterior por el cual será mapeada de tal manera que simulará un ambiente 3D. La desventaja de esta propuesta es que la clase QPainter no proporciona funcionalidades para el desarrollo de dibujos en 3D, ni tampoco sus clases antecesoras para el mapeo de textura. Por lo cual, se debería codificar la textura manualmente y utilizando las funcionalidades primitivas de OpenGL.
-			
-			\item \textbf{Inserción de rectángulos dependientes del Pitch: } Aquí lo que se pretende es que a medida que el pitch aumente o disminuya, es decir, que el vehículo cabecee para arriba o abajo, el script interprete estos datos para dibujar un nuevo rectángulo contrario al que se ve en pantalla (cielo/tierra), simulando un entorno infinito, como se puede ver en la Figura \ref{fig:addrectangle}.
-			
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/addRectangle}
-				\caption{Insertando un rectángulo perteneciente al piso. }
-				\label{fig:addrectangle}
-			\end{figure}
-			
-			Siendo parecer la propuesta más efectiva, al momento de realizar las pruebas con el vehículo se descubre que presenta inconsistencias, ya que el movimiento del pitch no es continuo, por tanto, no se puede ir llevando un seguimiento del cuadro que se esta viendo actualmente para la inserción del siguiente. Más allá de poder emparchar esta propuesta anexando al algoritmo estructuras extras para el seguimiento de los cuadros, el propósito del mismo no es acomplejar el problema presente, de esta manera, se recurre al desarrollo de la siguiente propuesta.
-			
-			\item \textbf{Mapeo del Pitch sobre una imagen: } Finalmente, para solucionar el presente problema, y siempre reduciendo la complejidad a una solución, se propone dibujar una imagen que contenga la escena del horizonte artificial en forma repetida, con el propósito de mapear el rango completo del pitch [0 - 360] dentro de una sola imagen, sin estar utilizando imágenes extras para cubran lo restante. 
-			
-			\begin{figure}[h!]
-				\centering
-				\includegraphics[width=0.7\linewidth, height=0.5\textheight]{Imagenes/mapeo}
-				\caption{Mapeo del horizonte artificial.}
-				\label{fig:mapeo}
-			\end{figure}
-			
-			\par Como se puede notar en la Figura \ref{fig:mapeo} el mapeo del pitch corresponderá unicamente al dominio de la pantalla marcada en color rojo. Con esto hacemos referencia, que el mapeo no será de forma lineal ya que la entrada del pitch corresponde dentro del dominio de [0 - 360], por lo que se procede a convertirlo en el dominio [-180 - 180] para que sea más representativo a la dirección que apunta el vehículo y luego mapearlo al dominio del tamaño de la imagen. La razón por la cual se ha tomado el dominio de pantalla especificado, es porque cuando el pitch supere el limite de los 180 (grados), inmediatamente el mapeador deberá llevar "la vista" al rango inferior, es decir, a los -180 (grados), esto dará al usuario una sensación continuidad de la imagen ya que al sobrepasar, ya sean los limites inferior o superior del dominio de la pantalla, las escenas serán prácticamente las mismas. 
-			
-			
-		\end{enumerate}
-		
-	\end{enumerate}% FIN de problemas al momento de dibujar el horizonte 
-	
-	\item \textbf{Dibujo del ángulo de banco}
-	El ángulo de banco representa directamente al instrumento de coordinador de giro. Este instrumento indica al usuario la inclinación en el eje x o Roll de la misma forma en que se detalló en su definición, con la diferencia que este muestra el rango de inclinación [-(-60), 60] y en caso de sobrepasar este limite se indica con una flecha en color rojo a modo de precaución. 
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.4\linewidth, height=0.1\textheight]{Imagenes/angulo}
-		\caption{Ángulo de banco.}
-		\label{fig:angulo}
-	\end{figure}
-	
-	
-	\item \textbf{Dibujo de lineas de referencia}
-	Estas lineas de referencia tienen el fin de mostrar al usuario en la pantalla el pitch que esta teniendo el vehículo en tiempo real, de la misma forma que el ángulo de banco, este muestra un rango limitado de [-40,40].
-	
-	\item \textbf{Dibujo de atributos del vehículo}
-	Por último, se ha tomado la decisión de ilustrar dentro del HUD ciertos atributos del vehículo y conexión, que se han considerado importante antes y durante del inicio del despegue. Dentro de estos atributos se han insertado los siguientes elementos como se puede ver en la imagen \ref{fig:hudbeta}
-	
-	\begin{itemize}
-		
-		\item \textbf{Indicador de rumbos}
-		\item \textbf{Icono de estado de GPS, Señal y batería}
-		\item \textbf{Un atributo a elección del usuario} En este caso se ha insertado por defecto el pitch del vehículo, pero este espacio puede ser ocupado por cualquier atributo del vehículo. 
-		
-	\end{itemize}  
-	
-	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.7\linewidth, height=0.4\textheight]{Imagenes/HUD_beta}
-		\caption{HUD final con sus correspondientes atributos e  instrumentos de vuelo.}
-		\label{fig:hudbeta}
-	\end{figure}
-	
-	
-	
-	
-	\end{enumerate}% FIN de como se dibujaron cada elemento
-	
-	\newpage
-	
-	
-	\subsection{Clase Gestor Parámetro}
-	
+	\subsection{Radio Control}
+		Este control permite gobernar al vehículo a distancia de manera inalámbrica mediante señales de radio.
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/classGestParametro}
-			\caption{}
-			\label{fig:classgestparametro}
+			\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/RCcontrol}
+			\caption{Comando Radio Control}
+			\label{fig:rccontrol}
 		\end{figure}
-		
-		Dentro del vehículo además de encontrarse con sus atributos tales como: velocidad, posición, batería, etc. existen parámetros, como bien su nombre lo dice parametrizables, donde es posible establecer o informarse de todo tipo de configuración del vehículo. Existe una gran variedad de estos, ya que es importante poder configurar cada aspecto de los elementos del vehículo. Dentro de este conjunto de parámetros podemos clasificaros los siguientes grupos:
-		
-		\begin{itemize}
-			\item \textbf{Armado}
-			\item \textbf{Batería}
-			\item \textbf{Motores}
-			\item \textbf{Servo Output}
-			\item \textbf{Telemetría}
-			\item \textbf{IMU}
-			\item \textbf{Compas}
-			\item \textbf{Barometro}
-			\item \textbf{GPS}
-			\item \textbf{RC}
-			\item \textbf{WayPoint}
-			\item \textbf{Misiones}
-		\end{itemize} %FIX explicar más o menos cada grupo
-		
-		%FIX - explicar como hice para obtener la información
-		
-		Donde en cada grupo se encuentran reunidos un conjunto de parámetros individuales que configuran cierto aspecto de cada grupo. Por tal razón se decide crear una clase Gestión de Parámetro, de tal manera que sea el encargado de agrupar estos parámetros. Para la carga de información de cada parámetros se ha utilizado una planilla de cálculo para almacenar la información, esto es posible gracias a la librería \textit{openpyxl} que nos permite ir guardando cada 	grupo de parámetros en una hoja independiente dentro del documento.
-		\newpage
-		
+
+
+
+	\subsection{Joystick}	
+
+		Una palanca de mando o comúnmente conocido como \textit{Joystick}  es un dispositivo que por lo general contiene 2 palancas con dos ejes cada uno, donde es posible representar la posición de un punto según la posición física de este y un conjunto de botones que al ser presionados y según el software intermediario puede codificarse ciertas acciones. Este puede estar conectado mediante un cable USB o de manera inalámbrica. En nuestro caso, utilizaremos un joystick con conexión USB ya que necesitamos que el envío de información sea confiable.
+
+	\subsection{Router}
 	
-	\subsection{Clase Parámetro}
+		Un router es un dispositivo de hardware que permite la interconexión de ordenadores en red. El router o enrutador es un dispositivo que opera en capa de nivel de 3. Así, permite que varias redes u ordenadores se conecten entre sí y, por ejemplo, compartan una misma conexión de Internet. 
+		\par Este dispositivo es usado para el desarrollo del proyecto ya que en el momento de las pruebas no se tienen a disposición los módulos de comunicación verdaderos, estos módulos permiten una mayor distancia de cobertura y funciona exclusivamente para una conexión, lo que logra una mayor confiabilidad a la misma que comparando con el router que debe gestionar varias conexiones a la vez y la información enviada no está asegurada. Por tal motivo de ausencia de estos módulos se recurre a utilizar como medio de comunicación provisoria la tecnología wifi del router, ya que únicamente se pretende realizar pruebas en un ámbito controlado y de poca distancia.
+	
+
+	\subsection{Módulos XBee}
+	
+		Los módulos XBee \footnote{Página web de XBee  https://www.digi.com/xbee} son soluciones integradas que brindan un medio inalámbrico para la interconexión y comunicación entre dispositivos. Estos módulos utilizan el protocolo de red llamado IEEE 802.15.4 para crear redes FAST POINT-TO-MULTIPOINT (punto a multipunto); o para redes PEER-TO-PEER (punto a punto). Están diseñados para aplicaciones que requieren de un alto tráfico de datos, baja latencia y una sincronización de comunicación predecible.
 	
 		\begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.3\linewidth, height=0.3\textheight]{Imagenes/classParametro}
-			\caption{Clase parámetro}
-			\label{fig:classparametro}
+			\includegraphics[width=0.4\linewidth, height=0.25\textheight]{Imagenes/xbee}
+			\caption{Módulo de comunicación XBee}
+			\label{fig:xbee}
+		\end{figure}
+
+
+	\subsection{Batería LiPo}
+	
+		La batería LiPo (Litio y Polímero) son baterías recargables, compuestas generalmente de varias células conectadas en paralelo para aumentar la capacidad de la corriente de descarga. Esta contiene un voltaje de 12v con 2200 mA, suministrando dicha energía a los motores y además a la Raspberry Pi con 5V.
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.2\linewidth, height=0.25\textheight]{Imagenes/bateria}
+			\caption{Batería LiPo}
+			\label{fig:bateria}
+		\end{figure}
+	
+
+
+\section{Procedimiento}
+
+	\subsection{Armado del cuerpo}
+		Una vez ya descripto el hardware adquirido para el desarrollo de esta etapa,  estamos habilitados para iniciar el proceso del armado del vehículo. En primera instancia se comienza con el cuerpo del cuadricóptero, esta actividad  es realizada en base a las instrucciones que nos proporciona el vendedor \textit{ValueHobby} \footnote{http://www.valuehobby.com/media/wysiwyg/upload/Manual/bumblebee-manual.pdf} obteniendo el cuerpo armado como se puede observar en la Figura \ref{fig:armado}. Como medida de seguridad antes de realizar las pruebas se han extraído las hélices. Pero al momento se ser instaladas con el propósito de que el cuadricóptero no se tumbe con respecto a su eje de orientación cuando este se encuentre en el aire se deben colocar las hélices pares de tal manera que su propulsión al momento de girar sea en sentido contra-horario y las hélices impares deben estar colocadas en sentido horario tal como se ven en la Figura \ref{fig:esquemacuadricoptero} . 
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.6\linewidth, height=0.3\textheight]{Imagenes/fotos/Armado}
+			\caption{Cuerpo de cuadricóptero armado}
+			\label{fig:armado}
 		\end{figure}
 		
-		Cada parámetro tiene la particularidad dentro del software un conjunto de propiedades que ayudan al usuario a entender su significado y poder 	modificarlos. Para la creación de dicha clase se han creado las siguientes propiedades:
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.3\linewidth, height=0.2\textheight]{Imagenes/esquemacuadricoptero}
+			\caption{Esquema de instalación de hélices.}
+			\label{fig:esquemacuadricoptero}
+		\end{figure}
+
+	\subsection{Armado y configuración del piloto}
+		En esta sección se describe el armado del piloto del cuadricóptero, este va a ser el encargado en gestionar todos los sensores, enviar señales a los motores y administrar la información generada por estos sensores con el fin de ser enviadas a una maquina cliente y que este las pueda interpretar, entre otras cosas.
 		
+		
+		\par Para comenzar con el armado debemos instalar la placa Navio2 sobre la Raspberry Pi 3, proporcionando así los sensores indispensables para el control, monitoreo y vuelo del vehículo ya que el ordenador de placa reducida Raspberry Pi no cuenta con estos sensores de forma nativa. Por lo tanto, se procede a conectar los 40 pines GPIO sobre la placa Navio2, como se muestra en la Figura \ref{fig:navio2-mount}
+		
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.25\textheight]{Imagenes/navio2-mount}
+			\caption{Conexión entre Raspberry Pi 3 y placa Navio2.}
+			\label{fig:navio2-mount}
+		\end{figure}
+		
+		Luego se procede a conectar la antena GNSS sobre la placa Navio2. Una vez ya conectado se debe verificar su correcto funcionamiento de todos los sensores presentes, para eso debemos tener un software que gestione eficazmente todo el hardware y sea el intermediario entre estos dispositivos electrónicos y el usuario, además de proporcionar servicios de utilidad para el mismo, en otras palabras, un sistema operativo (SO). Antes de instalar cualquier sistema operativo hay que tener en cuenta que  estamos en presencia de un ordenador de placa reducida, es decir, el hardware de los componentes del mismo como memoria, procesador, puertos de entrada y salida, etcétera no son los mismos a los ordenadores comerciales que vemos comúnmente; por poner un ejemplo, el procesador que contiene la Raspberry es un ARM1176JZF-S, con esto queremos decir que el CPU en si mismo esta fabricado bajo una arquitectura con un conjunto reducido de instrucciones (o por su siglas en ingles \textit{RISC - Reduced instruction set computing}) en comparación a un CPU que son utilizados normalmente en un ordenador hogareño. Por tal motivo, es necesario de un SO que se adapte a estas características; afortunadamente existen varias organizaciones o empresas que desarrollan y distribuyen este tipo de producto, por ejemplo, \textit{Canonical Ltd} y \textit{Microsoft} han adaptado sus sistemas operativos para este tipo de ordenadores. En nuestro caso utilizaremos un SO proporcionado por la empresa \textit{Emlid} basado en una distribución de Linux llamada \textit{Raspbian} (acrónimo entre Raspberry Pi y Debian) donde ya viene preinstalado las herramientas necesarias.
+		\par Una vez seleccionado el SO a instalar, se procede a descargar la imagen y grabarla en una tarjeta SD, una vez realizado este paso se carga la tarjeta SD en la ranura disponible en la Raspberry Pi, se enchufa un teclado, mouse y un conector HDMI que se encuentra conectado a un monitor, y por último se procede a encender el dispositivo  mostrándonos la siguiente imagen: 
+		
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.8\linewidth, height=0.37\textheight]{Imagenes/pantallaInicio}
+			\caption{Pantalla de bienvenida luego de instalar el SO}
+			\label{fig:pantallainicio}
+		\end{figure}
+		
+		Como se puede observar en la imagen \ref{fig:pantallainicio} la pantalla de bienvenida nos muestra los siguientes pasos que hay que seguir para configurar nuestro piloto.
 		\begin{itemize}
-			\item \textbf{Permiso:     } Este propiedad determina si el parámetro es de solo lectura o es modificable por el usuario. 
-			\item \textbf{Código:      } Dentro del software se generan códigos a cada parámetro con el fin de poder enviarlos mediante comandos al vehículo.
-			\item \textbf{Nombre:      } Es una pequeña descripción del código, ya que los mismos están escritos de forma reducida.
-			\item \textbf{Descripción: } Describe de manera extendida el significado de cada parámetro y en determinados casos con ejemplos para ayudar al 	usuario a configurarlos.
-			\item \textbf{Rango:       } Los valores máximos y mínimos que puede tomar el parámetro.
-			\item \textbf{Incremento:  } Tiene como fin ser una propiedad para configurar un \textit{slider} dentro de cada parámetro en la GUI.
-			\item \textbf{Unidades:    } Unidades correspondiente al parámetro.
+			\item \textbf{Paso 1:} Se selecciona el tipo de vehículo que se va a manejar, utilizando el comando \textit{update-alternatives}. Esta función se encarga de seleccionar como predeterminada la opción ingresada dentro de otras alternativas, es decir, 
+			Es posible que tenga en el sistema varios programas instalados a la vez  que  realizan  la
+			misma  función. Por ejemplo, muchos sistemas tienen varios editores de texto instalados al
+			mismo tiempo, lo que deja la elección de  qué  editor  de  texto  utilizar  en  manos  del
+			usuario,  si  éste lo desea, pero hace difícil que un programa elija la opción correcta si
+			el usuario no ha definido ninguna preferencia. En nuestro caso es el tipo de autopiloto como puede ser arducopter, arduplaner y ardurover. Como estamos por utilizar un cuadricóptero ingresamos:
+			
+			\begin{listing}[style=consola, numbers=none]
+				> sudo update-alternatives --config arducopter
+			\end{listing}
+				
+				
+				
+				\item \textbf{Paso 2:} Se debe ingresar dentro del archivo /etc/default/arducopter el IP perteneciente al GCS (\textit{Ground Control Station}), es decir, este archivo contiene la dirección IP del ordenador que enviará y recibirá información del vehículo. Además, brinda la opción de seleccionar la interfaz por el que se realizará la comunicación. En nuestro caso lo haremos realizaremos mediante tecnología Wifi y utilizando el protocolo UDP \footnote{Es posible también utilizar el protocolo TCP, pero la razón por la cual se este método es porque es un protocolo no orientado a la conexión, por lo tanto como estaremos realizando maniobras que son ejecutadas por el vehículo en tiempo real necesitamos la menor latencia posible y no estar esperando paquetes de confirmación todo el tiempo}. 
+				
+				\item \textbf{Paso 3:} Una vez ya seleccionado el tipo de vehículo a utilizar e ingresado el IP de nuestro GCS se debe iniciar los servicios y procesos proporcionados por arducopter (ya que este se encargará de administrar las funcionalidades pertinentes), para eso se utiliza el gestor del sistema y servicios \textbf{systemd} de Linux con el objetivo de iniciar un conjunto nuevo de procesos y servicios encapsulados en Arducopter, para eso utilizamos los siguiente comandos :
+				
+				\begin{listing}[style=consola, numbers=none]
+				> sudo systemctl daemon-reload
+				> sudo systemctl start arducopter 
+				\end{listing}
+				
+				
+				
+				
+				\item \textbf{Paso 4:} Por último es deseable que los servicios proporcionados por Arducopter se inicien cada vez que el vehículo se encienda, por tal motivo se ingresa el útlimo comando :
+				
+				\begin{listing}[style=consola, numbers=none]
+				> sudo systemctl enable arducopter 
+				\end{listing}
+			
+			
+			
 		\end{itemize}
-		Como es de notar la clase parámetro no almacena su correspondiente valor, esto es debido a que los valores de cada parámetro son tomados del vehículo 	cuando se establece la primera conexión. Ya que estar manipulando valores cambiantes en dos lugares a la vez pueden producir accidentes al momento de sincronizarlos.
+
+	\subsection{Configuración para el acceso a la red}
+
+		\par Entre las opciones de conexión a la red que dispone la Raspberry Pi 3, podemos identificar que el mismo tiene una entrada Ethernet como también un módulo interno Wi-Fi, por lo tanto es necesario configurar dichas interfaces para poder conectarnos mediante un cable UTP con un conector RJ45, como también por tecnología \textit{Wireles}. Por lo que dentro del sistema operativo del vehículo y sobre la consola se ingresa el siguiente comando 
+		\begin{listing}[style=consola, numbers=none]
+			> sudo ifconfig
+		\end{listing}
+		Con este comando podemos verificar nombres de interfaces presentes y si se encuentran en actual funcionamiento. En caso de observar ningún tipo de trafico por estas interfaces se procede a configurarlas, para esto se utiliza el mismo comando pero con la opción de activar la interfaz deseada, en nuestro caso queremos activar la interfaz del módulo interno de Wi-Fi, para eso ingresamos el siguiente comando 
+		\begin{listing}[style=consola, numbers=none]
+		> sudo ifconfig intwifi0 up
+		\end{listing}
+		Una vez ya activo podemos buscar las redes disponibles y que son captadas por el módulo, utilizando el siguiente comando 
 		
-	\newpage
-	\subsection{Clase GUI becopter}
-	
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.2\linewidth, height=0.15\textheight]{Imagenes/classGUI_becopter}
-			\caption{Clase Graphical User Interface de BEcopter}
-			\label{fig:classguibecopter}
-		\end{figure}
+		\begin{listing}[style=consola, numbers=none]
+			> iwlist wlan0 scan
+			\end{listing}
+			Con este comando nos muestra mediante una lista las redes captadas por el módulo, una vez que hayamos encontrado la red de nuestro interés podemos conectarnos con el siguiente comando 
+			
+			\begin{listing}[style=consola, numbers=none]
+			> iwconfig wlan0 essid "Nombre de Red" key "Contrasena"
+		\end{listing}
+		y finalmente procederemos a obtener nuestra IP y conectarnos con la siguiente función :
+
+		\begin{listing}[style=consola, numbers=none]
+		> sudo dhclient wlan0
+		\end{listing}
 		
-		En lo que respecta al proyecto es la clase de mayor tamaño, ya que contiene absolutamente todos los elementos gráficos que se pueden ver en BEcopter. Estos están desarrollados en base a la creación de un widget padre, con su respectiva estética y comportamiento. Una vez definido este widget padre se procede a crear sus correspondientes hijos y una vez finalizados se los inserta en su antecesor. Estos widgets cuentan con una gran variedad de propiedades que puden ser modificadas, y los mismos pueden ser administrados mediante la herramienta Qt Designer (figura \ref{fig:qtdesigner}).
+		En caso de querer almacenar esta red e indicarle al sistema operativo que es nuestra red por defecto podemos modificar el archivo wpa\_supplicant.conf ingresando el nombre de la red y su correspondiente clave.
+		Por último, se reinicia y una vez iniciado el sistema se comprueba su conectividad realizando chequeo de conexión con algún tipo de página en internet, por ejemplo, Google utilizando el siguiente comando 
+		\begin{listing}[style=consola, numbers=none]
+		> ping 8.8.8.8
+		\end{listing}
+
+
+	\subsection{Instalación del firmware}
+
+		\par Una vez ya comprobado la conectividad a la red y conFigurado el sistema operativo, es necesario instalar el \textit{firmware}  encargado de gestionar todos los sensores que se han incluido a la Raspberry mediante la placa Navio2, con el objetivo de poder administrar esta información y poder enviarla al \textit{GCS}. Para instalar el firmware se procede a descargarlo desde el mismo SO del vehículo mediante el siguiente comando 
 		
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/qtDesigner}
-			\caption{Aplicación QT designer}
-			\label{fig:qtdesigner}
-		\end{figure}
 		
+		\begin{listing}[style=consola, numbers=none]
+			
+			pi@navio: ~\$ wget http://firmware.eu.ardupilot.org/Copter/stable/navio2-quad/arducopter-quad
+			pi@navio: ~\$ chmod +x arducopter-quad}
 		
-		\par Como es de notar BEcopter comprende un gran número de widget, lo que causa que la programación de cada elemento se vuelva engorrosa y consuma tiempo, es por eso que el mismo programa brinda una herramienta que traduce los archivos .ui generados por la aplicacion a archivos .py, que es nuestro lenguaje seleccionado, con el fin de agregarlo directamente al proyecto. Cabe mencionar que dicha herramienta nos dá la facilidad de modificar los aspectos estéticos de los widget mediante CSS, por lo tanto se ha tenido que estudiar dicha sintaxis y utilizarla para el personalizado de los mismos.
+		\end{listing}
 		
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/ejemploCCS}
-			\caption{Ejemplo del diseño de estilo con CSS.}
-			\label{fig:ejemploccs}
-		\end{figure}
-	
-	
-	
-	
-	
-	
-	\subsection{Clase BEcopter}
-	
-	\begin{figure}[h!]
+		Una vez descargado el firmware se desea que los servicios ya instalados de Arducopter utilicen dicho firmware actualizado, por lo tanto se procede a modificar el archivo /etc/systemd/system/ardupilot.service. Modificando la línea  
+		
+		\begin{listing}[style=consola, numbers=none]
+		#ExecStart=/bin/sh -c "/home/pi/path/to/your/binary \$\{ARDUPILOT\_OPTS\}"
+		\end{listing}
+		por
+		\begin{listing}[style=consola, numbers=none]
+		#ExecStart=/bin/sh -c "/home/pi/arducopter-quad \$\{ARDUPILOT\_OPTS\}"}
+		\end{listing}
+
+
+	\subsection{Primeras pruebas}	\label{sec:primprue}
+		Ya instalado el firmware correspondiente dentro de la Raspberry Pi estamos en condiciones de poder hacer nuestras primeras pruebas, para eso, dentro del mismo vehículo se ejecutan programas proporcionados por ArduPilot para poder observar los datos generados por los sensores. En la misma carpeta de instalación se encuentran programas de ejemplo para observar los datos provenientes de los sensores y al ejecutar dichos programas evidentemente la información mostrada es errónea ya que estos sensores no se encuentran calibrados, por lo tanto, para realizar estas correcciones utilizamos las herramientas recomendadas y proporcionadas por la empresa ArduPilot como es el software \textbf{MavProxy} (Figura \ref{fig:mavproxy}), este software muestra a través de una consola todos los datos obtenidos de los sensores, estado del vehículo entre otras cosas, siendo lo más importante poder calibrar los sensores.
+		\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.5\linewidth, height=0.3\textheight]{Imagenes/classBEcopter}
-		\caption{Clase principal BEcopter}
-		\label{fig:classbecopter}
-	\end{figure}
-	
-	Por último tenemos la clase principal BEcopter, esta es la encargada de gestionar las demás clases presentes en este proyecto. Como podemos observar en el diagrama de clases de la Figura \ref{fig:classbecopter} la misma está relacionada con la gran mayoría por lo que conlleva varias tareas; si detallamos un poco su interacción, esta se encarga de:
-	
-	\begin{itemize}
+		\includegraphics[width=0.8\linewidth, height=0.4\textheight]{Imagenes/mavproxy}
+		\caption{Captura de pantalla del Software MavProxy}
+		\label{fig:mavproxy}
+		\end{figure} 
+		Así que una vez iniciado el software se prueba la opción de calibrarlos. Al momento de iniciar el proceso de calibración surge el inconveniente de no poder iniciarlo, ya que para realizar dicha acción es de suma importancia tener conectado el radio control al vehículo. Esto genera un inconveniente al momento del desarrollo de esta fase ya que la compra de un radio control conllevaría un tiempo extra en el cronograma del proyecto. Buscando alternativas en conjunto se descubre que es posible realizar la calibración mediante un script que debíamos codificar. Analizando esta propuesta se descubre que para generar dicho script es necesario de estudiar las librerías involucradas lo que conlleva un tiempo considerado y únicamente el objetivo de esta fase es realizar la comprobación funcional de estos dispositivos. De esta manera se obtiene provisoriamente un radio control como se ilustra en la imagen \ref{fig:radiocontrol}
 		
-		\item \textbf{Gestionar la interfaz gráfica: }  La interfaz proporcionada por la clase GUI\_becopter únicamente representa la GUI, por tanto, este no contiene ningún tipo de lógica ni tampoco aspectos dinámicos que son de suma importancia para este proyecto. Por lo que es tarea de la clase principal brindarle de dichos comportamientos para poder interactuar con las acciones del usuario; dentro de sus amplias tareas tales como inicialización de estilos, gestión de pestañas, validación de datos, etc.  Tenemos las más destacadas que son :
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth, height=0.5\textheight]{Imagenes/fotos/rc_control_receptor}
+		\caption{Radio Control LANYU model y su correspondiente receptor.}
+		\label{fig:radiocontrol}
+		\end{figure}
+		
+		Este radio control simplemente envía las señales por 4 canales independientes, que son generados por sus dos palancas donde cada una contiene 2 ejes (\textit{eje x y eje y}), por lo tanto tendríamos que la palanca 1 enviará información del $eje_{p1} x$ y $eje_{p1} y$ y de la misma manera, la palanca 2 enviará información de el $eje_{p2} x$ y $eje_{p2} y$ mediante la técnica de modulación por ancho de pulso. Simplificando un poco, el receptor o (\textit{RX})  tendrá 4 cables con información de cada canal y que deberá conectarse al vehículo, pero recordando la sección \ref{sec:ioRC} el vehículo solo dispone de una entrada compatible con PPM o SBUS. Por lo que aquí surge otro problema, debemos encontrar la forma de poder convertir las señales del radio control que se encontraban en PWM y pasarlas a PPM o SBUS para que el vehículo pueda interpretar esta información. Para solucionar este problema se plantean 3 alternativas:
 		
 		\begin{enumerate}
-			
-			\item \textbf{Ocultamiento de de opciones: } A modo de seguridad se ha establecido por defecto que al iniciar la aplicación ciertas opciones estén deshabilitadas, como son las pestañas de (Inicio y Configuración) ya que estos dependen de que el vehículo este conectado y en caso contrario, si proporcionamos a que se puedan modificar misiones o parámetros del mismo pueden ocasionar errores.  
-			
-			
-			\item \textbf{Sincronización de datos: } Poder observar los atributos del vehículo en tiempo real es de suma importancia, por lo que se definen \textit{timer's} que sincronizan cada cierto periodo de tiempo los valores ubicados en la pestaña inicio que contiene un conjunto de botones que muestran datos sobre el vehículo y en la pestaña conexión que presenta información de su respectiva conexión y aspectos generales del vehículo.
-			
+		\item \textbf{Comprar un radio control con su respectivo receptor compatible con el vehículo.}   
+		\item \textbf{Realizar manualmente un conversor de PWM a PPM o SBUS con componentes electrónicos desde cero. }   
+		\item \textbf{Implementar el conversor sobre una placa Arduino UNO.}   
 		\end{enumerate}
 		
-		\item \textbf{Gestionar los Joysticks: } Como el fin de BEcopter es poder manejar un único vehículo, se ha restringido a la utilización de un solo Joystick, pero es importante tener en cuenta que pueden haber más de un dispositivo tipo comando conectado al equipo, por lo que se provee de opciones de selección de comandos para contemplar ese aspecto. 
-		Además de gestionar la selección del comando a utilizar y realizar el correspondiente mapeo en relación de acción-botón que ha seleccionado el usuario, este es encargado de captar todos los eventos que se están siendo generados en el joystick, con el propósito de enviarlos al vehículo para su posterior interpretación. Esta función es la responsable de realizar el modo manual en caso de ser solicitado.
+		Para estas propuestas se realiza el siguiente análisis:\newline
+		\par \textbf{Propuesta 1: } La adquisición de un nuevo radio control más allá de sus futuros usos conllevaría un elevado costo adicional para el proyecto ya que el mismo tiene un valor de \$8000 \footnote{Fecha consultada, septiembre del 2017}, además atrasaría el cronograma los días que se deban esperar el producto desde su ciudad de origen.
+		
+		\par \textbf{Propuesta 2: } Consiste en realizar la compra de los componentes electrónicos de tipo CMOS CD4001 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26834/TI/CD4001.html} y 	CD40106 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26839/TI/CD40106.html} con un precio estimado de \$100. A pesar de su bajo costo de implementación y siendo la mano de obra realizada por el profesor de la cátedra Electrónica Digital, es una tarea ajena al ejecutante del proyecto, por lo que no complementaría los conocimientos del alumno.
+		
+		\par \textbf{Propuesta 3: } Esta propuesta consiste en implementar la función de conversión de PWM a PPM o SBUS mediante un script que se implementará sobra la placa Arduino, donde se conectarán los cables provenientes del Rx a sus entradas y retornará en una de sus salidas un único cable con la información codificada en PPM o SBUS como estaba especificado en el sitio web del fabricante. El precio estimado de la placa Arduino UNO es de \$200, pero existen versiones reducidas como el Arduino Nano que cuentan con un precio a la mitad del Arduino UNO. De manera conveniente se contaba con la adquisición de un Arduino UNO, por lo que no hacia falta realizar una compra. Además, la implementación de este algoritmo contribuye al crecimiento de las aptitudes del ejecutante del proyecto como estudiante de ingeniería en informática. 
+		% TODO: Explicar codificación del script	 
+		Por lo que finalmente se decide realizar la propuesta 3. Una vez realizada se implementa sobre la placa Arduino UNO y se comprueban los resultados con un osciloscopio, dándonos un resultado favorable.
+
+
+
+
+	\subsection{Conexión de componentes}
+		
+		Antes de comenzar a describir el proceso de cableado del vehículo se comienza conectando el receptor del comando radio control con el Arduino UNO que va a ser el en cargado de recibir las señales PWM y convertirlas en SBUS momentáneamente para poder enviarlas a la Navio2. Hay que tener en cuenta que la ubicación de los conectores y los pines del receptor llevan un orden en específico. Por tal motivo, se investiga dicho orden, pero sin encontrar información relevante, hasta ubicar con un transmisor de la misma empresa y deducir las siguientes conexiones
 		
 		
-		\item \textbf{Gestionar los gráficos: }  Dentro de lo que es el proyecto BEcopter están incluido un par de gráficos que ayudan al usuario a tener presente información útil del vehículo y sus sensores. Estos gráficos son :
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth, height=0.3\textheight]{Imagenes/fotos/Rxconexion}
+		\caption{Ubicación de conexiones en el Rx}
+		\label{fig:RxConexiones}
+		\end{figure}
 		
-		\subitem \textbf{Gráfico \textit{Head UP Display}}: Más allá de su propio funcionamiento interno de la clase HUD, la clase BEcopter es la responsable de poder inicializar la conexión entre el vehículo y dicha clase. Por eso es importante que este proporcione los datos necesarios a mostrar cada vez que el atributo sufra un cambio, por tal motivo, es que se generan \textit{callback's} que administran dichos eventos.
+		Como se puede observar en la Figura \ref{fig:RxConexiones} la columna izquierda de pines le pertenece a los negativos, la columna central a los positivos y la última columna perteneciente a datos; esta es la de interés ya que por cada $conector_i$ estaríamos recibiendo señal PWM del emisor correspondiente al $canal_i$, por lo que cada una son las entradas a nuestro Arduino UNO para poder realizar la codificación. Antes de iniciar la conexión con el codificador se comprueban las señales mediante un osciloscopio. 
+		\par Ya identificados los cables correspondientes a cada canal, se conectan los mismos a la placa Arduino UNO. Por último, se conecta la salida proporcionada por el codificador a la entrada del vehículo, asegurando así una señal de tipo SBUS como lo indica su fabricante.
 		
-		\subitem \textbf{Gráfico de atributos: } La clase vehículo nos brinda un gran conjunto de atributos que informan sobre el estado del vehículo, conexión, como también provenientes de los sensores, de tal manera que la clase BEcopter se debe encargar de mostrar dichos atributos en una lista con la opción poder agregarlos a la clase gráfico de datos para su procedente graficación. Además, BEcopter debe proporcionar en dicha lista la opción agregar/eliminar atributos tanto en el gráfico de datos como también en la botonera.
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth, height=0.3\textheight]{Imagenes/fotos/rc_receptor}
+		\caption{Receptor o Rx de 4 canales}
+		\label{fig:rc_receptor}
+		\end{figure}
+		
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth, height=0.3\textheight]{Imagenes/fotos/arduino_ppm}
+		\caption{Codificador PWM a SBUS implementado sobre Arduino.}
+		\label{fig:arduino_ppm}
+		\end{figure}
 		
 		
-		\item \textbf{Gestionar el vehículo: } La clase vehículo corresponde al corazón del proyecto, ya que este representa de manera directa el UAVs que estamos por manipular, por tal razón es importante tener actualizado todos los valores que proporciona la clase vehículo hacia el usuario; además hay que tener en cuenta que el usuario deseará enviarle comandos al mismo como, despegar, moverse, aterrizar, desplazarse, etc. Ya sea en modo manual mediante el joystick ya selecionado o en forma de misiones, es decir, en modo automático. De esta manera la clase BEcopter para contemplar estos aspectos tendrá que realizar las siguientes tareas:
+		\par Con respecto a las conexiones eléctricas que lleva el cuadricóptero, recurrimos en basarnos en la Figura \ref{fig:instnavio1}, donde muestra gráficamente el orden que llevan las conexiones con sus respectivos cables de colores. 
 		
-		\subitem \textbf{Sincronización: } La clase BEcopter tiene la responsabilidad informarle a las clases restantes cuando los atributos que están siendo utilizado sufren algún tipo de cambio, de esta manera, se han creado un conjunto de conexiones mediante \textit{callbacks} y \textit{timer's} que envían de manera sincrona y asincrona la información requerido a cada entidad.
+		\begin{figure}[h!]
+		%TODO: Modificar imagen (esta mal el cableado de alimentacion de los motores)
+		\centering
+		\includegraphics[width=0.9\linewidth, height=0.4\textheight]{Imagenes/inst_navio1}
+		\caption{Esquema de conexiones}
+		\label{fig:instnavio1}
+		\end{figure}
 		
-		\subitem \textbf{Misiones: } Las misiones son un aspecto importante en BEcopter, ya que proporcionan al usuario la posibilidad de crear un conjunto de comandos parametrizables y que pueden ser enviados al vehículo para que sean ejecutadas. En lo que concierne a estas opciones tenemos las siguientes utilidades:
+		Un aspecto a tener en cuenta es que no todos los componentes que se visualizan en la Figura \ref{fig:instnavio1} están presentes al momento de la instrumentación ya que los dispositivos marcados con los números (1,2 y 3) son de tipo comunicación y se supone que con el módulo interno de \textit{Wifi} podríamos sustituir estos elementos. 
+		\par Por lo tanto se procede a realizar las conexiones mostradas. En primera medida se inicia conectando los motores del cuerpo del cuadricóptero con los pines de la Navio2 como se puede observar en la imagen \ref{fig:conexionmotores}
 		
-		\subsubitem \underline{Descargar misiones: } Esta opción permite descargar y mostrar en pantalla las misiones que ya tiene almacenado el vehículo. De manera complementaría, es una herramienta útil para comprobar que las misiones que han sido enviadas de manera correcta.
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.4\linewidth, height=0.3\textheight]{Imagenes/fotos/conexion_motores}
+			\caption{Conexión de datos a los motores.}
+			\label{fig:conexionmotores}
+		\end{figure}
 		
-		\subsubitem \underline{Agregar misión: } Agrega una nueva linea en blanco para el ingreso de siguiente misión.
+		Después de haber hecho las conexiones correspondientes a los motores, es necesario suministrarle energía de algún tipo de fuente para realizar las pruebas iniciales, es por eso que antes de conectar la bateria LiPo se considera la siguiente cuestión: ya que esta tiene una carga útil limitada se decide utilizar una fuente variable regulable disponible en el laboratorio de electrónica del \textit{sinc(i)}  con el objetivo de realizar las pruebas necesarias sin estar dependiendo de la carga de la batería. Antes de realizar la conexión se ajusta el voltaje según la batería Lipo existente (12V), dejando libre la cantidad de Amperes para que consuma lo que necesite. La fuente utilizada se puede observar en la Figura  \ref{fig:fuentevr}
 		
-		\subsubitem \underline{Enviar misión: } Esta opción tiene la particularidad de únicamente cargar las misiones en el vehículo sin la intensión de ejecutarlas, ya que puede suceder de enviar misiones incorrectas, por tal motivo BEcopter se encarga de validar dichas misiones y en caso de encontrar un error se le informará al usuario.
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.4\linewidth, height=0.3\textheight]{Imagenes/fotos/fuentevr}
+		\caption{Fuente variable regulable.}
+		\label{fig:fuentevr}
+		\end{figure}
 		
-		\subsubitem \underline{Iniciar: } Por último y una vez validada las misiones, BEcopter le envía la confirmación al vehículo para que inicie las misiones enviadas.
-		
-		\subitem \textbf{Estado de conexión: } Cumpliendo con el requerimiento R016, que establece la codificación de un script de control del estado de conexión, la clase BEcopter se encarga de este aspecto, consultando periódicamente dicho estado y en caso de perder la conexión (siempre y cuando no se encuentre en vuelo) se bloquearán las opciones pertinentes al vehículo, como si estuviera iniciando la aplicación de nuevo. En caso de existir una perturbación en las variables tales como conexión, GPS y batería, el sistema informará dicho suceso al usuario para que realice las acciones pertinentes.
-		
-		\item \textbf{Logging: } Para satisfacer los requerimientos R010 y R011 del documento de especificación de requerimientos la clase BEcopter como también la clase vehículo utilizan la librería \textbf{logging} de Python para la generación de un logging ya sea de la plataforma o del vehículo, que se van mostrando en la pestaña de conexión de BEcopter. 
-		
-	\end{itemize}
-%\newpage
-%
-%
+		En la Figura \ref{fig:instnavio1} se puede ver que la batería suministra energía a los cuatro motores y al vehículo, por lo tanto se decide alimentar al vehículo con el transformador de fábrica y suministrar energía a  los motores con la fuente. Esta fuente como se puede observar en la Figura \ref{fig:fuentevr} contiene un único par de salida (positivo y negativo) por lo que es necesario multiplexar esta salida a 4 par de salidas más. Para eso se decide armar y soldar un conjunto de cables con sus respectivos conectores quedando de la siguiente manera.
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=0.5\linewidth, height=0.4\textheight]{Imagenes/fotos/IMG_20170601_131119448}
+%\caption{Multiplexor}
+%\label{fig:img20170601131119448}
+%\end{figure}
+
+Por último, se verifican las conexiones pertinentes a los planos y se buscan imperfectos en las uniones, en caso de encontrar algún tipo de estos se procede a repararlos. 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\linewidth, height=0.4\textheight]{Imagenes/fotos/quad_armado}
+\caption{Cuadricóptero armado para verificar funcionamiento.}
+\label{fig:terminado}
+\end{figure}
+
+
+\subsection{Prueba de funcionamiento inicial}
+Como etapa final y con el objetivo de verificar el correcto funcionamiento de nuestro vehículo, se inicia el proceso de calibración de sensores, para eso se decide utilizar \textbf{Mavproxy} seleccionando el módulo de calibración y consecuentemente realizando los pasos que se nos indican de manera sencilla como se puede observar en la Figura \ref{fig:calibmavproxy}. 
+
+Una vez concluida la etapa de calibración se procede a enviar misiones de prueba, como por ejemplo elevarse del suelo 1 metro desde la posición inicial sin tener instalado las hélices por motivos de seguridad, dándonos como resultados que el vehículo interpreta los comandos. Aunque estas pruebas fueron realizadas de modo superficial en el capitulo \ref{cap4:pruebas} se profundizará que el funcionamiento integral de los componentes responda de manera correcta.
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth, height=0.4\textheight]{Imagenes/calibMavproxy}
+\caption{Ejecución del modulo de calibración de MavProxy}
+\label{fig:calibmavproxy}
+\end{figure}
+
+
+% Variable local para emacs, para  que encuentre el fichero maestro de
+% compilación y funcionen mejor algunas teclas rápidas de AucTeX
+%%%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../ManualTeXiS.tex"
+%%% End:

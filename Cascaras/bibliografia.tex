@@ -1,4 +1,3 @@
-% -*-coding: iso-latin-1  -*-
 %---------------------------------------------------------------------
 %
 %                      configBibliografia.tex
@@ -50,8 +49,10 @@
 % el comando \setBibFiles. Si se desea utilizar varias líneas,
 % terminarlas con una apertura de comentario.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setBibFiles{biblio}
-\bibliographystyle{ieeetr}
+\setBibFiles{%
+	nuestros,latex,otros%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Definición de la frase célebre para el capítulo de la
 % bibliografía. Dentro normalmente se querrá hacer uso del entorno
@@ -63,21 +64,21 @@
 % macro setCitaBibliografia{} ).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setCitaBibliografia{
-	
-\begin{FraseCelebre}
-\begin{Frase}
-	Cuando bebas agua, recuerda la fuente.
-\end{Frase}
-\begin{Fuente}
-	Proverbio chino
-\end{Fuente}
-\end{FraseCelebre}
-
+	\begin{FraseCelebre}
+		\begin{Frase}
+			Cuando bebas agua, recuerda la fuente.
+		\end{Frase}
+		\begin{Fuente}
+			Proverbio chino
+		\end{Fuente}
+	\end{FraseCelebre}
 }
 
 %%
 %% Creamos la bibliografia
 %%
+%\bibliographystyle{plain}
+%\bibliography{Bibliografia/biblio}
 \makeBib
 
 % Variable local para emacs, para  que encuentre el fichero maestro de

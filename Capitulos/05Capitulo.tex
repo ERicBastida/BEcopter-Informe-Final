@@ -1,11 +1,11 @@
 % -*-coding: iso-latin-1  -*-
 %---------------------------------------------------------------------
 %
-%                          Capítulo 5
+%                          Capítulo 4
 %
 %---------------------------------------------------------------------
 %
-% 06Makefile.tex
+% 
 % Copyright 2009 Marco Antonio Gomez-Martin, Pedro Pablo Gomez-Martin
 %
 % This file belongs to the TeXiS manual, a LaTeX template for writting
@@ -34,35 +34,593 @@
 %
 %---------------------------------------------------------------------
 
-\chapter{Conclusión}
-\label{cap6}
-\label{cap:makefile}
+\chapter{Prueba integral de la plataforma y del cuadricóptero}
+
+\label{cap4:pruebas}
 
 \begin{FraseCelebre}
 \begin{Frase}
-A fuerza de construir bien, se llega a buen arquitecto.
+	D?vide et Imper?
 \end{Frase}
 \begin{Fuente}
-Aristóteles
+	Julio Cesar
 \end{Fuente}
 \end{FraseCelebre}
 
 \begin{resumen}
-Este capítulo describe la infraestructura de creación del
-documento final, apoyada en la herramienta \texttt{make}
-de GNU.
+	En el presente capítulo se describirá todo el proceso realizado de la fase denominada \textbf{ Prueba integral de la plataforma y del cuadricóptero} que forma parte del actual proyecto. En esta fase se contempla la tarea de \textit{Evaluar el funcionamiento del cuadricóptero y de la plataforma} con el fin de satisfacer los requerimientos estipulados y de manera complementaria que el sistema se comporte de forma estable. 
 \end{resumen}
 
-%-------------------------------------------------------------------
 \section{Introducción}
-%-------------------------------------------------------------------
-\label{cap6:sec:intro}
+
+	\par Al momento de encargar el desarrollo de cualquier tipo de proyecto y estemos avanzando en sus respectivas fases es necesario comprobar que el funcionamiento de lo que se va desarrollando esté cumpliendo con los resultados esperados, ya que de no ser así, la continuidad del mismo se verá afectada. Por tal motivo, en las siguientes secciones se detallarán los distintos tipos de pruebas que han sido ejecutadas luego de codificar alguna funcionalidad del mismo. Cabe mencionar que por la naturaleza del proyecto que estamos desarrollando es importante que el mismo se comporte exactamente a los requerimientos estipulados y que además, el software proporcione mecanismos de seguridad en caso de que ocurriese alguna inconsistencia, ya que podría provocar accidentes que dañen el equipo como también a las personas que se encuentren en la intersección de su trayectoria. Dicho esto, introduciremos el concepto de  \textbf{Aseguramiento de la calidad} en las próximas secciones. 
+
+\section{Conceptos preliminares}
+
+	El\textbf{ plan de QA} atraviesa el proceso de desarrollo desde el nacimiento de la idea hasta la implementación del software.  En las primeras etapas, verifica que los objetivos estén bien planteados y los requerimientos sean precisos. En las fases de diseño y codificación, vigila el cumplimiento de los estándares fijados. Finalmente, revisa que el software en funcionamiento respete los requerimientos pedidos y que la entrega al cliente se haga en las condiciones adecuadas.
+	
+	El responsable del QA se tendrá que basar en conjunto de pruebas de calidad, entre las que se incluyen:
+	
+	\begin{itemize}
+		
+		\item \textbf{Testeo unitario:} se prueba que cada módulo funcione bien por separado.
+		\item \textbf{Prueba de estrés :} se prueba la resistencia de la aplicación enviándole una cantidad de peticiones excesiva, buscando que colapse.
+		\item \textbf{Test de integración:} los módulos probados independientemente durante el testeo unitario se acoplan y se prueban en conjunto.
+		\item \textbf{Test funcional:} se prueba que el software ofrezca las funciones solicitadas.
+		\item \textbf{Test de aceptación:} el usuario verifica que el producto satisfaga sus expectativas. En este caso, como se trata de una necesidad que inicialmente ha surgido de integrantes del \textit{sinc(i)} el software será validado por dichos responsables y una vez que el producto esté finalizado, y con el objetivo de que éste cumpla de manera eficaz con todas sus funcionalidades, el mismo será publicado en una plataforma de desarrollo colaborativo con el fin de que éste realice un \textit{feedback} de las inconsistencias y/o errores del mismo. 
+		
+	\end{itemize}
+	
+	
+	Las pruebas de QA no sólo son beneficiosas para el usuario final que recibirá un producto de calidad, sino también para el ejecutor del proyecto, ya que al establecer un control permanente sobre el proceso evitará en buena medida los costos de tener que corregir errores en etapas avanzadas del proyecto.
+	
+	\newpage
+
+\section{Evaluación funcional del Cuadricóptero y la Plataforma}
+
+	\subsection{Verificación y validación de la plataforma}
+	
+		Para el desarrollo del proyecto, se ha utilizado un paradigma de programación \textit{orientado a objetos}. Este paradigma nos ha facilitado la división lógica de las funcionalidades y por lo tanto, nos ha sido de gran facilidad probar cada componente lógico una vez codificado. Para validar y verificar que las funcionalidades cumplan con las especificaciones del cliente; se realiza el siguiente \textbf{plan de QA}.
+		
+		En primera instancia se valida con el documento de requerimientos y con el diagrama de clases generado en etapas anteriores. Se examina de manera general que cumpla con las necesidades de los usuarios y, en caso de encontrar inconsistencias que no cumplen completamente dicha necesidad se procede a modificar el diagrama de clases. Una vez codificadas, se procede a realizar los siguientes niveles de prueba:\newline
+		
+	
+
+		\begin{itemize}
+			\item \textbf{ [Descripción] Nivel 0 } Por funcionalidad se implementan las pruebas unitarias, realizando el siguiente procedimiento: 
+			
+				\par Se ingresan datos reales o verdaderos en las entradas de las funciones, y luego de ejecutarla, observamos si obtuvimos los resultados deseados. A partir de aquí podemos obtener 2 casos, que la función se comporte según lo esperado o que la misma contenga errores. En caso de contenerlos se procede a solucionarlo siempre y cuando  al momento de obtener dicha solución la misma no conlleve demasiado tiempo y no sea dependiente de otras tareas; se registra dicho inconveniente con su respectiva fecha de incidencia y sus posibles riesgos para ser resuelta en etapas posteriores.
+				Por otro lado y una vez obtenido los resultados con los datos verdaderos, se procede a cambiar el tipo de entrada por datos erróneos o posibles alternativas, como por ejemplo , datos numéricos en vez de texto, caracteres especiales, datos fuera de rango, etc. con el fin de ``proporcionar robustez a nuestro código'' (prueba de estrés) y adaptar el código para  mantener el control en caso de ocurrir algún tipo de inconsistencia. Cabe mencionar, que sólo se suspenden temporalmente funcionalidades, si se consideran de tipo \textit{no funcionales} o no resuelve completamente un requerimiento del usuario. En la Figura \ref{fig:nivel-0} se esquematiza con un diagrama de flujo este procedimiento. 
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.7\linewidth, height=0.4\textheight]{Imagenes/Nivel0}
+					\caption{Plan de QA - Nivel 0}
+					\label{fig:nivel-0}
+				\end{figure}
+				
+				\newpage
+			
+			\item \textbf{[Descripción] Nivel 1 } En este nivel lo que se busca es realizar los test de integración y funcionales (una vez ya finalizados los test del nivel 0), para esto se procede de la siguiente manera:
+			
+				
+				En el mismo módulo, se instancia cada clase perteneciente al mismo y se prueban las funcionalidades que dependen de otras clases (ya que las funcionalidades que no dependen de otras ya han sido probadas) y se toma el mismo procedimiento por funcionalidad que en el Nivel 0. 
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Nivel1}
+					\caption{Plan de QA - Nivel 1}
+					\label{fig:nivel1}
+				\end{figure}
+	
+	\item \textbf{[Descripción] Nivel 2 } 	Este nivel es el último que se realiza, tiene como principal objetivo cumplir con los test de aceptación (considerando temporalmente que el programador es el usuario final):
+	
+		 \par para realizar esto se tiene como prioridad que la interacción entre el vehículo y el software se comporte correctamente, con esto hacemos referencia a que se muestren los resultados correspondientes, como señal de GPS, batería desenchufada, vehículo desconectado de la red, que el recibimiento de los comandos se puedan comprobar con las revoluciones de los motores, etc. En caso de encontrar algún tipo de falla o desperfecto, nos dirigimos directamente hasta el nivel 0 y desde ahí se procede a repetir el procedimiento. 
+			
+		% TODO: Falta modificar el diagrama a que luego se lleva a cabo la solucion de los problemas pendientes
+			
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Nivel2}
+			\caption{Plan de QA - Nivel 2}
+			\label{fig:nivel2}
+		\end{figure}
+	
+	
+	
+	\end{itemize}
 
 
-% Variable local para emacs, para  que encuentre el fichero maestro de
-% compilación y funcionen mejor algunas teclas rápidas de AucTeX
-%%%
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../ManualTeXiS.tex"
-%%% End:
+
+	\subsection{Verificación y validación del cuadricóptero}
+	
+		Más allá que el concepto del plan de QA se aplique comúnmente en el desarrollo de software, es posible crear un punto de intersección y adoptar la misma estructura lógica en donde se realizan los distintos tipos de pruebas que en el plan creado; pero en este caso sobre elementos electrónicos. Con esto hacemos referencia, que podemos ver a cada componente electrónico como un módulo, por el cual nosotros como QA lo conceptualizamos como una \textbf{caja negra}, en donde ingresan  datos de entrada y deberíamos obtener determinados datos de salida. Estos datos  pueden ser obtenidos por sus correspondientes fabricantes que proporcionan en su gran mayoría el \textit{data-sheet} de cada componente. 
+		Por lo tanto en lo que concierne a esta sección se explicará el procedimiento utilizado para probar el correcto funcionamientos de cada componente antes de ponerlos en marcha de manera conjunta. 
+		
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.9\linewidth, height=0.6\textheight]{Imagenes/esquema-hardware}
+			\caption{Esquema de conexiones eléctricas del cuadricóptero}
+			\label{fig:esquema-hardware}
+		\end{figure}
+
+		\subsubsection{Conectores}
+		
+			Los conectores o cables, son los encargados de comunicar o transportar las señales a cada entrada/salida entre componentes electrónicos, por tal razón es de suma importancia evaluar su estado, ya que cumplen un rol importante al transportar la información. Para determinar el estado de cada conector se utilizó el tester en modo ``comprobación de continuidad'', como se puede ver en la Figura \ref{fig:testermodocont},  el cual conectando las puntas del cable con las puntas del tester, nos indicará con un sonido cuando el cable se encuentre en buenas condiciones, en caso contrario se intenta repararlo o desecharlo en el peor de los casos.
+
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.6\linewidth, height=0.3\textheight]{Imagenes/testerModoCont}
+				\caption{Multímetro digital}
+				\label{fig:testermodocont}
+			\end{figure}
+
+
+
+		\subsubsection{Fuentes de alimentación}
+		
+			En lo que respecta a las pruebas, hay que hacer foco en que es necesario disponer de un uso considerable de los componentes, ya que probar cada funcionalidad conlleva realizar pruebas continuas y por lo tanto al ser componentes electrónicos el suministro de energía en esta etapa deben ser , ``ilimitado''. Es por tal razón que la portabilidad que disponemos al tener baterías es innecesaria (más allá que serán útiles al momento de realizar vuelos a distancia),  por lo tanto estas baterías son reemplazadas por fuentes transformadoras de energía, las cuales dependen del suministro de energía de tipo alterna proveniente de las instalaciones del domicilio del ejecutante, y de esta manera obtendremos independencia en en tiempo de uso. En la Figura \ref{fig:esquema-hardware} los componentes etiquetadas con los números 1 y 4 corresponden a las baterías que deben tener las siguientes especificaciones según los dispositivos electrónicos que alimentan:
+			%TODO: el diagrama fue reeemplazado sin querer por el diagrama viejo, donde esta mal el cableado
+			
+			\begin{itemize}
+				\item \textbf{Batería 1: } La misma provee de energía a la placa Arduino UNO. Por lo tanto, según las especificaciones de Arduino
+				debe recibir los siguientes suministros \footnote{Especificaciones de Arduino UNO  https://store.arduino.cc/usa/arduino-uno-rev3} :
+				\begin{table}[ht]
+					\begin{center}
+						\begin{tabular}{|c|c|}
+							\hline 
+							\multicolumn{2}{|c|}{\textbf{Especificaciones Arduino UNO}} \\ 
+							\hline 
+							Voltaje operativo & 5 [Volts] \\ 
+							\hline 
+							Entrada de voltaje (recomendado)  & 7 - 12  [Volts] \\ 
+							\hline 
+							Entrada de voltaje (limites) & 6 - 20 [Volts] \\ 
+							\hline 
+						\end{tabular} 
+					\end{center}
+					\caption{Suministro energía Arduino UNO}
+					\label{Tab:energia_ArduinoUNO}
+				\end{table}
+				
+			
+				Para reemplazar esta batería se ha utilizado una fuente transformador de 7 Volts y 800mA, como se puede observar en la Figura \ref{fig:fuentearduino}
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/fuenteArduinoo}
+					\caption{Fuente de alimentación para Arduino UNO 7 [Volts] - 800[mA]}
+					\label{fig:fuentearduino}
+				\end{figure}
+	
+	
+	
+	
+			\item \textbf{Batería 4: } La segunda batería como se puede ver en la Figura \ref{fig:esquema-hardware} provee de energía a los 4 motores  y además alimenta de manera paralela a la placa Navio2/Raspberry Pi. Y por el otro lado tenemos los motores HobbyKing \footnote{ Página web del fabricante   hobbyking.com/es\_es/hobbyking-30a-blueseries-brushless-speed-controller.html} que reciben los suministros mostrados en la Tabla \ref{Tab:energia_motores}
+			
+					\begin{table}[ht]
+						\begin{center}
+							\begin{tabular}{|c|c|}
+								\hline 
+								\multicolumn{2}{|c|}{Especificaciones motor} \\ 
+								\hline 
+								Voltaje de entrada & 7.4 - 14.8 [Volts] \\ 
+								\hline 
+								Baterías & 2-4 célula Lipo / 5-12 de la célula de Ni-XX \\ 
+								\hline 
+							\end{tabular} 
+						\end{center}
+						\caption{Suministro energía de motores}
+						\label{Tab:energia_motores}
+					\end{table}
+
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.6\linewidth, height=0.25\textheight]{Imagenes/fuente12A}
+				\caption{Fuente de alimentación Nitto de 12v - 5A}
+				\label{fig:fuente12a}
+			\end{figure}
+			
+			Para reemplazar la alimentación proveniente de dicha batería se ha adquirido una fuente de alimentación como se puede observar en la Figura \ref{fig:fuente12a}, la cual será responsable de alimentar a los 4 motores y como se explicará más adelante al Radio Control.
+			
+			Por último debemos alimentar a nuestra Raspberry Pi / Navio2 \footnote{https://emlid.com/navio/} que recibe los valores mostrados en la Tabla \ref{Tab:energia_navio2}
+			\begin{table}
+				\begin{center}
+					\begin{tabular}{|c|c|}
+						\hline 
+						\multicolumn{2}{|c|}{\textbf{Especificaciones Navio2}} \\ 
+						\hline 
+						Entrada de voltaje   & 4.75 - 5.25  [Volts] \\ 
+						\hline 
+						Consumo promedio & \< 150 [miliAmperes] \\ 
+						\hline 
+					\end{tabular} 
+				\end{center}
+					\caption{Suministro energía de Navio2}
+					\label{Tab:energia_navio2}
+			\end{table}
+
+			
+			En este caso para alimentar a las placas se nos ha suministrado un transformador incluido en la compra de nuestra Raspberry Pi 3 con las siguientes especificaciones:
+			5V y 2500mA, como se puede observar en la Figura \ref{fig:fuentenavio2}.
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/fuenteNavio2}
+				\caption{Fuente de alimentación para la Navio2 con 5V y 2500mA}
+				\label{fig:fuentenavio2}
+			\end{figure}
+			
+		\end{itemize}
+
+		Para comprobar que los respectivos valores de salida de cada fuente sean correctos y no provengan con algún tipo de falla técnica, se procede a medir los voltajes correspondientes con un tester, dándonos como resultado valores dentro del rango de especificaciones de fábrica.
+		
+		
+		
+		\newpage
+
+		\subsubsection{Radio Control}
+
+			La comprobación del radio control en primera instancia se reemplazan las 8 baterías de 1.5v, con lo cual  tenemos una cantidad suministrada de 12V necesarios para alimentarlo, siendo justamente la misma cantidad de Voltaje proveniente de nuestra fuente de alimentación de la Figura \ref{fig:fuente12a}. Luego de conectar la fuente se procede a controlar que las señales enviadas por lo movimientos del Joystick de control lleguen de manera correcta al receptor de señal. Para realizar dicho procedimiento se debería medirlo mediante un osciloscopio y ver de manera precisa la forma de la señal. Pero al no contar con dicho instrumento se analizan los pines con el tester midiendo el voltaje de la corriente continua, y se observa que al producir movimientos en los joystick cada pin en promedio muestra un voltaje cercano a los 5 Volts. Exceptuando el primer pin (el que corresponde al Eje x del primer joystick) donde no se observan valor de voltaje significativos. De esta manera, se tendrá en cuenta dicha falencia para las próximas pruebas.  
+			
+
+		\subsubsection{Motores}
+			En la prueba de motores se tuvo que codificar un script  \ref{script:motor}para que sea ejecutado sobre la placa Arduino. Una vez codificado dicho script se procedió a realizar sus respectivas conexiones como se puede observar en la Figura \ref{fig:testmotor}.
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/testMotor}
+				\caption{Esquema de conexiones para realizar prueba del motor}
+				\label{fig:testmotor}
+			\end{figure}
+			
+			
+			
+			\newpage
+
+\begin{lstlisting}[language=C++]{Name=test2}\label{script:motor}
+/* Programacion de un ESC con Arduino
+*
+* La velocidad del motor puede cambiarse enviando
+* un entero entre 1000 (vel. minima) y 2000 (vel. max.)
+* por Serial.
+*
+*/
+#include<Servo.h>
+
+//Crear un objeto de clase servo
+Servo ESC; 
+
+//Amplitud del pulso
+int vel = 2000; 
+
+
+void setup()
+{
+	//Asignar un pin al ESC
+	ESC.attach(9);
+	
+	//Activar el ESC -> 1000 = 1ms
+	ESC.writeMicroseconds(1000); 
+	
+	//Esperar 5 segundos para hacer la activacion
+	delay(5000); 
+	
+	//Iniciar puerto serial
+	Serial.begin(9600);
+	Serial.setTimeout(10);
+}
+
+
+void loop()
+{
+	if(Serial.available() >= 1)
+	{
+		vel = Serial.parseInt(); //Leer un entero por serial
+		if(vel != 0)
+		{
+		//Generar un pulso con el numero recibido
+		ESC.writeMicroseconds(vel); 
+		}
+	}
+}
+\end{lstlisting}
+
+			En la Figura \ref{fig:motortest} (que fue obtenida mediante el módulo de representación de datos en etapas posteriores) se puede observar una gráfica de tiempo vs rpm
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/motor_test}
+				\caption{Gráfico tiempo-RPM de los motores probados con el script}
+				\label{fig:motortest}
+			\end{figure}
+			
+			
+			
+
+		\subsubsection{Raspberry Pi - Navio2}
+
+			La prueba de funcionamiento de dichas placas se comprueba con la interacción con el software desarrollado. 
+			
+			\subsubsection{Arduino}
+			En lo que compete a la placa Arduino, en el esquema presentado en la Figura \ref{fig:esquema-hardware} la misma cumple la función de un conversor PWM a PPM, el cual es el formato de señal necesario para que la placa Navio2 interprete las señales enviadas por el radio-control.  En nuestro caso, ya se han probado los dispositivos conectados al mismo, por lo tanto sólo nos queda corroborar que el tipo de señal enviada sea el correcto. Para realizar esta prueba es necesario contar con un osciloscopio, que muestre el tipo de señal enviada por el pin configurado en la placa Arduino. Como no disponemos momentáneamente de un osciloscopio, se recurre a la simulación; de manera que se utiliza el software de la siguiente página web  \url{www.library.io}, el cual proporciona un simulador de código y además nos da la posibilidad de mostrar la señal generada por un osciloscopio digital.   	
+			Luego de corroborar que la señal es correcta mediante el programa de simulación, se mide mediante un tester que la corriente promedio de salida se mantenga en un valor aceptable de voltaje para comprobar que la placa este funcionando correctamente.
+			Por último, en la Figura \ref{fig:todoconectado} se puede apreciar todo el sistema conectado según el diagrama de la Figura \ref{fig:esquema-hardware}. Exceptuando los motores, que han sido debidamente desconectados al momento de realizar las pruebas; y únicamente se ha conectado un motor sobre una base de madera, con el fin de mantener el mismo inmóvil al momento de enviar las órdenes de arrancar. 
+			
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.8\linewidth, height=0.2\textheight]{Imagenes/todoConectado}
+				\caption{Conexiones terminadas}
+				\label{fig:todoconectado}
+			\end{figure}
+			
+			\newpage
+
+	\subsection{Prueba integral}
+	
+		Por último y ya probado que tanto la plataforma como el vehículo estén en condiciones, se procede a realizar las pruebas integrales entre ambas partes (Proyecto-Vehículo). Para esto se descomponen dichas pruebas en categorías o "módulos" que se han definido en el comienzo del proyecto por los \textit{stakeholders}.
+
+
+		\subsubsection{Conexión }
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/pConexion}
+				\caption{Módulo de conexión del proyecto}
+				\label{fig:pconexion}
+			\end{figure}
+
+		El módulo de conexión es el encargado de habilitar y mantener toda la comunicación entre el vehículo y nuestro software, por tanto éste debe ser lo bastante robusto para interpretar los principales errores producidos por la red de comunicación elegida. El siguiente código muestra la funcionalidad principal que se encarga de conectarse con nuestro vehículo y mediante los try-except gestiona el control de errores proporcionando al usuario (en caso de generarse alguno) su respectivo mensaje informativo.
+
+\begin{lstlisting}[language=python]
+try:
+if port_host != None:
+# Concatenamos la direccion IP con el puerto
+source = ip_host + ":" + port_host
+else: 
+# En caso de entrar aqui es porque se ha ingresado un puerto serial
+source = ip_host
+# Utilizamos la funcion connect de DroneKit
+self.v = connect(source, 
+wait_ready=True, 
+heartbeat_timeout=10,
+status_printer=logging.info)  		
+# El parametro wait_ready = True garantiza que connect () no volvera 
+# hasta que Vehicle.parameters y la mayoria de los otros atributos
+# predeterminados se hayan rellenado con valores del vehiculo.
+
+logging.info("Se ha conectado con la direccion {} de manera exitosa".format(source))
+
+self.__on = True
+self.descargarMisiones(False)
+
+# Error TCP connection
+except socket.error:
+logging.info('No se ha encontrado el vehiculo, por favor compruebe la conexion')
+raise WindowsError('No se ha encontrado el vehiculo, por favor compruebe la conexion')
+
+# Error TTY connection
+except exceptions.OSError as e:
+logging.info('No se pudo establecer conexion con el puerto serial')
+raise WindowsError('No se pudo establecer conexion con el puerto serial')
+return
+except APIException:
+logging.info('Se ha excedido el tiempo de espera para establecer la conexion!')
+raise WindowsError('Se ha excedido el tiempo de espera para establecer la conexion!')
+
+except :
+logging.info('Ha ocurrido un error inesperado. ')
+raise WindowsError('Ha ocurrido un error inesperado. ') 
+
+\end{lstlisting}
+
+Según el código mostrado, podemos realizar una conexión con nuestro vehículo mediante un dispositivo que se conecte por puerto serial o a través de la red, ya sea mediante Ethernet o Wireless (utilizando UDP). 
+
+\begin{itemize}
+	
+	\item \textbf{Conexión mediante el puerto serial: } Para comprobar el funcionamiento, se han realizado anteriormente pruebas de conexión utilizando el protocolo SSH, el cual nos permite interactuar mediante una consola de comandos con nuestro vehículo, dándonos los datos solicitados sin ningún tipo de problema. Cabe mencionar que el objetivo de este tipo de conexión es utilizar los módulos inalámbricos XBee/LoRa. 
+	
+	\item \textbf{Conexión mediante la red local: } Por comodidad al momento de transportar el vehículo en los lugares en que la fuente de alimentación necesitaba conectarse, este tipo de conexión nos ha resultado la más beneficiosa. El mismo utiliza un Router TP LINK TL-WR841N con una cantidad de 10 clientes conectados de manera inalámbrica en el domincilio utilizado. Además, se han realizado las mismas pruebas pero dentro de las instalaciones del \textit{sinc(i)} con una cantidad de 50 clientes  conectados aproximadamente al mismo router de pruebas. Y para este caso, la conexión sufría de varias interrupciones continuas.  Por lo que obtenemos como conclusión para estos casos que el router utilizado para el envio de comandos no debe ser utilizados por muchos usuarios, que de ser así la conexión no será la optima.
+	%TODO consultar que cantidad de clientes tiene la red aproximadamente
+\end{itemize}
+
+\textbf{Pruebas de interrupción de conexión}
+
+Un aspecto importante a tener en cuenta, es el momento en que la conexión se corta. Por tal inconsistencia que puede ocurrir fácilmente  se han realizado pruebas simulando dicho fenómeno y comprobando cómo se comporta el software y el vehículo al ocurrir este hecho. 
+Cuando este inconveniente se presente, tanto el vehículo como el software comparten una variable en común llamada \textit{last heartbeat}, la cual contiene información sobre el tiempo (en segundos) en que ha recibido su último mensaje proveniente del vehículo.
+
+\begin{lstlisting}[language=python]
+
+# Testing on SITL indicates that last_heartbeat averages about .5 seconds,
+# but will rarely exceed 1.5 seconds when connected. 
+# Whether heartbeat monitoring can be useful will very much depend on the application.
+
+if self.v.last_heartbeat > 1 and self.v.last_heartbeat <= 1.5 :
+estados['signal'] = None
+elif self.v.last_heartbeat <= 1 and self.v.last_heartbeat :
+estados['signal'] = True
+else:
+estados['signal'] = False	
+\end{lstlisting}
+
+
+En el código anterior se puede observar que existe una variable correspondiente al estado de la señal, el mismo puede contener 3 valores: [False, None, True]. En caso de tener el valor de False, esto quiere decir que la conexión se ha perdido, ya que se ha superado el rango establecido; cuando el valor de \textit{last heartbeat} está comprendido entre 1 y 1.5 segundos, tendrá un estado None, el mismo significa que está dentro de valores de precaución ya que está recibiendo mensajes con un poco de demora. Y por último en caso de estar en valores normales de tiempo tendrá un valor de True, indicando que estamos recibiendo información a tiempo del vehículo, esta estructura simula el comportamiento de un semáforo. 
+
+
+\begin{itemize}
+	\item \textbf{Comportamiento del vehículo: } Como mencionamos, la variable \textit{last hearbeat} es compartida entre el software y el vehículo. Por lo tanto cuando el vehículo detecte que se ha perdido la conexión tenemos 3 posibilidades:
+	\begin{enumerate}
+		\item \textbf{Aterrizar}						
+		\item \textbf{Volver al inicio}
+		\item \textbf{Quedarse suspendido en el aire}
+	\end{enumerate}
+	
+	Por defecto el vehículo estará en suspensión en el aire (siempre y cuando el nivel de batería lo permita) y en caso de agotar la batería, se procederá a aterrizar el vehículo. Se procede de esta forma ya que se considera que el vehículo puede encontrarse en una zona no apta para aterrizar, como por ejemplo sobre una edificación, un río, árbol, etc. El mismo puede llegar a estropearse, por lo tanto seguirá pendiente hasta que la conexión se restablezca y en el último de los casos se procede a aterrizar (ya que se supone el problema de que el equipo de comunicación se estropee o el mismo software cierre inesperadamente su ejecución por algún motivo). Es importante a tener en cuenta que estas acciones pueden ser cambiadas en la respectiva configuración de la aplicación. 
+	
+	\item \textbf{Comportamiento del software: } Cuando este inconveniente se presente, el software, en primera instancia, tratará de reconectarse por un tiempo estipulado (5 segundos)  y en caso de no poder restablecerá el estado del programa al mismo que cuando se inicia la aplicación en primera instancia, con el objetivo de deshabilitar las funciones dependientes del vehículo y dejar a disposición del usuario volver a conectarse en caso de ser necesario. 
+\end{itemize}  
+
+
+\subsubsection{Representación de datos} 
+
+La visualización de los datos es un aspecto importante cuando estamos controlando algún objeto a distancia, ya que es necesario conocer el estado del mismo, y con mayor importancia cuando el objeto no está en nuestro campo visible. Por tal motivo se han realizado varias pruebas sobre los módulos de representación de datos, con el propósito de que éstos muestren fielmente los datos capturados por el vehículo en tiempo real.
+\begin{itemize}
+	\item \textbf{Gráfico temporal de datos: }	El objetivo de este módulo de software en nuestro proyecto, como su nombre lo dice, es poder representar la evolución temporal de los datos provenientes de algún sensor o estado del vehículo mediante una gráfica. 
+	\par Según lo especificado en el ERS, se ha propuesto utilizar la librería Vispy\footnote{Sitio web de Vispy http://vispy.org/}, esta librería escrita en Python  está diseñada específicamente para la visualización interactiva de gran cantidad de datos de forma rápida, escalable y fácil.  Pero más allá de sus prestaciones, al momento de realizar las \textbf{pruebas de integración} se ha observado que el rendimiento de nuestro software se ha reducido considerablemente; esto es debido a que Vispy utiliza distintas tecnologías al renderizar las figuras, por lo que se debió incrustar dicho gráfico de manera brusca para poder ver su funcionamiento. Al momento de querer optimizar dicho rendimiento, al ser Vispy una librería nueva,  su documentación y por lo tanto su comunidad era escasa, y como es de esperar no se encontraba la ayuda necesaria para poder solventar los problemas presentes. Por tales motivos se recurre a la búsqueda de alguna alternativa que se adapte a nuestras necesidades; luego de encontrar y analizar las librerías disponibles se llega a la decisión de utilizar PyQtGraph\footnote{Sitio web de PyQtGraph http://pyqtgraph.org/}. Esta librería además de todas su prestaciones en el ámbito científico / matemático / aplicaciones ingenieriles, está construida con las mismas librerías que utilizamos en nuestro proyecto, que es PyQt\footnote{Sitio Web de PyQt https://riverbankcomputing.com/software/pyqt/intro}. Por lo tanto, esto generó una excelente adaptabilidad y rendimiento al momento de realizar las pruebas de integración.  
+	Para las \textbf{pruebas unitarias/estrés/funcionales} se ha creado el módulo \textit{GraphDatav2}, el cual ha sido puesto en prueba hasta su máximo potencial. Utilizando una señal de tipo aleatoria como datos de prueba (ya que el mismo contiene una gran cantidad de componentes frecuenciales en su dominio) y se ha generado su respectiva transformada de Fourier (utilizando la Transformada Rápida de Fourier), con el fin de corroborar que los cálculos de los mismo no ralenticen el funcionamiento del mismo, y luego de realizar las pruebas nos suministró  resultados  dentro de las expectativa de rendimiento. Siendo estas espectativas:
+	\begin{itemize}
+		\item Fluidez en la animación de la figuras.
+		\item Que no interrumpa el flujo de trabajo de la aplicación en general.
+		\item La interfaz ofrece de herramientas como zoom y paneo, por lo tanto al momento que el usuario las utilice es deseable que el mismo no retarde el renderizado.
+		\item Fluidez al momento de graficar el limite de figuras permitidas (5 - 10).
+	\end{itemize} 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/pINICIO_b}
+		\caption{Módulo de representación de datos}
+		\label{fig:piniciob}
+	\end{figure}
+	
+	
+	\item \textbf{HUD: } A diferencia del módulo anterior, su responsabilidad es mostrar al usuario de manera instantánea los estados sobre los componentes integrados al vehículo, como también algunos de sus respectivos valores. Por lo tanto, más allá de sus pruebas unitarias/funcionales/estrés/integración aquí entra en juego las pruebas de aceptación proporcionadas por ``los pilotos de los vehículos'', ya que el mismo debe ser indispensable al momento de mostrar los valores que ayuden al piloto del vehículo en tener un conocimiento general del mismo en plena ejecución. Así que de manera preventiva se ha desarrollado el mismo imitando en lo mejor posible a los HUD's reales, con el fin de tener una base de diseño que sea válida en la vida real. 
+	Con respecto a las pruebas de integración hemos detectado que no cumple con nuestras necesidades de rendimiento, esto causa que el software se ralentice y no pueda interpretar ``en tiempo real'' la información recibida del vehículo como también los comandos enviados. Por lo que se decidió temporalmente deshabilitar algunas características del HUD hasta que se encuentre su respectiva solución. 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth, height=0.2\textheight]{Imagenes/HUD}
+		\caption{Head Up Display}
+		\label{fig:hud}
+	\end{figure}
+	
+	
+\end{itemize}
+
+\subsubsection{Control del vehículo}
+
+El control del vehículo, ya sea de forma manual o automática, es una de las funcionalidades principales de este software. En lo que es el control manual, consiste en estar consultando constantemente los eventos producidos por un Joystick y según una respectiva pre-asignación se ejecuta un comando sobre el vehículo. Y en el caso del control automático, se requiere que se envíen un conjunto de misiones pre-configuradas y al ser recibidas por el vehículo, que el mismo las ejecute.
+
+\begin{itemize}
+	
+	\item \textbf{Control Manual:} Para poder ejecutar las pruebas del funcionamiento del control manual, es indispensable que el módulo de comunicación funcione correctamente, ya que el control manual depende del mismo. Al momento de ejecutar las pruebas unitarias, entran en juego varias clases, como lo son la clase Vehículo y Joystick. Por lo tanto se ha realizado en primera instancia el control manual con envío de acciones con una duración definida de tiempo, simulando la interacción con el joystick, y para determinar si los comandos han sido interpretados por el vehículo se ha analizado la evolución temporal del giro de los motores (utilizando el módulo de representación de datos) medido en [rpm], y mostrándonos resultados aceptables y razonables como se puede ver en la Figura \ref{fig:testmotor}
+	
+	
+	Luego de comprobar el correcto funcionamiento de los motores según comandos limitados en tiempo, se inicia el proceso de pruebas con el joystick. En este caso se utiliza una clase auxiliar \textit{Capturador} que ha sido creada con el fin de ejecutarse en un hilo de ejecución independiente para no congestionar el procesamiento de manera secuencial o interrumpir el hilo de ejecución padre . En el siguiente código podemos apreciar su funcionamiento:
+	
+	
+	\begin{lstlisting}[language=python]
+	class Capturador(QThread):
+	"Clase encargada de capturar en background los comandos que se envian del Joystick "
+	condicion_para_capturar = False		
+	def __init__(self,parent):
+	super(Capturadorr, self).__init__(parent)
+	# QThread.__init__(parent)
+	
+	def capturing(self,run):
+	self.condicion_para_capturar = run
+	
+	def __del__(self):
+	
+	self.exit(0)
+	
+	def capturarComandos(self):
+	try:	
+	while  True :
+	
+	if self.condicion_para_capturar:
+	eventos = pygame.event.get()	
+	for e in eventos:
+	# e.type == 7, es un codigo de tipo joymotion
+	if e.type == 7: 
+	self.emit(SIGNAL('mostrarEje(int,float)'), e.axis, e.value)
+	self.emit(SIGNAL('sendManualCmd(int,float,bool)'),\
+	e.axis+12, e.value, True)
+	if e.type == 10: #Es de tipo JoyButtonDown
+	self.emit(SIGNAL('sendManualCmd(int,float,bool)'), e.button, 1.0, False)
+	except:
+	WindowsError("Error de comando", "Ah ocurrido un error al enviar los comandos" )
+	\end{lstlisting}
+	
+	
+	La función \textit{sendManualCmd} posee comandos preestablecidos por el usuario, por lo tanto, cuando se presione algún botón o se mueva algún joystick (palancas) identificado con un id (primer parámetro entero) y su respectivo valor, la clase \textit{Capturador} emitirá una señal a su respectivo objeto instanciador y procederá a enviar los comandos pertinentes al vehículo. Para comprobar dichas funcionalidades únicamente se ha observado el comportamiento de los motores al girar, ya que al enviar un comando de detención, los mismos respondían correctamente a dicha acción. 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/pComando}
+		\caption{Configuración del módulo de control manual}
+		\label{fig:pcomando}
+	\end{figure}
+	
+	
+	
+	
+	\item \textbf{Control automático: } En este apartado se comprueba el gestionamiento de las misiones, como por ejemplo:  que las mismas puedan ser enviadas y recibidas correctamente por el vehículo, y que sean debidamente validadas mediante la interfaz gráfica. Por otro lado, tenemos que verificar que dichas misiones sean ejecutadas por el vehículo. Para comprobar dicha funcionalidad se han cargado y enviado, mediante la aplicación, misiones unitarias con el fin de corroborar el comportamiento del vehículo según la misión asignada. Pero antes de enviar cualquier tipo de misión, se tuvo que atar al vehículo a una base fija con el fin de que al momento de realizar algún tipo de movimiento inadecuado, el mismo no pierda el control y se estrelle con algún objeto. 
+	Las pruebas por cada misión llevaron el siguiente procedimiento:
+	
+	\begin{itemize}
+		
+		\item \textbf{Despegar: } En este tipo de misión  el vehículo procede a elevarse, de esta manera, los motores generaron la suficiente propulsión para elevar la estructura del vehículo. 
+		
+		\item \textbf{Aterrizar: } Posicionando el vehículo a una altura no mayor a 30cm, dejamos que descienda el mismo suavemente, procurando que no se desestabilice y se apoye suavemente sobre la base a la cual está atada.
+		
+		\item \textbf{Suspenderse en el aire: } Al momento de ejecutar dicha misión, se ha suspendido con una cuerda al vehículo con el fin de observar que el mismo pueda mantenerse en el aire el tiempo indicado en la misión (3 segundos) de manera estable. 
+		
+		\item \textbf{Punto Objetivo: } En este caso, se ha ordenado al vehículo simplemente moverse hacia la izquierda. Por lo tanto el mismo realizó un pequeño giro sobre su eje \textit{Roll}, propulsándose lentamente hacia a su izquierda, como se le ordenó.
+		%\item \textbf{Volver al inicio: } Esta prueba la debo hacer con el vehículo ya armado en su respectiva estructura.
+		
+	\end{itemize}
+
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.17\textheight]{Imagenes/pINICIO_a}
+		\caption{Módulo de control automático del vehículo}
+		\label{fig:pinicioa}
+	\end{figure}
+	
+	
+	
+	\end{itemize}
+
+		\subsubsection{Parametrización}
+
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/pestConfig}
+				\caption{Pestaña de parametrización del Autopiloto}
+				\label{fig:pestconfig}
+			\end{figure}
+			
+			
+			El módulo encargado de la parametrización, es simplemente una interfaz gráfica que muestra las opciones disponibles y configurables del firmware del autopiloto, como se puede ver en la Figura \ref{fig:pestconfig}. Por lo tanto, se valida que esta información sea mostrada de manera correcta. Además, esta pestaña permite modificar los valores de cada parámetro, por lo que es necesario validar esta modificación y que sea guardada de forma correcta. Por último probando que el vehículo con sus respectivas parámetros modificados se comporte según lo configurado.
+			
+			
+
+	\section{Resultados}
+	
+		Como se pudo ver en las secciones anteriores las pruebas realizadas hasta el momento de los módulos pertinentes se han realizado de manera satisfactoria. Como paso final, se realizará una prueba funcional del proyecto ejecutando un conjunto de pruebas de vuelo que involucren la mayor cantidad de funcionalidades integradas en el software. Por tal razón y a modo de evitar roturas en la estructura del vehículo, se ha optado por enviar a imprimir un modelo 3D de la estructura del vehículo, con el fin de ganar autonomía en la reposición de partes y facilitar a que el proyecto sea de fácil implementación gracias a esta tecnología. Por lo tanto se adjuntará un video de las pruebas realizadas una vez obtenido dicho modelo.
+		
+		\newpage
+		
+	\section{Conclusión}
+	
+		Finalmente, luego de haber terminado con la realización de los distintos tipos de pruebas y comprobar que cada funcionalidad de nuestra aplicación, como también de nuestro vehículo estén funcionando correctamente, llegamos a la conclusión de que el \textit{Aseguramiento de la calidad} es un aspecto muy importante en el desarrollo de cualquier tipo de proyecto. 
+		
+		\par De tal manera, como mencionamos en la introducción de este informe,  este proceso se aplica de manera integral desde los inicios del proyecto hasta en las últimas etapas; pero cabe destacar que este proceso del \textit{Aseguramiento de la calidad} no ha sido aplicado correctamente 
+		en las etapas iniciales al proyecto ya que se consideraba como una tarea irrelevante, por lo cual , y como es de esperarse en etapas posteriores nos encontrábamos que muchos errores y con la consecuencia de tener módulos deficientes e inseguros. Lo que impedía proseguir con el proyecto ya que se dificultaba la tarea del desarrollo debido a código no robusto y metodologías poco probadas. Así que nos vimos obligados de reformular la estrategia de las etapas siguientes con respecto a las pruebas y además, aplicar dicha técnica por primera vez a las etapas iniciales para asegurar que en un futuro la aparición de los errores disminuya. De esta manera se ha aprendido, y por lo tanto, se incorporará como ``buenas prácticas'', integrar el proceso de QA en proyectos futuros para el cual participe el alumno. 
+		
+		
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
