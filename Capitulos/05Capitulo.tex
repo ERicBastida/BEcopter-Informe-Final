@@ -40,10 +40,10 @@
 
 \begin{FraseCelebre}
 \begin{Frase}
-	D?vide et Imper?
+	Divide et Impera.
 \end{Frase}
 \begin{Fuente}
-	Julio Cesar
+	-Julio Cesar-
 \end{Fuente}
 \end{FraseCelebre}
 
@@ -161,7 +161,7 @@
 		\subsubsection{Fuentes de alimentación}
 		
 			En lo que respecta a las pruebas, hay que hacer foco en que es necesario disponer de un uso considerable de los componentes, ya que probar cada funcionalidad conlleva realizar pruebas continuas y por lo tanto al ser componentes electrónicos el suministro de energía en esta etapa deben ser , ``ilimitado''. Es por tal razón que la portabilidad que disponemos al tener baterías es innecesaria (más allá que serán útiles al momento de realizar vuelos a distancia),  por lo tanto estas baterías son reemplazadas por fuentes transformadoras de energía, las cuales dependen del suministro de energía de tipo alterna proveniente de las instalaciones del domicilio del ejecutante, y de esta manera obtendremos independencia en en tiempo de uso. En la Figura \ref{fig:esquema-hardware} los componentes etiquetadas con los números 1 y 4 corresponden a las baterías que deben tener las siguientes especificaciones según los dispositivos electrónicos que alimentan:
-			%TODO: el diagrama fue reeemplazado sin querer por el diagrama viejo, donde esta mal el cableado
+
 			
 			\begin{itemize}
 				\item \textbf{Batería 1: } La misma provee de energía a la placa Arduino UNO. Por lo tanto, según las especificaciones de Arduino
@@ -278,7 +278,7 @@
 			
 			\newpage
 
-\begin{lstlisting}[language=C++]{Name=test2}\label{script:motor}
+\begin{lstlisting}[language=C++]{Name=test2}
 /* Programacion de un ESC con Arduino
 *
 * La velocidad del motor puede cambiarse enviando
@@ -324,7 +324,8 @@ void loop()
 		}
 	}
 }
-\end{lstlisting}
+
+\end{lstlisting}\label{script:motor}
 
 			En la Figura \ref{fig:motortest} (que fue obtenida mediante el módulo de representación de datos en etapas posteriores) se puede observar una gráfica de tiempo vs rpm
 			
@@ -413,7 +414,7 @@ raise WindowsError('Ha ocurrido un error inesperado. ')
 
 \end{lstlisting}
 
-Según el código mostrado, podemos realizar una conexión con nuestro vehículo mediante un dispositivo que se conecte por puerto serial o a través de la red, ya sea mediante Ethernet o Wireless (utilizando UDP). 
+Según el código mostrado, podemos realizar una conexión con nuestro vehículo mediante un dispositivo que se conecte por puerto serial o a través de la red, ya sea mediante Ethernet o Wireless (utilizando UDP \cite{tanenbaum2003redes}). 
 
 \begin{itemize}
 	
@@ -599,19 +600,9 @@ El control del vehículo, ya sea de forma manual o automática, es una de las func
 	
 		Como se pudo ver en las secciones anteriores las pruebas realizadas hasta el momento de los módulos pertinentes se han realizado de manera satisfactoria. Como paso final, se realizará una prueba funcional del proyecto ejecutando un conjunto de pruebas de vuelo que involucren la mayor cantidad de funcionalidades integradas en el software. Por tal razón y a modo de evitar roturas en la estructura del vehículo, se ha optado por enviar a imprimir un modelo 3D de la estructura del vehículo, con el fin de ganar autonomía en la reposición de partes y facilitar a que el proyecto sea de fácil implementación gracias a esta tecnología. Por lo tanto se adjuntará un video de las pruebas realizadas una vez obtenido dicho modelo.
 		
-		\newpage
-		
-	\section{Conclusión}
-	
-		Finalmente, luego de haber terminado con la realización de los distintos tipos de pruebas y comprobar que cada funcionalidad de nuestra aplicación, como también de nuestro vehículo estén funcionando correctamente, llegamos a la conclusión de que el \textit{Aseguramiento de la calidad} es un aspecto muy importante en el desarrollo de cualquier tipo de proyecto. 
-		
-		\par De tal manera, como mencionamos en la introducción de este informe,  este proceso se aplica de manera integral desde los inicios del proyecto hasta en las últimas etapas; pero cabe destacar que este proceso del \textit{Aseguramiento de la calidad} no ha sido aplicado correctamente 
-		en las etapas iniciales al proyecto ya que se consideraba como una tarea irrelevante, por lo cual , y como es de esperarse en etapas posteriores nos encontrábamos que muchos errores y con la consecuencia de tener módulos deficientes e inseguros. Lo que impedía proseguir con el proyecto ya que se dificultaba la tarea del desarrollo debido a código no robusto y metodologías poco probadas. Así que nos vimos obligados de reformular la estrategia de las etapas siguientes con respecto a las pruebas y además, aplicar dicha técnica por primera vez a las etapas iniciales para asegurar que en un futuro la aparición de los errores disminuya. De esta manera se ha aprendido, y por lo tanto, se incorporará como ``buenas prácticas'', integrar el proceso de QA en proyectos futuros para el cual participe el alumno. 
-		
-		
-	
-	
 
+	
+		
 
 
 

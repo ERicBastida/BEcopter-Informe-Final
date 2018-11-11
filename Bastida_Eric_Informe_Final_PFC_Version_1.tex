@@ -1,3 +1,4 @@
+
 % -*-coding: iso-latin-1  -*-
 %----------------------------------------------------------------------
 %
@@ -77,26 +78,9 @@ constantes,guionado,Cascaras/bibliografia,config%
 % Paquete de la plantilla
 \usepackage{TeXiS/TeXiS}
 
-% Paquete para incluir URLs
-\usepackage{hyperref}
 
 % Incluimos el fichero con comandos de constantes
 \include{constantes}
-
-
-\usepackage{fancyhdr}
-\usepackage{color}
-\usepackage{wrapfig}
-\usepackage{graphicx}
-\usepackage{pdfpages}
-
-\usepackage{amsmath}
-\usepackage{url}
-\usepackage{listings}
-\usepackage{pdfpages} % Para incluir los documentos en formato PDF
-\usepackage{footmisc} % Para utilizar las notas referenciadas en pie de página
-
-
 
 % Sacamos en el log de la compilaci?n el copyright
 \typeout{Copyright Bastida Eric}
@@ -126,7 +110,7 @@ constantes,guionado,Cascaras/bibliografia,config%
 \input{guionado}
 
 % Marcamos  el inicio  del  documento para  la  numeraci?n de  p?ginas
-% (usando n?meros romanos para esta primera fase).
+% (usando numeros romanos para esta primera fase).
 \frontmatter
 
 \include{Cascaras/cover}
@@ -147,16 +131,21 @@ constantes,guionado,Cascaras/bibliografia,config%
 \mainmatter
 \restauraCabecera
 
+%--------------------------------------------------------------------------------
 % Capitulos
+%--------------------------------------------------------------------------------
+
 \include{Capitulos/01Capitulo}    % JOA
 \include{Capitulos/02Capitulo}    % Obtencion de los requerimientos
 \include{Capitulos/03Capitulo}    % Gestión del hardware y armado 
 \include{Capitulos/04Capitulo}    % Desarrollo de la plataforma
 \include{Capitulos/05Capitulo}    % Pruebas
-%\include{Capitulos/06Conclusion} % Resultados - Conclusión Final - Trabajos Futuros
+\include{Capitulos/06Capitulo}    % Resultados - Conclusión Final - Trabajos Futuros
 
-
+%--------------------------------------------------------------------------------
 % Apendices
+%--------------------------------------------------------------------------------
+
 \appendix
 \include{Apendices/ParteApendices}
 \include{Apendices/01ApendiceA}   % ERS
@@ -167,14 +156,15 @@ constantes,guionado,Cascaras/bibliografia,config%
 \include{Apendices/01ApendiceF}   % Diagrama de Clases Final
 \backmatter
 
+%--------------------------------------------------------------------------------
 % Bibliografia
-%
+%--------------------------------------------------------------------------------
 
 \include{Cascaras/bibliografia}
 
-%
-% ?ndice de palabras
-%
+%--------------------------------------------------------------------------------
+% Indice de palabras
+%--------------------------------------------------------------------------------
 
 % S?lo  la   generamos  si  est?   declarada  \generaindice.  Consulta
 % TeXiS.sty para m?s informaci?n.
@@ -184,13 +174,14 @@ constantes,guionado,Cascaras/bibliografia,config%
 % "en producci?n". Por tanto, el fichero que genera el ?ndice
 % *no* se incluye aqu? (est? comentado). Consulta la documentaci?n
 % en TeXiS_pream.tex para m?s informaci?n.
+
 \ifx\generaindice\undefined
 \else
 	\include{TeXiS/TeXiS_indice}
 \fi
 
 %
-% Lista de acr?nimos
+% Lista de acronimos
 %
 
 % S?lo  lo  generamos  si  est? declarada  \generaacronimos.  Consulta
@@ -202,7 +193,7 @@ constantes,guionado,Cascaras/bibliografia,config%
 \include{TeXiS/TeXiS_acron}
 \fi
 
-\include{Apendices/ParteAnexos}
+%\include{Apendices/ParteAnexos}
 
 %
 % Final

@@ -38,12 +38,12 @@
 
 \begin{FraseCelebre}
 	\begin{Frase}
-	Frase celebre
+		Caminar sobre el agua y desarrollar software sobre unos requisitos es fácil, si ambos están congelados.
 	
 	\end{Frase}
 
 	\begin{Fuente}
-		Autor
+		-Rafael Bartolome-
 	\end{Fuente}
 
 \end{FraseCelebre}
@@ -71,7 +71,7 @@
 
 \begin{itemize}
 	
-	\item \textbf{Lenguaje de programación Python: } Se trata de un lenguaje de programación multiparadigma, ya que soporta programación orientación a objetos, imperativa y, en menor medida, programación funcional. Es un lenguaje interpretado, usa tipado dinámico y es multiplataforma. Ademas corre con la ventaja de tener una gran cantidad de librerías que son de gran utilidad para el desarrollo de nuestro proyecto.
+	\item \textbf{Lenguaje de programación Python: } Se trata de un lenguaje de programación multiparadigma, ya que soporta programación orientación a objetos, imperativa y, en menor medida, programación funcional. Es un lenguaje interpretado, usa tipado dinámico y es multiplataforma \cite{lutz2013learning}. Además corre con la ventaja de tener una gran cantidad de librerías que son de gran utilidad para el desarrollo de nuestro proyecto.
 	
 	\item \textbf{PyCharm: } es un entorno de desarrollo integrado (IDE) utilizado en la programación de aplicaciones , específicamente en lenguaje Python . Es desarrollado por la compañía JetBrains. Proporciona análisis de código, un depurador gráfico, probador de unidades integrado, integración con sistemas de control de versiones (VCS) y admite el desarrollo web con Django. Un aspecto importante es que Pycharm es multi-plataforma, con versiones para Windows, Mac OS y Linux; teniendo  disponibles dos versiones, \textit{Professional} y \textit{Community}, siendo esta última la elegida por su utilización gratuita. 
 	
@@ -80,13 +80,13 @@
 	
 	\item \textbf{PyQtGraph} es una librería gráfica y de creaciones de GUI enteramente construida en Python, basadas en las famosas librerías \textbf{PyQt4} / \textbf{PySide} y \textbf{numpy}. Está destinado para uso en aplicaciones matemáticas / científicas y de ingeniería. A pesar de estar completamente escrito en Python, la biblioteca es muy rápida debido a su gran apalancamiento con numpy para el procesamiento de números y al marco de GraphicsView de Qt para una visualización rápida. Por último, PyQtGraph se distribuye bajo la licencia de código abierto MIT.
 	
-	\item \textbf{PyQt4: } es una librería gráfica de Qt y realizada bajo Python. Esta librería nos da la opción de poder realizar una interfaz gráfica a nuestra plataforma, para que sea de fácil uso y entendimiento. Además, el software Qt Designer genera código en python utilizando esta libería automáticamente.
+	\item \textbf{PyQt4: } es una librería gráfica de Qt y realizada bajo Python. Esta librería nos da la opción de poder realizar una interfaz gráfica a nuestra plataforma, para que sea de fácil uso y entendimiento \cite{doc:qt}. Además, el software Qt Designer genera código en python utilizando esta libería automáticamente.
 	
 	\item \textbf{Pygame:} es un conjunto multi-plataforma de módulos de Python	diseñados para la escritura de videojuegos. Incluye gráficos por ordenador y librerías de sonido diseñado para ser utilizado con el	lenguaje de programación Python. Se distribuye bajo la GNU Lesser General Public License. Cuenta con muchos tutoriales, muchos de ellos online.
 	
 	\item \textbf{Socket:} Al utilizar Python, todos los programas utilizan sockets para lograr comunicarse con otros programas que pueden estar en	diferentes computadoras. Por lo que podemos definirlo como un	objeto que define una conexión entre dos entidades de una red. De esta manera, un socket posee la dirección IP de la máquina, el puerto en el que escucha, y el protocolo que utiliza. Los tipos y	funciones necesarios para trabajar con estos elementos están en el módulo socket de Python.
 	
-	\item \textbf{Dronekit:} Es una API desarrollada por 3D Robotics en Python, flexible y abierta para el desarrollo de aplicaciones que se ejecutan desde el ordenador de abordo y comunican con el controlador de vuelo ArduPilot con un enlace de baja latencia.
+	\item \textbf{Dronekit:} Es una API desarrollada por 3D Robotics en Python, flexible y abierta para el desarrollo de aplicaciones que se ejecutan desde el ordenador de abordo y comunican con el controlador de vuelo ArduPilot con un enlace de baja latencia \cite{doc:dronekit}.
 	
 	La API se conecta con los drones a través del protocolo de comunicación MAVLink, un sistema utilizado habitualmente para conectar una estación de control de tierra y un vehículo no tripulado para transmitir, por ejemplo, la ubicación y la velocidad. Gracias a este protocolo, la API tiene acceso a los datos de la telemetría a través de Bluetooth, Wi-Fi o el sistema de radio 3DR o a los parámetros del dron y también permite controlar el movimiento y las operaciones del propio aparato no tripulado.
 	
@@ -143,7 +143,7 @@ En esta etapa del proyecto consiste en desarrollar un modelo que mejor represent
 	\item \textbf{Casos de usos (CU).}
 \end{itemize}
 
-La primer propuesta consiste en realizar un bosquejo de la apariencia del software (GUI) y además, incluirle ciertos comportamientos mediante animaciones que den la sensación al usuario de que está utilizando el producto terminado. Por otro lado la segunda propuesta es realizar el modelo comportamental mediante casos de usos, esta técnica consiste en bosquejar un entorno que representa el ámbito donde están las opciones que brindará el sistema con sus respectivos actores o responsables de cada funcionalidad. Analizando las ventajas y desventajas de cada uno se decide utilizar la técnica de \textbf{Mockup} ya que es más representativa al producto real y no utiliza lenguaje técnico; como por ejemplo el utilizado en los CU (\textit{include, extends, entorno y actores}). Para el desarrollo del mockup se utiliza la herramienta \textit{Balsamiq Mockup} \footnote{Utilizando su versión gratuita de 30 días, página web https://balsamiq.com/} y el resultado es anexado en  el apéndice \ref{ap1:GUI}.
+La primer propuesta consiste en realizar un bosquejo de la apariencia del software (GUI) y además, incluirle ciertos comportamientos mediante animaciones que den la sensación al usuario de que está utilizando el producto terminado. Por otro lado la segunda propuesta es realizar el modelo comportamental mediante casos de usos, esta técnica consiste en bosquejar un entorno que representa el ámbito donde están las opciones que brindará el sistema con sus respectivos actores o responsables de cada funcionalidad. Analizando las ventajas y desventajas de cada uno se decide utilizar la técnica de \textbf{Mockup}  ya que es más representativa al producto real y no utiliza lenguaje técnico; como por ejemplo el utilizado en los CU (\textit{include, extends, entorno y actores}). Para el desarrollo del mockup se utiliza la herramienta \textit{Balsamiq Mockup} \footnote{Utilizando su versión gratuita de 30 días, página web https://balsamiq.com/} y el resultado es anexado en  el apéndice \ref{ap1:GUI}.
 
 \par	Sin embargo, utilizar una técnica que detalle un aspecto superficial y un comportamiento general no ayuda en el inicio de implementación del sistema, es por eso, que en conjunto con el \textit{mockup} y el \textit{ERS} se decide implementar un modelo que ayude y/o simplifique más la tarea de decodificación del software como lo es el \textit{diagrama de clases}. En ingeniería de software, un diagrama de clases dentro de lo que es el Lenguaje Unificado de Modelado (UML) es un tipo de diagrama de estructura estática que describe la estructura de un sistema mostrando las clases del sistema, sus atributos, operaciones, y las relaciones entre los objetos \cite{sommer}. 
 En el apéndice \ref{ap1:classDiagra_v0} se puede ver el respectivo diagrama inicial del software, cabe aclarar que el mismo durante todo el proceso del desarrollo del proyecto ha ido sufriendo cambios que eran necesarios, ya sea por nuevas funcionalidades, complementar las existentes  o simplemente desecharlas ya que no cumplían su respectivo fin. 

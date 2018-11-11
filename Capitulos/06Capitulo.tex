@@ -1,3 +1,4 @@
+% !TeX spellcheck = <none>
 % -*-coding: iso-latin-1  -*-
 %---------------------------------------------------------------------
 %
@@ -34,29 +35,109 @@
 %
 %---------------------------------------------------------------------
 
-\chapter{Conclusión}
+\chapter{Aspectos pendientes y conclusión}
 \label{cap6}
 \label{cap:makefile}
 
 \begin{FraseCelebre}
 \begin{Frase}
-A fuerza de construir bien, se llega a buen arquitecto.
+	El mundo es redondo y lo que puede parecer el final, también puede ser el comienzo.
 \end{Frase}
 \begin{Fuente}
-Aristóteles
+	-Anónimo-
 \end{Fuente}
 \end{FraseCelebre}
 
 \begin{resumen}
-Este capítulo describe la infraestructura de creación del
-documento final, apoyada en la herramienta \texttt{make}
-de GNU.
+	En este último cápitulo se discutirán los aspectos a mejorar sobre el software, a causa de los resultados obtenidos en las secciones posteriores; como también los conocimientos adquiridos extracurriculares que han sido enfrentados por el ejecutante del proyecto.
+
 \end{resumen}
 
+
+
+
 %-------------------------------------------------------------------
-\section{Introducción}
+\section{Trabajos Futuros}
 %-------------------------------------------------------------------
-\label{cap6:sec:intro}
+	\label{cap6:sec:future_works}
+	En lo que respecta a los trabajos futuros, el presente proyecto cuenta con varias mejoras en estado pendiente para sus próximas versiones. Estas tienen el objetivo de poder abarcar más tipos de vehículos como tambien dar mejores facilidades al usuario al momento de utilizar el software. Dentro de estas mejoras tenemos: 
+	
+	\begin{itemize}
+		
+		\item \textbf{Adaptación para varios vehículos:} Por motivos de recursos materiales y poder observar si el proyecto puede ser viable, ùnicamente se a desarrollado la aplicación para utilizarlo sobre vehículos aereos no tripulas de tipo cuadricóptero ya que era el único disponible para encarar dicho proyecto. Por lo tanto, en las próximas versiones se incluirá la opción de comandar vehículos tanto aéreos, terrestres y náuticos, como por ejemplo: submarinos, lanchas , aeroplanos, autitos y variantes del cuadricóptero como tricópteros, hexacópteros, etc. En las Figuras \ref{fig:ziphis},\ref{fig:rutgers-universitydrone}, \ref{fig:hydrofoil-625x350}, pueden apreciarse ejemplos de vehículos a los cuales el software puede incluir. 
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/car_sinc}
+			\caption{Rover autónomo, propiedad del sinc(i) }
+			\label{fig:carsinc}
+		\end{figure}
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/ziphis}
+			\caption{Proyecto Ziphius  \protect\footnotemark   } 
+			\label{fig:ziphis}
+			
+		\end{figure}
+		\footnotetext{Página web del proyecto Ziphius \url{http://myziphius.com/} }
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/Rutgers_Drone}
+			\caption{Drone acuático \& volador de la Universidad de Rutgers\protect\footnotemark }
+			\label{fig:rutgers-universitydrone}
+			
+		\end{figure}
+	
+	    \footnotetext{Página web del proyecto \url{https://soe.rutgers.edu/rutgers-aerial-aquatic-drone-soars-higher-and-higher }}
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/Hydrofoil-625x350}
+			\caption{Drone aerodeslizador - Parrot \protect\footnotemark  }
+			\label{fig:hydrofoil-625x350}
+		\end{figure}
+	
+		\footnotetext{	Página web del proyecto \url{https://www.parrot.com/global/minidrones/parrot-hydrofoil-orak\#parrot-hydrofoil-orak }}
+
+		
+		
+		
+		\item \textbf{Mapa satelital: } Ya que dicho requerimiento estaba especificado inicialmente, no se lo ha tenido en cuenta, debido a que no se lo consideraba relevante para pruebas iniciales en un marco de referencia local, por lo tanto para las próximas versiones se considerará incluir un mapa, con el propósito de poder geolocalizar los puntos objetivos y moverse según puntos ubicados sobre un mapa satelital utilizando el GPS.
+	
+		\item \textbf{Cámara: } Un aspecto importante a considerar es la utilización de un capturador de imágenes con su respectivo controlador de movimientos a traves del Gimbal. De esta manera se considerará reemplazar el fondo del HUD, por las imágenes capturardas por el sensor correspondiente. Además, de presentar opciones para el gestionamiento de las mismas, como almacenamiento, aplicaciones de algoritmos en tiempo real, alteraciones de la misma, etc. 
+		
+		\item \textbf{Conexión automática: } Hasta el momento para establecer una conexión entre el vehículo y el equipo era necesario  ingresar la dirección IP a la cual el equipo tenia asignado dentro de la misma red. Esto para el usuario conlleva un trabajo extra, por lo tanto, para las próximas versiones se integrarán más funcionalidades con el fin de facilitar esta conexión.  
+		
+		\item \textbf{Calibración de sensores: }Dentro de las reestricciones para utilizar la aplicación se requiere que los sensores esten calibrados, esto conlleva utilizar una aplicación extra, como se puede ver en la Figura \ref{fig:calibmavproxy}. Por lo que se considerará principalmente agregar dicha funcionalidad al mismo proyecto con el fin de canalizar estas opciones. 
+		
+		%\item Multicontrol de UAV's
+		
+	\end{itemize}
+
+
+%-------------------------------------------------------------------
+\section{Conclusión}
+%-------------------------------------------------------------------
+\label{cap6:sec:conclusion}
+	Llegando a la parte final del informe de este proyecto nos queda evaluar cuales ha sido los resultados, no únicamente del software en sí, sino como ha afectado todo el desarrollo al ejecutante del proyecto, si fue posible adquirir conocimientos por tal experiencia  o no. Es por esto que a continuación se detallarán unas breves opiniones personales sobre cada etapa del proyecto. 
+
+
+\begin{itemize}
+	\item \textbf{Obtención y análisis de requerimientos: } En dicha etapa se ha manejado mucha incertidumbre, más allá de que los objetivos generales esten claros, el ejecutante del proyecto se encontraba con muchas dudas técnicas en cuanto a la implementación de cada funcionalidad, si las librerías actuales podran satisfacer los requerimientos de rendimiento o en caso de no encontrarlos si llevaría mucho tiempo el desarrollo del mismo y por lo tanto el retraso del proyecto. Pero más allá de estas dudas, se ha descubierto que mientras los requerimientos esten bien estipulados, uno puede buscar alternativas que satisfagan dicha funcionalidad más allá de que no cumpla en su totalidad los requerimientos de rendimiento. Como por ejemplo, en la elección de la librería \textit{PyQtGraph} en vez de la \textit{Vispy}, ya que era la estipulada inicialmente. Por lo tanto, de esta etapa hacemos foco que es de suma importancia obtener los requerimientos correctos dictaminados por los \textit{stakeholders} y además, un error que se considera realizado, es darle al usuario final únicamente resultados al finalizar una etapa y no ir mostrando avances en el transcurso del mismo. Ya que al momento de desarrollar, el programador estaba libre de codificar las funcionalidades que a él le parecian conveniente, habiendo casos en que al final no era necesario dicha funcionalidad, por lo cual se habia mal gastado un recurso en un proyecto, como lo es el tiempo.
+	
+	\item \textbf{Gestión de componentes y armado del cuadricóptero: } En esta fase del proyecto ha sido la que más beneficios se han podido obtener para el ejecutante. Ya que el mismo ha sido desarrollado en las oficinas del sinc(\textit{i}) por lo tanto, el trabajo en equipo era algo inevitable, ya que en esta etapa entraban en juego varios aspectos a tener en cuenta, como redes, electónica, sistemas operativos, procesamiento digital de señales, entre otros, y además por el tiempo limitado al cual el ejecutante disponia (ya que debia alquilar en la ciudad de Santa fe) le ha jugado en contra. Pero al estar dentro de un grupo de personas relacionados en el tema, esta transcisión ha sido sumamente placentera ya que al momento de encontrarse con algún tipo de dificultad que para el ejecutante le resultaba complicado obtener una solución; con la ayuda de personal especializado encontrar dicha solución consumia muchisimo menos tiempo, además de aprender técnicas nuevas y conocomientos enseñados por dicho personal. En lo que podemos destacar que el trabajo en equipo para proyectos medianamente grandes, es un punto a tener en cuenta. 
+	
+
+	\item \textbf{Desarrollo de la plataforma: } Durante el transcurso de la carrera en ingeniería en informática hemos aprendido a programar, a resolver problemas en especificos utilizando algún tipo de paradigma, además de diseñar y organizarse en las etapas anteriores utilizando técnicas provistas por la ingeniería de software. Pero al momento de encontrarse con un proyecto real de un tamaño mucho mayor a los realizados en el cursado de la carrera, uno se enfrenta con otro mundo totalmente distinto, ya que se encuentran un sin fin de tecnológias nuevas, librerías, frameworks, plugins, lenguajes informáticos, métodologías de trabajo, aplicaciones que resuelven tareas o las automatizan, etc; por lo que conllevó parte del tiempo del proyecto investigar sobre estas nuevas tecnologías y en lo que se estima que ha formado parte del conocimiento como programador, que es un aspecto paralelo a lo que se dio en el cursado de la carrera en lo que respecta al desarrollo de proyectos de software. Pero un punto a favor que se ha notado drásticamente en esta etapa, es que la carrera a predispuesto al alumno de herramientas (ingenio) para poder resolver problemas que se iban presentando continuamente, por lo que más allá de la falta de práctica en proyectos medianos pudimos comprender que tenemos la capacidad de enfrentarnos a cualquier tipo de proyectos, ya que contamos con las bases que han sido adquiridas con la ayuda de todas las materias cursadas de la carrera. 
+	
+	\item \textbf{Prueba integral de la plataforma y del cuadricóptero : } Finalmente, luego de haber terminado con la realización de los distintos tipos de pruebas y comprobar que cada funcionalidad de nuestra aplicación, como también de nuestro vehículo estén funcionando correctamente, llegamos a la conclusión de que el \textit{Aseguramiento de la calidad} es un aspecto muy importante en el desarrollo de cualquier tipo de proyecto. 
+	
+	\par De tal manera, como mencionamos en la introducción del cápitulo \ref{cap4:pruebas},  este proceso se aplica de manera integral desde los inicios del proyecto hasta en las últimas etapas; pero cabe destacar que este proceso del \textit{Aseguramiento de la calidad} no ha sido aplicado correctamente en las etapas iniciales al proyecto ya que se consideraba como una tarea irrelevante, por lo cual , y como es de esperarse en etapas posteriores nos encontrábamos que muchos errores y con la consecuencia de tener módulos deficientes e inseguros. Lo que impedía proseguir con el proyecto ya que se dificultaba la tarea del desarrollo debido a código no robusto y metodologías poco probadas. Así que nos vimos obligados de reformular la estrategia de las etapas siguientes con respecto a las pruebas y además, aplicar dicha técnica por primera vez a las etapas iniciales para asegurar que en un futuro la aparición de los errores disminuya. De esta manera se ha aprendido, y por lo tanto, se incorporará como ``buenas prácticas'', integrar el proceso de QA en proyectos futuros para el cual participe el alumno. 
+	
+	
+	
+\end{itemize}
 
 
 % Variable local para emacs, para  que encuentre el fichero maestro de
