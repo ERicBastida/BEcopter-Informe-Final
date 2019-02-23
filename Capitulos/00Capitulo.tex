@@ -1,0 +1,203 @@
+% -*-coding: iso-latin-1  -*-
+%---------------------------------------------------------------------
+%
+%                          Capítulo 1
+%
+%---------------------------------------------------------------------
+%
+% 01Introduccion.tex
+% Copyright 2009 Marco Antonio Gomez-Martin, Pedro Pablo Gomez-Martin
+%
+% This file belongs to the TeXiS manual, a LaTeX template for writting
+% Thesis and other documents. The complete last TeXiS package can
+% be obtained from http://gaia.fdi.ucm.es/projects/texis/
+%
+% Although the TeXiS template itself is distributed under the 
+% conditions of the LaTeX Project Public License
+% (http://www.latex-project.org/lppl.txt), the manual content
+% uses the CC-BY-SA license that stays that you are free:
+%
+%    - to share & to copy, distribute and transmit the work
+%    - to remix and to adapt the work
+%
+% under the following conditions:
+%
+%    - Attribution: you must attribute the work in the manner
+%      specified by the author or licensor (but not in any way that
+%      suggests that they endorse you or your use of the work).
+%    - Share Alike: if you alter, transform, or build upon this
+%      work, you may distribute the resulting work only under the
+%      same, similar or a compatible license.
+%
+% The complete license is available in
+% http://creativecommons.org/licenses/by-sa/3.0/legalcode
+%
+%---------------------------------------------------------------------
+
+\chapter{Justificación, Objetivos y Alcance}
+
+\begin{FraseCelebre}
+\begin{Frase}
+Frase celebre
+
+\end{Frase}
+\begin{Fuente}
+	Autor
+\end{Fuente}
+\end{FraseCelebre}
+
+\begin{resumen}
+En este capítulo se detallan los elementos que dan origen a este proyecto y componen la especificación del mismo. Se hace una reseña de los antecedentes identificados y cómo se justifica el trabajo realizado, aclarando los objetivos planteados para ellos y las restricciones tenidas en cuenta para el alcance y las tecnologías utilizadas. Por último, se mencionan los posibles pasos que puede tener en futuro el software desarrollado en este trabajo.
+\end{resumen}
+
+\newpage
+%-------------------------------------------------------------------
+\section{Justificación}
+%-------------------------------------------------------------------
+\label{cap0:sec:justificacion}
+
+
+Una de las áreas de la aviación que ha experimentado un rápido crecimiento es aquella relacionada con los vehículos aéreos no tripulados (UAVs). Esta clase de vehículos pueden ser operados de forma remota o totalmente autónoma , presentan reducidos costos de  %\cite{valavanis2008unmanned}. , \cite{valavanis2008advances}
+operación y además no ponen en riesgo al operador. En los últimos años han ganado gran interés debido a su utilización en misiones de búsqueda y rescate %\cite{doherty2007uav}
+, inspección de líneas eléctricas %\cite{jones2005power}
+, actividades agrícolas %\cite{zhang2012application}
+, recolección de imágenes %\cite{adams2013high}
+, seguridad %\cite{maza2011experimental}
+, lucha contra incendios forestales %\cite{maza2011experimental},\cite{ollero2006unmanned}
+, entre otros.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/dron_apli_1}
+	\caption{Aplicaciones agrícolas con drones}
+	\label{fig:dronapli1}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/drone_apli_2}
+	\caption{Inspección de tendido eléctrico con drones}
+	\label{fig:droneapli2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/dron_apli_rescue}
+	\caption{Aplicaciones de emergencia}
+	\label{fig:dronaplirescue}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth, height=0.2\textheight]{Imagenes/dron_apli_rescue2}
+	\caption{Aplicaciones de búsqueda y rescate}
+	\label{fig:dronaplirescue2}
+\end{figure}
+
+
+
+Los UAVs pueden implementarse a través de los dos tipos de vehículos aéreos disponibles: aviones o multirotores (dentro de este último grupo se encuentran los cuadricópteros). Esto hace que los UAVs resultantes presenten características dinámicas y prestaciones (autonomía, maniobrabilidad, capacidad de carga, etc.) muy definidas y diferentes. Los aviones son capaces de recorrer grandes distancias empleando poca energía, gracias a la sustentación provista por las alas, de modo que el UAV resultante tiene una gran autonomía. Sin embargo, las maniobras necesarias para relevar la información son muy complicadas o requieren de sistemas de control avanzados. Por otro lado, los
+cuadricópteros se caracterizan por su maniobrabilidad y su capacidad de vuelo estacionario (hovering), lo que los hace particularmente aptos para la recolección de información en un punto determinado. Actualmente en el mercado nacional no se han reportado empresas que se dediquen al desarrollo de UAVs, siendo los mismos importados, tanto su hardware como su software. Por otro lado, los UAVs disponibles no son \textit{open source}, lo cual implica que la adaptación de
+los mismos a las necesidades de clientes y/o empresas se ve dificultada. Desde el punto de vista académico-científico, la posibilidad de implementar algoritmos propios en este tipo de vehículos comerciales es prácticamente nula. Si bien existen empresas que se dedican al desarrollo de UAVs \textit{open source}, como lo es la empresa española Erle Robotics \footnote{Página web de Erle Robotics http://erlerobotics.com/}, pero los costos de adquisición de dichos vehículos son bastante elevados. 
+\par De lo expuesto anteriormente se desprende la necesidad de contar con una plataforma de desarrollo para UAVs. Una plataforma para este tipo de vehículos, es un sistema que sirve como base para hacer funcionar los módulos de hardware o de software. En lo que concierne al hardware hacemos referencia a los componentes electrónicos del UAVs como
+pueden ser:
+\begin{itemize}
+	\item Motores.
+	\item Sensores como acelerómetros, giroscopios, magnetómetros, etc.
+	\item Periféricos de entrada y/o salida tales como tarjeta SD, puertos USB, entre otros.
+\end{itemize}
+
+Para poder obtener información de cada componente y gestionar sus interacciones es necesario que un software administre en un segundo plano estas tareas, y que de forma sencilla proporcione al usuario funcionalidades para manipular estos componentes electrónicos, con el propósito de realizar acciones de navegación sobre el vehículo
+
+% Lo dejo de manera general ya que van cambiando continuamente las acciones posibles
+%, como pueden ser:
+
+%\begin{itemize}
+%	\item Despegar (Take off).
+%	\item Mantenerse suspendido (hovering).
+%	\item Desplazarse.
+%\end{itemize}
+
+Con el objetivo de solventar las deficiencias presentes en proyectos del mercado, tales como código privativo y escasa visualización de datos en forma evolutiva, se propone realizar el proyecto \textit{open source} e implementar un módulo de visualización de datos a través del tiempo, este tiene el propósito de monitorear y controlar las variables de estado y
+controles del vehículo. De esta forma, la realización del PFC propuesto será de gran utilidad para el desarrollo
+de cualquier otro tipo de proyecto que involucre vehículos autónomos, ya que facilitará la tarea del operador para que el mismo enfoque su atención en sus propios objetivos.
+\par Para la realización del PFC, se tendrá a disposición el equipamiento e instalaciones del Instituto de Investigación en Señales, Sistemas e Inteligencia Computacional (\textit{sinc(i)}), donde desempeñan sus actividades de investigación los directores propuestos. El \textit{sinc(i) }fue creado en 2004 por la Facultad de Ingeniería y Ciencias Hídricas (FICH) de la Universidad Nacional del Litoral (UNL), siendo reconocido como unidad ejecutora de doble dependencia UNL-CONICET en 2014. Las tareas de investigación en el \textit{sinc(i)} tienen como objetivo desarrollar nuevos algoritmos para el aprendizaje automático, procesamiento de señales, modelado y análisis de sistemas complejos, proporcionando tecnologías innovadoras para el avance de la salud, la agricultura de precisión, la bioinformática, la energía, los sistemas autónomos e interfaces hombre-máquina. El \textit{sinc(i)} posee la infraestructura necesaria para el correcto desempeño del PFC propuesto, a saber: espacio físico, equipamiento informático, laboratorio de electrónica, software, códigos y algoritmos propios. Recientemente ha adquirido computadoras modelo Raspberry Pi \footnote{Computadora reducida en tamaño y de bajo coste https://www.raspberrypi.org/ } , que operan en conjunto con placas Navio2 \footnote{Placa electrónica con un conjunto de sensores destinados para el control de navegación.
+ https://emlid.com/introducing-navio2/}, las cuales contienen GPS, doble IMU (unidad de medición inercial), giróscopo y barómetro, siendo de aplicación específica para navegación de vehículos autónomos. Además, cuenta con un kit de GPS con soporte de RTK (los cuales logran precisión centimétrica) y con modelos a escala de un automóvil tipo crawler y de un cuadricóptero. Asimismo, posee un centro de prototipado rápido que permite el desarrollo e implementación de sistemas
+embebidos a medida.
+\par El desarrollo de este Proyecto Final de Carrera (PFC) impactará positivamente tanto en la industria nacional como en el ámbito académico, científico y tecnológico. En primer lugar, el alumno adquirirá el know-how (experiencia, conocimiento y habilidad) en el manejo de sistemas embebidos para el desarrollo de plataformas \textit{open source} para UAVs. Además, impulsará el salto tecnológico no sólo por el desarrollo de UAVs a nivel local con fines de entretenimiento, sino que también permitirá trasladar el conocimiento adquirido a la obtención de UAVs con fines comerciales, económicos y/o sociales, entre otros, contribuyendo fuertemente al desarrollo de la industria argentina. Desde el punto de vista personal, la realización del PFC propuesto aumentará el activo de conocimientos complementarios obtenidos en la carrera Ingeniería en Informática, ya que el mismo involucra temas relacionados como redes y comunicación de datos, sistemas embebidos y electrónica digital. Asimismo, contribuirá en la formación práctica y experimental, lo cual, en definitiva, es fundamental para el crecimiento de un profesional en este ámbito.
+
+%------------------------------------------------------------------------
+\section{Objetivos}
+%------------------------------------------------------------------------
+
+\begin{itemize}
+	\item \textbf{Objetivo General}
+		\subitem Instrumentar el cuadricóptero con la Navio2 y la Raspberry Pi.
+		\subitem Diseñar e implementar una plataforma de desarrollo para UAVs.
+	\item \textbf{Objetivos Específicos}
+		\subitem Desarrollar un módulo que permita la comunicación inalámbrica entre el
+		cuadricóptero y una PC para procesar la información adquirida.
+		\subitem Desarrollar un módulo que permita la adquisición de datos relevantes como ser
+		posición, velocidad, aceleración y actitud.
+		\subitem  Desarrollar un módulo de visualización de datos en tiempo real, el cual sea
+		capaz de mostrar los datos provenientes de sensores que poseen alta
+		frecuencia de muestreo.
+		\subitem Evaluar el funcionamiento de la plataforma desarrollada mediante la utilización
+		de un modelo a escala de un cuadricóptero.
+	
+\end{itemize}
+
+
+
+%------------------------------------------------------------------------
+\section{Alcance}
+%------------------------------------------------------------------------
+
+El PFC propuesto consiste en desarrollar una plataforma para UAVs, que permita el control manual del mismo, además que permita la visualización de forma gráfica de los datos que fueron adquiridos de sus correspondientes sensores. Una vez desarrollada dicha plataforma será evaluada con un UAV tipo cuadricóptero. El desarrollo del proyecto estará restringido por las siguientes características:
+
+\begin{itemize}
+	\item La plataforma dispondrá del libre acceso al código fuente, es decir, de tipo Open Source.
+	\item Estará orientado al uso de computadoras de escritorio.
+	\item El lenguaje de codificación utilizado será Python.
+	\item Dispondrá de una interfaz gráfica.
+	\item Las opciones de navegación que tendrá el cuadricóptero momentáneamente serán:
+		\subitem Punto objetivo.
+		\subitem Aterrizar.
+		\subitem Despegar.
+		\subitem Estabilizarse.
+		\subitem Volver al inicio.
+\end{itemize}
+
+En lo que concierne a las funcionalidades de la plataforma serán limitadas por los siguientes módulos:
+
+	\subsection{Módulo de operación manual}
+	
+		El módulo perteneciente al control en modo manual será el encargado de gestionar los comandos que serán enviados desde un joystick conectado a la pc a nuestro cuadricóptero. Estos comandos determinarán los movimientos del vehículo según la restricción 5. 
+		
+	\subsection{Módulo de comunicación inalámbrica}
+		Corresponde a la comunicación entre el ordenador y el cuadricóptero. Se desarrollará con tecnología inalámbrica, considerando un radio de cobertura según los dispositivos disponibles a nuestro alcance. Además, gestionará el tipo de comunicación entre el receptor y emisor, con eso hacemos referencia al protocolo de comunicación, velocidad de transferencia, entre otros. Por el mismo medio se transmitirán los datos obtenidos por los 	sensores como también las maniobras establecidas por el usuario de forma manual.
+	
+	\subsection{Módulo de gráfico de datos}
+	
+		Este módulo permitirá la selección del sensor de nuestro interés, y mostrará de forma gráfica cómo evolucionan los datos que se están obteniendo de los mismos en tiempo real.	Debido a que la mayoría de los sensores utilizados emplean una frecuencia de muestreo alta, es necesario utilizar librerías gráficas que sean capaces de cumplir con los 	requerimientos de tiempo real. Para asegurar este objetivo, se propone utilizar VisPy o	similar, la cual es una librería escrita en lenguaje Python que está diseñada específicamente para la visualización interactiva de gran cantidad de datos de forma rápida, escalable y fácil. Con respecto a la adquisición de datos de los sensores, en el mercado existe un sinfín de éstos que son de utilidad para algún problema que se quiera resolver, como podrían ser:	detección de temperatura, presión, humo, obtención de imágenes mediante una cámara o la	captura de un video, entre otros. 
+		\par En este PFC se utilizarán los sensores que nos proporciona la placa Navio2, a saber:
+		
+		\begin{itemize}
+			\item  2 unidades de medición inercial MPU 9250 9DOF y LSM9DS1 9DOF. Son dispositivos electrónicos que miden e informan acerca de la velocidad, orientación y fuerzasmagnéticas utilizando una combinación de acelerómetros y giróscopos.
+			\item 1 barómetro MS5611 para medir la presión atmosférica.
+			\item 1 sistema de navegación por satélite U-blox M8N, el cual utilizan una combinación delas tecnologías Glonass/GPS/Beidou.
+		\end{itemize}
+	Los cuales serán detallados en los próximos capítulos. 
+
+% TODO: Consultar si se puede dejar las actividades
+
+
+
+% Variable local para emacs, para  que encuentre el fichero maestro de
+% compilación y funcionen mejor algunas teclas rápidas de AucTeX
+%%%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../ManualTeXiS.tex"
+%%% End:

@@ -29,7 +29,9 @@
 %
 % ---------------------------------------------------------------------
 
-\documentclass[10pt,a4paper,oneside]{book}
+\documentclass[10pt,a4paper,top=2.5cm,bottom=1.5cm,left=2.5cm,right=2cm,marginparwidth=1.75cm,oneside]{book}
+
+%\usepackage[a4paper,top=2.5cm,bottom=1.5cm,left=2.5cm,right=2cm,marginparwidth=1.75cm]{geometry}
 %
 % Definimos  el   comando  \compilaCapitulo,  que   luego  se  utiliza
 % (opcionalmente) en config.tex. Quedar?a  mejor si tambi?n se definiera
@@ -154,6 +156,7 @@ constantes,guionado,Cascaras/bibliografia,config%
 \include{Apendices/01ApendiceD}   % GUI
 \include{Apendices/01ApendiceE}   % Diagrama de Clases Inicial
 \include{Apendices/01ApendiceF}   % Diagrama de Clases Final
+\include{Apendices/01ApendiceG}   % Anteproyecto
 \backmatter
 
 %--------------------------------------------------------------------------------
@@ -188,10 +191,6 @@ constantes,guionado,Cascaras/bibliografia,config%
 % TeXiS.sty para m?s informaci?n.
 
 
-\ifx\generaacronimos\undefined
-\else
-\include{TeXiS/TeXiS_acron}
-\fi
 
 %\include{Apendices/ParteAnexos}
 

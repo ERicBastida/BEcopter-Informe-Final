@@ -129,36 +129,34 @@
 Este capítulo contiene información sobre el procedimiento que se ha llevado a cabo en el desarrollo de la tercera etapa del proyecto. Esta etapa consiste principalmente en describir los pasos realizados para el armado del vehículo aéreo no tripulado (VANT) de tipo cuadricóptero. Además, se incluirán los inconvenientes que se han presentado en el transcurso del desarrollo del mismo con sus respectivas alternativas y/o soluciones. 
 
 % TODO: Consultar si dejar esta parte   
-\par Cabe mencionar que el hardware aquí descripto como también las herramientas utilizadas han sido proporcionadas por el\textit{ Centro de Investigación en Señales, Sistemas e Inteligencia sinc(i)} con sede en la Facultad de Ingeniería y Ciencias Hídricas de la Universidad Nacional del Litoral y todo procedimiento riesgoso para el alumno ha sido siempre supervisado bajo personal idóneo en el tema.
+\par Cabe mencionar que el hardware aquí descripto como también las herramientas utilizadas han sido proporcionadas por el\textit{ Instituto de Investigación en Señales, Sistemas e Inteligencia sinc(i)} con sede en la Facultad de Ingeniería y Ciencias Hídricas de la Universidad Nacional del Litoral y todo procedimiento riesgoso para el alumno ha sido siempre supervisado bajo personal idóneo en el tema.
 
 \end{resumen}
-
+\newpage
 %-------------------------------------------------------------------
 \section{Hardware}
 %-------------------------------------------------------------------
 \label{cap2:sec:hardware}
 
-Antes de empezar con la descripción del armado de un VANT, es necesario tener en conocimiento el hardware que está involucrado en el vehículo y en consecuencia su funcionamiento, como por ejemplo, los sensores que forman parte del mismo y hacen que el cuadricóptero pueda realizar un vuelo de manera segura y controlada, el tipo de estructura usado para soportar los motores, la tecnología responsable de la comunicación y el ordenador que procesará toda esa información. Es por eso que iniciamos esta sección con una lista del hardware utilizado y su respectiva descripción:
+	Antes de empezar con la descripción del armado de un VANT, es necesario tener en conocimiento el hardware que está involucrado en el vehículo y en consecuencia su funcionamiento, como por ejemplo, los sensores que forman parte del mismo y hacen que el cuadricóptero pueda realizar un vuelo de manera segura y controlada, el tipo de estructura usado para soportar los motores, la tecnología responsable de la comunicación y el ordenador que procesará toda esa información. Es por eso que iniciamos esta sección con una lista del hardware utilizado y su respectiva descripción:
+	
+	
+	\begin{enumerate}
 
+		\item Estructura del vehículo.
+		\item Controlador Electrónico de Velocidad.
+		\item Motor sin escobillas.
+		\item Raspberry Pi 3.
+		\item Navio2.
+		\item Arduino UNO \footnote{Estos dispositivos han sido utilizados únicamente en las etapas iniciales del proyecto para llevar adelante las pruebas iniciales de funcionamiento, por lo tanto y como se explicará más adelante, serán reemplazados por los módulos XBee. \label{footnote_hardware} }.
+		\item Radio Control \footnote{El comando de radio control es utilizado para corroborar el funcionamiento inicial de los motores en su conjunto. En cambio, al momento de utilizar el producto final de este proyecto el mismo será reemplazado por un joystick convencional.}.
+		\item Joystick.
+		\item Router \footref{footnote_hardware}.
+		\item Módulos XBee
+		\item Bateria LiPo.
+	\end{enumerate}
 
-\begin{enumerate}
-	\item Estructura de vehículo.
-	\item Controlador Electrónico de Velocidad.
-	\item Motor sin escobillas.
-	\item Raspberry Pi 3.
-	\item Navio2.
-	\item Arduino UNO \footnote{Estos dispositivos no han sido previstos y tampoco forman parte definitiva del proyecto, ya que han surgido para solventar problemas que surgieron en el transcurso de esta etapa. \label{footnote_hardware} }.
-	\item Radio Control \footref{footnote_hardware}.
-	\item Joystick.
-	\item Router \footref{footnote_hardware}.
-	\item Módulos XBee
-	\item Bateria LiPo.
-\end{enumerate}
-
-
-
-
-	\subsection{Estructura de vehículo}
+	\subsection{Estructura del vehículo}
 
 		La estructura del cuadricóptero como se puede ver en la Figura \ref{fig:estrucuadricoptero} consta en su parte inferior de un patín de aterrizaje que cumplen la función (como en los helicópteros) de soportar el vehículo cuando se apoye sobre tierra y mantener las hélices lo más alejado posible de piso cuando se encuentra en reposo. En su parte superior proporciona una base donde es posible instalar los dispositivos electrónicos que controlan al vehículo. Por último, desde la base se extienden 4 brazos con la función de ser soporte a los motores con sus respectivas hélices y además, en cada motor se le incluye su controlador electrónico de velocidad o ESC (\textit{Electronic Speed Controller}). 
 
@@ -172,7 +170,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 			\label{fig:estrucuadricoptero}
 		\end{figure}
 
-		El material del cuerpo de vehículo esta hecho con fibra de carbono \footnote{Aunque el mismo puede ser reemplazado por otro tipo de estructura, por ejemplo, un modelo impreso por una impresora 3D}, este consta con la propiedad de tener una elevada resistencia mecánica que será de suma importancia ya que el vehículo presenta altas probabilidades de sufrir algún choque o aterrizaje forzoso, además de ser un material sumamente liviano por lo que disminuirá la fuerza de los motores para mantener un vuelo y por tanto, menos consumo de batería.
+		El material de la estructura está hecho con fibra de carbono \footnote{Aunque el mismo puede ser reemplazado por otro tipo de estructura, por ejemplo, un modelo impreso por una impresora 3D}, este consta con la propiedad de tener una elevada resistencia mecánica que será de suma importancia ya que el vehículo presenta altas probabilidades de sufrir algún choque o aterrizaje forzoso, además de ser un material sumamente liviano por lo que disminuirá la fuerza necesaria de los motores para mantener un vuelo y por tanto, menos consumo de batería.
 		
 
 	\subsection{Controlador Electrónico de Velocidad}
@@ -196,7 +194,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 		\end{figure}
 
 	\subsection{Raspberry Pi 3}
-		Es un ordenador de tamaño reducido que trata de ofrecer las mismas funcionalidades y componentes que el de un ordenador común pero con un rendimiento menor, entre sus componentes, esta placa reducida tiene memoria RAM, GPU, puertos USB, HDMI, ranura para tarjeta SD, conector para una cámara, conectividad WiFi, Ethernet, Bluetooth y 40 pines GPIO(\textit{General Purpose Input/Output}) donde es posible extender sus características instalando hardware extra como sensores, led, motores, interfaces, etc \cite{mcmanus2017raspberry}.
+		Es un ordenador de tamaño reducido que trata de ofrecer las mismas funcionalidades y componentes que el de un ordenador común, entre sus componentes principales esta placa reducida tiene: memoria RAM, GPU, puertos USB, HDMI, ranura para tarjeta SD, conector para una cámara, conectividad WiFi, Ethernet, Bluetooth y 40 pines GPIO(\textit{General Purpose Input/Output}) donde es posible extender sus características instalando hardware extra como sensores, led, motores, interfaces, etc\cite{mcmanus2017raspberry}. Además de estas características contamos con las ventajas de costo accesible y un consumo mucho menor, lo que nos da una independencia temporal generosa al conectarla con baterías. 
 		\par \textbf{Especificaciones:}
 			\begin{itemize}
 				
@@ -249,7 +247,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 		
 
 	\subsubsection{Barómetro}
-		El barómetro tiene sus usos provenientes de la meteorología para poder predecir el tiempo entre otras cosas, pero en este caso la placa controladora utiliza un barómetro MS5611 de alta precisión (con 10cm de resolución ) para poder estimar la altura en el cual se encuentra el dispositivo. 
+		El barómetro tiene sus usos provenientes de la meteorología para poder predecir el tiempo entre otras cosas, pero en este caso la placa controladora utiliza un barómetro MS5611 de alta precisión para poder estimar la altura en el cual se encuentra el dispositivo (con 10cm de resolución). 
 
 	\subsubsection{Interfaces}
 		\begin{itemize}
@@ -294,8 +292,8 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 
 	\subsection{Router}
 	
-		Un router es un dispositivo de hardware que permite la interconexión de ordenadores en red. El router o enrutador es un dispositivo que opera en capa de nivel de 3. Así, permite que varias redes u ordenadores se conecten entre sí y, por ejemplo, compartan una misma conexión de Internet. 
-		\par Este dispositivo es usado para el desarrollo del proyecto ya que en el momento de las pruebas no se tienen a disposición los módulos de comunicación verdaderos, estos módulos permiten una mayor distancia de cobertura y funciona exclusivamente para una conexión, lo que logra una mayor confiabilidad a la misma que comparando con el router que debe gestionar varias conexiones a la vez y la información enviada no está asegurada. Por tal motivo de ausencia de estos módulos se recurre a utilizar como medio de comunicación provisoria la tecnología wifi del router, ya que únicamente se pretende realizar pruebas en un ámbito controlado y de poca distancia.
+		Un router es un dispositivo de hardware que permite la interconexión de ordenadores en red. El router o enrutador es un dispositivo que opera en capa de nivel de 3 del modelo OSI. Así, permite que varias redes u ordenadores se conecten entre sí y, por ejemplo, compartan una misma conexión de Internet. 
+		\par Este dispositivo es usado en las etapas iniciales de prueba y desarrollo del proyecto, con el fin de utilizar una alternativa más accesible al público en general y corroborar sus limitaciones, que como se expondrán más adelante tiene sus respectivas limitaciones. Siendo el mismo reemplazada por los módulos de comunicación \textit{XBee}. Estos módulos permiten una mayor distancia de cobertura y funciona exclusivamente para una conexión, lo que logra una mayor confiabilidad que, comparando con el router que debe gestionar varias conexiones a la vez es mucho más eficiente. Pero para fines de testeo y comprobación de funcionalidades el mismo representa una opción tentativa, ya que las pruebas se realizaran en un ámbito controlado y de poca distancia. 		
 	
 
 	\subsection{Módulos XBee}
@@ -312,10 +310,10 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 
 	\subsection{Batería LiPo}
 	
-		La batería LiPo (Litio y Polímero) son baterías recargables, compuestas generalmente de varias células conectadas en paralelo para aumentar la capacidad de la corriente de descarga. Esta contiene un voltaje de 12v con 2200 mA, suministrando dicha energía a los motores y además a la Raspberry Pi con 5V.
+		La batería LiPo (Litio y Polímero) son baterías recargables, compuestas generalmente de varias células conectadas en paralelo para aumentar la capacidad de la corriente de descarga. Esta contiene un voltaje de 12v con 2200 mAh, suministrando dicha energía a los motores y además a la Raspberry Pi con 5V.
 		\begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.2\linewidth, height=0.25\textheight]{Imagenes/bateria}
+			\includegraphics[width=0.4\linewidth, height=0.25\textheight]{Imagenes/bateria}
 			\caption{Batería LiPo}
 			\label{fig:bateria}
 		\end{figure}
@@ -355,7 +353,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 			\label{fig:navio2-mount}
 		\end{figure}
 		
-		Luego se procede a conectar la antena GNSS sobre la placa Navio2. Una vez ya conectado se debe verificar su correcto funcionamiento de todos los sensores presentes, para eso debemos tener un software que gestione eficazmente todo el hardware y sea el intermediario entre estos dispositivos electrónicos y el usuario, además de proporcionar servicios de utilidad para el mismo, en otras palabras, un sistema operativo (SO). Antes de instalar cualquier sistema operativo hay que tener en cuenta que  estamos en presencia de un ordenador de placa reducida, es decir, el hardware de los componentes del mismo como memoria, procesador, puertos de entrada y salida, etcétera no son los mismos a los ordenadores comerciales que vemos comúnmente; por poner un ejemplo, el procesador que contiene la Raspberry es un ARM1176JZF-S, con esto queremos decir que el CPU en si mismo esta fabricado bajo una arquitectura con un conjunto reducido de instrucciones (o por su siglas en ingles \textit{RISC - Reduced instruction set computing}) en comparación a un CPU que son utilizados normalmente en un ordenador hogareño. Por tal motivo, es necesario de un SO que se adapte a estas características; afortunadamente existen varias organizaciones o empresas que desarrollan y distribuyen este tipo de producto, por ejemplo, \textit{Canonical Ltd} y \textit{Microsoft} han adaptado sus sistemas operativos para este tipo de ordenadores. En nuestro caso utilizaremos un SO proporcionado por la empresa \textit{Emlid} basado en una distribución de Linux llamada \textit{Raspbian} (acrónimo entre Raspberry Pi y Debian) donde ya viene preinstalado las herramientas necesarias.
+		Luego se procede a conectar la antena GNSS sobre la placa Navio2. Una vez ya conectado se debe verificar el correcto funcionamiento de todos los sensores presentes, para eso debemos tener un software que gestione eficazmente todo el hardware y sea el intermediario entre estos dispositivos electrónicos y el usuario, además de proporcionar servicios de utilidad para el mismo, en otras palabras, un sistema operativo (SO). Antes de instalar cualquier sistema operativo hay que tener en cuenta que  estamos en presencia de un ordenador de placa reducida, es decir, el hardware de los componentes del mismo como memoria, procesador, puertos de entrada y salida, etcétera no son los mismos a los ordenadores comerciales que vemos comúnmente; por poner un ejemplo, el procesador que contiene la Raspberry es un ARM1176JZF-S, con esto queremos decir que el CPU en si mismo esta fabricado bajo una arquitectura con un conjunto reducido de instrucciones (o por su siglas en ingles \textit{RISC - Reduced instruction set computing}) en comparación a un CPU que son utilizados normalmente en un ordenador hogareño. Por tal motivo, es necesario de un SO que se adapte a estas características; afortunadamente existen varias organizaciones o empresas que desarrollan y distribuyen este tipo de producto, por ejemplo, \textit{Canonical Ltd} y \textit{Microsoft} han adaptado sus sistemas operativos para este tipo de ordenadores. En nuestro caso utilizaremos un SO proporcionado por la empresa \textit{Emlid} basado en una distribución de Linux llamada \textit{Raspbian} (acrónimo entre Raspberry Pi y Debian) donde ya vienen preinstaladas las herramientas necesarias.
 		\par Una vez seleccionado el SO a instalar, se procede a descargar la imagen y grabarla en una tarjeta SD, una vez realizado este paso se carga la tarjeta SD en la ranura disponible en la Raspberry Pi, se enchufa un teclado, mouse y un conector HDMI que se encuentra conectado a un monitor, y por último se procede a encender el dispositivo  mostrándonos la siguiente imagen: 
 		
 		
@@ -368,8 +366,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 		
 		Como se puede observar en la imagen \ref{fig:pantallainicio} la pantalla de bienvenida nos muestra los siguientes pasos que hay que seguir para configurar nuestro piloto.
 		\begin{itemize}
-			\item \textbf{Paso 1:} Se selecciona el tipo de vehículo que se va a manejar, utilizando el comando \textit{update-alternatives}. Esta función se encarga de seleccionar como predeterminada la opción ingresada dentro de otras alternativas, es decir, 
-			Es posible que tenga en el sistema varios programas instalados a la vez  que  realizan  la
+			\item \textbf{Paso 1:} Se selecciona el tipo de vehículo que se va a manejar, utilizando el comando \textit{update-alternatives}. Esta función se encarga de seleccionar como predeterminada la opción ingresada dentro de otras alternativas, es decir, es posible que tenga en el sistema varios programas instalados a la vez  que  realizan  la
 			misma  función. Por ejemplo, muchos sistemas tienen varios editores de texto instalados al
 			mismo tiempo, lo que deja la elección de  qué  editor  de  texto  utilizar  en  manos  del
 			usuario,  si  éste lo desea, pero hace difícil que un programa elija la opción correcta si
@@ -381,7 +378,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 				
 				
 				
-				\item \textbf{Paso 2:} Se debe ingresar dentro del archivo /etc/default/arducopter el IP perteneciente al GCS (\textit{Ground Control Station}), es decir, este archivo contiene la dirección IP del ordenador que enviará y recibirá información del vehículo. Además, brinda la opción de seleccionar la interfaz por el que se realizará la comunicación. En nuestro caso lo haremos realizaremos mediante tecnología Wifi y utilizando el protocolo UDP \footnote{Es posible también utilizar el protocolo TCP, pero la razón por la cual se este método es porque es un protocolo no orientado a la conexión, por lo tanto como estaremos realizando maniobras que son ejecutadas por el vehículo en tiempo real necesitamos la menor latencia posible y no estar esperando paquetes de confirmación todo el tiempo}. 
+				\item \textbf{Paso 2:} Se debe ingresar dentro del archivo /etc/default/arducopter el IP perteneciente al GCS (\textit{Ground Control Station}), es decir, este archivo contiene la dirección IP del ordenador que enviará y recibirá información del vehículo. Además, brinda la opción de seleccionar la interfaz por el que se realizará la comunicación. En nuestro caso lo haremos realizaremos mediante tecnología Wifi y utilizando el protocolo UDP \footnote{Es posible también utilizar el protocolo TCP, pero la razón por la cual se emplea este método es porque es un protocolo no orientado a la conexión, por lo tanto como estaremos realizando maniobras que son ejecutadas por el vehículo en tiempo real necesitamos la menor latencia posible y no estar esperando paquetes de confirmación todo el tiempo}. 
 				
 				\item \textbf{Paso 3:} Una vez ya seleccionado el tipo de vehículo a utilizar e ingresado el IP de nuestro GCS se debe iniciar los servicios y procesos proporcionados por arducopter (ya que este se encargará de administrar las funcionalidades pertinentes), para eso se utiliza el gestor del sistema y servicios \textbf{systemd} de Linux con el objetivo de iniciar un conjunto nuevo de procesos y servicios encapsulados en Arducopter, para eso utilizamos los siguiente comandos :
 				
@@ -438,13 +435,13 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 
 	\subsection{Instalación del firmware}
 
-		\par Una vez ya comprobado la conectividad a la red y conFigurado el sistema operativo, es necesario instalar el \textit{firmware}  encargado de gestionar todos los sensores que se han incluido a la Raspberry mediante la placa Navio2, con el objetivo de poder administrar esta información y poder enviarla al \textit{GCS}. Para instalar el firmware se procede a descargarlo desde el mismo SO del vehículo mediante el siguiente comando 
+		\par Una vez ya comprobado la conectividad a la red y configurado el sistema operativo, es necesario instalar el \textit{firmware}  encargado de gestionar todos los sensores que se han incluido a la Raspberry mediante la placa Navio2, con el objetivo de poder administrar esta información y poder enviarla al \textit{GCS}. Para instalar el firmware se procede a descargarlo desde el mismo SO del vehículo mediante el siguiente comando 
 		
 		
 		\begin{listing}[style=consola, numbers=none]
 			
 			pi@navio: ~\$ wget http://firmware.eu.ardupilot.org/Copter/stable/navio2-quad/arducopter-quad
-			pi@navio: ~\$ chmod +x arducopter-quad}
+			pi@navio: ~\$ chmod +x arducopter-quad
 		
 		\end{listing}
 		
@@ -454,6 +451,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 		#ExecStart=/bin/sh -c "/home/pi/path/to/your/binary \$\{ARDUPILOT\_OPTS\}"
 		\end{listing}
 		por
+		
 		\begin{listing}[style=consola, numbers=none]
 		#ExecStart=/bin/sh -c "/home/pi/arducopter-quad \$\{ARDUPILOT\_OPTS\}"}
 		\end{listing}
@@ -476,7 +474,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 		\label{fig:radiocontrol}
 		\end{figure}
 		
-		Este radio control simplemente envía las señales por 4 canales independientes, que son generados por sus dos palancas donde cada una contiene 2 ejes (\textit{eje x y eje y}), por lo tanto tendríamos que la palanca 1 enviará información del $eje_{p1} x$ y $eje_{p1} y$ y de la misma manera, la palanca 2 enviará información de el $eje_{p2} x$ y $eje_{p2} y$ mediante la técnica de modulación por ancho de pulso. Simplificando un poco, el receptor o (\textit{RX})  tendrá 4 cables con información de cada canal y que deberá conectarse al vehículo, pero recordando la sección \ref{sec:ioRC} el vehículo solo dispone de una entrada compatible con PPM o SBUS. Por lo que aquí surge otro problema, debemos encontrar la forma de poder convertir las señales del radio control que se encontraban en PWM y pasarlas a PPM o SBUS para que el vehículo pueda interpretar esta información. Para solucionar este problema se plantean 3 alternativas:
+		Este radio control simplemente envía las señales por 4 canales independientes, que son generados por sus dos palancas donde cada una contiene 2 ejes (\textit{eje x y eje y}), por lo tanto tendríamos que la palanca 1 enviará información del $eje_{p1} x$ y $eje_{p1} y$ y de la misma manera, la palanca 2 enviará información de el $eje_{p2} x$ y $eje_{p2} y$ mediante la técnica de modulación por ancho de pulso. Simplificando un poco, el receptor  (o \textit{RX})  tendrá 4 cables con información de cada canal y que deberá conectarse al vehículo, pero recordando la sección \ref{sec:ioRC} el vehículo solo dispone de una entrada compatible con PPM o SBUS. Por lo que aquí surge otro problema, debemos encontrar la forma de poder convertir las señales del radio control que se encontraban en PWM y pasarlas a PPM o SBUS para que el vehículo pueda interpretar esta información. Para solucionar este problema se plantean 3 alternativas:
 		
 		\begin{enumerate}
 		\item \textbf{Comprar un radio control con su respectivo receptor compatible con el vehículo.}   
@@ -489,7 +487,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 		
 		\par \textbf{Propuesta 2: } Consiste en realizar la compra de los componentes electrónicos de tipo CMOS CD4001 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26834/TI/CD4001.html} y 	CD40106 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26839/TI/CD40106.html} con un precio estimado de \$100. A pesar de su bajo costo de implementación y siendo la mano de obra realizada por el profesor de la cátedra Electrónica Digital, es una tarea ajena al ejecutante del proyecto, por lo que no complementaría los conocimientos del alumno.
 		
-		\par \textbf{Propuesta 3: } Esta propuesta consiste en implementar la función de conversión de PWM a PPM o SBUS mediante un script que se implementará sobra la placa Arduino, donde se conectarán los cables provenientes del Rx a sus entradas y retornará en una de sus salidas un único cable con la información codificada en PPM o SBUS como estaba especificado en el sitio web del fabricante. El precio estimado de la placa Arduino UNO es de \$200, pero existen versiones reducidas como el Arduino Nano que cuentan con un precio a la mitad del Arduino UNO. De manera conveniente se contaba con la adquisición de un Arduino UNO, por lo que no hacia falta realizar una compra. Además, la implementación de este algoritmo contribuye al crecimiento de las aptitudes del ejecutante del proyecto como estudiante de ingeniería en informática. 
+		\par \textbf{Propuesta 3: } Esta propuesta consiste en implementar la función de conversión de PWM a PPM o SBUS mediante un script que se implementará sobra la placa Arduino, donde se conectarán los cables provenientes del Rx a sus entradas y retornará en una de sus salidas un único cable con la información codificada en PPM o SBUS como estaba especificado en el sitio web del fabricante. El precio estimado de la placa Arduino UNO es de \$200, pero existen versiones reducidas como el Arduino Nano que cuentan con un precio a la mitad del Arduino UNO. De manera conveniente se contaba con la adquisición de un Arduino UNO, por lo que no hacia falta realizar una compra. Además, la implementación de este algoritmo contribuye al crecimiento de las aptitudes del ejecutante del proyecto como estudiante de Ingeniería en Informática. 
 		% TODO: Explicar codificación del script	 
 		Por lo que finalmente se decide realizar la propuesta 3. Una vez realizada se implementa sobre la placa Arduino UNO y se comprueban los resultados con un osciloscopio, dándonos un resultado favorable.
 
@@ -498,7 +496,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 
 	\subsection{Conexión de componentes}
 		
-		Antes de comenzar a describir el proceso de cableado del vehículo se comienza conectando el receptor del comando radio control con el Arduino UNO que va a ser el en cargado de recibir las señales PWM y convertirlas en SBUS momentáneamente para poder enviarlas a la Navio2. Hay que tener en cuenta que la ubicación de los conectores y los pines del receptor llevan un orden en específico. Por tal motivo, se investiga dicho orden, pero sin encontrar información relevante, hasta ubicar con un transmisor de la misma empresa y deducir las siguientes conexiones
+		Antes de comenzar a describir el proceso de cableado del vehículo se comienza conectando el receptor del comando radio control con el Arduino UNO que va a ser el en cargado de recibir las señales PWM y convertirlas en SBUS momentáneamente para poder enviarlas a la Navio2. Hay que tener en cuenta que la ubicación de los conectores y los pines del receptor llevan un orden específico. Por tal motivo, se investiga dicho orden, pero sin encontrar información relevante, hasta ubicar con un transmisor de la misma empresa y deducir las siguientes conexiones
 		
 		
 		\begin{figure}[h!]
@@ -526,7 +524,7 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 		\end{figure}
 		
 		
-		\par Con respecto a las conexiones eléctricas que lleva el cuadricóptero, recurrimos en basarnos en la Figura \ref{fig:instnavio1}, donde muestra gráficamente el orden que llevan las conexiones con sus respectivos cables de colores. 
+		\par Con respecto a las conexiones eléctricas que lleva el cuadricóptero, recurrimos a basarnos en la Figura \ref{fig:instnavio1}, donde muestra gráficamente el orden que llevan las conexiones con sus respectivos cables de colores. 
 		
 		\begin{figure}[h!]
 		%TODO: Modificar imagen (esta mal el cableado de alimentacion de los motores)
@@ -555,36 +553,30 @@ Antes de empezar con la descripción del armado de un VANT, es necesario tener en
 		\label{fig:fuentevr}
 		\end{figure}
 		
-		En la Figura \ref{fig:instnavio1} se puede ver que la batería suministra energía a los cuatro motores y al vehículo, por lo tanto se decide alimentar al vehículo con el transformador de fábrica y suministrar energía a  los motores con la fuente. Esta fuente como se puede observar en la Figura \ref{fig:fuentevr} contiene un único par de salida (positivo y negativo) por lo que es necesario multiplexar esta salida a 4 par de salidas más. Para eso se decide armar y soldar un conjunto de cables con sus respectivos conectores quedando de la siguiente manera.
-
-%\begin{figure}[h!]
-%\centering
-%\includegraphics[width=0.5\linewidth, height=0.4\textheight]{Imagenes/fotos/IMG_20170601_131119448}
-%\caption{Multiplexor}
-%\label{fig:img20170601131119448}
-%\end{figure}
-
-Por último, se verifican las conexiones pertinentes a los planos y se buscan imperfectos en las uniones, en caso de encontrar algún tipo de estos se procede a repararlos. 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.5\linewidth, height=0.4\textheight]{Imagenes/fotos/quad_armado}
-\caption{Cuadricóptero armado para verificar funcionamiento.}
-\label{fig:terminado}
-\end{figure}
+		En la Figura \ref{fig:instnavio1} se puede ver que la batería suministra energía a los cuatro motores y al vehículo, por lo tanto se decide alimentar al vehículo con el transformador de fábrica y suministrar energía a  los motores con la fuente. Esta fuente como se puede observar en la Figura \ref{fig:fuentevr} contiene un único par de salida (positivo y negativo) por lo que es necesario multiplexar esta salida a 4 pares de salidas más. Para eso se decide armar y soldar un conjunto de cables con sus respectivos conectores como se puede observar en la figura \label{fig:terminado}.
 
 
-\subsection{Prueba de funcionamiento inicial}
-Como etapa final y con el objetivo de verificar el correcto funcionamiento de nuestro vehículo, se inicia el proceso de calibración de sensores, para eso se decide utilizar \textbf{Mavproxy} seleccionando el módulo de calibración y consecuentemente realizando los pasos que se nos indican de manera sencilla como se puede observar en la Figura \ref{fig:calibmavproxy}. 
-
-Una vez concluida la etapa de calibración se procede a enviar misiones de prueba, como por ejemplo elevarse del suelo 1 metro desde la posición inicial sin tener instalado las hélices por motivos de seguridad, dándonos como resultados que el vehículo interpreta los comandos. Aunque estas pruebas fueron realizadas de modo superficial en el capitulo \ref{cap4:pruebas} se profundizará que el funcionamiento integral de los componentes responda de manera correcta.
-
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth, height=0.4\textheight]{Imagenes/calibMavproxy}
-\caption{Ejecución del modulo de calibración de MavProxy}
-\label{fig:calibmavproxy}
-\end{figure}
+		Por último, se verifican las conexiones pertinentes a los planos y se buscan imperfectos en las uniones, en caso de encontrar algún tipo de estos se procede a repararlos. 
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth, height=0.4\textheight]{Imagenes/fotos/quad_armado}
+		\caption{Cuadricóptero armado para verificar funcionamiento.}
+		\label{fig:terminado}
+		\end{figure}
+		
+		
+		\subsection{Prueba de funcionamiento inicial}
+		Como etapa final y con el objetivo de verificar el correcto funcionamiento de nuestro vehículo, se inicia el proceso de calibración de sensores, para eso se decide utilizar \textbf{Mavproxy} seleccionando el módulo de calibración y consecuentemente realizando los pasos que se nos indican de manera sencilla como se puede observar en la Figura \ref{fig:calibmavproxy}. 
+		
+		Una vez concluida la etapa de calibración se procede a enviar misiones de prueba, como por ejemplo elevarse del suelo 1 metro desde la posición inicial sin tener instalado las hélices por motivos de seguridad, dándonos como resultados que el vehículo interpreta los comandos. Aunque estas pruebas fueron realizadas de modo superficial, en el capitulo \ref{cap4:pruebas} se profundizará que el funcionamiento integral de los componentes responda de manera correcta.
+		
+		
+		\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\linewidth, height=0.4\textheight]{Imagenes/calibMavproxy}
+		\caption{Ejecución del modulo de calibración de MavProxy}
+		\label{fig:calibmavproxy}
+		\end{figure}
 
 
 % Variable local para emacs, para  que encuentre el fichero maestro de
