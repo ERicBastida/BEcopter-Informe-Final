@@ -126,7 +126,7 @@
 \end{FraseCelebre}
 
 \begin{resumen}
-Este capítulo contiene información sobre el procedimiento que se ha llevado a cabo en el desarrollo de la tercera etapa del proyecto. Esta etapa consiste principalmente en describir los pasos realizados para el armado del vehículo aéreo no tripulado (VANT) de tipo cuadricóptero. Además, se incluirán los inconvenientes que se han presentado en el transcurso del desarrollo del mismo con sus respectivas alternativas y/o soluciones. 
+Este capítulo contiene información sobre el procedimiento que se ha llevado a cabo en el desarrollo de la tercera etapa del proyecto. Esta etapa consiste principalmente en describir los pasos realizados para el armado del vehículo aéreo no tripulado (\ac{VANT}) de tipo cuadricóptero. Además, se incluirán los inconvenientes que se han presentado en el transcurso del desarrollo del mismo con sus respectivas alternativas y/o soluciones. 
 
 % TODO: Consultar si dejar esta parte   
 \par Cabe mencionar que el hardware aquí descripto como también las herramientas utilizadas han sido proporcionadas por el\textit{ Instituto de Investigación en Señales, Sistemas e Inteligencia sinc(i)} con sede en la Facultad de Ingeniería y Ciencias Hídricas de la Universidad Nacional del Litoral y todo procedimiento riesgoso para el alumno ha sido siempre supervisado bajo personal idóneo en el tema.
@@ -153,7 +153,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\item Joystick.
 		\item Router \footref{footnote_hardware}.
 		\item Módulos XBee
-		\item Bateria LiPo.
+		\item Bateria \ac{LiPo}.
 	\end{enumerate}
 
 	\subsection{Estructura del vehículo}
@@ -198,8 +198,8 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\par \textbf{Especificaciones:}
 			\begin{itemize}
 				
-				\item 1.2GHz 64-bit quad-core ARMv8 CPU
-				\item 1GB RAM (Compartido con la GPU)
+				\item 1.2GHz 64-bit quad-core ARMv8 \ac{CPU}
+				\item 1GB RAM (Compartido con la \ac{GPU})
 				\item GPU Broadcom VideoCore IV	\newline
 			\end{itemize}
 		
@@ -254,7 +254,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\item Entrada UART (\textit{Universal Asynchronous Receiver-Transmitter})
 			\item Bus de serie de datos $I^{2}C$ de sus siglas en inglés (Inter-Integrated Circuit)
 			\item Conversor Analógico/Digital ADC
-			\item Y por último. 14 salidas para servomotores mediante el protocolo PWM (Modulación por Ancho de Pulso)
+			\item Y por último. 14 salidas para servomotores mediante el protocolo \ac{PWM} 
 		\end{itemize}
 
 
@@ -310,7 +310,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 
 	\subsection{Batería LiPo}
 	
-		La batería LiPo (Litio y Polímero) son baterías recargables, compuestas generalmente de varias células conectadas en paralelo para aumentar la capacidad de la corriente de descarga. Esta contiene un voltaje de 12v con 2200 mAh, suministrando dicha energía a los motores y además a la Raspberry Pi con 5V.
+		La batería LiPo (Litio y Polímero) son baterías recargables, compuestas generalmente de varias células conectadas en paralelo para aumentar la capacidad de la corriente de descarga. Esta contiene un voltaje de 12v con 2200 mAh, suministrando dicha energía a los motores y además a la Raspberry Pi con 5\ac{V}.
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.4\linewidth, height=0.25\textheight]{Imagenes/bateria}
@@ -378,7 +378,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 				
 				
 				
-				\item \textbf{Paso 2:} Se debe ingresar dentro del archivo /etc/default/arducopter el IP perteneciente al GCS (\textit{Ground Control Station}), es decir, este archivo contiene la dirección IP del ordenador que enviará y recibirá información del vehículo. Además, brinda la opción de seleccionar la interfaz por el que se realizará la comunicación. En nuestro caso lo haremos realizaremos mediante tecnología Wifi y utilizando el protocolo UDP \footnote{Es posible también utilizar el protocolo TCP, pero la razón por la cual se emplea este método es porque es un protocolo no orientado a la conexión, por lo tanto como estaremos realizando maniobras que son ejecutadas por el vehículo en tiempo real necesitamos la menor latencia posible y no estar esperando paquetes de confirmación todo el tiempo}. 
+				\item \textbf{Paso 2:} Se debe ingresar dentro del archivo /etc/default/arducopter el IP perteneciente al GCS (\textit{Ground Control Station}), es decir, este archivo contiene la dirección IP del ordenador que enviará y recibirá información del vehículo. Además, brinda la opción de seleccionar la interfaz por el que se realizará la comunicación. En nuestro caso lo haremos realizaremos mediante tecnología Wifi y utilizando el protocolo UDP \footnote{Es posible también utilizar el protocolo \ac{TCP}, pero la razón por la cual se emplea este método es porque es un protocolo no orientado a la conexión, por lo tanto como estaremos realizando maniobras que son ejecutadas por el vehículo en tiempo real necesitamos la menor latencia posible y no estar esperando paquetes de confirmación todo el tiempo}. 
 				
 				\item \textbf{Paso 3:} Una vez ya seleccionado el tipo de vehículo a utilizar e ingresado el IP de nuestro GCS se debe iniciar los servicios y procesos proporcionados por arducopter (ya que este se encargará de administrar las funcionalidades pertinentes), para eso se utiliza el gestor del sistema y servicios \textbf{systemd} de Linux con el objetivo de iniciar un conjunto nuevo de procesos y servicios encapsulados en Arducopter, para eso utilizamos los siguiente comandos :
 				
@@ -402,7 +402,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 
 	\subsection{Configuración para el acceso a la red}
 
-		\par Entre las opciones de conexión a la red que dispone la Raspberry Pi 3, podemos identificar que el mismo tiene una entrada Ethernet como también un módulo interno Wi-Fi, por lo tanto es necesario configurar dichas interfaces para poder conectarnos mediante un cable UTP con un conector RJ45, como también por tecnología \textit{Wireles}. Por lo que dentro del sistema operativo del vehículo y sobre la consola se ingresa el siguiente comando 
+		\par Entre las opciones de conexión a la red que dispone la Raspberry Pi 3, podemos identificar que el mismo tiene una entrada Ethernet como también un módulo interno Wi-Fi, por lo tanto es necesario configurar dichas interfaces para poder conectarnos mediante un cable \ac{UTP} con un conector RJ45, como también por tecnología \textit{Wireles}. Por lo que dentro del sistema operativo del vehículo y sobre la consola se ingresa el siguiente comando 
 		\begin{listing}[style=consola, numbers=none]
 			> sudo ifconfig
 		\end{listing}
@@ -485,7 +485,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		Para estas propuestas se realiza el siguiente análisis:\newline
 		\par \textbf{Propuesta 1: } La adquisición de un nuevo radio control más allá de sus futuros usos conllevaría un elevado costo adicional para el proyecto ya que el mismo tiene un valor de \$8000 \footnote{Fecha consultada, septiembre del 2017}, además atrasaría el cronograma los días que se deban esperar el producto desde su ciudad de origen.
 		
-		\par \textbf{Propuesta 2: } Consiste en realizar la compra de los componentes electrónicos de tipo CMOS CD4001 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26834/TI/CD4001.html} y 	CD40106 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26839/TI/CD40106.html} con un precio estimado de \$100. A pesar de su bajo costo de implementación y siendo la mano de obra realizada por el profesor de la cátedra Electrónica Digital, es una tarea ajena al ejecutante del proyecto, por lo que no complementaría los conocimientos del alumno.
+		\par \textbf{Propuesta 2: } Consiste en realizar la compra de los componentes electrónicos de tipo \ac{CMOS} CD4001 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26834/TI/CD4001.html} y 	CD40106 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26839/TI/CD40106.html} con un precio estimado de \$100. A pesar de su bajo costo de implementación y siendo la mano de obra realizada por el profesor de la cátedra Electrónica Digital, es una tarea ajena al ejecutante del proyecto, por lo que no complementaría los conocimientos del alumno.
 		
 		\par \textbf{Propuesta 3: } Esta propuesta consiste en implementar la función de conversión de PWM a PPM o SBUS mediante un script que se implementará sobra la placa Arduino, donde se conectarán los cables provenientes del Rx a sus entradas y retornará en una de sus salidas un único cable con la información codificada en PPM o SBUS como estaba especificado en el sitio web del fabricante. El precio estimado de la placa Arduino UNO es de \$200, pero existen versiones reducidas como el Arduino Nano que cuentan con un precio a la mitad del Arduino UNO. De manera conveniente se contaba con la adquisición de un Arduino UNO, por lo que no hacia falta realizar una compra. Además, la implementación de este algoritmo contribuye al crecimiento de las aptitudes del ejecutante del proyecto como estudiante de Ingeniería en Informática. 
 		% TODO: Explicar codificación del script	 
@@ -544,7 +544,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\label{fig:conexionmotores}
 		\end{figure}
 		
-		Después de haber hecho las conexiones correspondientes a los motores, es necesario suministrarle energía de algún tipo de fuente para realizar las pruebas iniciales, es por eso que antes de conectar la bateria LiPo se considera la siguiente cuestión: ya que esta tiene una carga útil limitada se decide utilizar una fuente variable regulable disponible en el laboratorio de electrónica del \textit{sinc(i)}  con el objetivo de realizar las pruebas necesarias sin estar dependiendo de la carga de la batería. Antes de realizar la conexión se ajusta el voltaje según la batería Lipo existente (12V), dejando libre la cantidad de Amperes para que consuma lo que necesite. La fuente utilizada se puede observar en la Figura  \ref{fig:fuentevr}
+		Después de haber hecho las conexiones correspondientes a los motores, es necesario suministrarle energía de algún tipo de fuente para realizar las pruebas iniciales, es por eso que antes de conectar la batería LiPo se considera la siguiente cuestión: ya que esta tiene una carga útil limitada se decide utilizar una fuente variable regulable disponible en el laboratorio de electrónica del \textit{sinc(i)}  con el objetivo de realizar las pruebas necesarias sin estar dependiendo de la carga de la batería. Antes de realizar la conexión se ajusta el voltaje según la batería Lipo existente (12V), dejando libre la cantidad de Amperes para que consuma lo que necesite. La fuente utilizada se puede observar en la Figura  \ref{fig:fuentevr}
 		
 		\begin{figure}[h!]
 		\centering

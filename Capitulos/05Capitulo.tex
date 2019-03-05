@@ -48,7 +48,7 @@
 \end{FraseCelebre}
 
 \begin{resumen}
-	En el presente capítulo se describirá todo el proceso realizado de la fase denominada \textbf{ Prueba integral de la plataforma y del cuadricóptero} que forma parte del actual proyecto. En esta fase se contempla la tarea de \textit{Evaluar el funcionamiento del cuadricóptero y de la plataforma} con el fin de satisfacer los requerimientos estipulados y de manera complementaria que el sistema se comporte de forma estable. 
+	En el presente capítulo se describirá todo el proceso realizado de la fase denominada \textbf{ Prueba integral de la plataforma y del cuadricóptero} que forma parte del actual proyecto. En esta fase se contempla la tarea de \textit{Evaluar el funcionamiento del cuadricóptero y de la plataforma} con el fin de satisfacer los requerimientos estipulados y de manera complementaria que el sistema se comporte de forma satisfactoria. 
 \end{resumen}
 \newpage
 \section{Introducción}
@@ -94,12 +94,12 @@
 				
 				\begin{figure}[h!]
 					\centering
-					\includegraphics[width=0.7\linewidth, height=0.4\textheight]{Imagenes/Nivel0}
+					\includegraphics[width=1.2\linewidth, height=0.8\textheight]{Imagenes/Nivel0}
 					\caption{Plan de QA - Nivel 0}
 					\label{fig:nivel-0}
 				\end{figure}
 				
-				\newpage
+			\newpage
 			
 			\item \textbf{[Descripción] Nivel 1 } En este nivel lo que se busca es realizar los test de integración y funcionales (una vez ya finalizados los test del nivel 0), para esto se procede de la siguiente manera:
 			
@@ -108,7 +108,7 @@
 				
 				\begin{figure}[h!]
 					\centering
-					\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Nivel1}
+					\includegraphics[width=1.2\linewidth, height=0.8\textheight]{Imagenes/Nivel1}
 					\caption{Plan de QA - Nivel 1}
 					\label{fig:nivel1}
 				\end{figure}
@@ -121,7 +121,7 @@
 			
 		\begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Nivel2}
+			\includegraphics[width=\linewidth, height=0.8\textheight]{Imagenes/Nivel2}
 			\caption{Plan de QA - Nivel 2}
 			\label{fig:nivel2}
 		\end{figure}
@@ -172,11 +172,11 @@
 							\hline 
 							\multicolumn{2}{|c|}{\textbf{Especificaciones Arduino UNO}} \\ 
 							\hline 
-							Voltaje operativo & 5 [Volts] \\ 
+							Voltaje operativo & 5 [V] \\ 
 							\hline 
-							Entrada de voltaje (recomendado)  & 7 - 12  [Volts] \\ 
+							Entrada de voltaje (recomendado)  & 7 - 12  [V] \\ 
 							\hline 
-							Entrada de voltaje (limites) & 6 - 20 [Volts] \\ 
+							Entrada de voltaje (limites) & 4 - 20 [V] \\ 
 							\hline 
 						\end{tabular} 
 					\end{center}
@@ -185,11 +185,11 @@
 				\end{table}
 				
 			
-				Para reemplazar esta batería se ha utilizado una fuente transformador de 7 Volts y 800mA, como se puede observar en la Figura \ref{fig:fuentearduino}
+				Para reemplazar esta batería se ha utilizado una fuente transformador de 7V y 800\ac{mA}, como se puede observar en la Figura \ref{fig:fuentearduino}
 				\begin{figure}[h!]
 					\centering
 					\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/fuenteArduinoo}
-					\caption{Fuente de alimentación para Arduino UNO 7 [Volts] - 800[mA]}
+					\caption{Fuente de alimentación para Arduino UNO 7 [V] - 800[mA]}
 					\label{fig:fuentearduino}
 				\end{figure}
 	
@@ -204,9 +204,9 @@
 								\hline 
 								\multicolumn{2}{|c|}{Especificaciones motor} \\ 
 								\hline 
-								Voltaje de entrada & 7.4 - 14.8 [Volts] \\ 
+								Voltaje de entrada & 7.4 - 14.8 [V] \\ 
 								\hline 
-								Baterías & 2-4 célula Lipo / 5-12 de la célula de Ni-XX \\ 
+								Baterías & 2-4 célula Lipo / 5-12 celdas de Ni-XX \\ 
 								\hline 
 							\end{tabular} 
 						\end{center}
@@ -217,7 +217,7 @@
 			\begin{figure}[h!]
 				\centering
 				\includegraphics[width=0.6\linewidth, height=0.25\textheight]{Imagenes/fuente12A}
-				\caption{Fuente de alimentación Nitto de 12v - 5A}
+				\caption{Fuente de alimentación Nitto de 12v - 5\ac{A}}
 				\label{fig:fuente12a}
 			\end{figure}
 			
@@ -230,9 +230,9 @@
 						\hline 
 						\multicolumn{2}{|c|}{\textbf{Especificaciones Navio2}} \\ 
 						\hline 
-						Entrada de voltaje   & 4.75 - 5.25  [Volts] \\ 
+						Entrada de voltaje   & 4.75 - 5.25  [V] \\ 
 						\hline 
-						Consumo promedio & \< 150 [miliAmperes] \\ 
+						Consumo promedio & \< 150 [mA] \\ 
 						\hline 
 					\end{tabular} 
 				\end{center}
@@ -261,7 +261,7 @@
 
 		\subsubsection{Radio Control}
 
-			La comprobación del radio control en primera instancia se reemplazan las 8 baterías de 1.5v, con lo cual  tenemos una cantidad suministrada de 12V necesarios para alimentarlo, siendo justamente la misma cantidad de Voltaje proveniente de nuestra fuente de alimentación de la Figura \ref{fig:fuente12a}. Luego de conectar la fuente se procede a controlar que las señales enviadas por lo movimientos del Joystick de control lleguen de manera correcta al receptor de señal. Para realizar dicho procedimiento se debería medirlo mediante un osciloscopio y ver de manera precisa la forma de la señal. Pero al no contar con dicho instrumento se analizan los pines con el tester midiendo el voltaje de la corriente continua, y se observa que al producir movimientos en los joystick cada pin en promedio muestra un voltaje cercano a los 5 Volts. Exceptuando el primer pin (el que corresponde al Eje x del primer joystick) donde no se observan valor de voltaje significativos. De esta manera, se tendrá en cuenta dicha falencia para las próximas pruebas.  
+			La comprobación del radio control en primera instancia se reemplazan las 8 baterías de 1.5v, con lo cual  tenemos una cantidad suministrada de 12V necesarios para alimentarlo, siendo justamente el mismo voltaje entregado por la fuente de la Figura \ref{fig:fuente12a}. Luego de conectar la fuente se procede a controlar que las señales enviadas por lo movimientos del Joystick de control lleguen de manera correcta al receptor de señal. Para realizar dicho procedimiento se debería medir mediante un osciloscopio y ver de manera precisa la forma de la señal. Pero al no contar con dicho instrumento se analizan los pines con el tester midiendo el voltaje, y se observa que al producir movimientos en los joystick cada pin en promedio muestra un voltaje cercano a los 5 Volts. Exceptuando el primer pin (el que corresponde al Eje x del primer joystick) donde no se observan valor de voltaje significativos. De esta manera, se tendrá en cuenta dicha falencia para las próximas pruebas.  
 			
 
 		\subsubsection{Motores}
@@ -327,7 +327,7 @@ void loop()
 
 \end{lstlisting}\label{script:motor}
 
-			En la Figura \ref{fig:motortest} (que fue obtenida mediante el módulo de representación de datos en etapas posteriores) se puede observar una gráfica de tiempo vs rpm
+			En la Figura \ref{fig:motortest} (que fue obtenida mediante el módulo de representación de datos en etapas posteriores) se puede observar una gráfica de tiempo vs \ac{RPM}
 			
 			\begin{figure}[h!]
 				\centering
@@ -344,8 +344,8 @@ void loop()
 			La prueba de funcionamiento de dichas placas se comprueba con la interacción con el software desarrollado. 
 			
 			\subsubsection{Arduino}
-			En lo que compete a la placa Arduino, en el esquema presentado en la Figura \ref{fig:esquema-hardware} la misma cumple la función de un conversor PWM a PPM, el cual es el formato de señal necesario para que la placa Navio2 interprete las señales enviadas por el radio-control.  En nuestro caso, ya se han probado los dispositivos conectados al mismo, por lo tanto sólo nos queda corroborar que el tipo de señal enviada sea el correcto. Para realizar esta prueba es necesario contar con un osciloscopio, que muestre el tipo de señal enviada por el pin configurado en la placa Arduino. Como no disponemos momentáneamente de un osciloscopio, se recurre a la simulación; de manera que se utiliza el software de la siguiente página web  \url{www.library.io}, el cual proporciona un simulador de código y además nos da la posibilidad de mostrar la señal generada por un osciloscopio digital.   	
-			Luego de corroborar que la señal es correcta mediante el programa de simulación, se mide mediante un tester que la corriente promedio de salida se mantenga en un valor aceptable de voltaje para comprobar que la placa este funcionando correctamente.
+			En lo que compete a la placa Arduino, en el esquema presentado en la Figura \ref{fig:esquema-hardware} la misma cumple la función de un conversor PWM a PPM, el cual es el protocolo de señal necesario para que la placa Navio2 interprete las señales enviadas por el radio-control.  En nuestro caso, ya se han probado los dispositivos conectados al mismo, por lo tanto sólo nos queda corroborar que el tipo de señal enviada sea el correcto. Para realizar esta prueba es necesario contar con un osciloscopio, que muestre el tipo de señal enviada por el pin configurado en la placa Arduino. Como no disponemos momentáneamente de un osciloscopio, se recurre a la simulación; de manera que se utiliza el software de la siguiente página web  \url{www.library.io}, el cual proporciona un simulador de código y además nos da la posibilidad de mostrar la señal generada por un osciloscopio digital.   	
+			Luego de corroborar que la señal es correcta mediante el programa de simulación, se mide mediante un tester que la corriente promedio de salida se mantenga en un valor aceptable para comprobar que la placa este funcionando correctamente.
 			Por último, en la Figura \ref{fig:todoconectado} se puede apreciar todo el sistema conectado según el diagrama de la Figura \ref{fig:esquema-hardware}. Exceptuando los motores, que han sido debidamente desconectados al momento de realizar las pruebas; y únicamente se ha conectado un motor sobre una base de madera, con el fin de mantener el mismo inmóvil al momento de enviar las órdenes de arrancar. 
 			
 			\begin{figure}
@@ -418,9 +418,9 @@ Según el código mostrado, podemos realizar una conexión con nuestro vehículo med
 
 \begin{itemize}
 	
-	\item \textbf{Conexión mediante el puerto serial: } Para comprobar el funcionamiento, se han realizado anteriormente pruebas de conexión utilizando el protocolo SSH, el cual nos permite interactuar mediante una consola de comandos con nuestro vehículo, dándonos los datos solicitados sin ningún tipo de problema. Cabe mencionar que el objetivo de este tipo de conexión es utilizar los módulos inalámbricos XBee/LoRa. 
+	\item \textbf{Conexión mediante el puerto serial: } Para comprobar el funcionamiento, se han realizado anteriormente pruebas de conexión utilizando el protocolo \ac{SSH}, el cual nos permite interactuar mediante una consola de comandos con nuestro vehículo, dándonos los datos solicitados sin ningún tipo de problema. Cabe mencionar que el objetivo de este tipo de conexión es utilizar los módulos inalámbricos XBee/LoRa. 
 	
-	\item \textbf{Conexión mediante la red local: } Por comodidad al momento de transportar el vehículo en los lugares en que la fuente de alimentación necesitaba conectarse, este tipo de conexión nos ha resultado la más beneficiosa. El mismo utiliza un Router TP LINK TL-WR841N con una cantidad de 10 clientes conectados de manera inalámbrica en el domincilio utilizado. Además, se han realizado las mismas pruebas pero dentro de las instalaciones del \textit{sinc(i)} con una cantidad de 50 clientes  conectados aproximadamente al mismo router de pruebas. Y para este caso, la conexión sufría de varias interrupciones continuas.  Por lo que obtenemos como conclusión para estos casos que el router utilizado para el envio de comandos no debe ser utilizados por muchos usuarios, que de ser así la conexión no será la optima.
+	\item \textbf{Conexión mediante la red local: } Por comodidad al momento de transportar el vehículo en los lugares en que la fuente de alimentación necesitaba conectarse, este tipo de conexión nos ha resultado la más beneficiosa. El mismo utiliza un Router TP LINK TL-WR841N con una cantidad de 10 clientes conectados de manera inalámbrica en el domicilio utilizado. Además, se han realizado las mismas pruebas pero dentro de las instalaciones del \textit{sinc(i)} con una cantidad de 50 clientes  conectados aproximadamente al mismo router de pruebas. Y para este caso, la conexión sufría de varias interrupciones continuas.  Por lo que obtenemos como conclusión para estos casos que el router utilizado para el envio de comandos no debe ser utilizados por muchos usuarios, que de ser así la conexión no será la optima.
 	%TODO consultar que cantidad de clientes tiene la red aproximadamente
 \end{itemize}
 
@@ -467,7 +467,7 @@ La visualización de los datos es un aspecto importante cuando estamos controland
 \begin{itemize}
 	\item \textbf{Gráfico temporal de datos: }	El objetivo de este módulo de software en nuestro proyecto, como su nombre lo dice, es poder representar la evolución temporal de los datos provenientes de algún sensor o estado del vehículo mediante una gráfica. 
 	\par Según lo especificado en el ERS, se ha propuesto utilizar la librería Vispy\footnote{Sitio web de Vispy http://vispy.org/}, esta librería escrita en Python  está diseñada específicamente para la visualización interactiva de gran cantidad de datos de forma rápida, escalable y fácil.  Pero más allá de sus prestaciones, al momento de realizar las \textbf{pruebas de integración} se ha observado que el rendimiento de nuestro software se ha reducido considerablemente; esto es debido a que Vispy utiliza distintas tecnologías al renderizar las figuras, por lo que se debió incrustar dicho gráfico de manera brusca para poder ver su funcionamiento. Al momento de querer optimizar dicho rendimiento, al ser Vispy una librería nueva,  su documentación y por lo tanto su comunidad era escasa, y como es de esperar no se encontraba la ayuda necesaria para poder solventar los problemas presentes. Por tales motivos se recurre a la búsqueda de alguna alternativa que se adapte a nuestras necesidades; luego de encontrar y analizar las librerías disponibles se llega a la decisión de utilizar PyQtGraph\footnote{Sitio web de PyQtGraph http://pyqtgraph.org/}. Esta librería además de todas su prestaciones en el ámbito científico / matemático / aplicaciones ingenieriles, está construida con las mismas librerías que utilizamos en nuestro proyecto, que es PyQt\footnote{Sitio Web de PyQt https://riverbankcomputing.com/software/pyqt/intro}. Por lo tanto, esto generó una excelente adaptabilidad y rendimiento al momento de realizar las pruebas de integración.  
-	Para las \textbf{pruebas unitarias/estrés/funcionales} se ha creado el módulo \textit{GraphDatav2}, el cual ha sido puesto en prueba hasta su máximo potencial. Utilizando una señal de tipo aleatoria como datos de prueba (ya que el mismo contiene una gran cantidad de componentes frecuenciales en su dominio) y se ha generado su respectiva transformada de Fourier (utilizando la Transformada Rápida de Fourier), con el fin de corroborar que los cálculos de los mismo no ralenticen el funcionamiento del mismo, y luego de realizar las pruebas nos suministró  resultados  dentro de las expectativa de rendimiento. Siendo estas espectativas:
+	Para las \textbf{pruebas unitarias/estrés/funcionales} se ha creado el módulo \textit{GraphDatav2}, el cual ha sido puesto en prueba hasta su máximo potencial. Utilizando una señal de tipo aleatoria como datos de prueba (ya que el mismo contiene una gran cantidad de componentes frecuenciales) y se ha calculado su respectiva transformada de Fourier (utilizando la Transformada Rápida de Fourier), con el fin de corroborar que los cálculos de los mismos no ralenticen el funcionamiento del mismo, y luego de realizar las pruebas nos suministró  resultados  dentro de las expectativas de rendimiento. Siendo estas:
 	\begin{itemize}
 		\item Fluidez en la animación de la figuras.
 		\item Que no interrumpa el flujo de trabajo de la aplicación en general.
@@ -502,7 +502,7 @@ El control del vehículo, ya sea de forma manual o automática, es una de las func
 
 \begin{itemize}
 	
-	\item \textbf{Control Manual:} Para poder ejecutar las pruebas del funcionamiento del control manual, es indispensable que el módulo de comunicación funcione correctamente, ya que el control manual depende del mismo. Al momento de ejecutar las pruebas unitarias, entran en juego varias clases, como lo son la clase Vehículo y Joystick. Por lo tanto se ha realizado en primera instancia el control manual con envío de acciones con una duración definida de tiempo, simulando la interacción con el joystick, y para determinar si los comandos han sido interpretados por el vehículo se ha analizado la evolución temporal del giro de los motores (utilizando el módulo de representación de datos) medido en [rpm], y mostrándonos resultados aceptables y razonables como se puede ver en la Figura \ref{fig:testmotor}
+	\item \textbf{Control Manual:} Para poder ejecutar las pruebas del funcionamiento del control manual, es indispensable que el módulo de comunicación funcione correctamente, ya que el control manual depende del mismo. Al momento de ejecutar las pruebas unitarias, entran en juego varias clases, como lo son la clase Vehículo y Joystick. Por lo tanto se ha realizado en primera instancia el control manual con envío de acciones con una duración definida de tiempo, simulando la interacción con el joystick, y para determinar si los comandos han sido interpretados por el vehículo se ha analizado la evolución temporal del giro de los motores (utilizando el módulo de representación de datos) medido en [RPM], y mostrándonos resultados aceptables y razonables como se puede ver en la Figura \ref{fig:testmotor}
 	
 	
 	Luego de comprobar el correcto funcionamiento de los motores según comandos limitados en tiempo, se inicia el proceso de pruebas con el joystick. En este caso se utiliza una clase auxiliar \textit{Capturador} que ha sido creada con el fin de ejecutarse en un hilo de ejecución independiente para no congestionar el procesamiento de manera secuencial o interrumpir el hilo de ejecución padre . En el siguiente código podemos apreciar su funcionamiento:
@@ -561,7 +561,7 @@ El control del vehículo, ya sea de forma manual o automática, es una de las func
 		
 		\item \textbf{Despegar: } En este tipo de misión  el vehículo procede a elevarse, de esta manera, los motores generaron la suficiente propulsión para elevar la estructura del vehículo. 
 		
-		\item \textbf{Aterrizar: } Posicionando el vehículo a una altura no mayor a 30cm, dejamos que descienda el mismo suavemente, procurando que no se desestabilice y se apoye suavemente sobre la base a la cual está atada.
+		\item \textbf{Aterrizar: } Posicionando el vehículo a una altura no mayor a 30\ac{cm}, dejamos que descienda el mismo suavemente, procurando que no se desestabilice y se apoye suavemente sobre la base a la cual está atada.
 		
 		\item \textbf{Suspenderse en el aire: } Al momento de ejecutar dicha misión, se ha suspendido con una cuerda al vehículo con el fin de observar que el mismo pueda mantenerse en el aire el tiempo indicado en la misión (3 segundos) de manera estable. 
 		
@@ -598,7 +598,8 @@ El control del vehículo, ya sea de forma manual o automática, es una de las func
 
 	\section{Resultados}
 	
-		Como se pudo ver en las secciones anteriores las pruebas realizadas hasta el momento de los módulos pertinentes se han realizado de manera satisfactoria. Como paso final, se realizará una prueba funcional del proyecto ejecutando un conjunto de pruebas de vuelo que involucren la mayor cantidad de funcionalidades integradas en el software. Por tal razón y a modo de evitar roturas en la estructura del vehículo, se ha optado por enviar a imprimir un modelo 3D de la estructura del vehículo, con el fin de ganar autonomía en la reposición de partes y facilitar a que el proyecto sea de fácil implementación gracias a esta tecnología. Por lo tanto, se adjuntará un vídeo de las pruebas realizadas con dicho modelo.
+		Como se pudo ver en las secciones anteriores las pruebas realizadas hasta el momento de los módulos pertinentes se han realizado de manera satisfactoria. Como paso final, se realizará una prueba funcional del proyecto ejecutando un conjunto de pruebas de vuelo que involucren la mayor cantidad de funcionalidades integradas en el software. Por tal razón y a modo de evitar roturas en la estructura del vehículo, se ha optado por enviar a imprimir un modelo 3D de la estructura del vehículo, con el fin de ganar autonomía en la reposición de partes y facilitar a que el proyecto sea de fácil implementación gracias a esta tecnología.
+		% Por lo tanto, se adjuntará un vídeo de las pruebas realizadas con dicho modelo.
 		
 
 	

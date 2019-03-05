@@ -1,0 +1,92 @@
+\begin{thebibliography}{10}
+
+\bibitem{adams2013high}
+Stuart~M Adams, Marc~L Levitan, and Carol~J Friedland.
+\newblock High resolution imagery collection utilizing unmanned aerial vehicles
+  (uavs) for post-disaster studies.
+\newblock In {\em Advances in Hurricane Engineering: Learning from Our Past},
+  pages 777--793. 2013.
+
+\bibitem{doherty2007uav}
+Patrick Doherty and Piotr Rudol.
+\newblock A uav search and rescue scenario with human body detection and
+  geolocalization.
+\newblock In {\em Australasian Joint Conference on Artificial Intelligence},
+  pages 1--13. Springer, 2007.
+
+\bibitem{doc:dronekit}
+DroneKit.
+\newblock Librería dronekit - documentacion, 2015.
+
+\bibitem{duckett2014web}
+Jon Duckett.
+\newblock {\em Web Design with HTML, CSS, JavaScript and jQuery Set}.
+\newblock Wiley Publishing, 2014.
+
+\bibitem{sommer}
+Sommerville Ian.
+\newblock {\em Ingenieria del software}.
+\newblock Pearson Educacion, 2005.
+
+\bibitem{jones2005power}
+Dewi Jones.
+\newblock Power line inspection-a uav concept.
+\newblock In {\em Autonomous Systems, 2005. The IEE Forum on (Ref. No.
+  2005/11271)}, pages 8--pp. IET, 2005.
+
+\bibitem{lutz2013learning}
+Mark Lutz.
+\newblock {\em Learning Python: Powerful Object-Oriented Programming}.
+\newblock " O'Reilly Media, Inc.", 2013.
+
+\bibitem{maza2011experimental}
+Iv{\'a}n Maza, Fernando Caballero, Jes{\'u}s Capit{\'a}n, Jos{\'e}~Ramiro
+  Mart{\'\i}nez-de Dios, and An{\'\i}bal Ollero.
+\newblock Experimental results in multi-uav coordination for disaster
+  management and civil security applications.
+\newblock {\em Journal of intelligent \& robotic systems}, 61(1-4):563--585,
+  2011.
+
+\bibitem{mcmanus2017raspberry}
+Sean McManus and Mike Cook.
+\newblock {\em Raspberry Pi for dummies}.
+\newblock John Wiley \& Sons, 2017.
+
+\bibitem{ollero2006unmanned}
+Anibal Ollero and L~Merino.
+\newblock Unmanned aerial vehicles as tools for forest-fire fighting.
+\newblock {\em Forest Ecology and Management}, 234(1):S263, 2006.
+
+\bibitem{pressman88is}
+Roger~S Pressman and Jose~Maria Troya.
+\newblock Ingenier{\'\i}a del software.
+\newblock 1988.
+
+\bibitem{doc:qt}
+Qt.
+\newblock Librería qt - documentacion, 2015.
+
+\bibitem{tanenbaum2003redes}
+Andrew~S Tanenbaum.
+\newblock {\em Redes de computadoras}.
+\newblock Pearson educaci{\'o}n, 2003.
+
+\bibitem{valavanis2008advances}
+Kimon~P Valavanis.
+\newblock {\em Advances in unmanned aerial vehicles: state of the art and the
+  road to autonomy}, volume~33.
+\newblock Springer Science \& Business Media, 2008.
+
+\bibitem{valavanis2008unmanned}
+Kimon~P Valavanis, Paul Oh, and Les~A Piegl.
+\newblock {\em Unmanned Aircraft Systems: International Symposium on Unmanned
+  Aerial Vehicles, UAV 08}.
+\newblock Springer Science \& Business Media, 2008.
+
+\bibitem{zhang2012application}
+Chunhua Zhang and John~M Kovacs.
+\newblock The application of small unmanned aerial systems for precision
+  agriculture: a review.
+\newblock {\em Precision agriculture}, 13(6):693--712, 2012.
+
+\end{thebibliography}
