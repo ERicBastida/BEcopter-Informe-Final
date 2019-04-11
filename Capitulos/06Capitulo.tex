@@ -35,7 +35,7 @@
 %
 %---------------------------------------------------------------------
 
-\chapter{Trabajos futuros y conclusión}
+\chapter{Conclusión y trabajos futuros}
 \label{cap6}
 \label{cap:makefile}
 
@@ -54,66 +54,6 @@
 \end{resumen}
 
 \newpage
-
-
-%-------------------------------------------------------------------
-\section{Trabajos Futuros}
-%-------------------------------------------------------------------
-	\label{cap6:sec:future_works}
-	En lo que respecta a los trabajos futuros, el presente proyecto tiene la posibilidad de implentar varias funcionalidades en sus próximas versiones. Entre las más destacadas, se describen aqui un conjunto de funcionalidades que tienen como objetivo principal, poder abarcar más tipos de vehículos como tambien dar mejores funcionalidades al usuario al momento de utilizar el software. Dentro de estas mejoras tenemos: 
-	
-	\begin{itemize}
-		
-		\item \textbf{Adaptación para varios vehículos:} Por motivos de recursos materiales y poder observar si el proyecto puede ser viable, ùnicamente se ha desarrollado la aplicación para utilizarlo sobre vehículos aéreos no tripulados de tipo cuadricóptero ya que era el único disponible para encarar dicho proyecto. Por lo tanto, en las próximas versiones, se incluirá la opción de comandar vehículos tanto aéreos, terrestres y náuticos, como por ejemplo: submarinos, lanchas , aeroplanos, autitos y variantes del cuadricóptero como tricópteros, hexacópteros, etc. En las Figuras \ref{fig:ziphis},\ref{fig:rutgers-universitydrone}, \ref{fig:hydrofoil-625x350}, pueden apreciarse ejemplos de vehículos a los cuales el software puede incluir. 
-		
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/car_sinc}
-			\caption{Rover autónomo, propiedad del sinc(i) }
-			\label{fig:carsinc}
-		\end{figure}
-	
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/ziphis}
-			\caption{Proyecto Ziphius  \protect\footnotemark   } 
-			\label{fig:ziphis}
-			
-		\end{figure}
-		\footnotetext{Página web del proyecto Ziphius \url{http://myziphius.com/} }
-	
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/Rutgers_Drone}
-			\caption{Drone acuático \& volador de la Universidad de Rutgers\protect\footnotemark }
-			\label{fig:rutgers-universitydrone}
-			
-		\end{figure}
-	
-	    \footnotetext{Página web del proyecto \url{https://soe.rutgers.edu/rutgers-aerial-aquatic-drone-soars-higher-and-higher }}
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/Hydrofoil-625x350}
-			\caption{Drone aerodeslizador - Parrot \protect\footnotemark  }
-			\label{fig:hydrofoil-625x350}
-		\end{figure}
-	
-		\footnotetext{	Página web del proyecto \url{https://www.parrot.com/global/minidrones/parrot-hydrofoil-orak\#parrot-hydrofoil-orak }}
-
-		
-		
-		
-		\item \textbf{Mapa satelital: } Ya que dicho requerimiento no estaba especificado inicialmente, se ha descartado su implementación, debido a que no se consideraba relevante para pruebas iniciales en un marco de referencia local, por lo tanto para las próximas versiones se considerará incluir un mapa, con el propósito de poder geolocalizar los puntos objetivos y moverse según puntos ubicados sobre un mapa satelital utilizando el GPS.
-	
-		\item \textbf{Cámara: } Un aspecto importante a considerar es la utilización de un capturador de imágenes con su respectivo controlador de movimientos a traves del Gimbal. De esta manera se considerará reemplazar el fondo del HUD, por las imágenes capturardas por el sensor correspondiente. Además, de presentar opciones para el gestionamiento de las mismas, como almacenamiento, aplicaciones de algoritmos en tiempo real, alteraciones de la misma, etc. 
-		
-		\item \textbf{Conexión automática: } Hasta el momento para establecer una conexión entre el vehículo y el equipo era necesario  ingresar la dirección IP a la cual el equipo tenia asignado dentro de la misma red. Esto para el usuario conlleva un trabajo extra, por lo tanto, para las próximas versiones se integrarán más funcionalidades con el fin de facilitar esta conexión.  
-		
-		\item \textbf{Calibración de sensores: }Dentro de las reestricciones para utilizar la aplicación se requiere que los sensores estén calibrados, esto conlleva utilizar una aplicación extra, como se puede ver en la Figura \ref{fig:calibmavproxy}. Por lo que se considerará principalmente agregar dicha funcionalidad al mismo proyecto con el fin de canalizar estas opciones. 
-		
-		%\item Multicontrol de UAV's
-		
-	\end{itemize}
 
 
 %-------------------------------------------------------------------
@@ -139,6 +79,65 @@
 	
 \end{itemize}
 
+
+%-------------------------------------------------------------------
+\section{Trabajos Futuros}
+%-------------------------------------------------------------------
+\label{cap6:sec:future_works}
+En lo que respecta a los trabajos futuros, el presente proyecto tiene la posibilidad de implentar varias funcionalidades en sus próximas versiones. Entre las más destacadas, se describen aqui un conjunto de funcionalidades que tienen como objetivo principal, poder abarcar más tipos de vehículos como tambien dar mejores funcionalidades al usuario al momento de utilizar el software. Dentro de estas mejoras tenemos: 
+
+\begin{itemize}
+	
+	\item \textbf{Adaptación para varios vehículos:} Por motivos de recursos materiales y poder observar si el proyecto puede ser viable, ùnicamente se ha desarrollado la aplicación para utilizarlo sobre vehículos aéreos no tripulados de tipo cuadricóptero ya que era el único disponible para encarar dicho proyecto. Por lo tanto, en las próximas versiones, se incluirá la opción de comandar vehículos tanto aéreos, terrestres y náuticos, como por ejemplo: submarinos, lanchas , aeroplanos, autitos y variantes del cuadricóptero como tricópteros, hexacópteros, etc. En las Figuras \ref{fig:ziphis},\ref{fig:rutgers-universitydrone}, \ref{fig:hydrofoil-625x350}, pueden apreciarse ejemplos de vehículos a los cuales el software puede incluir. 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/car_sinc}
+		\caption{Rover autónomo, propiedad del sinc(i) }
+		\label{fig:carsinc}
+	\end{figure}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/ziphis}
+		\caption{Proyecto Ziphius  \protect\footnotemark   } 
+		\label{fig:ziphis}
+		
+	\end{figure}
+	\footnotetext{Página web del proyecto Ziphius \url{http://myziphius.com/} }
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/Rutgers_Drone}
+		\caption{Drone acuático \& volador de la Universidad de Rutgers\protect\footnotemark }
+		\label{fig:rutgers-universitydrone}
+		
+	\end{figure}
+	
+	\footnotetext{Página web del proyecto \url{https://soe.rutgers.edu/rutgers-aerial-aquatic-drone-soars-higher-and-higher }}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth, height=0.3\textheight]{Imagenes/Projects_examples/Hydrofoil-625x350}
+		\caption{Drone aerodeslizador - Parrot \protect\footnotemark  }
+		\label{fig:hydrofoil-625x350}
+	\end{figure}
+	
+	\footnotetext{	Página web del proyecto \url{https://www.parrot.com/global/minidrones/parrot-hydrofoil-orak\#parrot-hydrofoil-orak }}
+	
+	
+	
+	
+	\item \textbf{Mapa satelital: } Ya que dicho requerimiento no estaba especificado inicialmente, se ha descartado su implementación, debido a que no se consideraba relevante para pruebas iniciales en un marco de referencia local, por lo tanto para las próximas versiones se considerará incluir un mapa, con el propósito de poder geolocalizar los puntos objetivos y moverse según puntos ubicados sobre un mapa satelital utilizando el GPS.
+	
+	\item \textbf{Cámara: } Un aspecto importante a considerar es la utilización de un capturador de imágenes con su respectivo controlador de movimientos a traves del Gimbal. De esta manera se considerará reemplazar el fondo del HUD, por las imágenes capturardas por el sensor correspondiente. Además, de presentar opciones para el gestionamiento de las mismas, como almacenamiento, aplicaciones de algoritmos en tiempo real, alteraciones de la misma, etc. 
+	
+	\item \textbf{Conexión automática: } Hasta el momento para establecer una conexión entre el vehículo y el equipo era necesario  ingresar la dirección IP a la cual el equipo tenia asignado dentro de la misma red. Esto para el usuario conlleva un trabajo extra, por lo tanto, para las próximas versiones se integrarán más funcionalidades con el fin de facilitar esta conexión.  
+	
+	\item \textbf{Calibración de sensores: }Dentro de las reestricciones para utilizar la aplicación se requiere que los sensores estén calibrados, esto conlleva utilizar una aplicación extra, como se puede ver en la Fig.\ref{fig:calibmavproxy}. Por lo que se considerará principalmente agregar dicha funcionalidad al mismo proyecto con el fin de canalizar estas opciones. 
+	
+	%\item Multicontrol de UAV's
+	
+\end{itemize}
 
 % Variable local para emacs, para  que encuentre el fichero maestro de
 % compilación y funcionen mejor algunas teclas rápidas de AucTeX

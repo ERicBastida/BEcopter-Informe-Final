@@ -34,7 +34,8 @@
 %
 %---------------------------------------------------------------------
 
-\chapter{Obtención y Análisis de requerimientos}
+\chapter{Análisis de requerimientos}
+%\chapter{Obtención y Análisis de requerimientos}
 
 \begin{FraseCelebre}
 	\begin{Frase}
@@ -66,35 +67,35 @@
 	
 	Como la naturaleza del proyecto se origina en la necesidad de un software que pueda comunicarse con un vehículo aéreo no tripulado y además, poder enviarle acciones que puedan ser ejecutadas desde larga distancia tenemos que analizar el campo del \textit{aeromodelismo}, por lo que el ejecutante del proyecto deberá tener los conocimientos necesarios para el mismo. 
 	
-	Para iniciar con el desarrollo del proyecto es necesario contar con herramientas; estas ayudan al ejecutante a realizar las tareas integradas en cada etapa del proyecto, por lo tanto, es de suma importancia elegir de las indicadas para que el desarrollo se facilite. De esta manera, comenzaremos explicando las herramientas elegidas para el desarrollo del software. 
+	Para iniciar con el desarrollo del proyecto es necesario contar con herramientas; estas ayudan al ejecutante a realizar las tareas integradas en cada etapa del proyecto, por lo tanto, es de suma importancia elegir las indicadas para que el desarrollo se facilite. De esta manera, comenzaremos explicando las herramientas elegidas para el desarrollo del software. 
 
 
 \begin{itemize}
 	
-	\item \textbf{Lenguaje de programación Python: } Se trata de un lenguaje de programación multiparadigma, ya que soporta programación orientación a objetos, imperativa y, en menor medida, programación funcional. Es un lenguaje interpretado, usa tipado dinámico y es multiplataforma \cite{lutz2013learning}. Además corre con la ventaja de tener una gran cantidad de librerías que son de gran utilidad para el desarrollo de nuestro proyecto.
+	\item \textbf{Lenguaje de programación Python 2.7\footnote{Página web de Python Argentina http://www.python.org.ar/}: } Se trata de un lenguaje de programación multiparadigma, ya que soporta programación orientado a objetos, imperativa y, en menor medida, programación funcional. Es un lenguaje interpretado, usa tipado dinámico y es multiplataforma \cite{lutz2013learning}. Además corre con la ventaja de tener una gran biblioteca que son de gran utilidad para el desarrollo de nuestro proyecto.
 	
-	\item \textbf{PyCharm: } es un entorno de desarrollo integrado (IDE) utilizado en la programación de aplicaciones , específicamente en lenguaje Python. Es desarrollado por la compañía JetBrains. Proporciona análisis de código, un depurador gráfico, probador de unidades integrado, integración con sistemas de control de versiones (\ac{VCS}) y admite el desarrollo web con Django. Un aspecto importante es que Pycharm es multi-plataforma, con versiones para Windows, Mac OS y Linux; teniendo  disponibles dos versiones, \textit{Professional} y \textit{Community}, siendo esta última la elegida por su utilización gratuita. 
+	\item \textbf{PyCharm\footnote{Página web del IDE https://www.jetbrains.com/pycharm/ }: } es un entorno de desarrollo integrado (IDE) utilizado en la programación de aplicaciones , específicamente en lenguaje Python. Es desarrollado por la compañía JetBrains. Proporciona análisis de código, un depurador gráfico, probador de unidades integrado, integración con sistemas de control de versiones (\ac{VCS}) y admite el desarrollo web con Django. Un aspecto importante es que Pycharm es multi-plataforma, con versiones para Windows, Mac OS y Linux; teniendo  disponibles dos versiones, \textit{Professional} y \textit{Community}, siendo esta última la elegida por su utilización gratuita. 
 	
-	\item \textbf{Qt Designer:} Es un programa (módulo del Framework Qt) para desarrollar interfaces gráficas de usuario y multilenguajes debido a que genera un archivo \ac{XML} cuyo contenido es el formato del respectivo \ac{GUI}. Existiendo la posibilidad de convertirlo a Python, que es el lenguaje elegido para el desarrollo del presente proyecto.
+	\item \textbf{Qt Designer\footnote{Página web de Qt https://www.qt.io/qt-features-libraries-apis-tools-and-ide/}:} Es un programa (módulo del Framework Qt incluido en IDE Qt creator) para desarrollar interfaces gráficas de usuario y multilenguajes debido a que genera un archivo \ac{XML} cuyo contenido es el formato del respectivo \ac{GUI}. Existiendo la posibilidad de convertirlo a Python, que es el lenguaje elegido para el desarrollo del presente proyecto.
 	
 	
-	\item \textbf{PyQtGraph} es una librería gráfica y de creaciones de GUI enteramente construida en Python, basadas en las famosas librerías \textbf{PyQt4} / \textbf{PySide} y \textbf{numpy}. Está destinado para uso en aplicaciones matemáticas / científicas y de ingeniería. A pesar de estar completamente escrito en Python, la biblioteca es muy rápida debido a su gran apalancamiento con numpy para el procesamiento de números y al marco de GraphicsView de Qt para una visualización rápida. Por último, PyQtGraph se distribuye bajo la licencia de código abierto MIT.
+	\item \textbf{PyQtGraph\footnote{Página web de PyQtGraph http://www.pyqtgraph.org/}:} es una bliblioteca gráfica y de creaciones de GUI enteramente construida en Python, basadas en las famosas bibliotecas \textbf{PyQt4} / \textbf{PySide} y \textbf{numpy}. Está destinado para uso en aplicaciones matemáticas / científicas y de ingeniería. A pesar de estar completamente escrito en Python, la biblioteca es muy rápida debido a su gran apalancamiento con numpy para el procesamiento de números y al marco de GraphicsView de Qt para una visualización rápida. Por último, PyQtGraph se distribuye bajo la licencia de código abierto MIT.
 	
-	\item \textbf{PyQt4: } es una librería gráfica de Qt y realizada bajo Python. Esta librería nos da la opción de poder realizar una interfaz gráfica a nuestra plataforma, para que sea de fácil uso y entendimiento \cite{doc:qt}. Además, el software Qt Designer genera código en python utilizando esta libería automáticamente.
+	\item \textbf{PyQt4\footnote{Página web sobre la documentación de la herramienta https://www.riverbankcomputing.com/static/Docs/PyQt4/}: } es una biblioteca gráfica de Qt y realizada bajo Python. Esta nos da la opción de poder realizar una interfaz gráfica a nuestra plataforma, para que sea de fácil uso y entendimiento \cite{doc:qt}. Además, el software Qt Designer genera código en python utilizando esta libería automáticamente.
 	
-	\item \textbf{Pygame:} es un conjunto multi-plataforma de módulos de Python	diseñados para la escritura de videojuegos. Incluye gráficos por ordenador y librerías de sonido diseñado para ser utilizado con el	lenguaje de programación Python. Se distribuye bajo la GNU Lesser General Public License. Cuenta con muchos tutoriales, muchos de ellos online.
+	\item \textbf{Pygame\footnote{Página web de Pygame https://www.pygame.org/wiki/about}:} es un conjunto multi-plataforma de módulos de Python	diseñados para la escritura de videojuegos. Incluye gráficos y bibliotecas de sonido diseñado para ser utilizado con el	lenguaje de programación Python. Se distribuye bajo la GNU Lesser General Public License. Cuenta con muchos tutoriales, muchos de ellos online.
 	
-	\item \textbf{Socket:} Al utilizar Python, todos los programas utilizan sockets para lograr comunicarse con otros programas que pueden estar en	diferentes computadoras. Por lo que podemos definirlo como un	objeto que define una conexión entre dos entidades de una red. De esta manera, un socket posee la dirección IP de la máquina, el puerto en el que escucha, y el protocolo que utiliza. Los tipos y	funciones necesarios para trabajar con estos elementos están en el módulo socket de Python.
+	\item \textbf{Socket:} Al utilizar Python, todos los programas utilizan sockets para lograr comunicarse con otros programas que pueden estar en	diferentes computadoras. Por lo que podemos definirlos como un	objeto que define una conexión entre dos entidades de una red. De esta manera, un socket posee la dirección IP de la máquina, el puerto en el que escucha, y el protocolo que utiliza. Los tipos y	funciones necesarios para trabajar con estos elementos están en el módulo socket de Python.
 	
-	\item \textbf{Dronekit:} Es una API desarrollada por 3D Robotics en Python, flexible y abierta para el desarrollo de aplicaciones que se ejecutan desde el ordenador de abordo y comunican con el controlador de vuelo ArduPilot con un enlace de baja latencia \cite{doc:dronekit}.
+	\item \textbf{Dronekit\footnote{Página web de DroneKit http://dronekit.io/}:} Es una API desarrollada por 3D Robotics en Python, flexible y abierta para el desarrollo de aplicaciones que se ejecutan desde la computadora a abordo y comunican con el controlador de vuelo ArduPilot con un enlace de baja latencia \cite{doc:dronekit}.
 	
-	La \ac{API} se conecta con los drones a través del protocolo de comunicación MAVLink, un sistema utilizado habitualmente para conectar una estación de control de tierra y un vehículo no tripulado para transmitir, por ejemplo, la ubicación y la velocidad. Gracias a este protocolo, la API tiene acceso a los datos de la telemetría a través de Bluetooth, Wi-Fi o el sistema de radio 3DR a los parámetros del dron y también permite controlar el movimiento y las operaciones del propio aparato no tripulado.
+	La \ac{API} se conecta con los drones a través del protocolo de comunicación MAVLink, un sistema utilizado habitualmente para conectar una estación de control de tierra y un vehículo no tripulado para transmitir, por ejemplo, la ubicación y la velocidad. Gracias a este protocolo, la API tiene acceso a los datos de la telemetría a través de \textit{Bluetooth}, Wi-Fi o el sistema de radio 3DR a los parámetros del dron y también permite controlar el movimiento y las operaciones del propio aparato no tripulado.
 	
 	Entre las características destacadas tenemos:
 	\begin{itemize}
 		\item Desarrollar aplicaciones que mejoran el vuelo en piloto automático.
 		
-		\item Proporcionar características inteligentes a un dron como la visión por ordenador, la planificación de la ruta o el modelado en 3D.
+		\item Proporcionar características inteligentes a un dron como la visión a través de la computadora, la planificación de la ruta o el modelado en 3D.
 		
 		\item Permitir a un vehículo aéreo seguir objetivos mediante GPS.
 		
@@ -103,12 +104,12 @@
 	
 	
 	
-	Además es posible instalar en sistemas operativos Linux, Windows y Mac OS X , y la plataforma funciona tanto en ordenadores de escritorio como en móviles. También se puede trabajar con el \ac{SDK} y acceder a la API en la nube.
+	Además es posible instalar en sistemas operativos Linux, Windows y Mac OS X , y la plataforma funciona tanto en computadoras de escritorio como en móviles. También se puede trabajar con el \ac{SDK} y acceder a la API en la nube.
 	
 	
 	\item \textbf{Loggin:} Este módulo define funciones y clases que implementan un sistema flexible de registro de eventos para aplicaciones y bibliotecas. Ya que por naturaleza del proyecto estamos utilizando hardware para el desarrollo del mismo, es de suma importancia llevar un registro de los acontecimientos de cada uno, y en caso de generarse algún tipo de inconveniente poder detectarlo con gran facilidad.
 	
-	\item \textbf{Sphinx: } Sphinx es una herramienta que facilita la creación de documentación de una manera simple e inteligente, escrita por Georg Brandl y bajo la licencia BSD. Originalmente fue creada para la documentación de código escrita en Python, y cuenta con excelentes funcionalidades para la documentación de proyectos de software en varios idiomas. Sphinx se destaca por las siguientes características:
+	\item \textbf{Sphinx\footnote{Página web de Sphinx http://www.sphinx-doc.org/es/stable/intro.html}: } Sphinx es una herramienta que facilita la creación de documentación de una manera simple e inteligente, escrita por Georg Brandl y bajo la licencia BSD. Originalmente fue creada para la documentación de código escrita en Python, y cuenta con excelentes funcionalidades para la documentación de proyectos de software en varios idiomas. Sphinx se destaca por las siguientes características:
 	
 	\begin{itemize}
 		\item \textbf{Formatos de salida:} HTML (incluida la Ayuda HTML de Windows), LaTeX (para versiones PDF imprimibles), ePub, Texinfo, páginas de manual y texto sin formato.
@@ -143,7 +144,7 @@ Esta etapa del proyecto consiste en desarrollar un modelo que mejor represente l
 	\item \textbf{Casos de usos (CU).}
 \end{itemize}
 
-La primer propuesta consiste en realizar un bosquejo de la apariencia del software (GUI) y además, incluirle ciertos comportamientos mediante animaciones que den la sensación al usuario de que está utilizando el producto terminado. Por otro lado la segunda propuesta es realizar el modelo comportamental mediante casos de usos, esta técnica consiste en bosquejar un entorno que representa el ámbito donde están las opciones que brindará el sistema con sus respectivos actores o responsables de cada funcionalidad. Analizando las ventajas y desventajas de cada uno se decide utilizar la técnica de \textbf{Mockup}  ya que es más representativa del producto real y no utiliza lenguaje técnico; como por ejemplo el utilizado en los CU (\textit{include, extends, entorno y actores}). Para el desarrollo del mockup se utiliza la herramienta \textit{Balsamiq Mockup} \footnote{Utilizando su versión gratuita de 30 días, página web https://balsamiq.com/} y el resultado es anexado en  el apéndice \ref{ap1:GUI}.
+La primer propuesta consiste en realizar un bosquejo de la apariencia del software (GUI) y además, incluirle ciertos comportamientos mediante animaciones que den la sensación al usuario de que está utilizando el producto terminado. Por otro lado la segunda propuesta es realizar el modelo comportamental mediante casos de usos, esta técnica consiste en bosquejar un entorno que representa el ámbito donde están las opciones que brindará el sistema con sus respectivos actores o responsables de cada funcionalidad. Analizando las ventajas y desventajas de cada uno se decide utilizar la técnica de \textbf{Mockup}  ya que es más representativa del producto real y no utiliza lenguaje técnico; como por ejemplo el utilizado en los CU (\textit{include, extends, entorno y actores}). Para el desarrollo del mockup se utiliza la herramienta \textit{Balsamiq Mockup}\footnote{Utilizando su versión gratuita de 30 días, página web https://balsamiq.com/} y el resultado es anexado en  el apéndice \ref{ap1:GUI}.
 
 \par	Sin embargo, utilizar una técnica que detalle un aspecto superficial y un comportamiento general no ayuda en el inicio de implementación del sistema, es por eso, que en conjunto con el \textit{mockup} y el \textit{ERS} se decide implementar un modelo que ayude y/o simplifique más la tarea de codificación del software como lo es el \textit{diagrama de clases}. En ingeniería de software, un diagrama de clases dentro de lo que es el Lenguaje Unificado de Modelado (UML) es un tipo de diagrama de estructura estática que describe la estructura de un sistema mostrando las clases del sistema, sus atributos, operaciones, y las relaciones entre los objetos \cite{sommer}. 
 En el apéndice \ref{ap1:classDiagra_v0} se puede ver el respectivo diagrama inicial del software, cabe aclarar que el mismo durante todo el proceso del desarrollo del proyecto ha ido sufriendo cambios que eran necesarios, ya sea por nuevas funcionalidades, complementar las existentes  o simplemente desecharlas ya que no cumplían su respectivo fin. 

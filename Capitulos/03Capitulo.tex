@@ -1,7 +1,7 @@
 % -*-coding: iso-latin-1  -*-
 %---------------------------------------------------------------------
 %
-%                          Capítulo 2
+%                          Capítulo 3
 %
 %---------------------------------------------------------------------
 %
@@ -109,7 +109,8 @@
 
 
 
-\chapter{Gestión de componentes y armado del cuadricóptero}
+%\chapter{Gestión de componentes y armado del cuadricóptero}
+\chapter{Componentes y armado del cuadricóptero}
 \label{cap2:gest_y_arm}
 
 \begin{FraseCelebre}
@@ -129,7 +130,7 @@
 Este capítulo contiene información sobre el procedimiento que se ha llevado a cabo en el desarrollo de la tercera etapa del proyecto. Esta etapa consiste principalmente en describir los pasos realizados para el armado del vehículo aéreo no tripulado (\ac{VANT}) de tipo cuadricóptero. Además, se incluirán los inconvenientes que se han presentado en el transcurso del desarrollo del mismo con sus respectivas alternativas y/o soluciones. 
 
 % TODO: Consultar si dejar esta parte   
-\par Cabe mencionar que el hardware aquí descripto como también las herramientas utilizadas han sido proporcionadas por el\textit{ Instituto de Investigación en Señales, Sistemas e Inteligencia sinc(i)} con sede en la Facultad de Ingeniería y Ciencias Hídricas de la Universidad Nacional del Litoral y todo procedimiento riesgoso para el alumno ha sido siempre supervisado bajo personal idóneo en el tema.
+\par Cabe mencionar que el hardware aquí descrito como también las herramientas utilizadas han sido proporcionadas por el\textit{ Instituto de Investigación en Señales, Sistemas e Inteligencia sinc(i)} con sede en la Facultad de Ingeniería y Ciencias Hídricas de la Universidad Nacional del Litoral y todo procedimiento riesgoso para el alumno ha sido siempre supervisado bajo personal idóneo en el tema.
 
 \end{resumen}
 \newpage
@@ -138,7 +139,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 %-------------------------------------------------------------------
 \label{cap2:sec:hardware}
 
-	Antes de empezar con la descripción del armado de un VANT, es necesario tener en conocimiento el hardware que está involucrado en el vehículo y en consecuencia su funcionamiento, como por ejemplo, los sensores que forman parte del mismo y hacen que el cuadricóptero pueda realizar un vuelo de manera segura y controlada, el tipo de estructura usado para soportar los motores, la tecnología responsable de la comunicación y el ordenador que procesará toda esa información. Es por eso que iniciamos esta sección con una lista del hardware utilizado y su respectiva descripción:
+	Antes de empezar con la descripción del armado de un vehículo aéreo no tripulado (VANT), es necesario tener en conocimiento el hardware que está involucrado en el vehículo y en consecuencia su funcionamiento, como por ejemplo, los sensores que forman parte del mismo y hacen que el cuadricóptero pueda realizar un vuelo de manera segura y controlada, el tipo de estructura usado para soportar los motores, la tecnología responsable de la comunicación y la computadora que procesará toda esa información. Es por eso que iniciamos esta sección con una lista del hardware utilizado y su respectiva descripción:
 	
 	
 	\begin{enumerate}
@@ -148,17 +149,17 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\item Motor sin escobillas.
 		\item Raspberry Pi 3.
 		\item Navio2.
-		\item Arduino UNO \footnote{Estos dispositivos han sido utilizados únicamente en las etapas iniciales del proyecto para llevar adelante las pruebas iniciales de funcionamiento, por lo tanto y como se explicará más adelante, serán reemplazados por los módulos XBee. \label{footnote_hardware} }.
-		\item Radio Control \footnote{El comando de radio control es utilizado para corroborar el funcionamiento inicial de los motores en su conjunto. En cambio, al momento de utilizar el producto final de este proyecto el mismo será reemplazado por un joystick convencional.}.
+		\item Arduino UNO\footnote{Estos dispositivos han sido utilizados únicamente en las etapas iniciales del proyecto para llevar adelante las pruebas iniciales de funcionamiento, por lo tanto y como se explicará más adelante, serán reemplazados por los módulos XBee. \label{footnote_hardware} }.
+		\item Radio Control\footnote{El comando de radio control es utilizado para corroborar el funcionamiento inicial de los motores en su conjunto. En cambio, al momento de utilizar el producto final de este proyecto el mismo será reemplazado por un joystick convencional.}.
 		\item Joystick.
-		\item Router \footref{footnote_hardware}.
+		\item Router\footref{footnote_hardware}.
 		\item Módulos XBee
 		\item Bateria \ac{LiPo}.
 	\end{enumerate}
 
 	\subsection{Estructura del vehículo}
 
-		La estructura del cuadricóptero como se puede ver en la Figura \ref{fig:estrucuadricoptero} consta en su parte inferior de un patín de aterrizaje que cumplen la función (como en los helicópteros) de soportar el vehículo cuando se apoye sobre tierra y mantener las hélices lo más alejado posible de piso cuando se encuentra en reposo. En su parte superior proporciona una base donde es posible instalar los dispositivos electrónicos que controlan al vehículo. Por último, desde la base se extienden 4 brazos con la función de ser soporte a los motores con sus respectivas hélices y además, en cada motor se le incluye su controlador electrónico de velocidad o ESC (\textit{Electronic Speed Controller}). 
+		La estructura del cuadricóptero como se puede ver en la Fig. \ref{fig:estrucuadricoptero} consta en su parte inferior de un patín de aterrizaje que cumplen la función (como en los helicópteros) de soportar el vehículo cuando se apoye sobre tierra y mantener las hélices lo más alejado posible de piso cuando se encuentra en reposo. En su parte superior proporciona una base donde es posible instalar los dispositivos electrónicos que controlan al vehículo. Por último, desde la base se extienden 4 brazos con la función de ser soporte a los motores con sus respectivas hélices y además, en cada motor se le incluye su controlador electrónico de velocidad o ESC (\textit{Electronic Speed Controller}). 
 
 
 
@@ -170,7 +171,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\label{fig:estrucuadricoptero}
 		\end{figure}
 
-		El material de la estructura está hecho con fibra de carbono \footnote{Aunque el mismo puede ser reemplazado por otro tipo de estructura, por ejemplo, un modelo impreso por una impresora 3D}, este consta con la propiedad de tener una elevada resistencia mecánica que será de suma importancia ya que el vehículo presenta altas probabilidades de sufrir algún choque o aterrizaje forzoso, además de ser un material sumamente liviano por lo que disminuirá la fuerza necesaria de los motores para mantener un vuelo y por tanto, menos consumo de batería.
+		El material de la estructura está hecho con fibra de carbono\footnote{Aunque el mismo puede ser reemplazado por otro tipo de estructura, por ejemplo, un modelo impreso por una impresora 3D}, este consta con la propiedad de tener una elevada resistencia mecánica que será de suma importancia ya que el vehículo presenta altas probabilidades de sufrir algún choque o aterrizaje forzoso, además de ser un material sumamente liviano por lo que disminuirá la fuerza necesaria de los motores para mantener un vuelo y por tanto, menos consumo de batería.
 		
 
 	\subsection{Controlador Electrónico de Velocidad}
@@ -194,7 +195,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\end{figure}
 
 	\subsection{Raspberry Pi 3}
-		Es un ordenador de tamaño reducido que trata de ofrecer las mismas funcionalidades y componentes que el de un ordenador común, entre sus componentes principales esta placa reducida tiene: memoria RAM, GPU, puertos USB, HDMI, ranura para tarjeta SD, conector para una cámara, conectividad WiFi, Ethernet, Bluetooth y 40 pines GPIO(\textit{General Purpose Input/Output}) donde es posible extender sus características instalando hardware extra como sensores, led, motores, interfaces, etc\cite{mcmanus2017raspberry}. Además de estas características contamos con las ventajas de costo accesible y un consumo mucho menor, lo que nos da una independencia temporal generosa al conectarla con baterías. 
+		Es una computadora de tamaño reducido que trata de ofrecer las mismas funcionalidades y componentes a las de una PC común, entre sus componentes principales esta placa reducida tiene: memoria RAM, GPU, puertos USB, HDMI, ranura para tarjeta SD, conector para una cámara, conectividad WiFi, Ethernet, Bluetooth y 40 pines GPIO(\textit{General Purpose Input/Output}) donde es posible extender sus características instalando hardware extra como sensores, led, motores, interfaces, etc\cite{mcmanus2017raspberry}. Además de estas características contamos con las ventajas de costo accesible y un consumo mucho menor, lo que nos da una independencia temporal generosa al conectarla con baterías. 
 		\par \textbf{Especificaciones:}
 			\begin{itemize}
 				
@@ -242,7 +243,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\end{enumerate}
 
 
-	\subsubsection{Entrada/Salida RC (Radio Control)} \label{sec:ioRC}
+	\subsubsection{Entrada/Salida del Radio Control (RC) } \label{sec:ioRC}
 		La placa Navio2 tiene una entrada habilitada para recibir información proveniente del emisor mediante un radio control, aceptando señales por los protocolos de comunicación PPM (Modulación por Posición de Pulso) y SBUS únicamente.
 		
 
@@ -292,13 +293,13 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 
 	\subsection{Router}
 	
-		Un router es un dispositivo de hardware que permite la interconexión de ordenadores en red. El router o enrutador es un dispositivo que opera en capa de nivel de 3 del modelo OSI. Así, permite que varias redes u ordenadores se conecten entre sí y, por ejemplo, compartan una misma conexión de Internet. 
+		Un router es un dispositivo de hardware que permite la interconexión entre computadoras en red. El router o enrutador es un dispositivo que opera en capa de nivel de 3 del modelo OSI. Así, permite que varias redes u ordenadores se conecten entre sí y, por ejemplo, compartan una misma conexión de Internet. 
 		\par Este dispositivo es usado en las etapas iniciales de prueba y desarrollo del proyecto, con el fin de utilizar una alternativa más accesible al público en general y corroborar sus limitaciones, que como se expondrán más adelante tiene sus respectivas limitaciones. Siendo el mismo reemplazada por los módulos de comunicación \textit{XBee}. Estos módulos permiten una mayor distancia de cobertura y funciona exclusivamente para una conexión, lo que logra una mayor confiabilidad que, comparando con el router que debe gestionar varias conexiones a la vez es mucho más eficiente. Pero para fines de testeo y comprobación de funcionalidades el mismo representa una opción tentativa, ya que las pruebas se realizaran en un ámbito controlado y de poca distancia. 		
 	
 
 	\subsection{Módulos XBee}
 	
-		Los módulos XBee \footnote{Página web de XBee  https://www.digi.com/xbee} son soluciones integradas que brindan un medio inalámbrico para la interconexión y comunicación entre dispositivos. Estos módulos utilizan el protocolo de red llamado IEEE 802.15.4 para crear redes FAST POINT-TO-MULTIPOINT (punto a multipunto); o para redes PEER-TO-PEER (punto a punto). Están diseñados para aplicaciones que requieren de un alto tráfico de datos, baja latencia y una sincronización de comunicación predecible.
+		Los módulos XBee\footnote{Página web de XBee  https://www.digi.com/xbee} son soluciones integradas que brindan un medio inalámbrico para la interconexión y comunicación entre dispositivos. Estos módulos utilizan el protocolo de red llamado IEEE 802.15.4 para crear redes FAST POINT-TO-MULTIPOINT (punto a multipunto); o para redes PEER-TO-PEER (punto a punto). Están diseñados para aplicaciones que requieren de un alto tráfico de datos, baja latencia y una sincronización de comunicación predecible.
 	
 		\begin{figure}[h!]
 			\centering
@@ -318,12 +319,38 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\label{fig:bateria}
 		\end{figure}
 	
+	\subsection{Esquema de las conexiones del hardware}
+		Finalizando con la descripción del hardware interviniente en este proyecto, a continuación se ilustra un diagrama en bloques de la respectiva conexión de los componentes, con el propósito de tener en mente sus respectivas funcionalidades e interacciones entre cada uno. En la Fig. \ref{fig:diagramabloqueconexionesINI} se muestra el esquema inicial de conexiones, en el cual se puede ver que existen varias conexiones dirigidas al vehículo; la primera de todas es la interacción entre la Raspberry Pi - Router - PC, estos componentes relacionados tienen el propósito inicial de establecer la comunicación encargada de enviar y recibir información sobre:
+		
+		\begin{itemize}
+			\item Estado de los sensores y general del vehículo
+			\item Gestionamiento de comandos.
+		\end{itemize}
+		
+		La segunda conexión intervienen los elementos Navio2- Arduino - Receptor RC - Radio Control, este tiene el propósito (limitante) de enviar únicamente los comandos de vuelo del Radio Control al vehículo utilizando radio frecuencia, y como se puede apreciar esta funcionalidad ya es posible realizarla en la primera conexión, por lo tanto para fines de pruebas esta configuración es necesaria/obligatoria por las especificaciones del firmware instalado en la Raspberry Pi 3. Como el objetivo de este proyecto no es acomplejar el procedimiento sino simplificarlo, en la Fig. \ref{fig:diagramabloqueconexionesFIN} se puede apreciar las conexiones finales pretendidas, brindando más detalle de su comportamiento en el capitulo \ref{cap4:pruebas}.
+
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\linewidth, height=0.3\textheight]{Imagenes/diagramaBloqueConexiones}
+			\caption{Diagrama en bloques de las conexiones iniciales}
+			\label{fig:diagramabloqueconexionesINI}
+		\end{figure}
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=\linewidth, height=0.3\textheight]{Imagenes/diagramaBloqueConexionesFinal}
+			\caption{Diagrama en bloques de las conexiones finales}
+			\label{fig:diagramabloqueconexionesFIN}
+		\end{figure}
+		
+	
+
 
 
 \section{Procedimiento}
 
 	\subsection{Armado del cuerpo}
-		Una vez ya descripto el hardware adquirido para el desarrollo de esta etapa,  estamos habilitados para iniciar el proceso del armado del vehículo. En primera instancia se comienza con el cuerpo del cuadricóptero, esta actividad  es realizada en base a las instrucciones que nos proporciona el vendedor \textit{ValueHobby} \footnote{http://www.valuehobby.com/media/wysiwyg/upload/Manual/bumblebee-manual.pdf} obteniendo el cuerpo armado como se puede observar en la Figura \ref{fig:armado}. Como medida de seguridad antes de realizar las pruebas se han extraído las hélices. Pero al momento se ser instaladas con el propósito de que el cuadricóptero no se tumbe con respecto a su eje de orientación cuando este se encuentre en el aire se deben colocar las hélices pares de tal manera que su propulsión al momento de girar sea en sentido contra-horario y las hélices impares deben estar colocadas en sentido horario tal como se ven en la Figura \ref{fig:esquemacuadricoptero} . 
+		Una vez ya descripto el hardware adquirido para el desarrollo de esta etapa,  estamos habilitados para iniciar el proceso del armado del vehículo. En primera instancia se comienza con el cuerpo del cuadricóptero, esta actividad  es realizada en base a las instrucciones que nos proporciona el vendedor \textit{ValueHobby}\footnote{http://www.valuehobby.com/media/wysiwyg/upload/Manual/bumblebee-manual.pdf} obteniendo el cuerpo armado como se puede observar en la Fig. \ref{fig:armado}. Como medida de seguridad antes de realizar las pruebas se han extraído las hélices. Pero al momento se ser instaladas con el propósito de que el cuadricóptero no se tumbe con respecto a su eje de orientación cuando este se encuentre en el aire se deben colocar las hélices pares de tal manera que su propulsión al momento de girar sea en sentido contra-horario y las hélices impares deben estar colocadas en sentido horario tal como se ven en la Fig. \ref{fig:esquemacuadricoptero} . 
 		
 		\begin{figure}[h!]
 			\centering
@@ -343,7 +370,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		En esta sección se describe el armado del piloto del cuadricóptero, este va a ser el encargado en gestionar todos los sensores, enviar señales a los motores y administrar la información generada por estos sensores con el fin de ser enviadas a una maquina cliente y que este las pueda interpretar, entre otras cosas.
 		
 		
-		\par Para comenzar con el armado debemos instalar la placa Navio2 sobre la Raspberry Pi 3, proporcionando así los sensores indispensables para el control, monitoreo y vuelo del vehículo ya que el ordenador de placa reducida Raspberry Pi no cuenta con estos sensores de forma nativa. Por lo tanto, se procede a conectar los 40 pines GPIO sobre la placa Navio2, como se muestra en la Figura \ref{fig:navio2-mount}
+		\par Para comenzar con el armado debemos instalar la placa Navio2 sobre la Raspberry Pi 3, proporcionando así los sensores indispensables para el control, monitoreo y vuelo del vehículo ya que el ordenador de placa reducida Raspberry Pi no cuenta con estos sensores de forma nativa. Por lo tanto, se procede a conectar los 40 pines GPIO sobre la placa Navio2, como se muestra en la Fig. \ref{fig:navio2-mount}
 		
 		
 		\begin{figure}[h!]
@@ -353,7 +380,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\label{fig:navio2-mount}
 		\end{figure}
 		
-		Luego se procede a conectar la antena GNSS sobre la placa Navio2. Una vez ya conectado se debe verificar el correcto funcionamiento de todos los sensores presentes, para eso debemos tener un software que gestione eficazmente todo el hardware y sea el intermediario entre estos dispositivos electrónicos y el usuario, además de proporcionar servicios de utilidad para el mismo, en otras palabras, un sistema operativo (SO). Antes de instalar cualquier sistema operativo hay que tener en cuenta que  estamos en presencia de un ordenador de placa reducida, es decir, el hardware de los componentes del mismo como memoria, procesador, puertos de entrada y salida, etcétera no son los mismos a los ordenadores comerciales que vemos comúnmente; por poner un ejemplo, el procesador que contiene la Raspberry es un ARM1176JZF-S, con esto queremos decir que el CPU en si mismo esta fabricado bajo una arquitectura con un conjunto reducido de instrucciones (o por su siglas en ingles \textit{RISC - Reduced instruction set computing}) en comparación a un CPU que son utilizados normalmente en un ordenador hogareño. Por tal motivo, es necesario de un SO que se adapte a estas características; afortunadamente existen varias organizaciones o empresas que desarrollan y distribuyen este tipo de producto, por ejemplo, \textit{Canonical Ltd} y \textit{Microsoft} han adaptado sus sistemas operativos para este tipo de ordenadores. En nuestro caso utilizaremos un SO proporcionado por la empresa \textit{Emlid} basado en una distribución de Linux llamada \textit{Raspbian} (acrónimo entre Raspberry Pi y Debian) donde ya vienen preinstaladas las herramientas necesarias.
+		Luego se procede a conectar la antena GNSS sobre la placa Navio2. Una vez ya conectado se debe verificar el correcto funcionamiento de todos los sensores presentes, para eso debemos tener un software que gestione eficazmente todo el hardware y sea el intermediario entre estos dispositivos electrónicos y el usuario, además de proporcionar servicios de utilidad para el mismo, en otras palabras, un sistema operativo (SO). Antes de instalar cualquier sistema operativo hay que tener en cuenta que  estamos en presencia de una computadora reducida, es decir, el hardware de los componentes del mismo como memoria, procesador, puertos de entrada y salida, etcétera no son los mismos a las PC convensionales ; por poner un ejemplo, el procesador que contiene la Raspberry es un ARM1176JZF-S, con esto queremos decir que el CPU en si mismo esta fabricado bajo una arquitectura con un conjunto reducido de instrucciones (o por su siglas en ingles \textit{RISC - Reduced instruction set computing}) en comparación a un CPU que son utilizados normalmente en una PC hogareña. Por tal motivo, es necesario de un SO que se adapte a estas características; afortunadamente existen varias organizaciones o empresas que desarrollan y distribuyen este tipo de producto, por ejemplo, \textit{Canonical Ltd} y \textit{Microsoft} han adaptado sus sistemas operativos para este tipo de computadoras. En nuestro caso utilizaremos un SO proporcionado por la empresa \textit{Emlid} basado en una distribución de Linux llamada \textit{Raspbian} (acrónimo entre Raspberry Pi y Debian) donde ya vienen preinstaladas las herramientas necesarias.
 		\par Una vez seleccionado el SO a instalar, se procede a descargar la imagen y grabarla en una tarjeta SD, una vez realizado este paso se carga la tarjeta SD en la ranura disponible en la Raspberry Pi, se enchufa un teclado, mouse y un conector HDMI que se encuentra conectado a un monitor, y por último se procede a encender el dispositivo  mostrándonos la siguiente imagen: 
 		
 		
@@ -364,13 +391,13 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\label{fig:pantallainicio}
 		\end{figure}
 		
-		Como se puede observar en la imagen \ref{fig:pantallainicio} la pantalla de bienvenida nos muestra los siguientes pasos que hay que seguir para configurar nuestro piloto.
+		Como se puede observar en la Fig.\ref{fig:pantallainicio} la pantalla de bienvenida nos muestra los siguientes pasos que hay que seguir para configurar nuestro piloto.
 		\begin{itemize}
 			\item \textbf{Paso 1:} Se selecciona el tipo de vehículo que se va a manejar, utilizando el comando \textit{update-alternatives}. Esta función se encarga de seleccionar como predeterminada la opción ingresada dentro de otras alternativas, es decir, es posible que tenga en el sistema varios programas instalados a la vez  que  realizan  la
 			misma  función. Por ejemplo, muchos sistemas tienen varios editores de texto instalados al
 			mismo tiempo, lo que deja la elección de  qué  editor  de  texto  utilizar  en  manos  del
 			usuario,  si  éste lo desea, pero hace difícil que un programa elija la opción correcta si
-			el usuario no ha definido ninguna preferencia. En nuestro caso es el tipo de autopiloto como puede ser arducopter, arduplaner y ardurover. Como estamos por utilizar un cuadricóptero ingresamos:
+			el usuario no ha definido ninguna preferencia. En nuestro caso es el tipo de auto-piloto como puede ser arducopter, arduplaner y ardurover. Como estamos por utilizar un cuadricóptero ingresamos:
 			
 			\begin{listing}[style=consola, numbers=none]
 				> sudo update-alternatives --config arducopter
@@ -378,7 +405,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 				
 				
 				
-				\item \textbf{Paso 2:} Se debe ingresar dentro del archivo /etc/default/arducopter el IP perteneciente al GCS (\textit{Ground Control Station}), es decir, este archivo contiene la dirección IP del ordenador que enviará y recibirá información del vehículo. Además, brinda la opción de seleccionar la interfaz por el que se realizará la comunicación. En nuestro caso lo haremos realizaremos mediante tecnología Wifi y utilizando el protocolo UDP \footnote{Es posible también utilizar el protocolo \ac{TCP}, pero la razón por la cual se emplea este método es porque es un protocolo no orientado a la conexión, por lo tanto como estaremos realizando maniobras que son ejecutadas por el vehículo en tiempo real necesitamos la menor latencia posible y no estar esperando paquetes de confirmación todo el tiempo}. 
+				\item \textbf{Paso 2:} Se debe ingresar dentro del archivo /etc/default/arducopter el IP perteneciente al GCS (\textit{Ground Control Station}), es decir, este archivo contiene la dirección IP de la computadora que enviará y recibirá información del vehículo. Además, brinda la opción de seleccionar la interfaz por el que se realizará la comunicación. En nuestro caso lo haremos realizaremos mediante tecnología Wifi y utilizando el protocolo UDP\footnote{Es posible también utilizar el protocolo \ac{TCP}, pero la razón por la cual se emplea este método es porque es un protocolo no orientado a la conexión, por lo tanto como estaremos realizando maniobras que son ejecutadas por el vehículo en tiempo real necesitamos la menor latencia posible y no estar esperando paquetes de confirmación todo el tiempo}. 
 				
 				\item \textbf{Paso 3:} Una vez ya seleccionado el tipo de vehículo a utilizar e ingresado el IP de nuestro GCS se debe iniciar los servicios y procesos proporcionados por arducopter (ya que este se encargará de administrar las funcionalidades pertinentes), para eso se utiliza el gestor del sistema y servicios \textbf{systemd} de Linux con el objetivo de iniciar un conjunto nuevo de procesos y servicios encapsulados en Arducopter, para eso utilizamos los siguiente comandos :
 				
@@ -458,14 +485,14 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 
 
 	\subsection{Primeras pruebas}	\label{sec:primprue}
-		Ya instalado el firmware correspondiente dentro de la Raspberry Pi estamos en condiciones de poder hacer nuestras primeras pruebas, para eso, dentro del mismo vehículo se ejecutan programas proporcionados por ArduPilot para poder observar los datos generados por los sensores. En la misma carpeta de instalación se encuentran programas de ejemplo para observar los datos provenientes de los sensores y al ejecutar dichos programas evidentemente la información mostrada es errónea ya que estos sensores no se encuentran calibrados, por lo tanto, para realizar estas correcciones utilizamos las herramientas recomendadas y proporcionadas por la empresa ArduPilot como es el software \textbf{MavProxy} (Figura \ref{fig:mavproxy}), este software muestra a través de una consola todos los datos obtenidos de los sensores, estado del vehículo entre otras cosas, siendo lo más importante poder calibrar los sensores.
+		Ya instalado el firmware correspondiente dentro de la Raspberry Pi estamos en condiciones de poder hacer nuestras primeras pruebas, para eso, dentro del mismo vehículo se ejecutan programas proporcionados por ArduPilot para poder observar los datos generados por los sensores. En la misma carpeta de instalación se encuentran programas de ejemplo para observar los datos provenientes de los sensores y al ejecutar dichos programas evidentemente la información mostrada es errónea ya que estos sensores no se encuentran calibrados, por lo tanto, para realizar estas correcciones utilizamos las herramientas recomendadas y proporcionadas por la empresa ArduPilot como es el software \textbf{MavProxy} (Fig.\ref{fig:mavproxy}), este software muestra a través de una consola todos los datos obtenidos de los sensores, estado del vehículo entre otras cosas, siendo lo más importante poder calibrar los sensores.
 		\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth, height=0.4\textheight]{Imagenes/mavproxy}
 		\caption{Captura de pantalla del Software MavProxy}
 		\label{fig:mavproxy}
 		\end{figure} 
-		Así que una vez iniciado el software se prueba la opción de calibrarlos. Al momento de iniciar el proceso de calibración surge el inconveniente de no poder iniciarlo, ya que para realizar dicha acción es de suma importancia tener conectado el radio control al vehículo. Esto genera un inconveniente al momento del desarrollo de esta fase ya que la compra de un radio control conllevaría un tiempo extra en el cronograma del proyecto. Buscando alternativas en conjunto se descubre que es posible realizar la calibración mediante un script que debíamos codificar. Analizando esta propuesta se descubre que para generar dicho script es necesario de estudiar las librerías involucradas lo que conlleva un tiempo considerado y únicamente el objetivo de esta fase es realizar la comprobación funcional de estos dispositivos. De esta manera se obtiene provisoriamente un radio control como se ilustra en la imagen \ref{fig:radiocontrol}
+		Así que una vez iniciado el software se prueba la opción de calibrarlos. Al momento de iniciar el proceso de calibración surge el inconveniente de no poder iniciarlo, ya que para realizar dicha acción es de suma importancia tener conectado el radio control al vehículo. Esto genera un inconveniente al momento del desarrollo de esta fase ya que la compra de un radio control conllevaría un tiempo extra en el cronograma del proyecto. Buscando alternativas en conjunto se descubre que es posible realizar la calibración mediante un script que debíamos codificar. Analizando esta propuesta se descubre que para generar dicho script es necesario de estudiar las bibliotecas involucradas lo que conlleva un tiempo considerado y únicamente el objetivo de esta fase es realizar la comprobación funcional de estos dispositivos. De esta manera se obtiene provisoriamente un radio control como se ilustra en la Fig.\ref{fig:radiocontrol}
 		
 		\begin{figure}[h!]
 		\centering
@@ -483,9 +510,9 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\end{enumerate}
 		
 		Para estas propuestas se realiza el siguiente análisis:\newline
-		\par \textbf{Propuesta 1: } La adquisición de un nuevo radio control más allá de sus futuros usos conllevaría un elevado costo adicional para el proyecto ya que el mismo tiene un valor de \$8000 \footnote{Fecha consultada, septiembre del 2017}, además atrasaría el cronograma los días que se deban esperar el producto desde su ciudad de origen.
+		\par \textbf{Propuesta 1: } La adquisición de un nuevo radio control más allá de sus futuros usos conllevaría un elevado costo adicional para el proyecto ya que el mismo tiene un valor de \$8000\footnote{Fecha consultada, septiembre del 2017}, además atrasaría el cronograma los días que se deban esperar el producto desde su ciudad de origen.
 		
-		\par \textbf{Propuesta 2: } Consiste en realizar la compra de los componentes electrónicos de tipo \ac{CMOS} CD4001 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26834/TI/CD4001.html} y 	CD40106 \footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26839/TI/CD40106.html} con un precio estimado de \$100. A pesar de su bajo costo de implementación y siendo la mano de obra realizada por el profesor de la cátedra Electrónica Digital, es una tarea ajena al ejecutante del proyecto, por lo que no complementaría los conocimientos del alumno.
+		\par \textbf{Propuesta 2: } Consiste en realizar la compra de los componentes electrónicos de tipo \ac{CMOS} CD4001\footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26834/TI/CD4001.html} y 	CD40106\footnote{http://www.alldatasheet.es/datasheet-pdf/pdf/26839/TI/CD40106.html} con un precio estimado de \$100. A pesar de su bajo costo de implementación y siendo la mano de obra realizada por el profesor de la cátedra Electrónica Digital, es una tarea ajena al ejecutante del proyecto, por lo que no complementaría los conocimientos del alumno.
 		
 		\par \textbf{Propuesta 3: } Esta propuesta consiste en implementar la función de conversión de PWM a PPM o SBUS mediante un script que se implementará sobra la placa Arduino, donde se conectarán los cables provenientes del Rx a sus entradas y retornará en una de sus salidas un único cable con la información codificada en PPM o SBUS como estaba especificado en el sitio web del fabricante. El precio estimado de la placa Arduino UNO es de \$200, pero existen versiones reducidas como el Arduino Nano que cuentan con un precio a la mitad del Arduino UNO. De manera conveniente se contaba con la adquisición de un Arduino UNO, por lo que no hacia falta realizar una compra. Además, la implementación de este algoritmo contribuye al crecimiento de las aptitudes del ejecutante del proyecto como estudiante de Ingeniería en Informática. 
 		% TODO: Explicar codificación del script	 
@@ -506,7 +533,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\label{fig:RxConexiones}
 		\end{figure}
 		
-		Como se puede observar en la Figura \ref{fig:RxConexiones} la columna izquierda de pines le pertenece a los negativos, la columna central a los positivos y la última columna perteneciente a datos; esta es la de interés ya que por cada $conector_i$ estaríamos recibiendo señal PWM del emisor correspondiente al $canal_i$, por lo que cada una son las entradas a nuestro Arduino UNO para poder realizar la codificación. Antes de iniciar la conexión con el codificador se comprueban las señales mediante un osciloscopio. 
+		Como se puede observar en la Fig.\ref{fig:RxConexiones} la columna izquierda de pines le pertenece a los negativos, la columna central a los positivos y la última columna perteneciente a datos; esta es la de interés ya que por cada $conector_i$ estaríamos recibiendo señal PWM del emisor correspondiente al $canal_i$, por lo que cada una son las entradas a nuestro Arduino UNO para poder realizar la codificación. Antes de iniciar la conexión con el codificador se comprueban las señales mediante un osciloscopio. 
 		\par Ya identificados los cables correspondientes a cada canal, se conectan los mismos a la placa Arduino UNO. Por último, se conecta la salida proporcionada por el codificador a la entrada del vehículo, asegurando así una señal de tipo SBUS como lo indica su fabricante.
 		
 		\begin{figure}[h!]
@@ -524,7 +551,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\end{figure}
 		
 		
-		\par Con respecto a las conexiones eléctricas que lleva el cuadricóptero, recurrimos a basarnos en la Figura \ref{fig:instnavio1}, donde muestra gráficamente el orden que llevan las conexiones con sus respectivos cables de colores. 
+		\par Con respecto a las conexiones eléctricas que lleva el cuadricóptero, recurrimos a basarnos en la Fig. \ref{fig:instnavio1}, donde muestra gráficamente el orden que llevan las conexiones con sus respectivos cables de colores. 
 		
 		\begin{figure}[h!]
 		%TODO: Modificar imagen (esta mal el cableado de alimentacion de los motores)
@@ -534,8 +561,8 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\label{fig:instnavio1}
 		\end{figure}
 		
-		Un aspecto a tener en cuenta es que no todos los componentes que se visualizan en la Figura \ref{fig:instnavio1} están presentes al momento de la instrumentación ya que los dispositivos marcados con los números (1,2 y 3) son de tipo comunicación y se supone que con el módulo interno de \textit{Wifi} podríamos sustituir estos elementos. 
-		\par Por lo tanto se procede a realizar las conexiones mostradas. En primera medida se inicia conectando los motores del cuerpo del cuadricóptero con los pines de la Navio2 como se puede observar en la imagen \ref{fig:conexionmotores}
+		Un aspecto a tener en cuenta es que no todos los componentes que se visualizan en la Fig. \ref{fig:instnavio1} están presentes al momento de la instrumentación ya que los dispositivos marcados con los números (1,2 y 3) son de tipo comunicación y se supone que con el módulo interno de \textit{Wifi} podríamos sustituir estos elementos. 
+		\par Por lo tanto se procede a realizar las conexiones mostradas. En primera medida se inicia conectando los motores del cuerpo del cuadricóptero con los pines de la Navio2 como se puede observar en la Fig.\ref{fig:conexionmotores}
 		
 		\begin{figure}[h!]
 			\centering
@@ -544,7 +571,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\label{fig:conexionmotores}
 		\end{figure}
 		
-		Después de haber hecho las conexiones correspondientes a los motores, es necesario suministrarle energía de algún tipo de fuente para realizar las pruebas iniciales, es por eso que antes de conectar la batería LiPo se considera la siguiente cuestión: ya que esta tiene una carga útil limitada se decide utilizar una fuente variable regulable disponible en el laboratorio de electrónica del \textit{sinc(i)}  con el objetivo de realizar las pruebas necesarias sin estar dependiendo de la carga de la batería. Antes de realizar la conexión se ajusta el voltaje según la batería Lipo existente (12V), dejando libre la cantidad de Amperes para que consuma lo que necesite. La fuente utilizada se puede observar en la Figura  \ref{fig:fuentevr}
+		Después de haber hecho las conexiones correspondientes a los motores, es necesario suministrarle energía de algún tipo de fuente para realizar las pruebas iniciales, es por eso que antes de conectar la batería LiPo se considera la siguiente cuestión: ya que esta tiene una carga útil limitada se decide utilizar una fuente variable regulable disponible en el laboratorio de electrónica del \textit{sinc(i)}  con el objetivo de realizar las pruebas necesarias sin estar dependiendo de la carga de la batería. Antes de realizar la conexión se ajusta el voltaje según la batería Lipo existente (12V), dejando libre la cantidad de Amperes para que consuma lo que necesite. La fuente utilizada se puede observar en la Fig.  \ref{fig:fuentevr}
 		
 		\begin{figure}[h!]
 		\centering
@@ -553,7 +580,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\label{fig:fuentevr}
 		\end{figure}
 		
-		En la Figura \ref{fig:instnavio1} se puede ver que la batería suministra energía a los cuatro motores y al vehículo, por lo tanto se decide alimentar al vehículo con el transformador de fábrica y suministrar energía a  los motores con la fuente. Esta fuente como se puede observar en la Figura \ref{fig:fuentevr} contiene un único par de salida (positivo y negativo) por lo que es necesario multiplexar esta salida a 4 pares de salidas más. Para eso se decide armar y soldar un conjunto de cables con sus respectivos conectores como se puede observar en la figura \label{fig:terminado}.
+		En la Fig. \ref{fig:instnavio1} se puede ver que la batería suministra energía a los cuatro motores y al vehículo, por lo tanto se decide alimentar al vehículo con el transformador de fábrica y suministrar energía a  los motores con la fuente. Esta fuente como se puede observar en la Fig. \ref{fig:fuentevr} contiene un único par de salida (positivo y negativo) por lo que es necesario multiplexar esta salida a 4 pares de salidas más. Para eso se decide armar y soldar un conjunto de cables con sus respectivos conectores como se puede observar en la Fig. \label{fig:terminado}.
 
 
 		Por último, se verifican las conexiones pertinentes a los planos y se buscan imperfectos en las uniones, en caso de encontrar algún tipo de estos se procede a repararlos. 
@@ -566,7 +593,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		
 		
 		\subsection{Prueba de funcionamiento inicial}
-		Como etapa final y con el objetivo de verificar el correcto funcionamiento de nuestro vehículo, se inicia el proceso de calibración de sensores, para eso se decide utilizar \textbf{Mavproxy} seleccionando el módulo de calibración y consecuentemente realizando los pasos que se nos indican de manera sencilla como se puede observar en la Figura \ref{fig:calibmavproxy}. 
+		Como etapa final y con el objetivo de verificar el correcto funcionamiento de nuestro vehículo, se inicia el proceso de calibración de sensores, para eso se decide utilizar \textbf{Mavproxy} seleccionando el módulo de calibración y consecuentemente realizando los pasos que se nos indican de manera sencilla como se puede observar en la Fig. \ref{fig:calibmavproxy}. 
 		
 		Una vez concluida la etapa de calibración se procede a enviar misiones de prueba, como por ejemplo elevarse del suelo 1 metro desde la posición inicial sin tener instalado las hélices por motivos de seguridad, dándonos como resultados que el vehículo interpreta los comandos. Aunque estas pruebas fueron realizadas de modo superficial, en el capitulo \ref{cap4:pruebas} se profundizará que el funcionamiento integral de los componentes responda de manera correcta.
 		

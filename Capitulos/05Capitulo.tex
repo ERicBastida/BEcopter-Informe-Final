@@ -90,7 +90,7 @@
 			\item \textbf{ [Descripción] Nivel 0 } Por funcionalidad se implementan las pruebas unitarias, realizando el siguiente procedimiento: 
 			
 				\par Se ingresan datos reales o verdaderos en las entradas de las funciones, y luego de ejecutarla, observamos si obtuvimos los resultados deseados. A partir de aquí podemos obtener 2 casos, que la función se comporte según lo esperado o que la misma contenga errores. En caso de contenerlos se procede a solucionarlo siempre y cuando  al momento de obtener dicha solución la misma no conlleve demasiado tiempo y no sea dependiente de otras tareas; se registra dicho inconveniente con su respectiva fecha de incidencia y sus posibles riesgos para ser resuelta en etapas posteriores.
-				Por otro lado y una vez obtenido los resultados con los datos verdaderos, se procede a cambiar el tipo de entrada por datos erróneos o posibles alternativas, como por ejemplo , datos numéricos en vez de texto, caracteres especiales, datos fuera de rango, etc. con el fin de ``proporcionar robustez a nuestro código'' (prueba de estrés) y adaptar el código para  mantener el control en caso de ocurrir algún tipo de inconsistencia. Cabe mencionar, que sólo se suspenden temporalmente funcionalidades, si se consideran de tipo \textit{no funcionales} o no resuelve completamente un requerimiento del usuario. En la Figura \ref{fig:nivel-0} se esquematiza con un diagrama de flujo este procedimiento. 
+				Por otro lado y una vez obtenido los resultados con los datos verdaderos, se procede a cambiar el tipo de entrada por datos erróneos o posibles alternativas, como por ejemplo , datos numéricos en vez de texto, caracteres especiales, datos fuera de rango, etc. con el fin de ``proporcionar robustez a nuestro código'' (prueba de estrés) y adaptar el código para  mantener el control en caso de ocurrir algún tipo de inconsistencia. Cabe mencionar, que sólo se suspenden temporalmente funcionalidades, si se consideran de tipo \textit{no funcionales} o no resuelve completamente un requerimiento del usuario. En la Fig.\ref{fig:nivel-0} se esquematiza con un diagrama de flujo este procedimiento. 
 				
 				\begin{figure}[h!]
 					\centering
@@ -147,7 +147,7 @@
 
 		\subsubsection{Conectores}
 		
-			Los conectores o cables, son los encargados de comunicar o transportar las señales a cada entrada/salida entre componentes electrónicos, por tal razón es de suma importancia evaluar su estado, ya que cumplen un rol importante al transportar la información. Para determinar el estado de cada conector se utilizó el tester en modo ``comprobación de continuidad'', como se puede ver en la Figura \ref{fig:testermodocont},  el cual conectando las puntas del cable con las puntas del tester, nos indicará con un sonido cuando el cable se encuentre en buenas condiciones, en caso contrario se intenta repararlo o desecharlo en el peor de los casos.
+			Los conectores o cables, son los encargados de comunicar o transportar las señales a cada entrada/salida entre componentes electrónicos, por tal razón es de suma importancia evaluar su estado, ya que cumplen un rol importante al transportar la información. Para determinar el estado de cada conector se utilizó el tester en modo ``comprobación de continuidad'', como se puede ver en la Fig.\ref{fig:testermodocont},  el cual conectando las puntas del cable con las puntas del tester, nos indicará con un sonido cuando el cable se encuentre en buenas condiciones, en caso contrario se intenta repararlo o desecharlo en el peor de los casos.
 
 			\begin{figure}
 				\centering
@@ -160,12 +160,12 @@
 
 		\subsubsection{Fuentes de alimentación}
 		
-			En lo que respecta a las pruebas, hay que hacer foco en que es necesario disponer de un uso considerable de los componentes, ya que probar cada funcionalidad conlleva realizar pruebas continuas y por lo tanto al ser componentes electrónicos el suministro de energía en esta etapa deben ser , ``ilimitado''. Es por tal razón que la portabilidad que disponemos al tener baterías es innecesaria (más allá que serán útiles al momento de realizar vuelos a distancia),  por lo tanto estas baterías son reemplazadas por fuentes transformadoras de energía, las cuales dependen del suministro de energía de tipo alterna proveniente de las instalaciones del domicilio del ejecutante, y de esta manera obtendremos independencia en en tiempo de uso. En la Figura \ref{fig:esquema-hardware} los componentes etiquetadas con los números 1 y 4 corresponden a las baterías que deben tener las siguientes especificaciones según los dispositivos electrónicos que alimentan:
+			En lo que respecta a las pruebas, hay que hacer foco en que es necesario disponer de un uso considerable de los componentes, ya que probar cada funcionalidad conlleva realizar pruebas continuas y por lo tanto al ser componentes electrónicos el suministro de energía en esta etapa deben ser , ``ilimitado''. Es por tal razón que la portabilidad que disponemos al tener baterías es innecesaria (más allá que serán útiles al momento de realizar vuelos a distancia),  por lo tanto estas baterías son reemplazadas por fuentes transformadoras de energía, las cuales dependen del suministro de energía de tipo alterna proveniente de las instalaciones del domicilio del ejecutante, y de esta manera obtendremos independencia en en tiempo de uso. En la Fig.\ref{fig:esquema-hardware} los componentes etiquetadas con los números 1 y 4 corresponden a las baterías que deben tener las siguientes especificaciones según los dispositivos electrónicos que alimentan:
 
 			
 			\begin{itemize}
 				\item \textbf{Batería 1: } La misma provee de energía a la placa Arduino UNO. Por lo tanto, según las especificaciones de Arduino
-				debe recibir los siguientes suministros \footnote{Especificaciones de Arduino UNO  https://store.arduino.cc/usa/arduino-uno-rev3} :
+				debe recibir los siguientes suministros\footnote{Especificaciones de Arduino UNO  https://store.arduino.cc/usa/arduino-uno-rev3} :
 				\begin{table}[ht]
 					\begin{center}
 						\begin{tabular}{|c|c|}
@@ -185,7 +185,7 @@
 				\end{table}
 				
 			
-				Para reemplazar esta batería se ha utilizado una fuente transformador de 7V y 800\ac{mA}, como se puede observar en la Figura \ref{fig:fuentearduino}
+				Para reemplazar esta batería se ha utilizado una fuente transformador de 7V y 800\ac{mA}, como se puede observar en la Fig.\ref{fig:fuentearduino}
 				\begin{figure}[h!]
 					\centering
 					\includegraphics[width=0.4\linewidth, height=0.2\textheight]{Imagenes/fuenteArduinoo}
@@ -196,7 +196,7 @@
 	
 	
 	
-			\item \textbf{Batería 4: } La segunda batería como se puede ver en la Figura \ref{fig:esquema-hardware} provee de energía a los 4 motores  y además alimenta de manera paralela a la placa Navio2/Raspberry Pi. Y por el otro lado tenemos los motores HobbyKing \footnote{ Página web del fabricante   hobbyking.com/es\_es/hobbyking-30a-blueseries-brushless-speed-controller.html} que reciben los suministros mostrados en la Tabla \ref{Tab:energia_motores}
+			\item \textbf{Batería 4: } La segunda batería como se puede ver en la Fig.\ref{fig:esquema-hardware} provee de energía a los 4 motores  y además alimenta de manera paralela a la placa Navio2/Raspberry Pi. Y por el otro lado tenemos los motores HobbyKing\footnote{ Página web del fabricante   hobbyking.com/es\_es/hobbyking-30a-blueseries-brushless-speed-controller.html} que reciben los suministros mostrados en la Tabla \ref{Tab:energia_motores}
 			
 					\begin{table}[ht]
 						\begin{center}
@@ -221,9 +221,9 @@
 				\label{fig:fuente12a}
 			\end{figure}
 			
-			Para reemplazar la alimentación proveniente de dicha batería se ha adquirido una fuente de alimentación como se puede observar en la Figura \ref{fig:fuente12a}, la cual será responsable de alimentar a los 4 motores y como se explicará más adelante al Radio Control.
+			Para reemplazar la alimentación proveniente de dicha batería se ha adquirido una fuente de alimentación como se puede observar en la Fig.\ref{fig:fuente12a}, la cual será responsable de alimentar a los 4 motores y como se explicará más adelante al Radio Control.
 			
-			Por último debemos alimentar a nuestra Raspberry Pi / Navio2 \footnote{https://emlid.com/navio/} que recibe los valores mostrados en la Tabla \ref{Tab:energia_navio2}
+			Por último debemos alimentar a nuestra Raspberry Pi / Navio2\footnote{https://emlid.com/navio/} que recibe los valores mostrados en la Tabla \ref{Tab:energia_navio2}
 			\begin{table}
 				\begin{center}
 					\begin{tabular}{|c|c|}
@@ -242,7 +242,7 @@
 
 			
 			En este caso para alimentar a las placas se nos ha suministrado un transformador incluido en la compra de nuestra Raspberry Pi 3 con las siguientes especificaciones:
-			5V y 2500mA, como se puede observar en la Figura \ref{fig:fuentenavio2}.
+			5V y 2500mA, como se puede observar en la Fig.\ref{fig:fuentenavio2}.
 			
 			\begin{figure}[h!]
 				\centering
@@ -261,11 +261,11 @@
 
 		\subsubsection{Radio Control}
 
-			La comprobación del radio control en primera instancia se reemplazan las 8 baterías de 1.5v, con lo cual  tenemos una cantidad suministrada de 12V necesarios para alimentarlo, siendo justamente el mismo voltaje entregado por la fuente de la Figura \ref{fig:fuente12a}. Luego de conectar la fuente se procede a controlar que las señales enviadas por lo movimientos del Joystick de control lleguen de manera correcta al receptor de señal. Para realizar dicho procedimiento se debería medir mediante un osciloscopio y ver de manera precisa la forma de la señal. Pero al no contar con dicho instrumento se analizan los pines con el tester midiendo el voltaje, y se observa que al producir movimientos en los joystick cada pin en promedio muestra un voltaje cercano a los 5 Volts. Exceptuando el primer pin (el que corresponde al Eje x del primer joystick) donde no se observan valor de voltaje significativos. De esta manera, se tendrá en cuenta dicha falencia para las próximas pruebas.  
+			La comprobación del radio control en primera instancia se reemplazan las 8 baterías de 1.5v, con lo cual  tenemos una cantidad suministrada de 12V necesarios para alimentarlo, siendo justamente el mismo voltaje entregado por la fuente de la Fig.\ref{fig:fuente12a}. Luego de conectar la fuente se procede a controlar que las señales enviadas por lo movimientos del Joystick de control lleguen de manera correcta al receptor de señal. Para realizar dicho procedimiento se debería medir mediante un osciloscopio y ver de manera precisa la forma de la señal. Pero al no contar con dicho instrumento se analizan los pines con el tester midiendo el voltaje, y se observa que al producir movimientos en los joystick cada pin en promedio muestra un voltaje cercano a los 5 Volts. Exceptuando el primer pin (el que corresponde al Eje x del primer joystick) donde no se observan valor de voltaje significativos. De esta manera, se tendrá en cuenta dicha falencia para las próximas pruebas.  
 			
 
 		\subsubsection{Motores}
-			En la prueba de motores se tuvo que codificar un script  \ref{script:motor}para que sea ejecutado sobre la placa Arduino. Una vez codificado dicho script se procedió a realizar sus respectivas conexiones como se puede observar en la Figura \ref{fig:testmotor}.
+			En la prueba de motores se tuvo que codificar un script  \ref{script:motor}para que sea ejecutado sobre la placa Arduino. Una vez codificado dicho script se procedió a realizar sus respectivas conexiones como se puede observar en la Fig.\ref{fig:testmotor}.
 			
 			\begin{figure}[h!]
 				\centering
@@ -327,7 +327,7 @@ void loop()
 
 \end{lstlisting}\label{script:motor}
 
-			En la Figura \ref{fig:motortest} (que fue obtenida mediante el módulo de representación de datos en etapas posteriores) se puede observar una gráfica de tiempo vs \ac{RPM}
+			En la Fig.\ref{fig:motortest} (que fue obtenida mediante el módulo de representación de datos en etapas posteriores) se puede observar una gráfica de tiempo vs \ac{RPM}
 			
 			\begin{figure}[h!]
 				\centering
@@ -344,9 +344,9 @@ void loop()
 			La prueba de funcionamiento de dichas placas se comprueba con la interacción con el software desarrollado. 
 			
 			\subsubsection{Arduino}
-			En lo que compete a la placa Arduino, en el esquema presentado en la Figura \ref{fig:esquema-hardware} la misma cumple la función de un conversor PWM a PPM, el cual es el protocolo de señal necesario para que la placa Navio2 interprete las señales enviadas por el radio-control.  En nuestro caso, ya se han probado los dispositivos conectados al mismo, por lo tanto sólo nos queda corroborar que el tipo de señal enviada sea el correcto. Para realizar esta prueba es necesario contar con un osciloscopio, que muestre el tipo de señal enviada por el pin configurado en la placa Arduino. Como no disponemos momentáneamente de un osciloscopio, se recurre a la simulación; de manera que se utiliza el software de la siguiente página web  \url{www.library.io}, el cual proporciona un simulador de código y además nos da la posibilidad de mostrar la señal generada por un osciloscopio digital.   	
+			En lo que compete a la placa Arduino, en el esquema presentado en la Fig.\ref{fig:esquema-hardware} la misma cumple la función de un conversor PWM a PPM, el cual es el protocolo de señal necesario para que la placa Navio2 interprete las señales enviadas por el radio-control.  En nuestro caso, ya se han probado los dispositivos conectados al mismo, por lo tanto sólo nos queda corroborar que el tipo de señal enviada sea el correcto. Para realizar esta prueba es necesario contar con un osciloscopio, que muestre el tipo de señal enviada por el pin configurado en la placa Arduino. Como no disponemos momentáneamente de un osciloscopio, se recurre a la simulación; de manera que se utiliza el software de la siguiente página web  \url{www.library.io}, el cual proporciona un simulador de código y además nos da la posibilidad de mostrar la señal generada por un osciloscopio digital.   	
 			Luego de corroborar que la señal es correcta mediante el programa de simulación, se mide mediante un tester que la corriente promedio de salida se mantenga en un valor aceptable para comprobar que la placa este funcionando correctamente.
-			Por último, en la Figura \ref{fig:todoconectado} se puede apreciar todo el sistema conectado según el diagrama de la Figura \ref{fig:esquema-hardware}. Exceptuando los motores, que han sido debidamente desconectados al momento de realizar las pruebas; y únicamente se ha conectado un motor sobre una base de madera, con el fin de mantener el mismo inmóvil al momento de enviar las órdenes de arrancar. 
+			Por último, en la Fig.\ref{fig:todoconectado} se puede apreciar todo el sistema conectado según el diagrama de la Fig.\ref{fig:esquema-hardware}. Exceptuando los motores, que han sido debidamente desconectados al momento de realizar las pruebas; y únicamente se ha conectado un motor sobre una base de madera, con el fin de mantener el mismo inmóvil al momento de enviar las órdenes de arrancar. 
 			
 			\begin{figure}
 				\centering
@@ -466,7 +466,7 @@ En el código anterior se puede observar que existe una variable correspondiente 
 La visualización de los datos es un aspecto importante cuando estamos controlando algún objeto a distancia, ya que es necesario conocer el estado del mismo, y con mayor importancia cuando el objeto no está en nuestro campo visible. Por tal motivo se han realizado varias pruebas sobre los módulos de representación de datos, con el propósito de que éstos muestren fielmente los datos capturados por el vehículo en tiempo real.
 \begin{itemize}
 	\item \textbf{Gráfico temporal de datos: }	El objetivo de este módulo de software en nuestro proyecto, como su nombre lo dice, es poder representar la evolución temporal de los datos provenientes de algún sensor o estado del vehículo mediante una gráfica. 
-	\par Según lo especificado en el ERS, se ha propuesto utilizar la librería Vispy\footnote{Sitio web de Vispy http://vispy.org/}, esta librería escrita en Python  está diseñada específicamente para la visualización interactiva de gran cantidad de datos de forma rápida, escalable y fácil.  Pero más allá de sus prestaciones, al momento de realizar las \textbf{pruebas de integración} se ha observado que el rendimiento de nuestro software se ha reducido considerablemente; esto es debido a que Vispy utiliza distintas tecnologías al renderizar las figuras, por lo que se debió incrustar dicho gráfico de manera brusca para poder ver su funcionamiento. Al momento de querer optimizar dicho rendimiento, al ser Vispy una librería nueva,  su documentación y por lo tanto su comunidad era escasa, y como es de esperar no se encontraba la ayuda necesaria para poder solventar los problemas presentes. Por tales motivos se recurre a la búsqueda de alguna alternativa que se adapte a nuestras necesidades; luego de encontrar y analizar las librerías disponibles se llega a la decisión de utilizar PyQtGraph\footnote{Sitio web de PyQtGraph http://pyqtgraph.org/}. Esta librería además de todas su prestaciones en el ámbito científico / matemático / aplicaciones ingenieriles, está construida con las mismas librerías que utilizamos en nuestro proyecto, que es PyQt\footnote{Sitio Web de PyQt https://riverbankcomputing.com/software/pyqt/intro}. Por lo tanto, esto generó una excelente adaptabilidad y rendimiento al momento de realizar las pruebas de integración.  
+	\par Según lo especificado en el ERS, se ha propuesto utilizar la biblioteca Vispy\footnote{Sitio web de Vispy http://vispy.org/}, esta escrita en Python  y diseñada específicamente para la visualización interactiva de gran cantidad de datos de forma rápida, escalable y fácil.  Pero más allá de sus prestaciones, al momento de realizar las \textbf{pruebas de integración} se ha observado que el rendimiento de nuestro software se ha reducido considerablemente; esto es debido a que Vispy utiliza distintas tecnologías al renderizar las figuras, por lo que se debió incrustar dicho gráfico de manera brusca para poder ver su funcionamiento. Al momento de querer optimizar dicho rendimiento, al ser Vispy una biblioteca nueva,  su documentación y por lo tanto su comunidad era escasa, y como es de esperar no se encontraba la ayuda necesaria para poder solventar los problemas presentes. Por tales motivos se recurre a la búsqueda de alguna alternativa que se adapte a nuestras necesidades; luego de encontrar y analizar las bibliotecas disponibles se llega a la decisión de utilizar PyQtGraph\footnote{Sitio web de PyQtGraph http://pyqtgraph.org/}. Esta además de todas su prestaciones en el ámbito científico / matemático / aplicaciones ingenieriles, está construida con las misma biblioteca que utilizamos en nuestro proyecto, que es PyQt\footnote{Sitio Web de PyQt https://riverbankcomputing.com/software/pyqt/intro}. Por lo tanto, esto generó una excelente adaptabilidad y rendimiento al momento de realizar las pruebas de integración.  
 	Para las \textbf{pruebas unitarias/estrés/funcionales} se ha creado el módulo \textit{GraphDatav2}, el cual ha sido puesto en prueba hasta su máximo potencial. Utilizando una señal de tipo aleatoria como datos de prueba (ya que el mismo contiene una gran cantidad de componentes frecuenciales) y se ha calculado su respectiva transformada de Fourier (utilizando la Transformada Rápida de Fourier), con el fin de corroborar que los cálculos de los mismos no ralenticen el funcionamiento del mismo, y luego de realizar las pruebas nos suministró  resultados  dentro de las expectativas de rendimiento. Siendo estas:
 	\begin{itemize}
 		\item Fluidez en la animación de la figuras.
@@ -502,7 +502,7 @@ El control del vehículo, ya sea de forma manual o automática, es una de las func
 
 \begin{itemize}
 	
-	\item \textbf{Control Manual:} Para poder ejecutar las pruebas del funcionamiento del control manual, es indispensable que el módulo de comunicación funcione correctamente, ya que el control manual depende del mismo. Al momento de ejecutar las pruebas unitarias, entran en juego varias clases, como lo son la clase Vehículo y Joystick. Por lo tanto se ha realizado en primera instancia el control manual con envío de acciones con una duración definida de tiempo, simulando la interacción con el joystick, y para determinar si los comandos han sido interpretados por el vehículo se ha analizado la evolución temporal del giro de los motores (utilizando el módulo de representación de datos) medido en [RPM], y mostrándonos resultados aceptables y razonables como se puede ver en la Figura \ref{fig:testmotor}
+	\item \textbf{Control Manual:} Para poder ejecutar las pruebas del funcionamiento del control manual, es indispensable que el módulo de comunicación funcione correctamente, ya que el control manual depende del mismo. Al momento de ejecutar las pruebas unitarias, entran en juego varias clases, como lo son la clase Vehículo y Joystick. Por lo tanto se ha realizado en primera instancia el control manual con envío de acciones con una duración definida de tiempo, simulando la interacción con el joystick, y para determinar si los comandos han sido interpretados por el vehículo se ha analizado la evolución temporal del giro de los motores (utilizando el módulo de representación de datos) medido en [RPM], y mostrándonos resultados aceptables y razonables como se puede ver en la Fig.\ref{fig:testmotor}
 	
 	
 	Luego de comprobar el correcto funcionamiento de los motores según comandos limitados en tiempo, se inicia el proceso de pruebas con el joystick. En este caso se utiliza una clase auxiliar \textit{Capturador} que ha sido creada con el fin de ejecutarse en un hilo de ejecución independiente para no congestionar el procesamiento de manera secuencial o interrumpir el hilo de ejecución padre . En el siguiente código podemos apreciar su funcionamiento:
@@ -592,7 +592,7 @@ El control del vehículo, ya sea de forma manual o automática, es una de las func
 			\end{figure}
 			
 			
-			El módulo encargado de la parametrización, es simplemente una interfaz gráfica que muestra las opciones disponibles y configurables del firmware del autopiloto, como se puede ver en la Figura \ref{fig:pestconfig}. Por lo tanto, se valida que esta información sea mostrada de manera correcta. Además, esta pestaña permite modificar los valores de cada parámetro, por lo que es necesario validar esta modificación y que sea guardada de forma correcta. Por último probando que el vehículo con sus respectivas parámetros modificados se comporte según lo configurado.
+			El módulo encargado de la parametrización, es simplemente una interfaz gráfica que muestra las opciones disponibles y configurables del firmware del autopiloto, como se puede ver en la Fig.\ref{fig:pestconfig}. Por lo tanto, se valida que esta información sea mostrada de manera correcta. Además, esta pestaña permite modificar los valores de cada parámetro, por lo que es necesario validar esta modificación y que sea guardada de forma correcta. Por último probando que el vehículo con sus respectivas parámetros modificados se comporte según lo configurado.
 			
 			
 
