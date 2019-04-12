@@ -1,4 +1,3 @@
-% -*-coding: iso-latin-1  -*-
 %---------------------------------------------------------------------
 %
 %                        TeXiS_acron.tex
@@ -56,8 +55,10 @@
 % en la  tabla de contenidos una  entrada para marcar  la página donde
 % está el índice de palabras.
 
-
+\ifx\generatoc\undefined
+\else
 \addcontentsline{toc}{chapter}{\listacronymname}
+\fi
 
 
 % Generamos la lista de acrónimos (en realidad el índice asociado a la

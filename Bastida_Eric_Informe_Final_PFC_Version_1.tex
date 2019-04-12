@@ -55,20 +55,19 @@
 % vamos a querer compilar  (aquellos relacionados con configuraci?n) y
 % luego definimos \compilaCapitulo.
 \newcommand{\ficherosBasicosTeXiS}{%
-TeXiS/TeXiS_pream,TeXiS/TeXiS_cab,TeXiS/TeXiS_bib,TeXiS/TeXiS_cover,%
-TeXiS/TeXiS_part%
+	TeXiS/TeXiS_pream,TeXiS/TeXiS_cab,TeXiS/TeXiS_bib,TeXiS/TeXiS_cover,%
+	TeXiS/TeXiS_part%
 }
 \newcommand{\ficherosBasicosTexto}{%
-constantes,guionado,Cascaras/bibliografia,config%
+	constantes,guionado,Cascaras/bibliografia,config%
 }
 \newcommand{\compilaCapitulo}[1]{%
-\includeonly{\ficherosBasicosTeXiS,\ficherosBasicosTexto,Capitulos/#1}%
+	\includeonly{\ficherosBasicosTeXiS,\ficherosBasicosTexto,Capitulos/#1}%
 }
 
 \newcommand{\compilaApendice}[1]{%
-\includeonly{\ficherosBasicosTeXiS,\ficherosBasicosTexto,Apendices/#1}%
+	\includeonly{\ficherosBasicosTeXiS,\ficherosBasicosTexto,Apendices/#1}%
 }
-
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %            Pre?mbulo del documento. Configuraciones varias
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -180,16 +179,17 @@ constantes,guionado,Cascaras/bibliografia,config%
 
 \ifx\generaindice\undefined
 \else
-	\include{TeXiS/TeXiS_indice}
+	%\include{TeXiS/TeXiS_indice}
 \fi
 
-%
+%211111111166554451
 % Lista de acronimos
 %
 
+\ifx\generaacronimos\undefined
+\else
 \include{TeXiS/TeXiS_acron}
-
-
+\fi
 
 % S?lo  lo  generamos  si  est? declarada  \generaacronimos.  Consulta
 % TeXiS.sty para m?s informaci?n.

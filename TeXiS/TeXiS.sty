@@ -34,13 +34,13 @@
 \ProvidesPackage{TeXiS/TeXiS}
 
 \RequirePackage{verbatim}  % Se necesita para el comando "example".
-                           % Si el paquete por alguna razón no es
-                           % compatible con alguno otro utilizado
-                           % puedes quitar el comando example y
-                           % eliminar la dependencia; el comando
-                           % example es utilizado en el manual de la
-                           % plantilla, pero no es probable que lo
-                           % necesites en otro tipo de documentos.
+% Si el paquete por alguna razón no es
+% compatible con alguno otro utilizado
+% puedes quitar el comando example y
+% eliminar la dependencia; el comando
+% example es utilizado en el manual de la
+% plantilla, pero no es probable que lo
+% necesites en otro tipo de documentos.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Constante:
@@ -91,7 +91,7 @@
 % la figura.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\imagen}[2]{%
-\includegraphics[#2]{Imagenes/#1}%
+	\includegraphics[#2]{Imagenes/#1}%
 } % \newcommand{\imagen}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,12 +109,12 @@
 % utilizar el comando \figuraEx
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\figura}[4]{%
-\begin{figure}[t]%
-\begin{center}%
-\imagen{#1}{#2}%
-\caption{#4} \label{#3}%
-\end{center}%
-\end{figure}%
+	\begin{figure}[t]%
+		\begin{center}%
+			\imagen{#1}{#2}%
+			\caption{#4} \label{#3}%
+		\end{center}%
+	\end{figure}%
 } % \newcommand{\figura}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,12 +131,12 @@
 % figuras.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\figuraEx}[5]{%
-\begin{figure}[t]%
-\begin{center}%
-\imagen{#1}{#2}%
-\caption[#5]{#4} \label{#3}%
-\end{center}%
-\end{figure}%
+	\begin{figure}[t]%
+		\begin{center}%
+			\imagen{#1}{#2}%
+			\caption[#5]{#4} \label{#3}%
+		\end{center}%
+	\end{figure}%
 } % \newcommand{\figura}
 
 
@@ -148,11 +148,11 @@
 % capítulo.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newenvironment{resumen}{%
-\begin{quotation}\noindent\begin{small}\textbf{\textsc{Resumen:}}%
-}%
-{%
-\end{small}\end{quotation}%
-\bigskip%
+	\begin{quotation}\noindent\begin{small}\textbf{\textsc{Resumen:}}%
+		}%
+		{%
+	\end{small}\end{quotation}%
+	\bigskip%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -174,29 +174,29 @@
 % Añade la frase célebre del principio de un capítulo.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newenvironment{FraseCelebre}% Definición del entorno de FraseCelebre
- {\begin{list}{}{%
-     \setlength{\leftmargin}{0.5\textwidth}% Desplazamos el inicio de
-                                 % los párrafos a la derecha la mitad
-                                 % de la anchura de la línea de texto.
-                                 % Puede que quieras cambiar esto
-                                 % por otra cantidad como '5cm'.
-     \setlength{\parsep}{0cm}% La separación entre párrafos de la
-                             % frase o de la fuente es normal, sin
-                             % espacio extra.
-     \addtolength{\topsep}{0.5cm}% Aumentamos un poco la separación
-                                 % entre la parte de la fase célebre
-                                 % y los párrafos de alrededor
-   }
- }
- {\unskip \end{list}}
+{\begin{list}{}{%
+			\setlength{\leftmargin}{0.5\textwidth}% Desplazamos el inicio de
+			% los párrafos a la derecha la mitad
+			% de la anchura de la línea de texto.
+			% Puede que quieras cambiar esto
+			% por otra cantidad como '5cm'.
+			\setlength{\parsep}{0cm}% La separación entre párrafos de la
+			% frase o de la fuente es normal, sin
+			% espacio extra.
+			\addtolength{\topsep}{0.5cm}% Aumentamos un poco la separación
+			% entre la parte de la fase célebre
+			% y los párrafos de alrededor
+		}
+	}
+	{\unskip \end{list}}
 
 \newenvironment{Frase}%
-  {\item \begin{flushright}\small\em}%
-  {\end{flushright}}
+{\item \begin{flushright}\small\em}%
+	{\end{flushright}}
 
 \newenvironment{Fuente}%
-  {\item \begin{flushright}\small}%
-  {\end{flushright}}
+{\item \begin{flushright}\small}%
+	{\end{flushright}}
 %
 % Notas de lo que hace:
 % El entorno FraseCelebre es un entorno de lista. Uno de esos entornos
@@ -238,38 +238,38 @@
 \newenvironment{example}%
 % Al principio del entorno, se abre un fichero auxiliar
 % donde se graba todo lo que se lee dentro del entorno
- {\begingroup
-  \@bsphack
-  \immediate\openout \example@out \jobname.exa
-  \let\do\@makeother\dospecials\catcode`\^^M\active
-  \def\verbatim@processline{%
-    \immediate\write\example@out{\the\verbatim@line}}%
-  \verbatim@start}%
+{\begingroup
+	\@bsphack
+	\immediate\openout \example@out \jobname.exa
+	\let\do\@makeother\dospecials\catcode`\^^M\active
+	\def\verbatim@processline{%
+		\immediate\write\example@out{\the\verbatim@line}}%
+	\verbatim@start}%
 % Al final del entorno, se cierra el fichero auxiliar y...
- {\immediate\closeout\example@out\@esphack\endgroup%
-%
-% ... se copia en dos minipage distintas, una que tiene un verbatim
-% para que el texto quede tal cual, y otra normal para que se
-% compile.
-%
-  \par\small\addvspace{3ex plus 1ex}\vskip -\parskip
-  \noindent
-  \makebox[0.5\linewidth][l]{%
-  \begin{minipage}[t]{0.50\linewidth}
-    \vspace*{-1ex}
-    \verbatiminput{\jobname.exa}
-  \end{minipage}}
-  \hfill%
-  \makebox[0.45\linewidth][l]{%
-  \begin{minipage}[t]{0.45\linewidth}
-    \vspace*{-2ex}
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{1ex plus 0.4ex minus 0.2ex}
-    \begin{trivlist}
-      \item\input{\jobname.exa}
-    \end{trivlist}
-  \end{minipage}}%
-  \par\addvspace{3ex plus 1ex}\vskip -\parskip
+{\immediate\closeout\example@out\@esphack\endgroup%
+	%
+	% ... se copia en dos minipage distintas, una que tiene un verbatim
+	% para que el texto quede tal cual, y otra normal para que se
+	% compile.
+	%
+	\par\small\addvspace{3ex plus 1ex}\vskip -\parskip
+	\noindent
+	\makebox[0.5\linewidth][l]{%
+		\begin{minipage}[t]{0.50\linewidth}
+			\vspace*{-1ex}
+			\verbatiminput{\jobname.exa}
+	\end{minipage}}
+	\hfill%
+	\makebox[0.45\linewidth][l]{%
+		\begin{minipage}[t]{0.45\linewidth}
+			\vspace*{-2ex}
+			\setlength{\parindent}{0pt}
+			\setlength{\parskip}{1ex plus 0.4ex minus 0.2ex}
+			\begin{trivlist}
+				\item\input{\jobname.exa}
+			\end{trivlist}
+	\end{minipage}}%
+	\par\addvspace{3ex plus 1ex}\vskip -\parskip
 }
 
 
@@ -299,15 +299,15 @@
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newenvironment{cambiamargen}[2]{%
-  \begin{list}{}{%
-    \setlength{\topsep}{0pt}%
-    \setlength{\leftmargin}{#1}%
-    \setlength{\rightmargin}{#2}%
-    \setlength{\listparindent}{\parindent}%
-    \setlength{\itemindent}{\parindent}%
-    \setlength{\parsep}{\parskip}%
-  }%
-  \item[]}{\end{list}}
+	\begin{list}{}{%
+			\setlength{\topsep}{0pt}%
+			\setlength{\leftmargin}{#1}%
+			\setlength{\rightmargin}{#2}%
+			\setlength{\listparindent}{\parindent}%
+			\setlength{\itemindent}{\parindent}%
+			\setlength{\parsep}{\parskip}%
+		}%
+		\item[]}{\end{list}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -325,30 +325,29 @@
 %
 
 \ifx\release\undefined
-    % Símbolos a definir en modo debug
-    \def\debug{1}
-    \def\printtodos{1}
-    \def\printcoments{1}
-    %\psdraft
-    %  Si  se descomenta,  las  imágenes  no  se incluirán  en  el
-    % documento  (por lo  que compilará más  rápido); en  su lugar
-    % aparece  el recuadro  que ocuparán (de  esa forma  puede uno
-    % hacerse  a la idea  de su tamaño  y situación en  el texto).
-    % Para que este funcione, tiene que incluirse antes el paquete
-    % ps
+% Símbolos a definir en modo debug
+\def\debug{1}
+\def\printtodos{1}
+\def\printcoments{1}
+%\psdraft
+%  Si  se descomenta,  las  imágenes  no  se incluirán  en  el
+% documento  (por lo  que compilará más  rápido); en  su lugar
+% aparece  el recuadro  que ocuparán (de  esa forma  puede uno
+% hacerse  a la idea  de su tamaño  y situación en  el texto).
+% Para que este funcione, tiene que incluirse antes el paquete
+% ps
 
-    % Para que  los comentarios salgan en un  recuadro en lugar de
-    % en un párrafo normal
-    \def\comsdestacados{1}
+% Para que  los comentarios salgan en un  recuadro en lugar de
+% en un párrafo normal
+\def\comsdestacados{1}
 \else
-    % Símbolos a definir en modo release
-    \def\generaindice{1}
-    \def\generatoc{1}
-    \ifx\acronimosEnRelease\undefined
-    	\def\generaacronimos{1}
-    \else
-        \def\generaacronimos{1}
-    \fi
+% Símbolos a definir en modo release
+\def\generaindice{1}
+\def\generatoc{1}
+\ifx\acronimosEnRelease\undefined
+\else
+\def\generaacronimos{1}
+\fi
 \fi
 
 %%%%%
@@ -373,7 +372,7 @@
 %
 %%%
 %
-%\generaacronimos
+% \generaacronimos
 %
 % Si está definido, se genera la lista de acrónimos
 %
@@ -432,9 +431,9 @@
 \fi
 
 \newcommand{\comImpl}[1]{\noindent \hspace*{-0.1\textwidth}
-\begin{small}
-\fbox{\parbox{1.1\textwidth}{
- \textsc{Comentario:} #1}}
+	\begin{small}
+		\fbox{\parbox{1.1\textwidth}{
+				\textsc{Comentario:} #1}}
 \end{small}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
