@@ -91,17 +91,20 @@
 \usepackage{listings}
 
 % Python style for highlighting
-\newcommand\pythonstyle{\lstset{
-language=Python,
-basicstyle=\ttm\small,
-otherkeywords={self},             % Add keywords here
-keywordstyle=\ttb\small\color{deepblue},
-emph={MyClass,__init__},          % Custom highlighting
-emphstyle=\ttb\small\color{deepred},    % Custom highlighting style
-stringstyle=\color{deepgreen}\small,
-frame=tb,                         % Any extra options here
-showstringspaces=false            % 
-}}
+\newcommand\pythonstyle{
+	\lstset{
+		language=Python,
+		numbersep=10pt,
+		basicstyle=\ttm\small,
+		otherkeywords={self},             % Add keywords here
+		keywordstyle=\ttb\small\color{deepblue},
+		emph={MyClass,__init__},          % Custom highlighting
+		emphstyle=\ttb\small\color{deepred},    % Custom highlighting style
+		stringstyle=\color{deepgreen}\small,
+		frame=tb,                         % Any extra options here
+		showstringspaces=false            % 
+	}
+}
 
 
 % Python environment

@@ -53,7 +53,7 @@
 \newpage
 \section{Introducción}
 
-	\par Al momento de encargar el desarrollo de cualquier tipo de proyecto y estemos avanzando en sus respectivas fases es necesario comprobar que el funcionamiento de lo que se va desarrollando esté cumpliendo con los resultados esperados, ya que de no ser así, la continuidad del mismo se verá afectada. Por tal motivo, en las siguientes secciones se detallarán los distintos tipos de pruebas que han sido ejecutadas luego de codificar alguna funcionalidad del mismo. Cabe mencionar que por la naturaleza del proyecto que estamos desarrollando es importante que el mismo se comporte exactamente a los requerimientos estipulados y que además, el software proporcione mecanismos de seguridad en caso de que ocurriese alguna inconsistencia, ya que podría provocar accidentes que dañen el equipo como también a las personas que se encuentren en la intersección de su trayectoria. Dicho esto, introduciremos el concepto de  \textbf{Aseguramiento de la calidad} en las próximas secciones. 
+	\par Al momento de encargar el desarrollo de cualquier tipo de proyecto y estemos avanzando en sus respectivas fases es necesario comprobar que el funcionamiento de lo que se va desarrollando esté cumpliendo con los resultados esperados, ya que de no ser así, la continuidad del mismo se verá afectada. Por tal motivo, en las siguientes secciones se detallarán los distintos tipos de pruebas que han sido ejecutadas luego de codificar alguna funcionalidad del mismo. Cabe mencionar que por la naturaleza del proyecto que estamos desarrollando es importante que el mismo se comporte exactamente a los requerimientos estipulados y que además, el software proporcione mecanismos de seguridad en caso de que ocurriese alguna inconsistencia, ya que podría provocar accidentes que dañen el equipo como también a las personas que se encuentren en la intersección de su trayectoria. Dicho esto, introduciremos el concepto de  \textbf{Aseguramiento de la calidad} o del inglés \textit{Quality Assurance }(\textbf{QA}) en las próximas secciones. 
 
 \section{Conceptos preliminares}
 
@@ -138,12 +138,7 @@
 		Por lo tanto en lo que concierne a esta sección se explicará el procedimiento utilizado para probar el correcto funcionamientos de cada componente antes de ponerlos en marcha de manera conjunta. 
 		
 		
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.9\linewidth, height=0.6\textheight]{Imagenes/esquema-hardware}
-			\caption{Esquema de conexiones eléctricas del cuadricóptero}
-			\label{fig:esquema-hardware}
-		\end{figure}
+
 
 		\subsubsection{Conectores}
 		
@@ -161,11 +156,18 @@
 		\subsubsection{Fuentes de alimentación}
 		
 			En lo que respecta a las pruebas, hay que hacer foco en que es necesario disponer de un uso considerable de los componentes, ya que probar cada funcionalidad conlleva realizar pruebas continuas y por lo tanto al ser componentes electrónicos el suministro de energía en esta etapa deben ser , ``ilimitado''. Es por tal razón que la portabilidad que disponemos al tener baterías es innecesaria (más allá que serán útiles al momento de realizar vuelos a distancia),  por lo tanto estas baterías son reemplazadas por fuentes transformadoras de energía, las cuales dependen del suministro de energía de tipo alterna proveniente de las instalaciones del domicilio del ejecutante, y de esta manera obtendremos independencia en en tiempo de uso. En la Fig.\ref{fig:esquema-hardware} los componentes etiquetadas con los números 1 y 4 corresponden a las baterías que deben tener las siguientes especificaciones según los dispositivos electrónicos que alimentan:
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.9\linewidth, height=0.6\textheight]{Imagenes/esquema-hardware}
+				\caption{Esquema de conexiones eléctricas del cuadricóptero}
+				\label{fig:esquema-hardware}
+			\end{figure}
 
 			
 			\begin{itemize}
 				\item \textbf{Batería 1: } La misma provee de energía a la placa Arduino UNO. Por lo tanto, según las especificaciones de Arduino
-				debe recibir los siguientes suministros\footnote{Especificaciones de Arduino UNO  https://store.arduino.cc/usa/arduino-uno-rev3} :
+				debe recibir los siguientes suministros\footnote{Especificaciones de Arduino UNO  https://store.arduino.cc/usa/arduino-uno-rev3} ilustrados en la tabla \ref{Tab:energia_ArduinoUNO}:
 				\begin{table}[ht]
 					\begin{center}
 						\begin{tabular}{|c|c|}
@@ -359,7 +361,7 @@ void loop()
 
 	\subsection{Prueba integral}
 	
-		Por último y ya probado que tanto la plataforma como el vehículo estén en condiciones, se procede a realizar las pruebas integrales entre ambas partes (Proyecto-Vehículo). Para esto se descomponen dichas pruebas en categorías o "módulos" que se han definido en el comienzo del proyecto por los \textit{stakeholders}.
+		Ya probado que tanto la plataforma como el vehículo estén en condiciones, se procede a realizar las pruebas integrales entre ambas partes (Proyecto-Vehículo). Para esto se descomponen dichas pruebas en categorías o "módulos" que se han definido en el comienzo del proyecto por los \textit{stakeholders}.
 
 
 		\subsubsection{Conexión }
@@ -374,43 +376,43 @@ void loop()
 
 \begin{lstlisting}[language=python]
 try:
-if port_host != None:
-# Concatenamos la direccion IP con el puerto
-source = ip_host + ":" + port_host
-else: 
-# En caso de entrar aqui es porque se ha ingresado un puerto serial
-source = ip_host
-# Utilizamos la funcion connect de DroneKit
-self.v = connect(source, 
-wait_ready=True, 
-heartbeat_timeout=10,
-status_printer=logging.info)  		
-# El parametro wait_ready = True garantiza que connect () no volvera 
-# hasta que Vehicle.parameters y la mayoria de los otros atributos
-# predeterminados se hayan rellenado con valores del vehiculo.
-
-logging.info("Se ha conectado con la direccion {} de manera exitosa".format(source))
-
-self.__on = True
-self.descargarMisiones(False)
-
+	if port_host != None:
+		# Concatenamos la direccion IP con el puerto
+		source = ip_host + ":" + port_host
+	else: 
+		# En caso de entrar aqui es porque se ha ingresado un puerto serial
+		source = ip_host
+	# Utilizamos la funcion connect de DroneKit
+	self.v = connect(source, 
+					wait_ready=True, 
+					heartbeat_timeout=10,
+					status_printer=logging.info)  		
+		# El parametro wait_ready = True garantiza que connect () no volvera 
+		# hasta que Vehicle.parameters y la mayoria de los otros atributos
+		# predeterminados se hayan rellenado con valores del vehiculo.
+	
+	logging.info("Se ha conectado con la direccion {} de manera exitosa".format(source))
+	
+	self.__on = True
+	self.descargarMisiones(False)
+	
 # Error TCP connection
 except socket.error:
-logging.info('No se ha encontrado el vehiculo, por favor compruebe la conexion')
-raise WindowsError('No se ha encontrado el vehiculo, por favor compruebe la conexion')
+	logging.info('No se ha encontrado el vehiculo, por favor compruebe la conexion')
+	raise WindowsError('No se ha encontrado el vehiculo, por favor compruebe la conexion')
 
 # Error TTY connection
 except exceptions.OSError as e:
-logging.info('No se pudo establecer conexion con el puerto serial')
-raise WindowsError('No se pudo establecer conexion con el puerto serial')
-return
+	logging.info('No se pudo establecer conexion con el puerto serial')
+	raise WindowsError('No se pudo establecer conexion con el puerto serial')
+	return
 except APIException:
-logging.info('Se ha excedido el tiempo de espera para establecer la conexion!')
-raise WindowsError('Se ha excedido el tiempo de espera para establecer la conexion!')
+	logging.info('Se ha excedido el tiempo de espera para establecer la conexion!')
+	raise WindowsError('Se ha excedido el tiempo de espera para establecer la conexion!')
 
 except :
-logging.info('Ha ocurrido un error inesperado. ')
-raise WindowsError('Ha ocurrido un error inesperado. ') 
+	logging.info('Ha ocurrido un error inesperado. ')
+	raise WindowsError('Ha ocurrido un error inesperado. ') 
 
 \end{lstlisting}
 
@@ -436,11 +438,11 @@ Cuando este inconveniente se presente, tanto el vehículo como el software compar
 # Whether heartbeat monitoring can be useful will very much depend on the application.
 
 if self.v.last_heartbeat > 1 and self.v.last_heartbeat <= 1.5 :
-estados['signal'] = None
+	estados['signal'] = None
 elif self.v.last_heartbeat <= 1 and self.v.last_heartbeat :
-estados['signal'] = True
+	estados['signal'] = True
 else:
-estados['signal'] = False	
+	estados['signal'] = False	
 \end{lstlisting}
 
 
@@ -510,35 +512,34 @@ El control del vehículo, ya sea de forma manual o automática, es una de las func
 	
 	\begin{lstlisting}[language=python]
 	class Capturador(QThread):
-	"Clase encargada de capturar en background los comandos que se envian del Joystick "
-	condicion_para_capturar = False		
-	def __init__(self,parent):
-	super(Capturadorr, self).__init__(parent)
-	# QThread.__init__(parent)
-	
-	def capturing(self,run):
-	self.condicion_para_capturar = run
-	
-	def __del__(self):
-	
-	self.exit(0)
-	
-	def capturarComandos(self):
-	try:	
-	while  True :
-	
-	if self.condicion_para_capturar:
-	eventos = pygame.event.get()	
-	for e in eventos:
-	# e.type == 7, es un codigo de tipo joymotion
-	if e.type == 7: 
-	self.emit(SIGNAL('mostrarEje(int,float)'), e.axis, e.value)
-	self.emit(SIGNAL('sendManualCmd(int,float,bool)'),\
-	e.axis+12, e.value, True)
-	if e.type == 10: #Es de tipo JoyButtonDown
-	self.emit(SIGNAL('sendManualCmd(int,float,bool)'), e.button, 1.0, False)
-	except:
-	WindowsError("Error de comando", "Ah ocurrido un error al enviar los comandos" )
+		"Clase encargada de capturar en background los comandos que se envian del Joystick "
+		condicion_para_capturar = False		
+		def __init__(self,parent):
+			super(Capturadorr, self).__init__(parent)
+			# QThread.__init__(parent)
+		
+		def capturing(self,run):
+			self.condicion_para_capturar = run
+		
+		def __del__(self):
+		
+			self.exit(0)
+		
+		def capturarComandos(self):
+			try:	
+				while  True :
+					if self.condicion_para_capturar:
+						eventos = pygame.event.get()	
+						for e in eventos:
+							# e.type == 7, es un codigo de tipo joymotion
+							if e.type == 7: 
+								self.emit(SIGNAL('mostrarEje(int,float)'), e.axis, e.value)
+								self.emit(SIGNAL('sendManualCmd(int,float,bool)'),\
+								e.axis+12, e.value, True)
+							if e.type == 10: #Es de tipo JoyButtonDown
+								self.emit(SIGNAL('sendManualCmd(int,float,bool)'), e.button, 1.0, False)
+			except:
+				WindowsError("Error de comando", "Ah ocurrido un error al enviar los comandos" )
 	\end{lstlisting}
 	
 	

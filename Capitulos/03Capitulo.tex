@@ -561,7 +561,12 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\label{fig:instnavio1}
 		\end{figure}
 		
-		Un aspecto a tener en cuenta es que no todos los componentes que se visualizan en la Fig. \ref{fig:instnavio1} están presentes al momento de la instrumentación ya que los dispositivos marcados con los números (1,2 y 3) son de tipo comunicación y se supone que con el módulo interno de \textit{Wifi} podríamos sustituir estos elementos. 
+		Un aspecto a tener en cuenta es que no todos los componentes que se visualizan en la Fig. \ref{fig:instnavio1} están presentes al momento de la instrumentación ya que los dispositivos marcados con los números (1,2 y 3) son de tipo comunicación y se supone que con el módulo interno de \textit{Wifi} podríamos sustituir estos elementos. Siendo estas alternativas los siguientes elementos:
+		\begin{enumerate}
+			\item Receptor de radio frecuencia.
+			\item Módulo de telemetría por USB.
+			\item Módulo de telemetría por UART.
+		\end{enumerate}
 		\par Por lo tanto se procede a realizar las conexiones mostradas. En primera medida se inicia conectando los motores del cuerpo del cuadricóptero con los pines de la Navio2 como se puede observar en la Fig.\ref{fig:conexionmotores}
 		
 		\begin{figure}[h!]
@@ -583,27 +588,28 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		En la Fig. \ref{fig:instnavio1} se puede ver que la batería suministra energía a los cuatro motores y al vehículo, por lo tanto se decide alimentar al vehículo con el transformador de fábrica y suministrar energía a  los motores con la fuente. Esta fuente como se puede observar en la Fig. \ref{fig:fuentevr} contiene un único par de salida (positivo y negativo) por lo que es necesario multiplexar esta salida a 4 pares de salidas más. Para eso se decide armar y soldar un conjunto de cables con sus respectivos conectores como se puede observar en la Fig. \label{fig:terminado}.
 
 
-		Por último, se verifican las conexiones pertinentes a los planos y se buscan imperfectos en las uniones, en caso de encontrar algún tipo de estos se procede a repararlos. 
+		Por último, se verifican las conexiones pertinentes a los planos y se buscan imperfectos en las uniones, en caso de encontrar algún tipo de estos se procede a repararlos. En la Fig. \ref{fig:terminado} se puede observar el vehículo conectado. 
+		
 		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.5\linewidth, height=0.4\textheight]{Imagenes/fotos/quad_armado}
-		\caption{Cuadricóptero armado para verificar funcionamiento.}
-		\label{fig:terminado}
+			\centering
+			\includegraphics[width=0.5\linewidth, height=0.4\textheight]{Imagenes/fotos/quad_armado}
+			\caption{Cuadricóptero armado para verificar funcionamiento.}
+			\label{fig:terminado}
 		\end{figure}
 		
 		
 		\subsection{Prueba de funcionamiento inicial}
-		Como etapa final y con el objetivo de verificar el correcto funcionamiento de nuestro vehículo, se inicia el proceso de calibración de sensores, para eso se decide utilizar \textbf{Mavproxy} seleccionando el módulo de calibración y consecuentemente realizando los pasos que se nos indican de manera sencilla como se puede observar en la Fig. \ref{fig:calibmavproxy}. 
-		
-		Una vez concluida la etapa de calibración se procede a enviar misiones de prueba, como por ejemplo elevarse del suelo 1 metro desde la posición inicial sin tener instalado las hélices por motivos de seguridad, dándonos como resultados que el vehículo interpreta los comandos. Aunque estas pruebas fueron realizadas de modo superficial, en el capitulo \ref{cap4:pruebas} se profundizará que el funcionamiento integral de los componentes responda de manera correcta.
-		
-		
-		\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.8\linewidth, height=0.4\textheight]{Imagenes/calibMavproxy}
-		\caption{Ejecución del modulo de calibración de MavProxy}
-		\label{fig:calibmavproxy}
-		\end{figure}
+			Como etapa final y con el objetivo de verificar el correcto funcionamiento de nuestro vehículo, se inicia el proceso de calibración de sensores, para eso se decide utilizar \textbf{Mavproxy} seleccionando el módulo de calibración y consecuentemente realizando los pasos que se nos indican de manera sencilla como se puede observar en la Fig. \ref{fig:calibmavproxy}. 
+			
+			Una vez concluida la etapa de calibración se procede a enviar misiones de prueba, como por ejemplo elevarse del suelo 1 metro desde la posición inicial sin tener instalado las hélices por motivos de seguridad, dándonos como resultados que el vehículo interpreta los comandos. Aunque estas pruebas fueron realizadas de modo superficial, en el capitulo \ref{cap4:pruebas} se profundizará que el funcionamiento integral de los componentes responda de manera correcta.
+			
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.8\linewidth, height=0.4\textheight]{Imagenes/calibMavproxy}
+				\caption{Ejecución del modulo de calibración de MavProxy}
+				\label{fig:calibmavproxy}
+			\end{figure}
 
 
 % Variable local para emacs, para  que encuentre el fichero maestro de

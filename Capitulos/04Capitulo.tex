@@ -55,7 +55,7 @@ Mi trabajo en el software libre está motivado por un objetivo idealista: difundi
 %-------------------------------------------------------------------
 \label{cap3:sec:Introduccion}
 
-	\par En el ámbito informático, como es sabido, la etapa de codificación del software generalmente es la que más tiempo abarca con respecto a la duración total del proyecto. Por esta razón, no es de sorprender que a medida que vayamos avanzando, objetivos, herramientas, planificación, diseño y lógica del software estén bajo un constante cambio ya que se van presentando obstáculos, alternativas e incompatiblididades que no han sido previstos en etapas iniciales. De esta manera, se irán ilustrando durante este capítulo capturas del estado del proyecto en distintas etapas del mismo, con el objetivo de poder ver el crecimiento y las técnicas utilizadas a medida que el proyecto va evolucionando y de esta manera poder aprender, para próximos proyectos, las estructuras que uno debe implementar en etapas iniciales con el fin de no cometer los mismos errores.
+	\par En el ámbito informático, como es sabido, la etapa de codificación del software generalmente es la que más tiempo abarca. Por esta razón, no es de sorprender que a medida que vayamos avanzando en los objetivos, herramientas, planificaciones, diseño y lógica del software estén bajo un constante cambio, ya que se van presentando obstáculos, alternativas e incompatiblididades que no han sido previstos en etapas iniciales. De esta manera, se irán ilustrando durante este capítulo capturas del estado del proyecto en las distintas etapas del mismo, con el objetivo de poder ver el crecimiento y las técnicas utilizadas a medida que se va evolucionando y de esta manera poder aprender las estructuras que uno debe implementar en etapas iniciales con el fin de no cometer los mismos errores.
 
 \section{Diseño detallado de la plataforma}
 \label{cap3:sec:Disenio_detallado}
@@ -77,7 +77,7 @@ Mi trabajo en el software libre está motivado por un objetivo idealista: difundi
 Antes de iniciar directamente con la codificación, es necesario realizar un diseño de todo lo que queramos hacer, esto genera un diagrama de tareas a seguir que ayuda al ejecutor del proyecto tener planificado las tareas generales que debe realizar en el transcurso del mismo y no estar pendiente de como proseguir una vez finalizada cada tarea y re-planificar constantemente el hilo del proyecto. Es por tal motivo que la fase de diseño del presente proyecto se ha dividido en dos, la primera abarca un diseño global, meramente con la intensión de contar con un panorama general del comportamiento del software/hardware y además, poder mitigar la incertidumbre del ejecutor del proyecto, al establecer los direccionamientos generales. En base a la documentación que se ha hecho en etapas anteriores podemos empezar a entablar de forma más precisa los procedimientos o tareas a realizar, lo que conlleva encarar la segunda parte del diseño.
 
 
-\par Según Pressman esta etapa produce los siguientes diseños:
+\par Según Pressman\cite{pressman88is} esta etapa produce los siguientes diseños:
 
 \begin{itemize}
 	\item \textbf{Diseño de datos: } El diseño de datos esencialmente se encarga de transformar el modelo de dominio de la información creado durante el análisis \cite{pressman88is}. 
@@ -97,7 +97,7 @@ Antes de iniciar directamente con la codificación, es necesario realizar un dise
 \par En el diseño orientado a objetos o más específicamente, en la confección del diagrama de clases se detallan los objetos mediante bloques gráficos denominados clases. Estas clases contienen todos los atributos correspondientes al objeto, como por ejemplo, la clase vehículo puede contener: cantidad de hélices, altura de vuelo, velocidad, posición, etc. Además, según este diseño, contiene todas las acciones que puede realizar a través de funciones; si continuamos con el ejemplo de vehículo aéreo pueden ser: volar, aterrizar, despegar, etc. Esto nos brinda como resultado final una estructura al momento de implementar el código, por lo que facilita la tarea del programador. Además, y un punto importante a tener en cuenta es que muestra como se comunicará cada clase con las demás, esta característica ayuda a descubrir que funciones extras son necesarias implementar para una correcta cooperación en conjunto. Sin embargo, existe una desventaja, desde el punto de vista de la interacción del usuario, y es que no toma en cuenta las funcionalidades que puede desear el mismo para qué el uso del software sea más placentero (que es el objetivo de este diseño), más específicamente que el resultado del diseño se centra en que cada clase pueda responder a las necesidades (mensajes) de las demás clases. 
 
 
-En cambio, si primero realizamos el diseño de la interfaz gráfica del usuario, nos determinará que es necesario entre otros aspectos que no han sido incluidos en el diseño arquitectónico, ya que no se han tomado como partes importantes en el desarrollo, la interacción del usuario. Como por ejemplo, funciones de validación de datos, ventanas de advertencias, gráficos, como es el HUD (Fig.\ref{fig:hudd}).
+En cambio, si primero realizamos el diseño de la interfaz gráfica del usuario, nos determinará que es necesario entre otros aspectos que no han sido incluidos en el diseño arquitectónico, ya que no se han tomado como partes importantes en el desarrollo, la interacción del usuario. Como por ejemplo, funciones de validación de datos, ventanas de advertencias, gráficos, como es el \textit{Head Up Display} (HUD) (Fig.\ref{fig:hudd}).
 
 
 \begin{figure}[h!]
@@ -111,9 +111,9 @@ En cambio, si primero realizamos el diseño de la interfaz gráfica del usuario, n
 
 \subsection{Diseño de interfaz}
 
-En primera instancia se inicia con la interfaz gráfica del usuario o su equivalente en ingles \textit{\textbf{G}raphical \textbf{U}ser \textbf{I}nterface}; por definición es el proceso que define como será la interacción entre el software y el usuario final. Para esto, se utiliza la herramienta Qt Designer, que proporciona mediante un panel de \textbf{widgets} todos los elementos necesarios para el diseño del mismo. 
+En primera instancia se inicia con la interfaz gráfica del usuario o del inglés \textit{\textbf{G}raphical \textbf{U}ser \textbf{I}nterface}; por definición es el proceso que define como será la interacción entre el software y el usuario final. Para esto, se utiliza la herramienta Qt Designer, que proporciona mediante un panel de \textbf{widgets} todos los elementos necesarios para el diseño del mismo. 
 
-\par Para iniciar este proceso, nos basamos en los \textit{mockups}  desarrollados  en la fase de diseño global de la plataforma, basándonos pantalla por pantalla en la confección de cada uno. Cabe mencionar que las pantallas presentes del diseño han sido obtenidas luego de un arduo proceso de modificaciones y actualizaciones debido a las necesidades e inconvenientes que se iban presentando en el transcurso de la fase de codificación. Las imágenes de la GUI se pueden ver en el anexo \ref{ap1:GUI}
+\par Para iniciar este proceso, partimos de los \textit{mockups}  desarrollados en la sección \ref{cap1:sec:dise}, basándonos pantalla por pantalla en la confección de cada uno. Cabe mencionar que las pantallas presentes del diseño han sido obtenidas luego de un arduo proceso de modificaciones y actualizaciones debido a las necesidades e inconvenientes que se iban presentando en el transcurso de la fase de codificación. Las imágenes de la GUI se pueden ver en el anexo \ref{ap1:GUI}
 
 \subsubsection{Modificaciones generales}
 \begin{itemize}
@@ -139,7 +139,7 @@ Luego de finalizar con el diseño de interfaz y en base al diagrama de clases rea
 
 	En esta etapa consiste en traducir el diseño a una forma legible por la máquina. Por tanto, iniciaremos esta tarea según los diseños de diagrama de clases generados y siempre teniendo en mente los requerimientos estipulados por los \textit{stakeholders}.
 	
-	\par Según, el diagrama de clases adjuntado en el apéndice \ref{ap1:classDiagra_vFinal} tenemos varias clases que se encargarán de un grupo de funcionalidades en específico y a su vez cada una brinda funcionalidades a sus clases vecinas, para entender un poco el funcionamiento del software comenzaremos explicando cada una, exceptuando las clases que se han utilizado de las bibliotecas pertinentes.
+	\par Según el diagrama de clases adjuntado en el apéndice \ref{ap1:classDiagra_vFinal} tenemos varias clases que se encargarán de un grupo de funcionalidades en específico y a su vez cada una brinda funcionalidades a sus clases vecinas, para entender un poco el funcionamiento del software comenzaremos explicando cada una de ellas.
 	
 	%ANEXAR CODIGO?
 
@@ -152,7 +152,7 @@ Luego de finalizar con el diseño de interfaz y en base al diagrama de clases rea
 				\label{fig:classvehiculo}
 			\end{figure}
 		
-			La clase Vehículo es la responsable de representar en su mayor medida el objeto real, en nuestro caso el cuadricóptero.  Se le han asignado las siguientes funcionalidades en base a:
+			La clase Vehículo (Fig.\ref{fig:classvehiculo}) es la responsable de representar en su mayor medida el objeto real, en nuestro caso el cuadricóptero.  Se le han asignado las siguientes funcionalidades en base a:
 			
 		\begin{itemize}
 			
@@ -195,7 +195,7 @@ Luego de finalizar con el diseño de interfaz y en base al diagrama de clases rea
 	\subsection{Clase Joystick}
 
 	
-		La clase Joystick, es la encargada de gestionar dentro del los comandos conectados en el equipo, sus respectivas acciones que han sido ejecutadas por el usuario. 
+		La clase Joystick (Fig. \ref{fig:classjoystick}), es la encargada de gestionar dentro del los comandos conectados en el equipo, sus respectivas acciones que han sido ejecutadas por el usuario. 
 		
 		\begin{figure}[h!]
 			\centering
@@ -221,7 +221,7 @@ Luego de finalizar con el diseño de interfaz y en base al diagrama de clases rea
 			\label{fig:classgraficodatos}
 		\end{figure}
 
-		La clase Gráfico de Datos fue creada con el fin de cumplir con el requerimiento R002 que solicita una representación gráfica en tiempo real y evolutiva de la información capturada. Para realizar dicha tarea en primer momento se ha utilizado la biblioteca Vispy\footnote{Página web de la herramienta vispy.org} como la definición del requerimiento lo especifica; pero a medida que se iba avanzando en el desarrollo y prueba del mismo se ha encontrado el inconveniente de que dicha biblioteca no contiene la documentación actualizada, lo que genera contratiempos al momento de cumplir con el objetivo, por lo que se decide utilizar otra con una comunidad más activa, como lo es PyQtGraph\footnote{Página web de la herramienta www.pyqtgraph.org}. Esta biblioteca cuenta con una gran comunidad activa y una documentación detallada de cada funcionalidad disponible, esto facilita mucho al ejecutor del proyecto a dirigir la atención en otros aspectos del proyecto. 
+		La clase Gráfico de datos (Fig. \ref{fig:classgraficodatos}) fue creada con el fin de cumplir con el requerimiento R002 que solicita una representación gráfica en tiempo real y evolutiva de la información capturada. Para realizar dicha tarea en primer momento se ha utilizado la biblioteca Vispy\footnote{Página web de la herramienta vispy.org} como la definición del requerimiento lo especifica; pero a medida que se iba avanzando en el desarrollo y prueba del mismo se ha encontrado el inconveniente de que dicha biblioteca no contiene la documentación actualizada, lo que genera contratiempos al momento de cumplir con el objetivo, por lo que se decide utilizar otra con una comunidad más activa, como lo es PyQtGraph\footnote{Página web de la herramienta www.pyqtgraph.org}. Esta biblioteca cuenta con una gran comunidad activa y una documentación detallada de cada funcionalidad disponible, esto facilita mucho al ejecutor del proyecto a dirigir la atención en otros aspectos del proyecto. En la Fig. \ref{fig:gdprueba} se muestra un ejemplo de la biblioteca ilustrando en un periodo de tiempo una función senosoidal con un agregado de ruido, para simular un comportamiento aleatorio. 
 	
 		\begin{figure}[h!]
 			\centering
@@ -242,7 +242,7 @@ Luego de finalizar con el diseño de interfaz y en base al diagrama de clases rea
 
 	\subsection{Clase HUD} %R003
 	
-		La clase HUD o por su respectiva traducción, \textit{visualización cabeza-arriba}, es la encargada de visualizar al piloto, en este caso el usuario, los datos más relevantes del estado del vehículo, con el objetivo de tener a simple vista el comportamiento del mismo en tiempo real. En la Fig.\ref{fig:classhud} se pueden apreciar las principales funcionalidades encargadas de representar dicha visualización.
+		La clase HUD (Fig. \ref{fig:classhud}) o por su respectiva traducción, \textit{visualización cabeza-arriba}, es la encargada de visualizar al piloto, en este caso el usuario, los datos más relevantes del estado del vehículo, con el objetivo de tener a simple vista el comportamiento del mismo en tiempo real. En la Fig.\ref{fig:classhud} se pueden apreciar las principales funcionalidades encargadas de representar dicha visualización.
 		
 		\begin{figure}[h!]
 			\centering
@@ -482,7 +482,7 @@ Luego de finalizar con el diseño de interfaz y en base al diagrama de clases rea
 		%FIX - explicar como hice para obtener la información
 		TABLA.MADRID.BONETE
 		
-		Donde en cada grupo se encuentran reunidos un conjunto de parámetros individuales que configuran cierto aspecto de cada grupo. Por tal razón se decide crear una clase Gestión de Parámetros, de tal manera que sea el encargado de agrupar estos parámetros. Para la carga de información de cada parámetro se ha utilizado una planilla de cálculo para almacenar la información, esto es posible gracias a la biblioteca \textit{openpyxl} que nos permite ir guardando cada 	grupo de parámetros en una hoja independiente dentro del documento.
+		Donde en cada grupo se encuentran reunidos un conjunto de parámetros individuales que configuran cierto aspecto de cada grupo. Por tal razón se decide crear una clase Gestión de Parámetros, de tal manera que sea el encargado de agrupar estos parámetros. Para la carga de información de cada parámetro se ha utilizado una planilla de cálculo para almacenar la información, esto es posible gracias a la biblioteca \textit{openpyxl\footnote{Página web de la biblioteca https://openpyxl.readthedocs.io/en/stable/}} que nos permite ir guardando cada 	grupo de parámetros en una hoja independiente dentro del documento.
 		\newpage
 		
 	
