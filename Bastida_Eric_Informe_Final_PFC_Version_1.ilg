@@ -1,0 +1,13 @@
+This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
+Scanning style file /usr/share/texmf/makeindex/glosstex.ist.........
+** Input style error (file = /usr/share/texmf/makeindex/glosstex.ist, line = 63):
+   -- Unknown specifier \endinput.
+done (9 attributes redefined, 1 ignored).
+Scanning input file Bastida_Eric_Informe_Final_PFC_Version_1.gxs....
+!! Input index error (file = Bastida_Eric_Informe_Final_PFC_Version_1.gxs, line = 17):
+   -- Incomplete first argument (premature LFD).
+done (22 entries accepted, 1 rejected).
+Sorting entries....done (95 comparisons).
+Generating output file Bastida_Eric_Informe_Final_PFC_Version_1.glx....done (46 lines written, 0 warnings).
+Output written in Bastida_Eric_Informe_Final_PFC_Version_1.glx.
+Transcript written in Bastida_Eric_Informe_Final_PFC_Version_1.ilg.

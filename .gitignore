@@ -1,0 +1,17 @@
+
+*.log
+*.toc
+*.aux
+*.lof
+*.lot
+*.out
+*.blg
+*.gz
+*.idx
+*.ps
+*.dvi
+*.bbl
+Capitulos/*.aux
+TeXiS/*.aux
+Apendices/*.aux
+
