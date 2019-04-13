@@ -1,4 +1,5 @@
 
+glosstex/
 *.log
 *.toc
 *.aux
@@ -14,4 +15,6 @@
 Capitulos/*.aux
 TeXiS/*.aux
 Apendices/*.aux
+clean.bat
+Apendices/Apendice_files/GUI.docx
 

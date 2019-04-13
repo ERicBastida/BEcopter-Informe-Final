@@ -20,17 +20,17 @@
 % tienes ninguno  referenciado, basta con que no  definas la constante
 % \acronimosEnRelease en config.tex
 
-@entry{CVS, , \emph{Control Version System}, Sistema de Control de Versiones}
+@entry{API, , \emph{Aplication Programming Interface}}
 
-@entry{UAV, , \emph{unmanned  Aerial Vehicle}, Vehículo Aereo No  tripulado}
+@entry{UAV, , \emph{Unmanned  Aerial Vehicle}, Vehículo Aereo No  tripulado}
 
 @entry{VANT, , \emph{Vehículo Aereo No Tripulado}}
-@entry{cm, , \emph{Volts}}
+
+@entry{cm, , \emph{Centímetros}}
+
 @entry{PC, , \emph{Personal Computer}, Computadora Personal}
 
 @entry{GPL, , \emph{General Public License}, Licencia Pública General de GNU}
-
-@entry{PC2, PC$^2$, \emph{Programming Contest Control}}
 
 @entry{USB, , \emph{Universal Serial Bus}}
 
@@ -50,16 +50,15 @@
 
 @entry{LiPo, , \emph{Lithium Polymer}}
 
-@entry{GPU, , \emph{Lithium Polymer}}
+@entry{GPU, , \emph{Graphics Processing Unit}}
 
-@entry{CPU, , \emph{Lithium Polymer}}
+@entry{CPU, , \emph{Central Processing Unit}}
 
+@entry{PPM, , \emph{Pulse Position Modulation}}
 
-@entry{PPM, , \emph{Lithium Polymer}}
+@entry{PWM, , \emph{Pulse Width Modulation}}
 
-@entry{PWM, , \emph{Modulación por Ancho de Pulso}}
-
-@entry{SBUS, , \emph{Lithium Polymer}}
+@entry{SBUS, , \emph{Serial Bus}}
 
 @entry{V, , \emph{Volts}}
 
@@ -67,14 +66,14 @@
 
 @entry{A, , \emph{Amperes}}
 
-@entry{TCP, , \emph{Volts}}
+@entry{TCP, , \emph{Transmission Control Protocol}}
 
-@entry{UTP, , \emph{Volts}}
+@entry{UDP, , \emph{User Datagram Protocol}}
 
-@entry{CMOS, , \emph{Volts}}
+@entry{UTP, , \emph{Unshielded Twisted Pair}}
 
-@entry{LAN, , \emph{Volts}}
+@entry{CMOS, , \emph{Complementary Metal-Oxide-Semiconductor}}
 
-@entry{API, , \emph{Volts}}
-@entry{RPM, , \emph{Volts}}
+@entry{LAN, , \emph{Local Area Network}}
+
 @entry{QA, , \emph{Quality Assurance}}

@@ -1,22 +1,22 @@
 
 
-\GlossTeXEntry{API}{API}{\emph{Volts}}{}{acr}{a}{\GlossTeXPage{n}{9}}
+\GlossTeXEntry{API}{API}{\emph{Aplication Programming Interface}}{}{acr}{a}{\GlossTeXPage{n}{9}}
 \GlossTeXNull{0}
-\GlossTeXEntry{cm}{cm}{\emph{Volts}}{}{acr}{a}{\GlossTeXPage{n}{78}}
+\GlossTeXEntry{cm}{cm}{\emph{Centímetros}}{}{acr}{a}{\GlossTeXPage{n}{78}}
 \GlossTeXNull{0}
-\GlossTeXEntry{CMOS}{CMOS}{\emph{Volts}}{}{acr}{a}{\GlossTeXPage{n}{28}}
+\GlossTeXEntry{CMOS}{CMOS}{\emph{Complementary Metal-Oxide-Semiconductor}}{}{acr}{a}{\GlossTeXPage{n}{28}}
 \GlossTeXNull{0}
-\GlossTeXEntry{CPU}{CPU}{\emph{Lithium Polymer}}{}{acr}{a}{\GlossTeXPage{n}{15}}
+\GlossTeXEntry{CPU}{CPU}{\emph{Central Processing Unit}}{}{acr}{a}{\GlossTeXPage{n}{15}}
 \GlossTeXNull{0}
 \GlossTeXEntry{GPS}{GPS}{\emph{Global Position System }}{}{acr}{a}{\GlossTeXPage{n}{6}}
 \GlossTeXNull{0}
-\GlossTeXEntry{GPU}{GPU}{\emph{Lithium Polymer}}{}{acr}{a}{\GlossTeXPage{n}{15}}
+\GlossTeXEntry{GPU}{GPU}{\emph{Graphics Processing Unit}}{}{acr}{a}{\GlossTeXPage{n}{15}}
 \GlossTeXNull{0}
 \GlossTeXEntry{GUI}{GUI}{\emph{Graphic User Interface}}{}{acr}{a}{\GlossTeXPage{n}{8}}
 \GlossTeXNull{0}
 \GlossTeXEntry{IMU}{IMU}{\emph{Múltiple Process Unit }}{}{acr}{a}{\GlossTeXPage{n}{52}}
 \GlossTeXNull{0}
-\GlossTeXEntry{LAN}{LAN}{\emph{Volts}}{}{acr}{a}{\GlossTeXPage{n}{40}}
+\GlossTeXEntry{LAN}{LAN}{\emph{Local Area Network}}{}{acr}{a}{\GlossTeXPage{n}{40}}
 \GlossTeXNull{0}
 \GlossTeXEntry{LiPo}{LiPo}{\emph{Lithium Polymer}}{}{acr}{a}{\GlossTeXPage{n}{13}}
 \GlossTeXNull{0}
@@ -26,15 +26,15 @@
 \GlossTeXNull{0}
 \GlossTeXEntry{PC}{PC}{\emph{Personal Computer}, Computadora Personal}{}{acr}{a}{\GlossTeXPage{n}{5}}
 \GlossTeXNull{0}
-\GlossTeXEntry{PWM}{PWM}{\emph{Modulación por Ancho de Pulso}}{}{acr}{a}{\GlossTeXPage{n}{17}}
+\GlossTeXEntry{PWM}{PWM}{\emph{Pulse Width Modulation}}{}{acr}{a}{\GlossTeXPage{n}{17}}
 \GlossTeXNull{0}
-\GlossTeXEntry{RPM}{RPM}{\emph{Volts}}{}{acr}{a}{\GlossTeXPage{n}{69}}
+\GlossTeXEntry{RPM}{RPM}{\emph{Revolutions Per Minute}}{}{acr}{a}{\GlossTeXPage{n}{69}}
 \GlossTeXNull{0}
-\GlossTeXEntry{TCP}{TCP}{\emph{Volts}}{}{acr}{a}{\GlossTeXPage{n}{23}}
+\GlossTeXEntry{TCP}{TCP}{\emph{Transmission Control Protocol}}{}{acr}{a}{\GlossTeXPage{n}{23}}
 \GlossTeXNull{0}
 \GlossTeXEntry{USB}{USB}{\emph{Universal Serial Bus}}{}{acr}{a}{\GlossTeXPage{n}{3}}
 \GlossTeXNull{0}
-\GlossTeXEntry{UTP}{UTP}{\emph{Volts}}{}{acr}{a}{\GlossTeXPage{n}{24}}
+\GlossTeXEntry{UTP}{UTP}{\emph{Unshielded Twisted Pair}}{}{acr}{a}{\GlossTeXPage{n}{24}}
 \GlossTeXNull{0}
 \GlossTeXEntry{V}{V}{\emph{Volts}}{}{acr}{a}{\GlossTeXPage{n}{19}}
 \GlossTeXNull{0}
