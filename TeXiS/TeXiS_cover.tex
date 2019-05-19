@@ -105,7 +105,7 @@
 \textbf{\directorPortadaVal}
 \\ [1em]
 \textit{Codirigida por el Ingeniero}  \\ [0.3em]
-\textbf{\codirectorPortadaVal}
+\textbf{Nestor Nahuel Deniz}
 }
 \newcommand{\textoSegundoSubtituloPortada}[1]{
 \def\textoSegundoSubtituloPortadaVal{#1}
@@ -320,7 +320,9 @@
 \begin{large}
 
 \begin{center}
-\textbf{\autorPortadaVal}\\[0.3cm]
+	
+	Alumno: \textbf{\autorPortadaVal}\\[0.3cm]
+	Director: \textbf{\directorPortadaVal} \\[0.4cm]
 
 \textbf{\institucionVal}\\[1em]
 \textbf{\fechaPublicacionVal}
@@ -338,29 +340,6 @@
 % Página que en la cara de detrás del folio de la portada.
 % Ponemos que el documento esta maquetado con TeXiS y la
 % aclaración de que debe imprimirse a doble cara.
-\thispagestyle{empty}
-\mbox{ }
-\vfill%space*{4cm}
-\begin{small} 
-\begin{center}
-\ifx\noTeXiSCreditsVal\undefined
-  Documento maquetado con \texis\ v.\texisVer.
-\else
-\mbox{ }
-\fi
-\end{center}
-\end{small}
-\vspace*{2cm}
-\begin{small} 
-\begin{center}
-\ifx\explicacionDobleCaraVal\undefined
-\mbox{ }
-\else
-\noindent Este documento está preparado para ser imprimido a doble
-cara.
-\fi
-\end{center}
-\end{small}
 
 %%%
 % Segunda portada

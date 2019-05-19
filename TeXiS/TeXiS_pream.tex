@@ -349,7 +349,7 @@
 % empieza a numerarse así).
 
 \ifpdf
-   \RequirePackage[pdfborder=0,colorlinks,hyperindex,pdfpagelabels]{hyperref}
+   \RequirePackage[pdfborder=0,hidelinks,hyperindex,pdfpagelabels]{hyperref}
    \def\pdfBorderAttrs{/Border [0 0 0] } % Ningún borde en los enlaces
 \fi
 
@@ -359,7 +359,7 @@
 % al comando anterior. Si no se está en pdf, se incluye directamente
 \ifpdf
 \else
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \fi
 
 \hypersetup{colorlinks=false}

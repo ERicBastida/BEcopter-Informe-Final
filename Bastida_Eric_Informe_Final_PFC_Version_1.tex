@@ -100,7 +100,7 @@
     \pdfinfo{/CreationDate (\today)}
 \fi
 
-
+\renewcommand{\lstlistingname}{Script}
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 %                        Documento
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -115,20 +115,17 @@
 \frontmatter
 
 \include{Cascaras/cover}
-
 \include{Cascaras/dedicatoria}
-
 \include{Cascaras/agradecimientos}
-
 \include{Cascaras/resumen}
+
 
 \ifx\generatoc\undefined
 \else
 \include{TeXiS/TeXiS_toc}
 \fi
 
-% Marcamos el  comienzo de  los cap?tulos (para  la numeraci?n  de las
-% p?ginas) y ponemos la cabecera normal
+
 \mainmatter
 \restauraCabecera
 
@@ -148,7 +145,7 @@
 %--------------------------------------------------------------------------------
 
 \appendix
-\include{Apendices/ParteApendices}
+%\include{Apendices/ParteApendices}
 \include{Apendices/01ApendiceA}   % ERS
 \include{Apendices/01ApendiceB}   % Manual del Usuario
 \include{Apendices/01ApendiceC}   % Mockups
@@ -168,35 +165,11 @@
 % Indice de palabras
 %--------------------------------------------------------------------------------
 
-% S?lo  la   generamos  si  est?   declarada  \generaindice.  Consulta
-% TeXiS.sty para m?s informaci?n.
-
-% En realidad, el soporte para la generaci?n de ?ndices de palabras
-% en TeXiS no est? documentada en el manual, porque no ha sido usada
-% "en producci?n". Por tanto, el fichero que genera el ?ndice
-% *no* se incluye aqu? (est? comentado). Consulta la documentaci?n
-% en TeXiS_pream.tex para m?s informaci?n.
-
-\ifx\generaindice\undefined
-\else
-	%\include{TeXiS/TeXiS_indice}
-\fi
-
-%211111111166554451
-% Lista de acronimos
-%
-
 \ifx\generaacronimos\undefined
 \else
 \include{TeXiS/TeXiS_acron}
 \fi
 
-% S?lo  lo  generamos  si  est? declarada  \generaacronimos.  Consulta
-% TeXiS.sty para m?s informaci?n.
-
-
-
-%\include{Apendices/ParteAnexos}
 
 %
 % Final
