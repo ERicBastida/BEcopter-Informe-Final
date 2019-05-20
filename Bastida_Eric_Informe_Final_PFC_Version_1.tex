@@ -1,59 +1,10 @@
 
 % -*-coding: iso-latin-1  -*-
-%----------------------------------------------------------------------
-%
-%                          Plantilla_TeXis.tex
-%
-%----------------------------------------------------------------------
-%
-% Este fichero contiene el "documento maestro" del documento. Lo ?nico
-% que hace es configurar el entorno LaTeX e incluir los ficheros .tex
-% que contienen cada secci?n.
-%
-%----------------------------------------------------------------------
-%
-% Los ficheros necesarios para este documento son:
-%
-%       TeXiS/* : ficheros de la plantilla TeXiS.
-%       Cascaras/* : ficheros con las partes del documento que no
-%          son cap?tulos ni ap?ndices (portada, agradecimientos, etc.)
-%       Capitulos/*.tex : cap?tulos de la tesis
-%       Apendices/*.tex: ap?ndices de la tesis
-%       constantes.tex: constantes LaTeX
-%       config.tex : configuraci?n de la "compilaci?n" del documento
-%       guionado.tex : palabras con guiones
-%
-% Para la bibliograf?a, adem?s, se necesitan:
-%
-%       *.bib : ficheros con la informaci?n de las referencias
-%
-% ---------------------------------------------------------------------
+
 
 \documentclass[10pt,a4paper,top=2.5cm,bottom=1.5cm,left=2.5cm,right=2cm,marginparwidth=1.75cm,oneside]{book}
 
-%\usepackage[a4paper,top=2.5cm,bottom=1.5cm,left=2.5cm,right=2cm,marginparwidth=1.75cm]{geometry}
-%
-% Definimos  el   comando  \compilaCapitulo,  que   luego  se  utiliza
-% (opcionalmente) en config.tex. Quedar?a  mejor si tambi?n se definiera
-% en  ese fichero,  pero por  el modo  en el  que funciona  eso  no es
-% posible. Puedes consultar la documentaci?n de ese fichero para tener
-% m?s  informaci?n. Definimos tambi?n  \compilaApendice, que  tiene el
-% mismo  cometido, pero  que se  utiliza para  compilar  ?nicamente un
-% ap?ndice.
-%
-%
-% Si  queremos   compilar  solo   una  parte  del   documento  podemos
-% especificar mediante  \includeonly{...} qu? ficheros  son los ?nicos
-% que queremos  que se incluyan.  Esto  es ?til por  ejemplo para s?lo
-% compilar un cap?tulo.
-%
-% El problema es que todos aquellos  ficheros que NO est?n en la lista
-% NO   se  incluir?n...  y   eso  tambi?n   afecta  a   ficheros  de
-% la plantilla...
-%
-% Total,  que definimos  una constante  con los  ficheros  que siempre
-% vamos a querer compilar  (aquellos relacionados con configuraci?n) y
-% luego definimos \compilaCapitulo.
+
 \newcommand{\ficherosBasicosTeXiS}{%
 	TeXiS/TeXiS_pream,TeXiS/TeXiS_cab,TeXiS/TeXiS_bib,TeXiS/TeXiS_cover,%
 	TeXiS/TeXiS_part%
