@@ -82,5 +82,5 @@ CORRECCIONES GUIDO
 
 TODO en versión 3:
 * Diagrama de clases en hoja A3, ahora no hay nada en esa ubicación.
-* Tablas de resultados en capitulo 5 con el simulador.
-* Se resaltará la descripción del trabajo realizado en el capiutlo 6. 
+* Concluir con los resultados en el final del capitulo 5.
+* Se resaltará la descripción del trabajo realizado en el capitulo 6. 
