@@ -152,7 +152,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\item Raspberry Pi 3.
 		\item Navio2.
 		\item Arduino UNO\footnote{Estos dispositivos han sido utilizados únicamente en las etapas iniciales del proyecto para llevar adelante las pruebas iniciales de funcionamiento, por lo tanto y como se explicará más adelante, serán reemplazados por los módulos XBee.\label{footnote_hardware} }.
-		\item Radio Control\footnote{El comando de radio control es utilizado para corroborar el funcionamiento inicial de los motores en su conjunto. En cambio, al momento de utilizar el producto final de este proyecto el mismo será reemplazado por un joystick convencional.}.
+		\item Radio control\footnote{El comando de radio control es utilizado para corroborar el funcionamiento inicial de los motores en su conjunto. En cambio, al momento de utilizar el producto final de este proyecto el mismo será reemplazado por un joystick convencional.}.
 		\item Joystick.
 		\item Router\footref{footnote_hardware}.
 		\item Módulos XBee
@@ -265,7 +265,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 
 
 	\subsection{Arduino UNO}
-		El Arduino UNO es una plataforma computacional física open-source basada en una simple tarjeta de I/O y un entorno de desarrollo que implementa el lenguaje Processing/Wiring. A diferencia de la Raspberry Pi 3, este está fabricado para realizar tareas más sencillas, ya que su poder de procesamiento y memoria son limitados.
+		El Arduino UNO es una plataforma computacional física basada en una simple tarjeta de I/O y un entorno de desarrollo que implementa el lenguaje Processing/Wiring. A diferencia de la Raspberry Pi 3, este está fabricado para realizar tareas más sencillas, ya que su poder de procesamiento y memoria son limitados.
 		\begin{itemize}
 			\item Microcontrolador ATmega328.
 			\item 14 pines digitales de I/O (6 salidas PWM).
@@ -281,7 +281,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\end{figure}
 		
 
-	\subsection{Radio Control}
+	\subsection{Radio control}
 		Este control permite gobernar al vehículo a distancia de manera inalámbrica mediante señales de radio.
 		\begin{figure}[h]
 			\centering
@@ -294,7 +294,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 
 	\subsection{Joystick}	
 
-		Una palanca de mando o comúnmente conocido como \textit{Joystick}  es un dispositivo que por lo general contiene 2 palancas con dos ejes cada uno, donde es posible representar la posición de un punto según la posición física de este y un conjunto de botones que al ser presionados y según el software intermediario puede codificarse ciertas acciones. Este puede estar conectado mediante un cable USB o de manera inalámbrica. En nuestro caso, utilizaremos un Joystick con conexión USB ya que necesitamos que el envío de información sea confiable.
+		Una palanca de mando o comúnmente conocido como \textit{joystick}  es un dispositivo que por lo general contiene 2 palancas con dos ejes cada uno, donde es posible representar la posición de un punto según la posición física de este y un conjunto de botones que al ser presionados y según el software intermediario puede codificarse ciertas acciones. Este puede estar conectado mediante un cable USB o de manera inalámbrica. En nuestro caso, utilizaremos un joystick con conexión USB ya que necesitamos que el envío de información sea confiable.
 
 	\subsection{Router}
 	
@@ -324,23 +324,15 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\label{fig:bateria}
 		\end{figure}
 	
-	\subsection{Esquema de las conexiones del hardware}
+	\subsection{Esquema de conexiones del hardware}
 		Finalizando con la descripción del hardware interviniente en este proyecto, a continuación se ilustra un diagrama en bloques de la respectiva conexión de los componentes, con el propósito de tener en mente sus respectivas funcionalidades e interacciones entre cada uno. En la Fig. \ref{fig:diagramabloqueconexionesINI} se muestra el esquema inicial de conexiones, en el cual se puede ver que existen varias conexiones dirigidas al vehículo; la primera de todas es la interacción entre la Raspberry Pi - Router - PC, estos componentes relacionados tienen el propósito inicial de establecer la comunicación encargada de enviar y recibir información sobre:
-		
-		\begin{itemize}
-			\item Estado de los sensores y general del vehículo
-			\item Gestionamiento de comandos.
-		\end{itemize}
-		
-		La segunda conexión intervienen los elementos Navio2- Arduino - Receptor RC - Radio Control, este tiene el propósito (limitante) de enviar únicamente los comandos de vuelo del Radio Control al vehículo utilizando radio frecuencia, y como se puede apreciar esta funcionalidad ya es posible realizarla en la primera conexión, por lo tanto para fines de pruebas esta configuración es necesaria/obligatoria por las especificaciones del firmware instalado en la Raspberry Pi 3. Como el objetivo de este proyecto no es acomplejar el procedimiento sino simplificarlo, en la Fig. \ref{fig:diagramabloqueconexionesFIN} se puede apreciar las conexiones finales pretendidas, brindando más detalle de su comportamiento en el capitulo \ref{cap4:pruebas}.
-
-		\begin{figure}[h!]
+				\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\linewidth, height=0.5\textheight]{Imagenes/diagramaBloqueConexiones}
 			\caption{Diagrama en bloques de las conexiones iniciales}
 			\label{fig:diagramabloqueconexionesINI}
 		\end{figure}
-	
+		
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=\linewidth, height=0.5\textheight]{Imagenes/diagramaBloqueConexionesFinal}
@@ -348,14 +340,22 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			\label{fig:diagramabloqueconexionesFIN}
 		\end{figure}
 		
-	
+		
+		\begin{itemize}
+			\item Estado de los sensores y general del vehículo
+			\item Gestionamiento de comandos.
+		\end{itemize}
+		
+		La segunda conexión intervienen los elementos Navio2- Arduino - Receptor RC - Radio Control, este tiene el propósito (limitante) de enviar únicamente los comandos de vuelo del radio control al vehículo utilizando radio frecuencia, y como se puede apreciar esta funcionalidad ya es posible realizarla en la primera conexión, por lo tanto para fines de pruebas esta configuración es necesaria/obligatoria por las especificaciones del firmware instalado en la Raspberry Pi 3. Como el objetivo de este proyecto no es acomplejar el procedimiento sino simplificarlo, en la Fig. \ref{fig:diagramabloqueconexionesFIN} se puede apreciar las conexiones finales pretendidas, brindando más detalle de su comportamiento en el capitulo \ref{cap4:pruebas}.
+
+
 
 
 
 \section{Procedimiento}
 
 	\subsection{Armado del cuerpo}
-		Una vez ya descripto el hardware adquirido para el desarrollo de esta etapa,  estamos habilitados para iniciar el proceso del armado del vehículo. En primera instancia se comienza con el cuerpo del cuadricóptero, esta actividad  es realizada en base a las instrucciones que nos proporciona el vendedor \textit{ValueHobby}\footnote{http://www.valuehobby.com/media/wysiwyg/upload/Manual/bumblebee-manual.pdf} obteniendo el cuerpo armado como se puede observar en la Fig. \ref{fig:armado}. Como medida de seguridad antes de realizar las pruebas se han extraído las hélices. Pero al momento se ser instaladas con el propósito de que el cuadricóptero no se tumbe con respecto a su eje de orientación cuando este se encuentre en el aire se deben colocar las hélices pares de tal manera que su propulsión al momento de girar sea en sentido contra-horario y las hélices impares deben estar colocadas en sentido horario tal como se ven en la Fig. \ref{fig:esquemacuadricoptero} . 
+		Una vez ya descripto el hardware adquirido para el desarrollo de esta etapa,  estamos habilitados para iniciar el proceso del armado del vehículo. En primera instancia se comienza con el cuerpo del cuadricóptero, esta actividad  es realizada en base a las instrucciones que nos proporciona el vendedor \textit{ValueHobby}\footnote{http://www.valuehobby.com/media/wysiwyg/upload/Manual/bumblebee-manual.pdf} obteniendo el cuerpo armado como se puede observar en la Fig. \ref{fig:armado}. Como medida de seguridad antes de realizar las pruebas se han extraído las hélices. Pero al momento de ser instaladas con el propósito de que el cuadricóptero no se tumbe con respecto a su eje de vertical (Yaw) cuando este se encuentre en el aire se deben colocar las hélices pares de tal manera que su propulsión al momento de girar sea en sentido contra-horario y las hélices impares deben estar colocadas en sentido horario tal como se ven en la Fig. \ref{fig:esquemacuadricoptero} . 
 		
 		\begin{figure}[h!]
 			\centering
@@ -372,7 +372,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\end{figure}
 
 	\subsection{Armado y configuración del autopiloto}
-		En esta sección se describe el armado del piloto del cuadricóptero, este va a ser el encargado en gestionar todos los sensores, enviar señales a los motores y administrar la información generada por estos sensores con el fin de ser enviadas a una maquina cliente y que este las pueda interpretar, entre otras cosas.
+		En esta sección se describe el armado del piloto del cuadricóptero, este va a ser el encargado en gestionar todos los sensores, enviar señales a los motores y administrar la información generada por estos, con el fin de ser enviadas a una maquina cliente y que este las pueda interpretar, entre otras cosas.
 		
 		
 		\par Para comenzar con el armado debemos instalar la placa Navio2 sobre la Raspberry Pi 3, proporcionando así los sensores indispensables para el control, monitoreo y vuelo del vehículo ya que el ordenador de placa reducida Raspberry Pi no cuenta con estos sensores de forma nativa. Por lo tanto, se procede a conectar los 40 pines GPIO sobre la placa Navio2, como se muestra en la Fig. \ref{fig:navio2-mount}.
@@ -386,7 +386,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\end{figure}
 		
 		Luego se procede a conectar la antena GNSS sobre la placa Navio2. Una vez ya conectado se debe verificar el correcto funcionamiento de todos los sensores presentes, para eso debemos tener un software que gestione eficazmente todo el hardware y sea el intermediario entre estos dispositivos electrónicos y el usuario, además de proporcionar servicios de utilidad para el mismo, en otras palabras, un sistema operativo (SO). Antes de instalar cualquier sistema operativo hay que tener en cuenta que  estamos en presencia de una computadora reducida, es decir, el hardware de los componentes del mismo como memoria, procesador, puertos de entrada y salida, etcétera no son los mismos a las PC convencionales; por poner un ejemplo, el procesador que contiene la Raspberry es un ARM1176JZF-S, con esto queremos decir que el CPU en si mismo esta fabricado bajo una arquitectura con un conjunto reducido de instrucciones (o por su siglas en ingles \textit{RISC - Reduced instruction set computing}) en comparación a un CPU que son utilizados normalmente en una PC hogareña. Por tal motivo, es necesario de un SO que se adapte a estas características; afortunadamente existen varias organizaciones o empresas que desarrollan y distribuyen este tipo de producto, por ejemplo, \textit{Canonical Ltd} y \textit{Microsoft} han adaptado sus sistemas operativos para este tipo de computadoras. En nuestro caso utilizaremos un SO proporcionado por la empresa \textit{Emlid} basado en una distribución de Linux llamada \textit{Raspbian} (acrónimo entre Raspberry Pi y Debian), ya que viene preparado para que funcione directamente con nuestra placa Navio2 (ya que es un producto fabricado por la misma empresa).
-		\par Una vez seleccionado el SO a instalar, se procede a descargar la imagen y grabarla en una tarjeta SD, una vez realizado este paso se carga la tarjeta SD en la ranura disponible en la Raspberry Pi, se enchufa un teclado, mouse y un conector HDMI que se encuentra conectado a un monitor, y por último se procede a encender el dispositivo  mostrándonos la siguiente imagen: 
+		\par Una vez seleccionado el SO a instalar, se procede a descargar la imagen y grabarla en una tarjeta SD, una vez realizado este paso se carga la tarjeta SD en la ranura disponible en la Raspberry Pi, se enchufa un teclado, mouse y una interfaz HDMI que se encuentra conectado a un monitor, y por último se procede a encender el dispositivo, en la Fig. \ref{fig:pantallainicio} se puede observar de manera general el contenido disponible. 
 		
 		
 		\begin{figure}[h!]
@@ -438,7 +438,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\begin{listing}[style=consola, numbers=none]
 			> sudo ifconfig
 		\end{listing}
-		Con este comando podemos verificar nombres de interfaces presentes y si se encuentran en actual funcionamiento. En caso de observar ningún tipo de trafico por estas interfaces se procede a configurarlas, para esto se utiliza el mismo comando pero con la opción de activar la interfaz deseada, en nuestro caso queremos activar la interfaz del módulo interno de Wi-Fi, para eso ingresamos el siguiente comando 
+		Con este comando podemos verificar nombres de interfaces presentes y si se encuentran en actual funcionamiento. En caso de observar ningún tipo de tráfico por estas interfaces se procede a configurarlas, para esto se utiliza el mismo comando pero con la opción de activar la interfaz deseada, en nuestro caso queremos activar la interfaz del módulo interno de Wi-Fi, para eso ingresamos el siguiente comando 
 		\begin{listing}[style=consola, numbers=none]
 		> sudo ifconfig intwifi0 up
 		\end{listing}
@@ -450,16 +450,16 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 			Con este comando nos muestra mediante una lista las redes captadas por el módulo, una vez que hayamos encontrado la red de nuestro interés podemos conectarnos con el siguiente comando 
 			
 			\begin{listing}[style=consola, numbers=none]
-			> iwconfig wlan0 essid "Nombre de Red" key "Contrasena"
+			> iwconfig wlan0 essid "Nombre de Red" key "Contrasenia"
 		\end{listing}
-		y finalmente procederemos a obtener nuestra IP y conectarnos con la siguiente función :
+		y finalmente procederemos a obtener nuestra IP y conectarnos con la siguiente función:
 
 		\begin{listing}[style=consola, numbers=none]
 		> sudo dhclient wlan0
 		\end{listing}
 		
 		En caso de querer almacenar esta red e indicarle al sistema operativo que es nuestra red por defecto podemos modificar el archivo wpa\_supplicant.conf ingresando el nombre de la red y su correspondiente clave.
-		Por último, se reinicia y una vez iniciado el sistema se comprueba su conectividad realizando chequeo de conexión con algún tipo de página en internet, por ejemplo, Google utilizando el siguiente comando 
+		Por último, se reinicia y una vez iniciado el sistema se comprueba su conectividad realizando chequeo de conexión con algún tipo de página en internet, por ejemplo, Google utilizando el siguiente comando: 
 		\begin{listing}[style=consola, numbers=none]
 		> ping 8.8.8.8
 		\end{listing}
@@ -523,7 +523,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 
 	\subsection{Conexión de componentes}
 		
-		Antes de comenzar a describir el proceso de cableado del vehículo se comienza conectando el receptor del comando radio control con el Arduino UNO que va a ser el en cargado de recibir las señales PWM y convertirlas en SBUS momentáneamente para poder enviarlas a la Navio2. Hay que tener en cuenta que la ubicación de los conectores y los pines del receptor llevan un orden específico. Por tal motivo, se investiga dicho orden, pero sin encontrar información relevante, hasta ubicar con un transmisor de la misma empresa y deducir las siguientes conexiones
+		Antes de comenzar a describir el proceso de cableado del vehículo se comienza conectando el receptor del comando radio control con el Arduino UNO que va a ser el en cargado de recibir las señales PWM y convertirlas en SBUS momentáneamente para poder enviarlas a la Navio2. Hay que tener en cuenta que la ubicación de los conectores y los pines del receptor llevan un orden específico. Por tal motivo, se investiga dicho orden, pero sin encontrar información relevante, hasta ubicar con un transmisor de la misma empresa y deducir las siguientes conexiones:
 		
 		
 		\begin{figure}[h!]
@@ -533,8 +533,8 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\label{fig:RxConexiones}
 		\end{figure}
 		
-		Como se puede observar en la Fig.\ref{fig:RxConexiones} la columna izquierda de pines le pertenece a los negativos, la columna central a los positivos y la última columna perteneciente a datos; esta es la de interés ya que por cada $conector_i$ estaríamos recibiendo señal PWM del emisor correspondiente al $canal_i$, por lo que cada una son las entradas a nuestro Arduino UNO para poder realizar la codificación. Antes de iniciar la conexión con el codificador se comprueban las señales mediante un osciloscopio. 
-		\par Ya identificados los cables correspondientes a cada canal, se conectan los mismos a la placa Arduino UNO. Por último, se conecta la salida proporcionada por el codificador a la entrada del vehículo, asegurando así una señal de tipo SBUS como lo indica su fabricante.
+		Como se puede observar en la Fig.\ref{fig:RxConexiones} la columna izquierda de pines le pertenece a los negativos, la columna central a los positivos y la última columna perteneciente a datos; esta es la de interés ya que por cada $conector_i$ estaríamos recibiendo señal PWM del emisor correspondiente al $canal_i$. Antes de iniciar la conexión con el codificador se comprueban las señales mediante un osciloscopio. 
+		\par Ya identificados los cables respectivos a cada canal, se conectan los mismos a la placa Arduino UNO. Por último, se conecta la salida proporcionada por el codificador a la entrada del vehículo, asegurando así una señal de tipo SBUS como lo indica su fabricante.
 		
 		\begin{figure}[h!]
 		\centering
@@ -554,7 +554,7 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\par Con respecto a las conexiones eléctricas que lleva el cuadricóptero, recurrimos a basarnos en la Fig. \ref{fig:instnavio1}, donde muestra gráficamente el orden que llevan las conexiones con sus respectivos cables de colores. 
 		
 		\begin{figure}[h!]
-		%TODO: Modificar imagen (esta mal el cableado de alimentacion de los motores)
+
 		\centering
 		\includegraphics[width=0.9\linewidth, height=0.4\textheight]{Imagenes/inst_navio1}
 		\caption{Esquema de conexiones}
@@ -585,16 +585,16 @@ Este capítulo contiene información sobre el procedimiento que se ha llevado a ca
 		\label{fig:fuentevr}
 		\end{figure}
 		
-		En la Fig. \ref{fig:instnavio1} se puede ver que la batería suministra energía a los cuatro motores y al vehículo, por lo tanto se decide alimentar al vehículo con el transformador de fábrica y suministrar energía a  los motores con la fuente. Esta fuente como se puede observar en la Fig. \ref{fig:fuentevr} contiene un único par de salida (positivo y negativo) por lo que es necesario multiplexar esta salida a 4 pares de salidas más. Para eso se decide armar y soldar un conjunto de cables con sus respectivos conectores como se puede observar en la Fig. \label{fig:terminado}.
+		En la Fig. \ref{fig:instnavio1} se puede ver que la batería suministra energía a los cuatro motores y al vehículo, por lo tanto se decide alimentar al vehículo con el transformador de fábrica y suministrar energía a  los motores con la fuente. Esta fuente como se puede observar en la Fig. \ref{fig:fuentevr} contiene un único par de salida (positivo y negativo) por lo que es necesario multiplexar esta salida a 4 pares de salidas más. Para eso se decide armar y soldar un conjunto de cables con sus respectivos conectores como se puede observar en la Fig. \label{fig:terminadoo}.
 
 
-		Por último, se verifican las conexiones pertinentes a los planos y se buscan imperfectos en las uniones, en caso de encontrar algún tipo de estos se procede a repararlos. En la Fig. \ref{fig:terminado} se puede observar el vehículo conectado. 
+		Por último, se verifican las conexiones pertinentes a los planos y se buscan imperfectos en las uniones, en caso de encontrar algún tipo de estos se procede a repararlos. En la Fig. \ref{fig:terminadoo} se puede observar el vehículo conectado. 
 		
 		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.5\linewidth, height=0.35\textheight]{Imagenes/fotos/quad_armado}
 			\caption{Cuadricóptero armado para verificar funcionamiento.}
-			\label{fig:terminado}
+			\label{fig:terminadoo}
 		\end{figure}
 		
 		

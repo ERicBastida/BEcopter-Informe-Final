@@ -5,34 +5,7 @@
 %
 %---------------------------------------------------------------------
 %
-% 01Introduccion.tex
-% Copyright 2009 Marco Antonio Gomez-Martin, Pedro Pablo Gomez-Martin
-%
-% This file belongs to the TeXiS manual, a LaTeX template for writting
-% Thesis and other documents. The complete last TeXiS package can
-% be obtained from http://gaia.fdi.ucm.es/projects/texis/
-%
-% Although the TeXiS template itself is distributed under the 
-% conditions of the LaTeX Project Public License
-% (http://www.latex-project.org/lppl.txt), the manual content
-% uses the CC-BY-SA license that stays that you are free:
-%
-%    - to share & to copy, distribute and transmit the work
-%    - to remix and to adapt the work
-%
-% under the following conditions:
-%
-%    - Attribution: you must attribute the work in the manner
-%      specified by the author or licensor (but not in any way that
-%      suggests that they endorse you or your use of the work).
-%    - Share Alike: if you alter, transform, or build upon this
-%      work, you may distribute the resulting work only under the
-%      same, similar or a compatible license.
-%
-% The complete license is available in
-% http://creativecommons.org/licenses/by-sa/3.0/legalcode
-%
-%---------------------------------------------------------------------
+
 
 \chapter{Análisis de requerimientos}
 %\chapter{Obtención y Análisis de requerimientos}
@@ -61,29 +34,29 @@
 \label{cap1:sec:introduccion}
 
 
-	La primera etapa de este proyecto consiste en obtener los requerimientos del personal interesado en el desarrollo del mismo (\textit{Stakeholders}), que en nuestro caso son personal del \textit{Instituto de Investigación en Señales, Sistemas e Inteligencia Computacional sinc(\textit{i}))} la Dra. Marina Murillo, Ing. Lucas Genzeliz, Ing. Nahuel Denis y el Dr. Guido Sánchez.
+	La primera etapa de este proyecto consiste en obtener los requerimientos del personal interesado en el desarrollo del mismo (\textit{Stakeholders}), que en nuestro caso son personal del Instituto de Investigación en Señales, Sistemas e Inteligencia Computacional sinc(\textit{i})) la Dra. Marina Murillo, Ing. Lucas Genzeliz, Ing. Nahuel Denis y el Dr. Guido Sánchez.
 	
 	El proceso de obtención de requerimientos ha consistido en una entrevista con el  personal dónde se ha tenido una charla especificando las necesidades y naturaleza del proyecto y además, se han presentando las tecnologías disponibles para el desarrollo del mismo. Una vez obtenido los requerimientos, se inicia la actividad de estudiar el campo involucrado del proyecto, con el fin de entender el problema, buscar alternativas, validar y modificar o eliminar requerimientos.
 	
 	Como la naturaleza del proyecto se origina en la necesidad de un software que pueda comunicarse con un vehículo aéreo no tripulado y además, poder enviarle acciones que puedan ser ejecutadas desde larga distancia tenemos que analizar el campo del \textit{aeromodelismo}, por lo que el ejecutante del proyecto deberá tener los conocimientos necesarios para el mismo. 
 	
-	Para iniciar con el desarrollo del proyecto es necesario contar con herramientas; estas ayudan al ejecutante a realizar las tareas integradas en cada etapa del proyecto, por lo tanto, es de suma importancia elegir las indicadas para que el desarrollo se facilite. De esta manera, comenzaremos explicando las herramientas elegidas para el desarrollo del software. 
+	Para iniciar con el desarrollo del proyecto es necesario contar con herramientas; estas ayudan al ejecutante realizar las tareas integradas en cada etapa del proyecto, por lo tanto, es de suma importancia elegir las indicadas para que el proceso se facilite. De esta manera, comenzaremos explicando las herramientas elegidas para el desarrollo del software. 
 
 
 \begin{itemize}
 	
 	\item \textbf{Lenguaje de programación Python 2.7\footnote{Página web de Python Argentina http://www.python.org.ar/}: } Se trata de un lenguaje de programación multiparadigma, ya que soporta programación orientado a objetos, imperativa y, en menor medida, programación funcional. Es un lenguaje interpretado, usa tipado dinámico y es multiplataforma \cite{lutz2013learning}. Además corre con la ventaja de tener una gran biblioteca que son de gran utilidad para el desarrollo de nuestro proyecto.
 	
-	\item \textbf{PyCharm\footnote{Página web del IDE https://www.jetbrains.com/pycharm/ }: } es un entorno de desarrollo integrado (IDE) utilizado en la programación de aplicaciones, específicamente en lenguaje Python. Es desarrollado por la compañía JetBrains. Proporciona análisis de código, un depurador gráfico, probador de unidades integrado, integración con sistemas de control de versiones (\ac{VCS}).El mismo está  disponible en dos versiones: \textit{Professional} y \textit{Community}, siendo esta última la elegida por su gratuidad. 
+	\item \textbf{PyCharm\footnote{Página web del IDE https://www.jetbrains.com/pycharm/ }: } es un entorno de desarrollo integrado (IDE del inglés Integrated Development Environment) utilizado en la programación de aplicaciones, específicamente en lenguaje Python. Es desarrollado por la compañía JetBrains. Proporciona análisis de código, un depurador gráfico, probador de unidades integrado, integración con sistemas de control de versiones (\ac{VCS}).El mismo está  disponible en dos versiones: \textit{Professional} y \textit{Community}, siendo esta última la elegida por su gratuidad. 
 	
-	\item \textbf{Qt Designer\footnote{Página web de Qt https://www.qt.io/qt-features-libraries-apis-tools-and-ide/}:} Es un programa (módulo del Framework Qt) para desarrollar interfaces gráficas de usuario o del inglés Graphic User Interface (GUI) multilenguajes debido a que genera un archivo \ac{XML} cuyo contenido es el formato del respectivo \ac{GUI}. Existiendo la posibilidad de convertirlo a Python, que es el lenguaje elegido para el desarrollo del presente proyecto.
+	\item \textbf{Qt Designer\footnote{Página web de Qt https://www.qt.io/qt-features-libraries-apis-tools-and-ide/}:} Es un programa (módulo del Framework Qt) para desarrollar interfaces gráficas de usuario o del inglés Graphic User Interface (GUI) multilenguajes debido a que genera un archivo \ac{XML} cuyo contenido es el formato del respectivo GUI. Existiendo la posibilidad de convertirlo en el lenguaje de Python, que es el elegido para el desarrollo del presente proyecto.
 	
 	
 	\item \textbf{PyQtGraph\footnote{Página web de PyQtGraph http://www.pyqtgraph.org/}:} es una bliblioteca gráfica y de creaciones de GUI enteramente construida en Python, basadas en las famosas bibliotecas \textbf{PyQt4}, \textbf{PySide} y \textbf{Numpy}. Está destinado para uso en aplicaciones matemáticas/científicas y de ingeniería. A pesar de estar completamente escrito en Python, la biblioteca es muy rápida debido a su gran apalancamiento con Numpy para el procesamiento de números y al marco de GraphicsView de Qt para una visualización rápida. Por último, PyQtGraph se distribuye bajo la licencia de código abierto MIT.
 	
-	\item \textbf{PyQt4\footnote{Página web sobre la documentación de la herramienta https://www.riverbankcomputing.com/static/Docs/PyQt4/}: } es una biblioteca gráfica de Qt y realizada bajo Python. Esta nos da la opción de poder realizar una interfaz gráfica a nuestra plataforma, para que sea de fácil uso y entendimiento \cite{doc:qt}. Además, el software Qt Designer genera código en Python utilizando esta libería automáticamente.
+	\item \textbf{PyQt4\footnote{Página web sobre la documentación de la herramienta https://www.riverbankcomputing.com/static/Docs/PyQt4/}: } es una biblioteca gráfica de Qt. Esta nos da la opción de poder realizar una interfaz gráfica a nuestra plataforma, para que sea de fácil uso y entendimiento \cite{doc:qt}. Además, el software Qt Designer genera código en Python utilizando esta libería automáticamente.
 	
-	\item \textbf{Pygame\footnote{Página web de Pygame https://www.pygame.org/wiki/about}:} es un conjunto multiplataforma de módulos de Python	diseñados para la escritura de videojuegos. Incluye gráficos y bibliotecas de sonido diseñado para ser utilizado con el	lenguaje de programación Python. Cuenta con muchos tutoriales, muchos de ellos online.
+	\item \textbf{Pygame\footnote{Página web de Pygame https://www.pygame.org/wiki/about}:} es un conjunto multiplataforma de módulos de Python	diseñados para la escritura de videojuegos. Incluye gráficos y bibliotecas de sonido.
 	
 	\item \textbf{Socket:} Al utilizar Python, todos los programas utilizan sockets para lograr comunicarse con otros programas que pueden estar en	diferentes computadoras. Por lo que podemos definirlos como un	objeto que define una conexión entre dos entidades de una red. De esta manera, un socket posee la dirección IP de la máquina, el puerto en el que escucha, y el protocolo que utiliza. Los tipos y	funciones necesarios para trabajar con estos elementos están en el módulo socket de Python.
 	
@@ -99,7 +72,7 @@
 		
 		\item Permitir a un vehículo aéreo seguir objetivos mediante GNSS (del inglés Global Navigation Satellite System).
 		
-		\item Facilitar el seguimiento de una ruta marcada con receptores GNSS.
+		\item Facilitar el seguimiento de una ruta marcada con sus respectivas coordenadas geográficas.
 	\end{itemize}
 	
 	
@@ -146,7 +119,7 @@ Esta etapa del proyecto consiste en desarrollar un modelo que mejor represente l
 
 La primer propuesta consiste en realizar una maqueta (del inglés \textit{Mockup}) de la apariencia del software (GUI) y además, incluirle ciertos comportamientos mediante animaciones que den la sensación al usuario de que está utilizando el producto terminado. Por otro lado la segunda propuesta es realizar el modelo comportamental mediante casos de usos, esta técnica consiste en bosquejar un entorno que representa el ámbito donde están las opciones que brindará el sistema con sus respectivos actores o responsables de cada funcionalidad. Analizando las ventajas y desventajas de cada uno se decide utilizar la técnica de \textbf{Mockup}  ya que es más representativa del producto real y no utiliza lenguaje técnico; como por ejemplo el utilizado en los CU (\textit{include, extends, entorno y actores}). Para el desarrollo del mockup se utiliza la herramienta \textit{Balsamiq Mockup}\footnote{Utilizando su versión gratuita de 30 días, página web https://balsamiq.com/} y el resultado es anexado en  el Apéndice \ref{ap1:GUI}.
 
-\par	Sin embargo, utilizar una técnica que detalle un aspecto superficial y un comportamiento general no ayuda en el inicio de implementación del sistema, es por eso, que en conjunto con el \textit{mockup} y en el documento de especificación de requisitos del software\textit{ERS} se decide implementar un modelo que ayude y/o simplifique más la tarea de codificación del software como lo es el \textit{diagrama de clases}. En ingeniería de software, un diagrama de clases dentro de lo que es el lenguaje unificado de modelado (UML, por sus siglas en inglés, Unified Modeling Language) es un tipo de diagrama de estructura estática que describe  un sistema mostrando las clases que los componen, sus atributos, operaciones, y las relaciones entre los objetos \cite{sommer}. 
+\par	Sin embargo, utilizar una técnica que detalle un aspecto superficial y un comportamiento general no ayuda en el inicio de implementación del sistema, es por eso, que en conjunto con el \textit{mockup} y en el documento de especificación de requisitos del software \textit{ERS} se decide implementar un modelo que ayude y/o simplifique más la tarea de codificación del software como lo es el \textit{diagrama de clases}. En ingeniería de software, un diagrama de clases dentro de lo que es el lenguaje unificado de modelado (UML, por sus siglas en inglés, Unified Modeling Language) es un tipo de diagrama de estructura estática que describe  un sistema mostrando las clases que los componen, sus atributos, operaciones, y las relaciones entre ellos \cite{sommer}. 
 En el apéndice \ref{ap1:classDiagra_v0} se puede ver el respectivo diagrama inicial del software, cabe aclarar que el mismo durante todo el proceso del desarrollo del proyecto ha ido sufriendo cambios que eran necesarios, ya sea por nuevas funcionalidades, complementar las existentes  o simplemente desecharlas ya que no cumplían su respectivo fin. 
 
 
