@@ -1,6 +1,5 @@
-# BEcopter* Informe* Final
+# BEcopter Informe Final
 Informe de Proyecto Final de Carrera *  Ingeniería en Informática.
-
 
 
 Correcciones realizadas en esta Versión 2: 
@@ -58,6 +57,7 @@ CORRECCIONES EMILIANO
 * p21, dice que los componentes de la raspi no son los mismos a los ordenadores comerciales. la raspi es una computadora comercial. No aplicaría acá la diferenciación utilizando el término comercial, en todo caso sería computadora convencional para las PC y computadora de placa única para la raspi (single board computer) https://all3dp.com/1/single* board* computer* raspberry* pi* alternative/
 * Muchas figuras no cuentan con la referencia en el texto o en algunos se muestra primero la figura y luego su referencia, esto no debe ser así. Hay muchos errores de puntuación y de tipeo.
 * p20, clarificar/mejorar la escritura del primer párrafo (que viene de la página previa). Luego de un punto seguido empieza con *Pero*, lo que no es muy recomendable.
+
 * p21, dice la distro que usa para la raspi de entre varias pero no justifica, sería bueno saber las razones/justificaciones para decantarse hacia emlid por sobre la raspbian. A mi me gustaría saberlo, yo la he probado con arch y raspian por ejemplo y no conocía emlid. Entiendo que es para drones, pero nunca lo aclara, uno se da cuenta leyendo mas adelante.
 * p15, si se menciona de la ventaja de la raspi en términos de consumo energético e incluso comparandola con una pc convencional debe decirse cuánto es esto? watts? autonomía con una determinada batería? etc, etc
 
@@ -80,7 +80,7 @@ CORRECCIONES GUIDO
 * Modificación del tamaño de las imágenes y espacios
 
 
-En versión 3:
+En versión 2.1:
 * Diagrama de clases en hoja A3.
 * Capitulo 6: Corrección del orden (Conclusión - Trabajos futuros) y descripción detallada del trabajo realizado en las distintas fases.
 
